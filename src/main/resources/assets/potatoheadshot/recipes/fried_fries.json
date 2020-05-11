@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:baked_potato_planks"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:fried_fries",
+    "count": 4
+  }
+}

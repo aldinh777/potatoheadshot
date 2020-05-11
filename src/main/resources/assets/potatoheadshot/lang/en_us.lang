@@ -1,0 +1,43 @@
+itemGroup.potatoheadshot=Potato Headshot
+
+item.hot_potato.name=Hot Potato
+item.extra_hot_potato.name=Extra Hot Potato
+item.extreme_hot_potato.name=Extreme Hot Potato
+item.lava_potato.name=Lava Potato
+item.wet_potato.name=Wet Potato
+item.super_wet_potato.name=Super Wet Potato
+item.water_potato.name=Water Potato
+item.baked_small_potato_planks.name=Baked Small Potato Planks
+item.baked_potato_chip.name=Baked Potato Chip
+item.fried_fries.name=Fried Fries
+item.small_potato_planks.name=Small Potato Planks
+item.dried_potato.name=Dried Potato
+item.potato_chip.name=Potato Chip
+item.potato_stick.name=Potato Stick
+item.potato_knife.name=Potato Knife
+item.potato_leaves.name=Potato Leaves
+item.ultimate_broken_fuel.name=Ultimate Broken Fuel
+item.useless_potato.name=Useless Potato
+item.potato_starch.name=Potato Starch
+item.salt.name=Salt
+item.dried_sweet_potato.name=Dried Sweet Potato
+item.sweet_potato_dust.name=Sweet Potato Dust
+item.sweet_potato_ingot.name=Sweet Potato Ingot
+item.sweet_potato_bucket.name=Sweet Potato Bucket
+item.sweet_bucket_empty.name=Sweet Bucket
+item.sweet_bucket_lava.name=Sweet Lava Bucket
+item.sweet_bucket_water.name=Sweet Water Bucket
+item.sweet_bucket_milk.name=Sweet Milk Bucket
+item.salt_potato.name=Salt Potato
+item.sweet_potato.name=Very Sweet Potato
+item.baked_sweet_potato.name=Baked Sweet Potato
+
+tile.cooked_dirt.name=Cooked Dirt
+tile.potato_planks.name=Potato Planks
+tile.baked_potato_planks.name=Baked Potato Planks
+tile.potato_block.name=Potato Block
+tile.baked_potato_block.name=Baked Potato Block
+tile.potato_drier.name=Potato Drier
+tile.sweet_potato_block.name=Sweet Potato Block
+
+death.attack.potato_explosion=%1$s Died by potato explosion

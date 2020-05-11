@@ -1,0 +1,15 @@
+[
+{
+  "modid": "potatoheadshot",
+  "name": "Potato Headshot",
+  "description": "Adding more functionality to Minecraft Potato.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Aldinh777"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

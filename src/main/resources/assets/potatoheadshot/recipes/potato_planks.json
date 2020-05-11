@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "planks",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:small_potato_planks"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:potato_planks"
+  }
+}

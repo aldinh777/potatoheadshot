@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:small_potato_planks"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:potato_stick"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "potatoheadshot:potato_starch"
+    }
+  ],
+  "result": {
+    "item": "minecraft:sugar"
+  }
+}

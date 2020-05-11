@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:stick"
+      },
+      {
+        "item": "potatoheadshot:potato_stick"
+      }
+    ],
+    "X": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "minecraft:golden_hoe"
+  }
+}

@@ -1,0 +1,162 @@
+package aldinh777.potatoheadshot.block.containers;
+
+import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
+import aldinh777.potatoheadshot.block.slots.SlotDryInputHandler;
+import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
+import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
+import aldinh777.potatoheadshot.block.slots.SlotWetInputHandler;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+
+public class ContainerPotatoDrier extends Container {
+
+    private final TileEntityPotatoDrier tileEntity;
+    private int burnTime, currentBurnTime;
+    private int wateringTime, currentWateringTime;
+    private int dryTime, totalDryTime;
+    private int wetTime, totalWetTime;
+    private int waterSize;
+
+    public ContainerPotatoDrier(InventoryPlayer player, TileEntityPotatoDrier tileEntity) {
+        this.tileEntity = tileEntity;
+        IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
+        this.addSlotToContainer(new SlotFuelHandler(handler, 0, 14, 34));
+        this.addSlotToContainer(new SlotDryInputHandler(handler, 1, 87, 26));
+        this.addSlotToContainer(new SlotWetInputHandler(handler, 2, 87, 58));
+        this.addSlotToContainer(new SlotOutputHandler(handler, 3, 141, 22));
+        this.addSlotToContainer(new SlotOutputHandler(handler, 4, 141, 54));
+
+        for (int y = 0; y < 3; y++) {
+            for(int x = 0; x < 9; x++) {
+                this.addSlotToContainer(new Slot(player, x + y*9 + 9, 8 + x*18, 84 + y*18));
+            }
+        }
+
+        for (int x = 0; x < 9; x++) {
+            this.addSlotToContainer(new Slot(player, x, 8 + x * 18, 142));
+        }
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+
+        for (IContainerListener listener : this.listeners) {
+
+            int waterSize = this.tileEntity.getField("waterSize");
+            int wateringTime = this.tileEntity.getField("wateringTime");
+            int burnTime = this.tileEntity.getField("burnTime");
+            int dryTime = this.tileEntity.getField("dryTime");
+            int wetTime = this.tileEntity.getField("wetTime");
+            int currentBurnTime = this.tileEntity.getField("currentBurnTime");
+            int currentWateringTime = this.tileEntity.getField("currentWateringTime");
+            int totalDryTime = this.tileEntity.getField("totalDryTime");
+            int totalWetTime = this.tileEntity.getField("totalWetTime");
+
+            if (this.waterSize != waterSize)
+                listener.sendWindowProperty(this, 0, waterSize);
+            if (this.burnTime != burnTime)
+                listener.sendWindowProperty(this, 1, burnTime);
+            if (this.wateringTime != wateringTime)
+                listener.sendWindowProperty(this, 2, wateringTime);
+            if (this.dryTime != dryTime)
+                listener.sendWindowProperty(this, 3, dryTime);
+            if (this.wetTime != wetTime)
+                listener.sendWindowProperty(this, 4, wetTime);
+            if (this.currentBurnTime != currentBurnTime)
+                listener.sendWindowProperty(this, 5, currentBurnTime);
+            if (this.currentWateringTime != currentWateringTime)
+                listener.sendWindowProperty(this, 6, currentWateringTime);
+            if (this.totalDryTime != totalDryTime)
+                listener.sendWindowProperty(this, 7, totalDryTime);
+            if (this.totalWetTime != totalWetTime)
+                listener.sendWindowProperty(this, 8, totalWetTime);
+        }
+
+        this.waterSize = this.tileEntity.getField("waterSize");
+        this.burnTime = this.tileEntity.getField("burnTime");
+        this.wateringTime = this.tileEntity.getField("wateringTime");
+        this.dryTime = this.tileEntity.getField("dryTime");
+        this.wetTime = this.tileEntity.getField("wetTime");
+        this.currentBurnTime = this.tileEntity.getField("currentBurnTime");
+        this.currentWateringTime = this.tileEntity.getField("currentWateringTime");
+        this.totalDryTime = this.tileEntity.getField("totalDryTime");
+        this.totalWetTime = this.tileEntity.getField("totalWetTime");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data) {
+        this.tileEntity.setField(id, data);
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return this.tileEntity.isUsableByPlayer(playerIn);
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            itemstack = stack.copy();
+
+            if (index == 3 || index == 4) {
+                if (!this.mergeItemStack(stack, 5, 41, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onSlotChange(stack, itemstack);
+            } else if (index !=2 && index != 1 && index != 0) {
+                if (TileEntityPotatoDrier.isItemFuel(stack)) {
+                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (PotatoDrierRecipes.INSTANCE.isDryRecipeExists(stack.getItem())) {
+                    if (!this.mergeItemStack(stack, 1, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (PotatoDrierRecipes.INSTANCE.isWetRecipeExists(stack.getItem())) {
+                    if (!this.mergeItemStack(stack, 2, 3, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index < 32) {
+                    if (!this.mergeItemStack(stack, 32, 41, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index < 41 && !this.mergeItemStack(stack, 5, 32, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.mergeItemStack(stack, 5, 41, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (stack.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (stack.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, stack);
+        }
+
+        return itemstack;
+    }
+}

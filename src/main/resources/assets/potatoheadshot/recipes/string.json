@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "potatoheadshot:potato_leaves"
+    },
+    {
+      "item": "potatoheadshot:potato_leaves"
+    },
+    {
+      "item": "potatoheadshot:potato_leaves"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string"
+  }
+}

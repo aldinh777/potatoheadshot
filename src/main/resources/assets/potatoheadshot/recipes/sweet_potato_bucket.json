@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:sweet_potato_ingot"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:sweet_potato_bucket"
+  }
+}

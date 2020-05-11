@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "banner",
+  "pattern": [
+    "###",
+    "###",
+    " | "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wool",
+      "data": 2
+    },
+    "|": [
+      {
+        "item": "minecraft:stick"
+      },
+      {
+        "item": "potatoheadshot:potato_stick"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:banner",
+    "data": 13
+  }
+}
