@@ -22,10 +22,10 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
 
     public ItemStackHandler handler = new ItemStackHandler(3);
     private final PotatoEnergyStorage storage = new PotatoEnergyStorage(80000, 0, 60);
-    public int energy = storage.getEnergyStored();
+    private int energy = storage.getEnergyStored();
     private String customName;
-    public int currentCookTime = 0;
-    public int totalCookTime = 100;
+    private int currentCookTime = 0;
+    private int totalCookTime = 100;
 
     private boolean cookProcess() {
         ItemStack process = this.handler.getStackInSlot(1);

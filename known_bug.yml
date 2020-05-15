@@ -1,19 +1,39 @@
--
-  name: GUI value error
-  description:
-    After seeing any gui, and then left it until some value become empty,
-    the value still not change from it's previous state
-  expected behaviour:
-    The value shown in gui should be 0
-  reality:
-    The value shown in gui is the value player seen in gui last time
+SEVERE:
+  -
+    name: Hopper Problem
+    description:
+      When hopper is put on top or bottom of any TileEntity... it just go mess
+    expected behaviour:
+      Currently don't really know what to expect
+    reality:
+      It just break
 
 
--
-  name: Another GUI weirdness
-  description:
-    At Sweet Potato Generator, the progress bar didn't match up with variables got from tileEntity
-  expected behaviour:
-    Getting currentCookTime and totalCookTime of the generator got by getField method
-  reality:
-    Getting current energy
+MINOR:
+  -
+    name: Custom Name that dont change the name
+    description:
+      Change block name with anvil, and when the block is put,
+      The name of the block displayed in gui still not changed
+
+
+SOLVED:
+  -
+    name: GUI value error
+    description:
+      After seeing any gui, and then left it until some value become empty,
+      the value still not change from it's previous state
+    expected behaviour:
+      The value shown in gui should be 0
+    reality:
+      The value shown in gui is the value player seen in gui last time
+
+
+  -
+    name: Another GUI weirdness
+    description:
+      At Sweet Potato Generator, the progress bar didn't match up with variables got from tileEntity
+    expected behaviour:
+      Getting currentCookTime and totalCookTime of the generator got by getField method
+    reality:
+      Getting current energy

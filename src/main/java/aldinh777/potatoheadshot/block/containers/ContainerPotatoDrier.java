@@ -62,8 +62,9 @@ public class ContainerPotatoDrier extends Container {
             int currentWateringTime = this.tileEntity.getField("currentWateringTime");
             int totalDryTime = this.tileEntity.getField("totalDryTime");
             int totalWetTime = this.tileEntity.getField("totalWetTime");
+            int maxWaterCapacity = this.tileEntity.getMaxWaterSize();
 
-            if (this.waterSize != waterSize)
+            if (this.waterSize != waterSize || waterSize <= 0 || waterSize >= maxWaterCapacity)
                 listener.sendWindowProperty(this, 0, waterSize);
             if (this.burnTime != burnTime)
                 listener.sendWindowProperty(this, 1, burnTime);

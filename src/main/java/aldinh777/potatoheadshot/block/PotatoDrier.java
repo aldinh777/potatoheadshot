@@ -43,8 +43,7 @@ public class PotatoDrier extends Block implements ITileEntityProvider {
         this.setResistance(blockType.getResistance());
         this.setSoundType(blockType.getSoundType());
 
-        BlockStateContainer blockState = this.getBlockState();
-        this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
         PotatoBlocks.LISTS.add(this);
         this.setUnlocalizedName("potato_drier");

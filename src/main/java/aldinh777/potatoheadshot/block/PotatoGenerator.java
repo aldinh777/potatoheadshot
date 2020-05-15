@@ -25,6 +25,7 @@ public class PotatoGenerator extends PotatoBlock {
 
     public PotatoGenerator(String name, BlockType blockType) {
         super(name, blockType);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
@@ -104,5 +105,4 @@ public class PotatoGenerator extends PotatoBlock {
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
     }
-
 }

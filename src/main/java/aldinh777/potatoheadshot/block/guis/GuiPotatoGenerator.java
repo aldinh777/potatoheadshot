@@ -45,6 +45,7 @@ public class GuiPotatoGenerator extends GuiContainer {
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
         drawEnergyStored();
+        drawCookProgress();
     }
 
     private void drawEnergyStored() {
@@ -56,6 +57,30 @@ public class GuiPotatoGenerator extends GuiContainer {
                 this.guiLeft + 10, this.guiTop + 11 + 56 - i,
                 178, 33 + 56 - i,
                 18, i + 1
+        );
+    }
+
+    private void drawCookProgress() {
+        int currentCookTime = this.tileEntity.getField("currentCookTime");
+        int totalCookTime = this.tileEntity.getField("totalCookTime");
+        int i = totalCookTime != 0 && currentCookTime != 0 ? currentCookTime * 24 / totalCookTime : 0;
+
+        if (i > 0) {
+            this.drawBurning();
+        }
+
+        this.drawTexturedModalRect(
+                this.guiLeft + 90, this.guiTop + 35,
+                176, 14,
+                i + 1, 16
+        );
+    }
+
+    private void drawBurning() {
+        this.drawTexturedModalRect(
+                this.guiLeft + 63, this.guiTop + 53,
+                176, 0,
+                14, 14
         );
     }
 }
