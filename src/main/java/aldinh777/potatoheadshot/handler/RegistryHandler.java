@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -57,6 +58,14 @@ public class RegistryHandler {
         GameRegistry.addSmelting(PotatoBlocks.POTATO_BLOCK, bakedPotatoBlock, 0.45f);
     }
 
+    public static void registerTileEntity() {
+        ResourceLocation potatoDrier = new ResourceLocation("potatoheadshot:potato_drier");
+        ResourceLocation potatoGenerator = new ResourceLocation("potatoheadshot:potato_generator");
+
+        GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
+        GameRegistry.registerTileEntity(TileEntityPotatoGenerator.class, potatoGenerator);
+    }
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(PotatoItems.LISTS.toArray(new Item[0]));
@@ -66,8 +75,7 @@ public class RegistryHandler {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(PotatoBlocks.LISTS.toArray(new Block[0]));
 
-        ResourceLocation potatoDrier = new ResourceLocation("potatoheadshot:potato_drier");
-        GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
+        registerTileEntity();
     }
 
     @SubscribeEvent

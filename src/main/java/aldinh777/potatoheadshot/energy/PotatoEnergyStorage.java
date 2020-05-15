@@ -1,0 +1,31 @@
+package aldinh777.potatoheadshot.energy;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.energy.EnergyStorage;
+
+public class PotatoEnergyStorage extends EnergyStorage {
+
+    public PotatoEnergyStorage(int capacity, int maxReceive, int maxExtract, int energy) {
+        super(capacity, maxReceive, maxExtract, energy);
+    }
+
+    public PotatoEnergyStorage(int capacity, int maxReceive, int maxExtract) {
+        super(capacity, maxReceive, maxExtract);
+    }
+
+    public void readFromNBT(NBTTagCompound compound) {
+        this.energy = compound.getInteger("Energy");
+    }
+
+    public void writeToNBT(NBTTagCompound compound) {
+        compound.setInteger("Energy", this.energy);
+    }
+
+    public void generateEnergy(int energy) {
+        if (this.energy + energy > this.capacity) {
+            this.energy = this.capacity;
+        } else {
+            this.energy += energy;
+        }
+    }
+}

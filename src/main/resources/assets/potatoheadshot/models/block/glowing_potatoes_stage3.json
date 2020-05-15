@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "potatoheadshot:blocks/glowing_potatoes_stage_3"
+    }
+}

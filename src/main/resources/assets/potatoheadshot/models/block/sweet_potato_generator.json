@@ -1,0 +1,9 @@
+{
+  "parent": "potatoheadshot:block/orientable_with_bottom",
+  "textures": {
+    "top": "potatoheadshot:blocks/sweet_potato_generator_top",
+    "front": "potatoheadshot:blocks/sweet_potato_generator_front",
+    "side": "potatoheadshot:blocks/sweet_potato_generator_side",
+    "bottom": "potatoheadshot:blocks/sweet_potato_generator_bottom"
+  }
+}

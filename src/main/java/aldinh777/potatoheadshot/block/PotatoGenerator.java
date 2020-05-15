@@ -1,68 +1,65 @@
 package aldinh777.potatoheadshot.block;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.item.PotatoItemBlock;
-import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.lists.PotatoTab;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
 import aldinh777.potatoheadshot.util.BlockType;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nullable;
-
-public class PotatoDrier extends Block implements ITileEntityProvider {
+public class PotatoGenerator extends PotatoBlock {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    public static boolean keepInventory;
 
-    public PotatoDrier(String name, BlockType blockType) {
-        this(name, blockType, false);
-    }
-
-    public PotatoDrier(String name, BlockType blockType, boolean isBurning) {
-        super(blockType.getMaterial());
-        this.setRegistryName(name);
-        this.setHardness(blockType.getHardness());
-        this.setResistance(blockType.getResistance());
-        this.setSoundType(blockType.getSoundType());
-
-        BlockStateContainer blockState = this.getBlockState();
-        this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-
-        PotatoBlocks.LISTS.add(this);
-        this.setUnlocalizedName("potato_drier");
-
-        if (!isBurning) {
-            PotatoItems.LISTS.add(new PotatoItemBlock(this));
-            this.setCreativeTab(PotatoTab.POTATO_TAB);
-        } else {
-            this.setLightLevel(0.875f);
-        }
+    public PotatoGenerator(String name, BlockType blockType) {
+        super(name, blockType);
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(PotatoHeadshot.INSTANCE, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(PotatoHeadshot.INSTANCE, 2, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
+    }
+
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityPotatoGenerator();
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        if (!worldIn.isRemote) {
+            TileEntityPotatoGenerator tileEntity = (TileEntityPotatoGenerator) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.handler.getStackInSlot(0)));
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.handler.getStackInSlot(2)));
+            }
+        }
+        super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
+    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+        super.onNeighborChange(world, pos, neighbor);
     }
 
     @Override
@@ -86,32 +83,6 @@ public class PotatoDrier extends Block implements ITileEntityProvider {
 
             worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
         }
-    }
-
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        if (!worldIn.isRemote) {
-            if (!keepInventory) {
-                TileEntityPotatoDrier te = (TileEntityPotatoDrier) worldIn.getTileEntity(pos);
-                if (te != null) {
-                    ItemStackHandler handler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-
-                    for (int i = 0; i < handler.getSlots(); ++i) {
-                        ItemStack itemStack = handler.getStackInSlot(i);
-
-                        if (!itemStack.isEmpty()) {
-                            spawnAsEntity(worldIn, pos, itemStack);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityPotatoDrier();
     }
 
     @Override

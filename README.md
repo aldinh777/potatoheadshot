@@ -14,7 +14,7 @@ They comes with cooked variant
 
 Also, you can cook the dirt
 
-Cook the poisonous potat and you can get
+Cook the poisonous potato and you can get
 - Hot Potato
 - Extra Hot Potato
 - Extreme Hot Potato

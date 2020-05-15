@@ -26,6 +26,7 @@ public class PotatoItems {
     public static Item SALT_POTATO;
     public static Item SWEET_POTATO;
     public static Item BAKED_SWEET_POTATO;
+    public static Item GLOWING_POTATO;
 
     public static Item SMALL_POTATO_PLANKS;
     public static Item POTATO_STICK;
@@ -76,6 +77,9 @@ public class PotatoItems {
         // Sweet Potato Food Section
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
+
+        // Glowing Potato Food Section
+        GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
 
         // Potato Items
         SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");

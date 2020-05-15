@@ -31,6 +31,7 @@ item.sweet_bucket_milk.name=Sweet Milk Bucket
 item.salt_potato.name=Salt Potato
 item.sweet_potato.name=Very Sweet Potato
 item.baked_sweet_potato.name=Baked Sweet Potato
+item.glowing_potato.name=Glowing Potato
 
 tile.cooked_dirt.name=Cooked Dirt
 tile.potato_planks.name=Potato Planks
@@ -39,5 +40,8 @@ tile.potato_block.name=Potato Block
 tile.baked_potato_block.name=Baked Potato Block
 tile.potato_drier.name=Potato Drier
 tile.sweet_potato_block.name=Sweet Potato Block
+tile.dimensional_glass.name=Dimensional Glass
+tile.sweet_potato_generator.name=Sweet Potato Generator
+tile.sweet_machine_frame.name=Sweet Machine Frame
 
 death.attack.potato_explosion=%1$s Died by potato explosion
