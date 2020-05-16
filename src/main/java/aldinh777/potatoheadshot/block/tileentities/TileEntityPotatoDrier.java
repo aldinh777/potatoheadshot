@@ -27,11 +27,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityPotatoDrier extends TileEntity implements ITickable {
 
-    private final ItemStackHandler handler = new ItemStackHandler(5);
+//    private final ItemStackHandler handler = new ItemStackHandler(5);
+    private final ItemStackHandler fuelHandler = new ItemStackHandler(1) {
+        @Nonnull
+        @Override
+        public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+            return isItemFuel(stack) ? super.insertItem(slot, stack, simulate) : stack;
+        }
+    };
+    private final ItemStackHandler inputHandler = new ItemStackHandler(2);
+    private final ItemStackHandler outputHandler = new ItemStackHandler(2);
     private String customName;
 
     private int waterSize;
@@ -134,7 +144,13 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return (T) this.handler;
+            if (facing == EnumFacing.UP) {
+                return (T)this.inputHandler;
+            } else if (facing == EnumFacing.DOWN) {
+                return (T)this.outputHandler;
+            } else {
+                return (T)this.fuelHandler;
+            }
         }
         return super.getCapability(capability, facing);
     }
@@ -156,7 +172,9 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        this.handler.deserializeNBT(compound.getCompoundTag("Inventory"));
+        this.fuelHandler.deserializeNBT(compound.getCompoundTag("InventoryFuel"));
+        this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
+        this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
         this.waterSize = compound.getInteger("WaterVolume");
         this.burnTime = compound.getInteger("BurnTime");
         this.wateringTime = compound.getInteger("WateringTime");
@@ -164,7 +182,7 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
         this.wetTime = compound.getInteger("WetTime");
         this.totalDryTime = compound.getInteger("DryTimeTotal");
         this.totalWetTime = compound.getInteger("WetTimeTotal");
-        this.currentBurnTime = getItemBurnTime(this.handler.getStackInSlot(0));
+        this.currentBurnTime = getItemBurnTime(this.fuelHandler.getStackInSlot(0));
 
         if (compound.hasKey("CustomName", 8)) {
             this.setCustomName(compound.getString("CustomName"));
@@ -174,6 +192,9 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
+        compound.setTag("InventoryFuel", this.fuelHandler.serializeNBT());
+        compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
+        compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
         compound.setInteger("WaterVolume", (short)this.waterSize);
         compound.setInteger("BurnTime", (short)this.burnTime);
         compound.setInteger("WateringTime", (short)this.wateringTime);
@@ -181,7 +202,6 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
         compound.setInteger("WetTime", (short)this.wetTime);
         compound.setInteger("DryTimeTotal", (short)this.totalDryTime);
         compound.setInteger("WetTimeTotal", (short)this.totalWetTime);
-        compound.setTag("Inventory", this.handler.serializeNBT());
 
         if (this.hasCustomName()) {
             compound.setString("CustomName", this.customName);
@@ -199,9 +219,9 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
 
     private boolean canDry() {
 
-        ItemStack fuel = this.handler.getStackInSlot(0);
-        ItemStack dryInput = this.handler.getStackInSlot(1);
-        ItemStack dryOutput = this.handler.getStackInSlot(3);
+        ItemStack fuel = this.fuelHandler.getStackInSlot(0);
+        ItemStack dryInput = this.inputHandler.getStackInSlot(0);
+        ItemStack dryOutput = this.outputHandler.getStackInSlot(0);
 
         if (fuel.isEmpty() && dryInput.isEmpty()) {
             return false;
@@ -231,8 +251,8 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
 
     private boolean canWet() {
 
-        ItemStack wetInput = this.handler.getStackInSlot(2);
-        ItemStack wetOutput = this.handler.getStackInSlot(4);
+        ItemStack wetInput = this.inputHandler.getStackInSlot(1);
+        ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
 
         if (this.waterSize < 1000 && wetInput.isEmpty()) {
             return false;
@@ -262,12 +282,12 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
 
     public void dryItem() {
         if (this.canDry()) {
-            ItemStack dryInput = this.handler.getStackInSlot(1);
-            ItemStack dryOutput = this.handler.getStackInSlot(3);
+            ItemStack dryInput = this.inputHandler.getStackInSlot(0);
+            ItemStack dryOutput = this.outputHandler.getStackInSlot(0);
             ItemStack result = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
 
             if (dryOutput.isEmpty()) {
-                this.handler.setStackInSlot(3, result.copy());
+                this.outputHandler.setStackInSlot(0, result.copy());
             }
             else if (dryOutput.getItem() == result.getItem()) {
                 dryOutput.grow(result.getCount());
@@ -283,12 +303,12 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
 
     public void wetItem() {
         if (this.canWet()) {
-            ItemStack wetInput = this.handler.getStackInSlot(2);
-            ItemStack wetOutput = this.handler.getStackInSlot(4);
+            ItemStack wetInput = this.inputHandler.getStackInSlot(1);
+            ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
             ItemStack result = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
 
             if (wetOutput.isEmpty()) {
-                this.handler.setStackInSlot(4, result.copy());
+                this.outputHandler.setStackInSlot(1, result.copy());
             }
             else if (wetOutput.getItem() == result.getItem()) {
                 wetOutput.grow(result.getCount());
@@ -312,9 +332,9 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
         }
 
         if (!this.world.isRemote) {
-            ItemStack fuel = this.handler.getStackInSlot(0);
-            ItemStack dryInput = this.handler.getStackInSlot(1);
-            ItemStack wetInput = this.handler.getStackInSlot(2);
+            ItemStack fuel = this.fuelHandler.getStackInSlot(0);
+            ItemStack dryInput = this.inputHandler.getStackInSlot(0);
+            ItemStack wetInput = this.inputHandler.getStackInSlot(1);
 
             // Burning Section
             if (this.isBurning() || !fuel.isEmpty() && !dryInput.isEmpty()) {
@@ -331,7 +351,7 @@ public class TileEntityPotatoDrier extends TileEntity implements ITickable {
 
                             if (fuel.isEmpty()) {
                                 ItemStack containerItem = item.getContainerItem(fuel);
-                                this.handler.setStackInSlot(0, containerItem);
+                                this.fuelHandler.setStackInSlot(0, containerItem);
                             }
                         }
                     }

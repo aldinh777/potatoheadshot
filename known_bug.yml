@@ -1,4 +1,16 @@
 SEVERE:
+  - NO BUGS YAY
+
+
+IGNORABLE:
+  -
+    name: Custom Name that dont change the name
+    description:
+      Change block name with anvil, and when the block is put,
+      The name of the block displayed in gui still not changed
+
+
+SOLVED:
   -
     name: Hopper Problem
     description:
@@ -9,15 +21,6 @@ SEVERE:
       It just break
 
 
-MINOR:
-  -
-    name: Custom Name that dont change the name
-    description:
-      Change block name with anvil, and when the block is put,
-      The name of the block displayed in gui still not changed
-
-
-SOLVED:
   -
     name: GUI value error
     description:

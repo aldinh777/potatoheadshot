@@ -4,7 +4,6 @@ import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -18,9 +17,14 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import java.util.Objects;
+
 public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
 
-    public ItemStackHandler handler = new ItemStackHandler(3);
+    private final ItemStackHandler inputHandler = new ItemStackHandler(1);
+    private final ItemStackHandler processHandler = new ItemStackHandler(1);
+    private final ItemStackHandler outputHandler = new ItemStackHandler(1);
+
     private final PotatoEnergyStorage storage = new PotatoEnergyStorage(80000, 0, 60);
     private int energy = storage.getEnergyStored();
     private String customName;
@@ -28,15 +32,15 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
     private int totalCookTime = 100;
 
     private boolean cookProcess() {
-        ItemStack process = this.handler.getStackInSlot(1);
-        ItemStack output = this.handler.getStackInSlot(2);
+        ItemStack process = this.processHandler.getStackInSlot(0);
+        ItemStack output = this.outputHandler.getStackInSlot(0);
 
-        Item result = getResult(process);
+        ItemStack result = getResult(process);
 
-        if (output.isEmpty()) {
-            this.handler.setStackInSlot(2, new ItemStack(result));
+        if (output.isEmpty() && !result.isEmpty()) {
+            this.outputHandler.setStackInSlot(0, result);
             return true;
-        } else if (output.getCount() < output.getMaxStackSize() && result.equals(output.getItem())) {
+        } else if (output.getCount() < output.getMaxStackSize() && result.getItem().equals(output.getItem())) {
             output.grow(1);
             return true;
         }
@@ -46,8 +50,8 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!world.isRemote) {
-            ItemStack input = this.handler.getStackInSlot(0);
-            ItemStack process = this.handler.getStackInSlot(1);
+            ItemStack input = this.inputHandler.getStackInSlot(0);
+            ItemStack process = this.processHandler.getStackInSlot(0);
 
             if (!process.isEmpty()) {
                 if (this.storage.getEnergyStored() < this.storage.getMaxEnergyStored()) {
@@ -62,10 +66,10 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
                         process.shrink(1);
                     }
                 }
-            } else if (!input.isEmpty()) {
+            } else if (!input.isEmpty() && isItemFuel(input)) {
                 this.totalCookTime = getFuelValue(input);
                 this.currentCookTime = 0;
-                this.handler.setStackInSlot(1, new ItemStack(input.getItem()));
+                this.processHandler.setStackInSlot(0, new ItemStack(input.getItem()));
                 input.shrink(1);
             }
 
@@ -87,25 +91,37 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) return (T)this.storage;
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return (T)this.handler;
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (facing == null) {
+                return (T)this.processHandler;
+            } else if (facing == EnumFacing.DOWN) {
+                return (T)this.outputHandler;
+            } else if (facing == EnumFacing.UP) {
+                return (T)this.inputHandler;
+            }
+        }
         return super.getCapability(capability, facing);
     }
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) return true;
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return facing == null || facing == EnumFacing.DOWN || facing == EnumFacing.UP;
+        }
         return super.hasCapability(capability, facing);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setTag("Inventory", this.handler.serializeNBT());
+        compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
+        compound.setTag("InventoryProcess", this.processHandler.serializeNBT());
+        compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
         compound.setInteger("GuiEnergy", this.energy);
         compound.setInteger("CurrentCookTime", (short)this.currentCookTime);
         compound.setInteger("TotalCookTime", (short)this.totalCookTime);
-        compound.setString("Name", getDisplayName().toString());
+        compound.setString("Name", Objects.requireNonNull(getDisplayName()).toString());
         this.storage.writeToNBT(compound);
         return compound;
     }
@@ -113,7 +129,9 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        this.handler.deserializeNBT(compound.getCompoundTag("Inventory"));
+        this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
+        this.processHandler.deserializeNBT(compound.getCompoundTag("InventoryProcess"));
+        this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
         this.energy = compound.getInteger("GuiEnergy");
         this.currentCookTime = compound.getInteger("CurrentCookTime");
         this.totalCookTime = compound.getInteger("TotalCookTime");
@@ -165,23 +183,23 @@ public class TileEntityPotatoGenerator extends TileEntity implements ITickable {
         return this.world.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
-    private static int getFuelValue(ItemStack stack) {
+    public static int getFuelValue(ItemStack stack) {
         if (stack.getItem() == Items.POTATO) return 200;
         if (stack.getItem() == PotatoItems.SWEET_POTATO) return 200;
         return 0;
     }
 
-    private static Item getResult(ItemStack stack) {
-        if (stack.getItem() == Items.POTATO) return Items.BAKED_POTATO;
-        if (stack.getItem() == PotatoItems.SWEET_POTATO) return PotatoItems.BAKED_SWEET_POTATO;
-        return Items.BAKED_POTATO;
+    public static ItemStack getResult(ItemStack stack) {
+        if (stack.getItem() == Items.POTATO) return new ItemStack(Items.BAKED_POTATO);
+        if (stack.getItem() == PotatoItems.SWEET_POTATO) return new ItemStack(PotatoItems.BAKED_SWEET_POTATO);
+        return ItemStack.EMPTY;
     }
 
     public static boolean isItemFuel(ItemStack itemStack) {
         return getFuelValue(itemStack) > 0;
     }
 
-    private static void doEnergyInteract(TileEntity source, TileEntity target, EnumFacing side, int maxTransfer) {
+    public static void doEnergyInteract(TileEntity source, TileEntity target, EnumFacing side, int maxTransfer) {
         if (maxTransfer > 0) {
             EnumFacing interfaceSide = side == null ? EnumFacing.UP : side.getOpposite();
             if (source != null && target != null) {

@@ -4,7 +4,6 @@ import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -16,8 +15,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public class PotatoGenerator extends PotatoBlock {
 
@@ -51,16 +51,18 @@ public class PotatoGenerator extends PotatoBlock {
         if (!worldIn.isRemote) {
             TileEntityPotatoGenerator tileEntity = (TileEntityPotatoGenerator) worldIn.getTileEntity(pos);
             if (tileEntity != null) {
-                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.handler.getStackInSlot(0)));
-                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.handler.getStackInSlot(2)));
+                IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+                IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+
+                if (inputHandler != null) {
+                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), inputHandler.getStackInSlot(0)));
+                }
+                if (outputHandler != null) {
+                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), outputHandler.getStackInSlot(0)));
+                }
             }
         }
         super.breakBlock(worldIn, pos, state);
-    }
-
-    @Override
-    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(world, pos, neighbor);
     }
 
     @Override
@@ -98,7 +100,7 @@ public class PotatoGenerator extends PotatoBlock {
 
     @Override
     public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, FACING);
     }
 
     @Override

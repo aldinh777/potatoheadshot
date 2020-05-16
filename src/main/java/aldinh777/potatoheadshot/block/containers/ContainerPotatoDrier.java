@@ -1,10 +1,8 @@
 package aldinh777.potatoheadshot.block.containers;
 
 import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
-import aldinh777.potatoheadshot.block.slots.SlotDryInputHandler;
 import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
 import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
-import aldinh777.potatoheadshot.block.slots.SlotWetInputHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,10 +10,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerPotatoDrier extends Container {
 
@@ -28,13 +28,15 @@ public class ContainerPotatoDrier extends Container {
 
     public ContainerPotatoDrier(InventoryPlayer player, TileEntityPotatoDrier tileEntity) {
         this.tileEntity = tileEntity;
-        IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler fuelHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.WEST);
+        IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+        IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
-        this.addSlotToContainer(new SlotFuelHandler(handler, 0, 14, 34));
-        this.addSlotToContainer(new SlotDryInputHandler(handler, 1, 87, 26));
-        this.addSlotToContainer(new SlotWetInputHandler(handler, 2, 87, 58));
-        this.addSlotToContainer(new SlotOutputHandler(handler, 3, 141, 22));
-        this.addSlotToContainer(new SlotOutputHandler(handler, 4, 141, 54));
+        this.addSlotToContainer(new SlotFuelHandler(fuelHandler, 0, 14, 34));
+        this.addSlotToContainer(new SlotItemHandler(inputHandler, 0, 87, 26));
+        this.addSlotToContainer(new SlotItemHandler(inputHandler, 1, 87, 58));
+        this.addSlotToContainer(new SlotOutputHandler(outputHandler, 0, 141, 22));
+        this.addSlotToContainer(new SlotOutputHandler(outputHandler, 1, 141, 54));
 
         for (int y = 0; y < 3; y++) {
             for(int x = 0; x < 9; x++) {

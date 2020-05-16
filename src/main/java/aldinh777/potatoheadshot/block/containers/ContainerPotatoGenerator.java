@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.block.containers;
 
-import aldinh777.potatoheadshot.block.slots.SlotGeneratorHandler;
 import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.block.slots.SlotProcessHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
@@ -10,9 +9,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerPotatoGenerator extends Container {
 
@@ -21,11 +23,13 @@ public class ContainerPotatoGenerator extends Container {
 
     public ContainerPotatoGenerator(InventoryPlayer player, TileEntityPotatoGenerator tileEntity) {
         this.tileEntity = tileEntity;
-        IItemHandler handler = tileEntity.handler;
+        IItemHandler processHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+        IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
-        this.addSlotToContainer(new SlotGeneratorHandler(handler, 0, 42, 35));
-        this.addSlotToContainer(new SlotProcessHandler(handler, 1, 63, 35));
-        this.addSlotToContainer(new SlotOutputHandler(handler, 2, 131, 33));
+        this.addSlotToContainer(new SlotItemHandler(inputHandler, 0, 42, 35));
+        this.addSlotToContainer(new SlotProcessHandler(processHandler, 0, 63, 35));
+        this.addSlotToContainer(new SlotOutputHandler(outputHandler, 0, 131, 33));
 
         for(int y = 0; y < 3; y++) {
             for(int x = 0; x < 9; x++) {
