@@ -11,7 +11,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class PotatoCrops extends BlockCrops {
 
-    private static final AxisAlignedBB[] SWEET_POTATO_AABB = new AxisAlignedBB[] {
+    private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.1875D, 1.0D),
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D),
@@ -23,7 +23,6 @@ public class PotatoCrops extends BlockCrops {
     };
 
     public PotatoCrops(String name) {
-        super();
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         PotatoBlocks.LISTS.add(this);
@@ -38,6 +37,6 @@ public class PotatoCrops extends BlockCrops {
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return SWEET_POTATO_AABB[state.getValue(this.getAgeProperty())];
+        return CROPS_AABB[state.getValue(this.getAgeProperty())];
     }
 }

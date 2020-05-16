@@ -12,10 +12,14 @@ public class PotatoBlock extends Block {
     public PotatoBlock(String name, BlockType blockType) {
         super(blockType.getMaterial());
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
         this.setHardness(blockType.getHardness());
         this.setResistance(blockType.getResistance());
         this.setSoundType(blockType.getSoundType());
+        init(name);
+    }
+
+    protected void init(String name) {
+        this.setUnlocalizedName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
         PotatoBlocks.LISTS.add(this);
