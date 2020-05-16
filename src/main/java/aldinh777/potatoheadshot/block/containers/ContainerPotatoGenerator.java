@@ -43,11 +43,6 @@ public class ContainerPotatoGenerator extends Container {
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return this.tileEntity.isUsableByPlayer(playerIn);
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data) {
         this.tileEntity.setField(id, data);
@@ -83,6 +78,11 @@ public class ContainerPotatoGenerator extends Container {
         this.energy = this.tileEntity.getField("energy");
         this.totalCookTime = this.tileEntity.getField("totalCookTime");
         this.currentCookTime = this.tileEntity.getField("currentCookTime");
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return this.tileEntity.isUsableByPlayer(playerIn);
     }
 
     @Override

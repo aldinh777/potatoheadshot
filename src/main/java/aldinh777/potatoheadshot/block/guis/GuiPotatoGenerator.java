@@ -35,7 +35,7 @@ public class GuiPotatoGenerator extends GuiContainer {
         String tileName = Objects.requireNonNull(this.tileEntity.getDisplayName()).getUnformattedText();
         this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 10, 6, 4210752);
         this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 7, this.ySize - 96 + 2, 4210752);
-        this.fontRenderer.drawString(this.tileEntity.getField("energy") + " RF", 120, 72, 4210752);
+        this.fontRenderer.drawString("RF : " + this.tileEntity.getField("energy"), 120, 72, 4210752);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class GuiPotatoGenerator extends GuiContainer {
     }
 
     private void drawEnergyStored() {
-        int energy = this.tileEntity.getEnergyStored();
+        int energy = this.tileEntity.getField("energy");
         int maxEnergy = this.tileEntity.getMaxEnergyStored();
         int i = (energy == 0 || maxEnergy == 0) ? 0 : energy * 57 / maxEnergy;
 
