@@ -24,10 +24,6 @@ public class PotatoFood extends ItemFood {
         PotatoItems.LISTS.add(this);
     }
 
-    public void addEffects(FoodEffects... effects) {
-        this.effects.addAll(Arrays.asList(effects));
-    }
-
     @Override
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!worldIn.isRemote) {
@@ -35,5 +31,9 @@ public class PotatoFood extends ItemFood {
                 effect.applyEffects(stack, worldIn, player);
             }
         }
+    }
+
+    public void addEffects(FoodEffects... effects) {
+        this.effects.addAll(Arrays.asList(effects));
     }
 }

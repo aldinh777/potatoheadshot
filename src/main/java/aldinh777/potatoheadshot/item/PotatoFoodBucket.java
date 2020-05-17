@@ -29,21 +29,6 @@ public class PotatoFoodBucket extends PotatoFood {
         this.setMaxStackSize(64);
     }
 
-    public PotatoFoodBucket setSoundEvent(SoundEvent soundEvent) {
-        this.soundEvent = soundEvent;
-        return this;
-    }
-
-    public PotatoFoodBucket setExplodeOnPlaced() {
-        this.explodeOnPlaced = true;
-        return this;
-    }
-
-    public PotatoFoodBucket setBurnTime(int burnTime) {
-        this.burnTime = burnTime;
-        return this;
-    }
-
     @Override
     public int getItemBurnTime(ItemStack itemStack) {
         return this.burnTime;
@@ -92,6 +77,21 @@ public class PotatoFoodBucket extends PotatoFood {
                 }
             }
         }
+    }
+
+    public PotatoFoodBucket setSoundEvent(SoundEvent soundEvent) {
+        this.soundEvent = soundEvent;
+        return this;
+    }
+
+    public PotatoFoodBucket setExplodeOnPlaced() {
+        this.explodeOnPlaced = true;
+        return this;
+    }
+
+    public PotatoFoodBucket setBurnTime(int burnTime) {
+        this.burnTime = burnTime;
+        return this;
     }
 
     private void explode(World worldIn, EntityPlayer player, BlockPos posIn) {

@@ -7,8 +7,10 @@ import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -16,6 +18,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
+import java.util.Random;
 
 public class PotatoDrier extends PotatoMachine {
 
@@ -45,6 +48,11 @@ public class PotatoDrier extends PotatoMachine {
         }
     }
 
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(PotatoBlocks.POTATO_DRIER);
+    }
+
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
@@ -57,13 +65,18 @@ public class PotatoDrier extends PotatoMachine {
             if (!keepInventory) {
                 TileEntityPotatoDrier te = (TileEntityPotatoDrier) worldIn.getTileEntity(pos);
                 if (te != null) {
-                    ItemStackHandler handler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                    ItemStackHandler fuelHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                    ItemStackHandler inputHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+                    ItemStackHandler outputHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+                    ItemStackHandler[] handlers = new ItemStackHandler[]{fuelHandler, inputHandler, outputHandler};
 
-                    for (int i = 0; i < Objects.requireNonNull(handler).getSlots(); ++i) {
-                        ItemStack itemStack = handler.getStackInSlot(i);
+                    for (ItemStackHandler handler : handlers) {
+                        for (int i = 0; i < Objects.requireNonNull(handler).getSlots(); ++i) {
+                            ItemStack itemStack = handler.getStackInSlot(i);
 
-                        if (!itemStack.isEmpty()) {
-                            spawnAsEntity(worldIn, pos, itemStack);
+                            if (!itemStack.isEmpty()) {
+                                spawnAsEntity(worldIn, pos, itemStack);
+                            }
                         }
                     }
                 }

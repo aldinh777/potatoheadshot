@@ -46,10 +46,6 @@ public class SweetBucket extends Item {
         PotatoItems.LISTS.add(this);
     }
 
-    public void addEffects(FoodEffects... effects) {
-        this.effects.addAll(Arrays.asList(effects));
-    }
-
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
         return 32;
@@ -60,6 +56,7 @@ public class SweetBucket extends Item {
         return EnumAction.DRINK;
     }
 
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         if (!worldIn.isRemote) {
             if (entityLiving instanceof EntityPlayer) {
@@ -74,6 +71,7 @@ public class SweetBucket extends Item {
         return stack.isEmpty() ? new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET) : stack;
     }
 
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
         ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -106,6 +104,19 @@ public class SweetBucket extends Item {
                 }
             }
         }
+    }
+
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        if (this.getClass() == SweetBucket.class) {
+            return new FluidBucketWrapper(stack);
+        } else {
+            return super.initCapabilities(stack, nbt);
+        }
+    }
+
+    public void addEffects(FoodEffects... effects) {
+        this.effects.addAll(Arrays.asList(effects));
     }
 
     private boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World worldIn, BlockPos posIn) {
@@ -155,14 +166,5 @@ public class SweetBucket extends Item {
     private ActionResult<ItemStack> drink(EntityPlayer playerIn, ItemStack itemstack, EnumHand handIn) {
         playerIn.setActiveHand(handIn);
         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-    }
-
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if (this.getClass() == SweetBucket.class) {
-            return new FluidBucketWrapper(stack);
-        } else {
-            return super.initCapabilities(stack, nbt);
-        }
     }
 }

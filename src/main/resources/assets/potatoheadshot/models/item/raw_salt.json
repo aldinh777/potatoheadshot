@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "potatoheadshot:items/salt"
+    "layer0": "potatoheadshot:items/raw_salt"
   }
 }

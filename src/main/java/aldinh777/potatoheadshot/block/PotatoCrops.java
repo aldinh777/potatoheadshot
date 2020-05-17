@@ -28,14 +28,17 @@ public class PotatoCrops extends BlockCrops {
         PotatoBlocks.LISTS.add(this);
     }
 
+    @Override
     protected Item getSeed() {
         return PotatoItems.SWEET_POTATO;
     }
 
+    @Override
     protected Item getCrop() {
         return PotatoItems.SWEET_POTATO;
     }
 
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return CROPS_AABB[state.getValue(this.getAgeProperty())];
     }

@@ -367,7 +367,13 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             if (this.waterSize > this.getMaxWaterSize()) {
                 this.waterSize = this.getMaxWaterSize();
             }
-            dryInput.shrink(1);
+            if (dryInput.getItem() == Items.WATER_BUCKET) {
+                this.inputHandler.setStackInSlot(0, new ItemStack(Items.BUCKET));
+            } else if (dryInput.getItem() == PotatoItems.SWEET_WATER_BUCKET) {
+                this.inputHandler.setStackInSlot(0, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET));
+            } else {
+                dryInput.shrink(1);
+            }
         }
     }
 
@@ -408,6 +414,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             if (item == PotatoItems.WET_POTATO) return 200;
             if (item == PotatoItems.SUPER_WET_POTATO) return 400;
             if (item == Items.WATER_BUCKET || item == PotatoItems.WATER_POTATO) return 800;
+            if (item == PotatoItems.SWEET_WATER_BUCKET) return 800;
         }
         return 0;
     }

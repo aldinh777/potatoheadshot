@@ -29,6 +29,7 @@ public class SweetFoodBucket extends PotatoFood {
         this.setMaxStackSize(16);
     }
 
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);
@@ -69,6 +70,15 @@ public class SweetFoodBucket extends PotatoFood {
         }
     }
 
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        if (this.getClass() == SweetFoodBucket.class) {
+            return new FluidBucketWrapper(stack);
+        } else {
+            return super.initCapabilities(stack, nbt);
+        }
+    }
+
     private ActionResult<ItemStack> eatItem(EntityPlayer playerIn, ItemStack itemstack, EnumHand handIn) {
         if (playerIn.canEat(false)) {
             playerIn.setActiveHand(handIn);
@@ -92,15 +102,6 @@ public class SweetFoodBucket extends PotatoFood {
 
                 return emptyBuckets;
             }
-        }
-    }
-
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if (this.getClass() == SweetFoodBucket.class) {
-            return new FluidBucketWrapper(stack);
-        } else {
-            return super.initCapabilities(stack, nbt);
         }
     }
 }

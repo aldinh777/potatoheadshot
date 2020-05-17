@@ -28,9 +28,6 @@ public class PotatoKnife extends ItemSword {
         return false;
     }
 
-    /**
-     * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
-     */
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if ((double)state.getBlockHardness(worldIn, pos) != 0.0D) {
@@ -52,9 +49,6 @@ public class PotatoKnife extends ItemSword {
         return true;
     }
 
-    /**
-     * Check whether this Item can harvest the given Block
-     */
     @Override
     public boolean canHarvestBlock(IBlockState blockIn) {
         return blockIn.getBlock() == Blocks.POTATOES || blockIn.getBlock() == Blocks.WEB;

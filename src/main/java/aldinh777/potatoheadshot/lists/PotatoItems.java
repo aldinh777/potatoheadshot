@@ -34,7 +34,7 @@ public class PotatoItems {
     public static Item DRIED_POTATO;
     public static Item POTATO_CHIP;
     public static Item POTATO_STARCH;
-    public static Item SALT;
+    public static Item RAW_SALT;
     public static Item DRIED_SWEET_POTATO;
     public static Item SWEET_POTATO_DUST;
     public static Item SWEET_POTATO_INGOT;
@@ -88,7 +88,7 @@ public class PotatoItems {
         POTATO_STICK = new PotatoItem("potato_stick", 100);
         POTATO_LEAVES = new PotatoItem("potato_leaves");
         POTATO_STARCH = new PotatoItem("potato_starch");
-        SALT = new PotatoItem("salt");
+        RAW_SALT = new PotatoItem("raw_salt");
         DRIED_SWEET_POTATO = new PotatoItem("dried_sweet_potato");
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");

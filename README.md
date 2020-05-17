@@ -30,9 +30,10 @@ Also, they have various effect when placed on block
 
 ### Potato Drier
 
-With this, you can dry some potatoes to get these another potatoes
+With this, you can dry some potatoes to get these another items
 - Dried Potato
 - Potato Starch
+- Raw Salt
 
 You can also wet the potatoes with this tools to get
 - Wet Potato
@@ -60,7 +61,7 @@ Just like potato, you can cook sweet potato
 
 Dry with potato drier, and you will get
 - Dried Sweet Potato
-- Potato Dust
+- Sweet Potato Dust
 
 Smelt Potato Dust to get "Sweet Potato Ingot"
 
