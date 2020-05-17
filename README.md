@@ -65,14 +65,17 @@ Dry with potato drier, and you will get
 
 Smelt Potato Dust to get "Sweet Potato Ingot"
 
-Currently, there is not much use of these ingot, it is just to craft "Sweet Potato Bucket" and "Sweet Potato Block"
+You can craft "Sweet Potato Block" with it
 
+### Sweet Potato Bucket
 Cook the "Sweet Potato Bucket" to make it usable and edible
 
 And be carefull to don't accidentally drink the lava and get burn
 
 If you did, then you can drink the water with the bucket
 
+### Sweet Potato Generator
+Simple generator that can produce RF by cooking "Potato" or "Very Sweet Potato"
 
 
 ## Broken Item
@@ -84,3 +87,6 @@ Works like coal, but won't consumed when used
 
 ### Useless Potato
 Dupeable potato with no use
+
+### Dimensional Glass
+Glass that can see through any other block beside it

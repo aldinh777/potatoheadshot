@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "PMP",
+    "PPP"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "P": {
+      "item": "potatoheadshot:sweet_potato_ingot"
+    },
+    "M": {
+      "item": "potatoheadshot:sweet_machine_frame"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:sweet_potato_generator"
+  }
+}
