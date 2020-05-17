@@ -149,10 +149,13 @@ public class TileEntityPotatoGenerator extends TileEntityPotatoMachine {
         switch(id) {
             case 0:
                 this.energy = value;
+                break;
             case 1:
                 this.totalCookTime = value;
+                break;
             case 2:
                 this.currentCookTime = value;
+                break;
         }
     }
 

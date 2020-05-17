@@ -55,8 +55,6 @@ public class ContainerPotatoDrier extends Container {
 
         for (IContainerListener listener : this.listeners) {
 
-            boolean flagUpdateAll = false;
-
             int waterSize = this.tileEntity.getField("waterSize");
             int wateringTime = this.tileEntity.getField("wateringTime");
             int burnTime = this.tileEntity.getField("burnTime");
@@ -69,35 +67,23 @@ public class ContainerPotatoDrier extends Container {
             int maxWaterCapacity = this.tileEntity.getMaxWaterSize();
 
             if (this.waterSize != waterSize || waterSize <= 0 || waterSize >= maxWaterCapacity)
-                flagUpdateAll = true;
-            if (this.burnTime != burnTime)
-                flagUpdateAll = true;
-            if (this.wateringTime != wateringTime)
-                flagUpdateAll = true;
-            if (this.dryTime != dryTime)
-                flagUpdateAll = true;
-            if (this.wetTime != wetTime)
-                flagUpdateAll = true;
-            if (this.currentBurnTime != currentBurnTime)
-                flagUpdateAll = true;
-            if (this.currentWateringTime != currentWateringTime)
-                flagUpdateAll = true;
-            if (this.totalDryTime != totalDryTime)
-                flagUpdateAll = true;
-            if (this.totalWetTime != totalWetTime)
-                flagUpdateAll = true;
-
-            if (flagUpdateAll) {
                 listener.sendWindowProperty(this, 0, waterSize);
+            if (this.burnTime != burnTime)
                 listener.sendWindowProperty(this, 1, burnTime);
+            if (this.wateringTime != wateringTime)
                 listener.sendWindowProperty(this, 2, wateringTime);
+            if (this.dryTime != dryTime)
                 listener.sendWindowProperty(this, 3, dryTime);
+            if (this.wetTime != wetTime)
                 listener.sendWindowProperty(this, 4, wetTime);
+            if (this.currentBurnTime != currentBurnTime)
                 listener.sendWindowProperty(this, 5, currentBurnTime);
+            if (this.currentWateringTime != currentWateringTime)
                 listener.sendWindowProperty(this, 6, currentWateringTime);
+            if (this.totalDryTime != totalDryTime)
                 listener.sendWindowProperty(this, 7, totalDryTime);
+            if (this.totalWetTime != totalWetTime)
                 listener.sendWindowProperty(this, 8, totalWetTime);
-            }
         }
 
         this.waterSize = this.tileEntity.getField("waterSize");

@@ -54,25 +54,17 @@ public class ContainerPotatoGenerator extends Container {
 
         for (IContainerListener listener : this.listeners) {
 
-            boolean flagUpdateAll = false;
-
             int energy = this.tileEntity.getField("energy");
             int totalCookTime = this.tileEntity.getField("totalCookTime");
             int currentCookTime = this.tileEntity.getField("currentCookTime");
             int maxCapacity = this.tileEntity.getMaxEnergyStored();
 
             if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
-                flagUpdateAll = true;
-            if (this.totalCookTime != totalCookTime)
-                flagUpdateAll = true;
-            if (this.currentCookTime != currentCookTime)
-                flagUpdateAll = true;
-
-            if (flagUpdateAll) {
                 listener.sendWindowProperty(this, 0, energy);
+            if (this.totalCookTime != totalCookTime)
                 listener.sendWindowProperty(this, 1, totalCookTime);
+            if (this.currentCookTime != currentCookTime)
                 listener.sendWindowProperty(this, 2, currentCookTime);
-            }
         }
 
         this.energy = this.tileEntity.getField("energy");
