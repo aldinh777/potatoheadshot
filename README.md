@@ -77,6 +77,8 @@ If you did, then you can drink the water with the bucket
 ### Sweet Potato Generator
 Simple generator that can produce RF by cooking "Potato" or "Very Sweet Potato"
 
+### Sweet Freezer
+Freeze water with "Raw Salt" to make ice
 
 ## Broken Item
 

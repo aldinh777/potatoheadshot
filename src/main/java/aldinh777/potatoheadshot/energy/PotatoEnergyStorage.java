@@ -28,4 +28,12 @@ public class PotatoEnergyStorage extends EnergyStorage {
             this.energy += energy;
         }
     }
+
+    public void useEnergy(int energy) {
+        if (this.energy - energy < 0) {
+            this.energy = 0;
+        } else {
+            this.energy -= energy;
+        }
+    }
 }

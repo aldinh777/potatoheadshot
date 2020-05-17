@@ -41,6 +41,7 @@ public class PotatoBlocks {
     public static Block POTATO_DRIER;
     public static Block LIT_POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
+    public static Block SWEET_FREEZER;
 
     public static Block DIMENSIONAL_GLASS;
 
@@ -75,6 +76,7 @@ public class PotatoBlocks {
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
         LIT_POTATO_DRIER = new PotatoDrier("lit_potato_drier", BlockType.STONE, true);
         SWEET_POTATO_GENERATOR = new PotatoGenerator("sweet_potato_generator", BlockType.METAL);
+        SWEET_FREEZER = new PotatoFreezer("sweet_freezer", BlockType.METAL);
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

@@ -112,7 +112,6 @@ public class TileEntityPotatoGenerator extends TileEntityPotatoMachine {
         this.energy = compound.getInteger("GuiEnergy");
         this.currentCookTime = compound.getInteger("CurrentCookTime");
         this.totalCookTime = compound.getInteger("TotalCookTime");
-        this.customName = compound.getString("Name");
         this.storage.readFromNBT(compound);
     }
 
@@ -125,7 +124,6 @@ public class TileEntityPotatoGenerator extends TileEntityPotatoMachine {
         compound.setInteger("GuiEnergy", this.energy);
         compound.setInteger("CurrentCookTime", (short)this.currentCookTime);
         compound.setInteger("TotalCookTime", (short)this.totalCookTime);
-        compound.setString("Name", Objects.requireNonNull(getDisplayName()).toString());
         this.storage.writeToNBT(compound);
         return compound;
     }

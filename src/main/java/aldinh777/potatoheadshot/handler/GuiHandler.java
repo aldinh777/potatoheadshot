@@ -1,10 +1,13 @@
 package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.block.containers.ContainerPotatoDrier;
+import aldinh777.potatoheadshot.block.containers.ContainerPotatoFreezer;
 import aldinh777.potatoheadshot.block.containers.ContainerPotatoGenerator;
 import aldinh777.potatoheadshot.block.guis.GuiPotatoDrier;
+import aldinh777.potatoheadshot.block.guis.GuiPotatoFreezer;
 import aldinh777.potatoheadshot.block.guis.GuiPotatoGenerator;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -27,6 +30,9 @@ public class GuiHandler implements IGuiHandler {
         } else if (ID == 2) {
             TileEntityPotatoGenerator te = (TileEntityPotatoGenerator) tileEntity;
             return new ContainerPotatoGenerator(player.inventory, Objects.requireNonNull(te));
+        } else if (ID == 3) {
+            TileEntityPotatoFreezer te = (TileEntityPotatoFreezer) tileEntity;
+            return new ContainerPotatoFreezer(player.inventory, Objects.requireNonNull(te));
         } else {
             return  null;
         }
@@ -42,6 +48,9 @@ public class GuiHandler implements IGuiHandler {
         } else if (ID == 2) {
             TileEntityPotatoGenerator te = (TileEntityPotatoGenerator) tileEntity;
             return new GuiPotatoGenerator(player.inventory, Objects.requireNonNull(te));
+        } else if (ID == 3) {
+            TileEntityPotatoFreezer te = (TileEntityPotatoFreezer) tileEntity;
+            return new GuiPotatoFreezer(player.inventory, Objects.requireNonNull(te));
         } else {
             return  null;
         }

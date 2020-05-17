@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -60,10 +61,12 @@ public class RegistryHandler {
 
     public static void registerTileEntity() {
         ResourceLocation potatoDrier = new ResourceLocation("potatoheadshot:potato_drier");
-        ResourceLocation potatoGenerator = new ResourceLocation("potatoheadshot:potato_generator");
+        ResourceLocation potatoGenerator = new ResourceLocation("potatoheadshot:sweet_potato_generator");
+        ResourceLocation potatoFreezer = new ResourceLocation("potatoheadshot:sweet_freezer");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntityPotatoGenerator.class, potatoGenerator);
+        GameRegistry.registerTileEntity(TileEntityPotatoFreezer.class, potatoFreezer);
     }
 
     @SubscribeEvent
