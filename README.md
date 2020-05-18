@@ -10,11 +10,11 @@ This mod adds more functionality to vanilla minecraft potato
 - Potato Stick
 - Potato Block
 
-They comes with cooked variant
+They come with cooked variant
 
 Also, you can cook the dirt
 
-Cook the poisonous potato and you can get
+Cook the poisonous potato, and you can get
 - Hot Potato
 - Extra Hot Potato
 - Extreme Hot Potato
@@ -46,16 +46,16 @@ Water potato will turn into water if placed on block
 
 ### Potato Knife
 
-Cut the potato crops and you will get "Potato Leaves"
+Cut the potato crops, and you will get "Potato Leaves"
 
 Craft 3 leaves to get 1 string
 
-Craft potato knife with dried potato and you will get potato chip
+Craft potato knife with dried potato, and you will get potato chip
 
 
 
 ## Very Sweet Potato :
-Surround potato with sugar and you will get new crop "Very Sweet Potato"
+Surround potato with sugar, and you will get new crop "Very Sweet Potato"
 
 Just like potato, you can cook sweet potato
 
@@ -70,25 +70,28 @@ You can craft "Sweet Potato Block" with it
 ### Sweet Potato Bucket
 Cook the "Sweet Potato Bucket" to make it usable and edible
 
-And be carefull to don't accidentally drink the lava and get burn
+Be careful to don't accidentally drink the lava and get burn
 
 If you did, then you can drink the water with the bucket
 
 ### Sweet Potato Generator
-Simple generator that can produce RF by cooking "Potato" or "Very Sweet Potato"
+A simple generator that can produce RF by cooking "Potato" or "Very Sweet Potato"
 
 ### Sweet Freezer
 Freeze water with "Raw Salt" to make ice
+
+### Sweet Infuser
+Infuse any item with other materials to get another items
 
 ## Broken Item
 
 These item just exists when developing
 
 ### Infinite Broken Fuel
-Works like coal, but won't consumed when used
+Works like coal, but won't consume when used
 
 ### Useless Potato
 Dupeable potato with no use
 
 ### Dimensional Glass
-Glass that can see through any other block beside it
+Glass who can see through any other block around it

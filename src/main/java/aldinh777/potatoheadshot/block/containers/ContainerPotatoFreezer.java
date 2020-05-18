@@ -91,8 +91,6 @@ public class ContainerPotatoFreezer extends Container {
                 if (!this.mergeItemStack(stack, 3, 39, false)) {
                     return ItemStack.EMPTY;
                 }
-
-                slot.onSlotChange(stack, itemstack);
             } else {
                 ItemStack result = TileEntityPotatoFreezer.getResult(stack);
 
@@ -115,7 +113,7 @@ public class ContainerPotatoFreezer extends Container {
                 }
             }
 
-            if(stack.isEmpty()) {
+            if (stack.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();

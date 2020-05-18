@@ -40,7 +40,7 @@ public class TileEntityPotatoFreezer extends TileEntityPotatoMachine {
     public void update() {
         if (!this.world.isRemote) {
             if (canFreeze()) {
-                if (currentFreezeTime >= totalFreezeTime) {
+                if (this.currentFreezeTime >= this.totalFreezeTime) {
                     ItemStack salt = this.saltHandler.getStackInSlot(0);
                     freezeItem();
                     this.currentFreezeTime = 0;

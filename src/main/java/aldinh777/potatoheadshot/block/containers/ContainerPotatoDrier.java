@@ -121,8 +121,6 @@ public class ContainerPotatoDrier extends Container {
                 if (!this.mergeItemStack(stack, 5, 41, true)) {
                     return ItemStack.EMPTY;
                 }
-
-                slot.onSlotChange(stack, itemstack);
             } else if (index !=2 && index != 1 && index != 0) {
                 if (TileEntityPotatoDrier.isItemFuel(stack)) {
                     if (!this.mergeItemStack(stack, 0, 1, false)) {

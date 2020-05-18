@@ -27,7 +27,7 @@ public class PotatoBlocks {
         protected Item getSeed() {
             return PotatoItems.GLOWING_POTATO;
         }
-    }.setLightLevel(1.0f);
+    }.setLightLevel(0.8f);
 
     public static Block COOKED_DIRT;
     public static Block BAKED_POTATO_PLANKS;
@@ -42,6 +42,7 @@ public class PotatoBlocks {
     public static Block LIT_POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
     public static Block SWEET_FREEZER;
+    public static Block SWEET_INFUSER;
 
     public static Block DIMENSIONAL_GLASS;
 
@@ -77,6 +78,7 @@ public class PotatoBlocks {
         LIT_POTATO_DRIER = new PotatoDrier("lit_potato_drier", BlockType.STONE, true);
         SWEET_POTATO_GENERATOR = new PotatoGenerator("sweet_potato_generator", BlockType.METAL);
         SWEET_FREEZER = new PotatoFreezer("sweet_freezer", BlockType.METAL);
+        SWEET_INFUSER = new PotatoInfuser("sweet_infuser", BlockType.METAL);
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

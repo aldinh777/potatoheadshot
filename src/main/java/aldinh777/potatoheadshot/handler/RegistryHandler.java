@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoInfuser;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -63,10 +64,12 @@ public class RegistryHandler {
         ResourceLocation potatoDrier = new ResourceLocation("potatoheadshot:potato_drier");
         ResourceLocation potatoGenerator = new ResourceLocation("potatoheadshot:sweet_potato_generator");
         ResourceLocation potatoFreezer = new ResourceLocation("potatoheadshot:sweet_freezer");
+        ResourceLocation potatoInfuser = new ResourceLocation("potatoheadshot:sweet_infuser");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntityPotatoGenerator.class, potatoGenerator);
         GameRegistry.registerTileEntity(TileEntityPotatoFreezer.class, potatoFreezer);
+        GameRegistry.registerTileEntity(TileEntityPotatoInfuser.class, potatoInfuser);
     }
 
     @SubscribeEvent

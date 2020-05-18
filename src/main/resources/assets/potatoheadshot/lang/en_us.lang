@@ -59,6 +59,7 @@ tile.potato_drier.name=Potato Drier
 tile.lit_potato_drier.name=Lit Potato Drier
 tile.sweet_potato_generator.name=Sweet Potato Generator
 tile.sweet_freezer.name=Sweet Freezer
+tile.sweet_infuser.name=Sweet Infuser
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

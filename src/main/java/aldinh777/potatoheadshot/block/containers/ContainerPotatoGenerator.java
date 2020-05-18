@@ -90,8 +90,6 @@ public class ContainerPotatoGenerator extends Container {
                 if (!this.mergeItemStack(stack, 3, 39, false)) {
                     return ItemStack.EMPTY;
                 }
-
-                slot.onSlotChange(stack, itemstack);
             } else if (index != 1) {
                 if (TileEntityPotatoGenerator.isItemFuel(stack)) {
                     if (this.mergeItemStack(stack, 0, 1, false)) {
@@ -110,7 +108,7 @@ public class ContainerPotatoGenerator extends Container {
                 return ItemStack.EMPTY;
             }
 
-            if(stack.isEmpty()) {
+            if (stack.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();

@@ -1,5 +1,17 @@
 SEVERE:
-  - NO BUGS YAY
+  - NO SEVERE BUGS YAY
+
+
+FINE:
+  -
+    name: GUI value error
+    description:
+      After seeing any gui, and then left it until some value become empty,
+      the value still not change from it's previous state
+    expected behaviour:
+      The value shown in gui should be 0
+    reality:
+      The value shown in gui is the value player seen in gui last time
 
 
 IGNORABLE:
@@ -19,17 +31,6 @@ SOLVED:
       Currently don't really know what to expect
     reality:
       It just break
-
-
-  -
-    name: GUI value error
-    description:
-      After seeing any gui, and then left it until some value become empty,
-      the value still not change from it's previous state
-    expected behaviour:
-      The value shown in gui should be 0
-    reality:
-      The value shown in gui is the value player seen in gui last time
 
 
   -
