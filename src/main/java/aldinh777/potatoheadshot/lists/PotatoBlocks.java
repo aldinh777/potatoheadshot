@@ -43,6 +43,7 @@ public class PotatoBlocks {
     public static Block SWEET_POTATO_GENERATOR;
     public static Block SWEET_FREEZER;
     public static Block SWEET_INFUSER;
+    public static Block MANA_COLLECTOR;
 
     public static Block DIMENSIONAL_GLASS;
 
@@ -79,6 +80,7 @@ public class PotatoBlocks {
         SWEET_POTATO_GENERATOR = new SweetPotatoGenerator("sweet_potato_generator", BlockType.METAL);
         SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
+        MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.WOOD);
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

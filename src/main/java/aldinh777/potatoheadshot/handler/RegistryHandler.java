@@ -1,10 +1,7 @@
 package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetPotatoGenerator;
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
+import aldinh777.potatoheadshot.block.tileentities.*;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -62,14 +59,16 @@ public class RegistryHandler {
 
     public static void registerTileEntity() {
         ResourceLocation potatoDrier = new ResourceLocation("potatoheadshot:potato_drier");
-        ResourceLocation potatoGenerator = new ResourceLocation("potatoheadshot:sweet_potato_generator");
-        ResourceLocation potatoFreezer = new ResourceLocation("potatoheadshot:sweet_freezer");
-        ResourceLocation potatoInfuser = new ResourceLocation("potatoheadshot:sweet_infuser");
+        ResourceLocation sweetPotatoGenerator = new ResourceLocation("potatoheadshot:sweet_potato_generator");
+        ResourceLocation sweetFreezer = new ResourceLocation("potatoheadshot:sweet_freezer");
+        ResourceLocation sweetInfuser = new ResourceLocation("potatoheadshot:sweet_infuser");
+        ResourceLocation manaCollector = new ResourceLocation("potatoheadshot:mana_collector");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
-        GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, potatoGenerator);
-        GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, potatoFreezer);
-        GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, potatoInfuser);
+        GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
+        GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
+        GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, sweetInfuser);
+        GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
     }
 
     @SubscribeEvent

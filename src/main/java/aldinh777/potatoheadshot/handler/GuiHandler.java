@@ -1,17 +1,8 @@
 package aldinh777.potatoheadshot.handler;
 
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoDrier;
-import aldinh777.potatoheadshot.block.containers.ContainerSweetFreezer;
-import aldinh777.potatoheadshot.block.containers.ContainerSweetPotatoGenerator;
-import aldinh777.potatoheadshot.block.containers.ContainerSweetInfuser;
-import aldinh777.potatoheadshot.block.guis.GuiPotatoDrier;
-import aldinh777.potatoheadshot.block.guis.GuiSweetFreezer;
-import aldinh777.potatoheadshot.block.guis.GuiSweetPotatoGenerator;
-import aldinh777.potatoheadshot.block.guis.GuiSweetInfuser;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetPotatoGenerator;
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
+import aldinh777.potatoheadshot.block.containers.*;
+import aldinh777.potatoheadshot.block.guis.*;
+import aldinh777.potatoheadshot.block.tileentities.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -39,6 +30,9 @@ public class GuiHandler implements IGuiHandler {
         } else if (ID == 4) {
             TileEntitySweetInfuser te = (TileEntitySweetInfuser) tileEntity;
             return new ContainerSweetInfuser(player.inventory, Objects.requireNonNull(te));
+        } else if (ID == 5) {
+            TileEntityManaCollector te = (TileEntityManaCollector) tileEntity;
+            return new ContainerManaCollector(player.inventory, Objects.requireNonNull(te));
         } else {
             return  null;
         }
@@ -60,6 +54,9 @@ public class GuiHandler implements IGuiHandler {
         } else if (ID == 4) {
             TileEntitySweetInfuser te = (TileEntitySweetInfuser) tileEntity;
             return new GuiSweetInfuser(player.inventory, Objects.requireNonNull(te));
+        } else if (ID == 5) {
+            TileEntityManaCollector te = (TileEntityManaCollector) tileEntity;
+            return new GuiManaCollector(player.inventory, Objects.requireNonNull(te));
         } else {
             return  null;
         }

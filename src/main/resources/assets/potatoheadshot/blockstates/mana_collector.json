@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "potatoheadshot:mana_collector" },
+    "facing=south": { "model": "potatoheadshot:mana_collector", "y": 180 },
+    "facing=west":  { "model": "potatoheadshot:mana_collector", "y": 270 },
+    "facing=east":  { "model": "potatoheadshot:mana_collector", "y": 90 }
+  }
+}

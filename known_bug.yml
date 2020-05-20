@@ -1,5 +1,13 @@
 SEVERE:
-  - NO SEVERE BUGS YAY
+  -
+    name: Tile Entity always facing NORTH after relog
+    description:
+      Just as the title says, when leave game and play again,
+      all the Custom Tile Entity goes facing north
+    expected behaviour:
+      It facing when it is as it placed
+    reality:
+      NORTH IS THE WAY!!!
 
 
 FINE:
