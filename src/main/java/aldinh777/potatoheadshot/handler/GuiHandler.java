@@ -1,17 +1,17 @@
 package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.block.containers.ContainerPotatoDrier;
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoFreezer;
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoGenerator;
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoInfuser;
+import aldinh777.potatoheadshot.block.containers.ContainerSweetFreezer;
+import aldinh777.potatoheadshot.block.containers.ContainerSweetPotatoGenerator;
+import aldinh777.potatoheadshot.block.containers.ContainerSweetInfuser;
 import aldinh777.potatoheadshot.block.guis.GuiPotatoDrier;
-import aldinh777.potatoheadshot.block.guis.GuiPotatoFreezer;
-import aldinh777.potatoheadshot.block.guis.GuiPotatoGenerator;
-import aldinh777.potatoheadshot.block.guis.GuiPotatoInfuser;
+import aldinh777.potatoheadshot.block.guis.GuiSweetFreezer;
+import aldinh777.potatoheadshot.block.guis.GuiSweetPotatoGenerator;
+import aldinh777.potatoheadshot.block.guis.GuiSweetInfuser;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoInfuser;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetPotatoGenerator;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -31,14 +31,14 @@ public class GuiHandler implements IGuiHandler {
             TileEntityPotatoDrier te = (TileEntityPotatoDrier) tileEntity;
             return new ContainerPotatoDrier(player.inventory, Objects.requireNonNull(te));
         } else if (ID == 2) {
-            TileEntityPotatoGenerator te = (TileEntityPotatoGenerator) tileEntity;
-            return new ContainerPotatoGenerator(player.inventory, Objects.requireNonNull(te));
+            TileEntitySweetPotatoGenerator te = (TileEntitySweetPotatoGenerator) tileEntity;
+            return new ContainerSweetPotatoGenerator(player.inventory, Objects.requireNonNull(te));
         } else if (ID == 3) {
-            TileEntityPotatoFreezer te = (TileEntityPotatoFreezer) tileEntity;
-            return new ContainerPotatoFreezer(player.inventory, Objects.requireNonNull(te));
+            TileEntitySweetFreezer te = (TileEntitySweetFreezer) tileEntity;
+            return new ContainerSweetFreezer(player.inventory, Objects.requireNonNull(te));
         } else if (ID == 4) {
-            TileEntityPotatoInfuser te = (TileEntityPotatoInfuser) tileEntity;
-            return new ContainerPotatoInfuser(player.inventory, Objects.requireNonNull(te));
+            TileEntitySweetInfuser te = (TileEntitySweetInfuser) tileEntity;
+            return new ContainerSweetInfuser(player.inventory, Objects.requireNonNull(te));
         } else {
             return  null;
         }
@@ -52,14 +52,14 @@ public class GuiHandler implements IGuiHandler {
             TileEntityPotatoDrier te = (TileEntityPotatoDrier) tileEntity;
             return new GuiPotatoDrier(player.inventory, Objects.requireNonNull(te));
         } else if (ID == 2) {
-            TileEntityPotatoGenerator te = (TileEntityPotatoGenerator) tileEntity;
-            return new GuiPotatoGenerator(player.inventory, Objects.requireNonNull(te));
+            TileEntitySweetPotatoGenerator te = (TileEntitySweetPotatoGenerator) tileEntity;
+            return new GuiSweetPotatoGenerator(player.inventory, Objects.requireNonNull(te));
         } else if (ID == 3) {
-            TileEntityPotatoFreezer te = (TileEntityPotatoFreezer) tileEntity;
-            return new GuiPotatoFreezer(player.inventory, Objects.requireNonNull(te));
+            TileEntitySweetFreezer te = (TileEntitySweetFreezer) tileEntity;
+            return new GuiSweetFreezer(player.inventory, Objects.requireNonNull(te));
         } else if (ID == 4) {
-            TileEntityPotatoInfuser te = (TileEntityPotatoInfuser) tileEntity;
-            return new GuiPotatoInfuser(player.inventory, Objects.requireNonNull(te));
+            TileEntitySweetInfuser te = (TileEntitySweetInfuser) tileEntity;
+            return new GuiSweetInfuser(player.inventory, Objects.requireNonNull(te));
         } else {
             return  null;
         }

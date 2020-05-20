@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PotatoInfuserRecipes {
+public class SweetInfuserRecipes {
     
-    public static final PotatoInfuserRecipes INSTANCE = new PotatoInfuserRecipes();
+    public static final SweetInfuserRecipes INSTANCE = new SweetInfuserRecipes();
     private final Map<Item, Object> mainMap = new HashMap<>();
 
-    public PotatoInfuserRecipes() {
+    public SweetInfuserRecipes() {
 
         Item lava = Items.LAVA_BUCKET;
         Item water = Items.WATER_BUCKET;

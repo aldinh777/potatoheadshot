@@ -1,24 +1,22 @@
 package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoGenerator;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
+import aldinh777.potatoheadshot.block.containers.ContainerSweetInfuser;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Objects;
+public class GuiSweetInfuser extends GuiContainer {
 
-public class GuiPotatoGenerator extends GuiContainer {
-
-    private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/container/sweet_potato_generator.png";
+    private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/container/sweet_Infuser.png";
     private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
     private final InventoryPlayer player;
-    private final TileEntityPotatoGenerator tileEntity;
+    private final TileEntitySweetInfuser tileEntity;
 
-    public GuiPotatoGenerator(InventoryPlayer player, TileEntityPotatoGenerator tileEntity) {
-        super(new ContainerPotatoGenerator(player, tileEntity));
+    public GuiSweetInfuser(InventoryPlayer player, TileEntitySweetInfuser tileEntity) {
+        super(new ContainerSweetInfuser(player, tileEntity));
         this.player = player;
         this.tileEntity = tileEntity;
     }
@@ -32,8 +30,6 @@ public class GuiPotatoGenerator extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String tileName = Objects.requireNonNull(this.tileEntity.getDisplayName()).getUnformattedText();
-        this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 10, 6, 4210752);
         this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 7, this.ySize - 96 + 2, 4210752);
         this.fontRenderer.drawString("RF : " + this.tileEntity.getField("energy"), 120, 72, 4210752);
     }
@@ -45,7 +41,7 @@ public class GuiPotatoGenerator extends GuiContainer {
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
         drawEnergyStored();
-        drawCookProgress();
+        drawInfuseProgress();
     }
 
     private void drawEnergyStored() {
@@ -60,27 +56,15 @@ public class GuiPotatoGenerator extends GuiContainer {
         );
     }
 
-    private void drawCookProgress() {
-        int currentCookTime = this.tileEntity.getField("currentCookTime");
-        int totalCookTime = this.tileEntity.getField("totalCookTime");
-        int i = totalCookTime != 0 && currentCookTime != 0 ? currentCookTime * 24 / totalCookTime : 0;
-
-        if (i > 0) {
-            this.drawBurning();
-        }
+    private void drawInfuseProgress() {
+        int currentInfuseTime = this.tileEntity.getField("currentInfuseTime");
+        int totalInfuseTime = this.tileEntity.getField("totalInfuseTime");
+        int i = totalInfuseTime != 0 && currentInfuseTime != 0 ? currentInfuseTime * 44 / totalInfuseTime : 0;
 
         this.drawTexturedModalRect(
-                this.guiLeft + 90, this.guiTop + 35,
-                176, 14,
-                i + 1, 16
-        );
-    }
-
-    private void drawBurning() {
-        this.drawTexturedModalRect(
-                this.guiLeft + 63, this.guiTop + 53,
-                176, 0,
-                14, 14
+                this.guiLeft + 142, this.guiTop + 21 + 43 - i,
+                200, 43 - i,
+                15, i + 1
         );
     }
 }

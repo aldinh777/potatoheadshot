@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoFreezer;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
+import aldinh777.potatoheadshot.block.containers.ContainerSweetFreezer;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,15 +10,15 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Objects;
 
-public class GuiPotatoFreezer extends GuiContainer {
+public class GuiSweetFreezer extends GuiContainer {
 
     private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/container/sweet_freezer.png";
     private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
     private final InventoryPlayer player;
-    private final TileEntityPotatoFreezer tileEntity;
+    private final TileEntitySweetFreezer tileEntity;
 
-    public GuiPotatoFreezer(InventoryPlayer player, TileEntityPotatoFreezer tileEntity) {
-        super(new ContainerPotatoFreezer(player, tileEntity));
+    public GuiSweetFreezer(InventoryPlayer player, TileEntitySweetFreezer tileEntity) {
+        super(new ContainerSweetFreezer(player, tileEntity));
         this.player = player;
         this.tileEntity = tileEntity;
     }

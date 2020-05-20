@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.containers;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoInfuser;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,12 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerPotatoInfuser extends Container {
+public class ContainerSweetInfuser extends Container {
 
-    private final TileEntityPotatoInfuser tileEntity;
+    private final TileEntitySweetInfuser tileEntity;
     private int energy, totalInfuseTime, currentInfuseTime;
 
-    public ContainerPotatoInfuser(InventoryPlayer player, TileEntityPotatoInfuser tileEntity) {
+    public ContainerSweetInfuser(InventoryPlayer player, TileEntitySweetInfuser tileEntity) {
         this.tileEntity = tileEntity;
         IItemHandler inputHandler = tileEntity.getHandler("input");
         IItemHandler middleHandler = tileEntity.getHandler("middle");

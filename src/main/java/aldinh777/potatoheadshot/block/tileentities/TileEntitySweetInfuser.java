@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.recipes.PotatoInfuserRecipes;
+import aldinh777.potatoheadshot.block.recipes.SweetInfuserRecipes;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.entity.item.EntityItem;
@@ -16,7 +16,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntityPotatoInfuser extends TileEntityPotatoMachine {
+public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
 
     private final ItemStackHandler inputHandler = new ItemStackHandler(6);
     private final ItemStackHandler middleHandler = new ItemStackHandler(1);
@@ -157,7 +157,7 @@ public class TileEntityPotatoInfuser extends TileEntityPotatoMachine {
             inputs[i] = input.getItem();
         }
 
-        ItemStack result = PotatoInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
+        ItemStack result = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
 
         return !result.isEmpty();
     }
@@ -172,7 +172,7 @@ public class TileEntityPotatoInfuser extends TileEntityPotatoMachine {
             itemInputs[i] = inputs[i].getItem();
         }
 
-        ItemStack infuseResult = PotatoInfuserRecipes.INSTANCE.getResult(middle.getItem(), itemInputs);
+        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), itemInputs);
         ItemStack result = infuseResult.copy();
 
         if (middle.getCount() > 1) {

@@ -76,9 +76,9 @@ public class PotatoBlocks {
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
         LIT_POTATO_DRIER = new PotatoDrier("lit_potato_drier", BlockType.STONE, true);
-        SWEET_POTATO_GENERATOR = new PotatoGenerator("sweet_potato_generator", BlockType.METAL);
-        SWEET_FREEZER = new PotatoFreezer("sweet_freezer", BlockType.METAL);
-        SWEET_INFUSER = new PotatoInfuser("sweet_infuser", BlockType.METAL);
+        SWEET_POTATO_GENERATOR = new SweetPotatoGenerator("sweet_potato_generator", BlockType.METAL);
+        SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
+        SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

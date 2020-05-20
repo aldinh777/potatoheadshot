@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -13,22 +13,22 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-public class PotatoFreezer extends PotatoMachine {
+public class SweetFreezer extends PotatoMachine {
 
-    public PotatoFreezer(String name, BlockType blockType) {
+    public SweetFreezer(String name, BlockType blockType) {
         super(name, blockType, 3);
     }
 
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityPotatoFreezer();
+        return new TileEntitySweetFreezer();
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         if (!worldIn.isRemote) {
-            TileEntityPotatoFreezer tileEntity = (TileEntityPotatoFreezer) worldIn.getTileEntity(pos);
+            TileEntitySweetFreezer tileEntity = (TileEntitySweetFreezer) worldIn.getTileEntity(pos);
             if (tileEntity != null) {
                 IItemHandler saltHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);

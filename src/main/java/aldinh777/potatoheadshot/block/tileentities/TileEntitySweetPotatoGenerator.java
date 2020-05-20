@@ -17,7 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class TileEntityPotatoGenerator extends TileEntityPotatoMachine {
+public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
 
     private final ItemStackHandler inputHandler = new ItemStackHandler(1);
     private final ItemStackHandler processHandler = new ItemStackHandler(1);

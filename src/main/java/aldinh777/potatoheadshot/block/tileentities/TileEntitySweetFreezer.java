@@ -17,7 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityPotatoFreezer extends TileEntityPotatoMachine {
+public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
 
     private final ItemStackHandler saltHandler = new ItemStackHandler(1) {
         @Nonnull

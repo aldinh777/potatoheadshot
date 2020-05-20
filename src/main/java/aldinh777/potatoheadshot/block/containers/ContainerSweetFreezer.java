@@ -1,8 +1,9 @@
 package aldinh777.potatoheadshot.block.containers;
 
 import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
-import aldinh777.potatoheadshot.block.slots.SlotProcessHandler;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
+import aldinh777.potatoheadshot.block.slots.SlotSaltHandler;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
+import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -16,20 +17,20 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerPotatoGenerator extends Container {
+public class ContainerSweetFreezer extends Container {
 
-    private final TileEntityPotatoGenerator tileEntity;
-    private int energy, totalCookTime, currentCookTime;
+    private final TileEntitySweetFreezer tileEntity;
+    private int energy, totalFreezeTime, currentFreezeTime;
 
-    public ContainerPotatoGenerator(InventoryPlayer player, TileEntityPotatoGenerator tileEntity) {
+    public ContainerSweetFreezer(InventoryPlayer player, TileEntitySweetFreezer tileEntity) {
         this.tileEntity = tileEntity;
-        IItemHandler processHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler saltHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
         IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 0, 42, 35));
-        this.addSlotToContainer(new SlotProcessHandler(processHandler, 0, 63, 35));
-        this.addSlotToContainer(new SlotOutputHandler(outputHandler, 0, 131, 33));
+        this.addSlotToContainer(new SlotSaltHandler(saltHandler, 0, 62, 47));
+        this.addSlotToContainer(new SlotItemHandler(inputHandler, 0, 62, 23));
+        this.addSlotToContainer(new SlotOutputHandler(outputHandler, 0, 132, 34));
 
         for(int y = 0; y < 3; y++) {
             for(int x = 0; x < 9; x++) {
@@ -55,26 +56,26 @@ public class ContainerPotatoGenerator extends Container {
         for (IContainerListener listener : this.listeners) {
 
             int energy = this.tileEntity.getField("energy");
-            int totalCookTime = this.tileEntity.getField("totalCookTime");
-            int currentCookTime = this.tileEntity.getField("currentCookTime");
+            int totalFreezeTime = this.tileEntity.getField("totalFreezeTime");
+            int currentFreezeTime = this.tileEntity.getField("currentFreezeTime");
             int maxCapacity = this.tileEntity.getMaxEnergyStored();
 
             if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
                 listener.sendWindowProperty(this, 0, energy);
-            if (this.totalCookTime != totalCookTime)
-                listener.sendWindowProperty(this, 1, totalCookTime);
-            if (this.currentCookTime != currentCookTime)
-                listener.sendWindowProperty(this, 2, currentCookTime);
+            if (this.totalFreezeTime != totalFreezeTime)
+                listener.sendWindowProperty(this, 1, totalFreezeTime);
+            if (this.currentFreezeTime != currentFreezeTime)
+                listener.sendWindowProperty(this, 2, currentFreezeTime);
         }
 
         this.energy = this.tileEntity.getField("energy");
-        this.totalCookTime = this.tileEntity.getField("totalCookTime");
-        this.currentCookTime = this.tileEntity.getField("currentCookTime");
+        this.totalFreezeTime = this.tileEntity.getField("totalFreezeTime");
+        this.currentFreezeTime = this.tileEntity.getField("currentFreezeTime");
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
-        return this.tileEntity.isUsableByPlayer(playerIn);
+        return tileEntity.isUsableByPlayer(playerIn);
     }
 
     @Override
@@ -86,12 +87,18 @@ public class ContainerPotatoGenerator extends Container {
             ItemStack stack = slot.getStack();
             itemstack = stack.copy();
 
-            if (index == 0 || index == 2) {
+            if (index == 0 || index == 1) {
                 if (!this.mergeItemStack(stack, 3, 39, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index != 1) {
-                if (TileEntityPotatoGenerator.isItemFuel(stack)) {
+            } else {
+                ItemStack result = TileEntitySweetFreezer.getResult(stack);
+
+                if (!result.isEmpty()) {
+                    if (this.mergeItemStack(stack, 1, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (stack.getItem() == PotatoItems.RAW_SALT) {
                     if (this.mergeItemStack(stack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -104,8 +111,6 @@ public class ContainerPotatoGenerator extends Container {
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (!this.mergeItemStack(stack, 3, 39, false)) {
-                return ItemStack.EMPTY;
             }
 
             if (stack.isEmpty()) {

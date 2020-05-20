@@ -2,9 +2,9 @@ package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoFreezer;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoGenerator;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoInfuser;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetPotatoGenerator;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -67,9 +67,9 @@ public class RegistryHandler {
         ResourceLocation potatoInfuser = new ResourceLocation("potatoheadshot:sweet_infuser");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
-        GameRegistry.registerTileEntity(TileEntityPotatoGenerator.class, potatoGenerator);
-        GameRegistry.registerTileEntity(TileEntityPotatoFreezer.class, potatoFreezer);
-        GameRegistry.registerTileEntity(TileEntityPotatoInfuser.class, potatoInfuser);
+        GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, potatoGenerator);
+        GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, potatoFreezer);
+        GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, potatoInfuser);
     }
 
     @SubscribeEvent
