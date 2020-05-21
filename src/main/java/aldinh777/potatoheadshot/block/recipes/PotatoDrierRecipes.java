@@ -23,6 +23,7 @@ public class PotatoDrierRecipes {
         addDryRecipe(PotatoItems.DRIED_POTATO, new ItemStack(PotatoItems.POTATO_STARCH));
         addDryRecipe(PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.DRIED_SWEET_POTATO));
         addDryRecipe(PotatoItems.DRIED_SWEET_POTATO, new ItemStack(PotatoItems.SWEET_POTATO_DUST));
+        addDryRecipe(PotatoItems.GLOWING_POTATO, new ItemStack(PotatoItems.GLOWING_POTATO_DUST));
         addDryRecipe(PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL));
         addDryRecipe(PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
         addDryRecipe(PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT));

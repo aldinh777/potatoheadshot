@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up": { "model": "potatoheadshot:glowing_mana_torch" },
+    "facing=down": { "model": "potatoheadshot:glowing_mana_torch", "x": 180 },
+    "facing=east": { "model": "potatoheadshot:glowing_mana_torch_wall" },
+    "facing=south": { "model": "potatoheadshot:glowing_mana_torch_wall", "y": 90 },
+    "facing=west": { "model": "potatoheadshot:glowing_mana_torch_wall", "y": 180 },
+    "facing=north": { "model": "potatoheadshot:glowing_mana_torch_wall", "y": 270 }
+  }
+}

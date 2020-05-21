@@ -1,5 +1,9 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -12,12 +16,12 @@ import javax.annotation.Nullable;
 
 public class TileEntityManaCollector extends TileEntityPotatoMachine {
 
-    private final ItemStackHandler inputHandler = new ItemStackHandler(1);
-    private final ItemStackHandler outputHandler = new ItemStackHandler(1);
+    protected final ItemStackHandler inputHandler = new ItemStackHandler(1);
+    protected final ItemStackHandler outputHandler = new ItemStackHandler(1);
 
-    private final int manaMaxSize = 60000;
-    private int manaSize = 0;
-    private int currentTick = 0;
+    protected final int manaMaxSize = 60000;
+    protected int manaSize = 0;
+    protected int currentTick = 0;
 
     // Override Methods
 
@@ -107,6 +111,10 @@ public class TileEntityManaCollector extends TileEntityPotatoMachine {
             ++this.manaSize;
             this.currentTick = 0;
         }
+
+        if (this.manaSize > this.manaMaxSize) {
+            this.manaSize = this.manaMaxSize;
+        }
     }
 
     private boolean canFuse() {
@@ -117,7 +125,7 @@ public class TileEntityManaCollector extends TileEntityPotatoMachine {
 
         int manaValue = getManaValue(input);
 
-        if (this.manaSize < manaValue) {
+        if (manaValue <= 0 || this.manaSize < manaValue) {
             return false;
         }
 
@@ -149,15 +157,29 @@ public class TileEntityManaCollector extends TileEntityPotatoMachine {
 
         this.manaSize -= manaValue;
         input.shrink(1);
+
+        if (this.manaSize < 0) {
+            this.manaSize = 0;
+        }
+    }
+
+    public ItemStack getResult(ItemStack stack) {
+        if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) {
+            return new ItemStack(PotatoItems.GLOWING_MANA_DUST);
+        } else if (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) {
+            return new ItemStack(PotatoBlocks.GLOWING_MANA_FLOWER);
+        } else if (stack.getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
+            return new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH);
+        }
+        return ItemStack.EMPTY;
     }
 
     // Static Methods
 
     private static int getManaValue(ItemStack stack) {
+        if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) return 1000;
+        if (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) return 1000;
+        if (stack.getItem() == Item.getItemFromBlock(Blocks.TORCH)) return 1000;
         return 0;
-    }
-
-    public static ItemStack getResult(ItemStack stack) {
-        return ItemStack.EMPTY;
     }
 }

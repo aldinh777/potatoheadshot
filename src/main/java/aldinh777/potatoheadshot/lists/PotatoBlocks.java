@@ -11,6 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PotatoBlocks {
 
@@ -37,6 +38,10 @@ public class PotatoBlocks {
     public static Block POTATO_BLOCK;
     public static Block SWEET_POTATO_BLOCK;
     public static Block SWEET_MACHINE_FRAME;
+    public static Block GLOWING_POTATO_BLOCK;
+    public static Block GLOWING_MANA_BLOCK;
+    public static Block GLOWING_MANA_FLOWER;
+    public static Block GLOWING_MANA_TORCH;
 
     public static Block POTATO_DRIER;
     public static Block LIT_POTATO_DRIER;
@@ -44,10 +49,15 @@ public class PotatoBlocks {
     public static Block SWEET_FREEZER;
     public static Block SWEET_INFUSER;
     public static Block MANA_COLLECTOR;
+    public static Block MANA_EXTRACTOR;
 
     public static Block DIMENSIONAL_GLASS;
 
     public static void init() {
+
+        // Place able Item
+        GLOWING_MANA_FLOWER = new ManaFlower("glowing_mana_flower");
+        GLOWING_MANA_TORCH = new Potatorch("glowing_mana_torch");
 
         // Food Block
         COOKED_DIRT = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND, 3, 0.2f);
@@ -73,6 +83,18 @@ public class PotatoBlocks {
             }
 
         };
+        GLOWING_POTATO_BLOCK = new PotatoBlock("glowing_potato_block", BlockType.GLASS) {
+            @Override
+            public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+                return PotatoItems.GLOWING_POTATO_DUST;
+            }
+        }.setLightLevel(1.0f);
+        GLOWING_MANA_BLOCK = new PotatoBlock("glowing_mana_block", BlockType.GLASS) {
+            @Override
+            public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+                return PotatoItems.GLOWING_MANA_DUST;
+            }
+        }.setLightLevel(1.0f);
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
@@ -80,7 +102,8 @@ public class PotatoBlocks {
         SWEET_POTATO_GENERATOR = new SweetPotatoGenerator("sweet_potato_generator", BlockType.METAL);
         SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
-        MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.WOOD);
+        MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
+        MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

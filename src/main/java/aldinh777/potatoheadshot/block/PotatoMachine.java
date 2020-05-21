@@ -80,4 +80,32 @@ public abstract class PotatoMachine extends PotatoBlock {
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
     }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        IBlockState iblockstate = this.getDefaultState();
+
+        switch (meta) {
+            case 0:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.DOWN);
+                break;
+            case 1:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.UP);
+                break;
+            case 2:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.NORTH);
+                break;
+            case 3:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.SOUTH);
+                break;
+            case 4:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.WEST);
+                break;
+            case 5:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.EAST);
+                break;
+        }
+
+        return iblockstate;
+    }
 }

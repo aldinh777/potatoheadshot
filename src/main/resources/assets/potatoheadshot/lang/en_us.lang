@@ -26,6 +26,8 @@ item.potato_chip.name=Potato Chip
 item.potato_leaves.name=Potato Leaves
 item.potato_starch.name=Potato Starch
 item.raw_salt.name=Raw Salt
+item.glowing_potato_dust.name=Glowing Potato Dust
+item.glowing_mana_dust.name=Glowing Mana Dust
 
 # Sweet Items
 item.dried_sweet_potato.name=Dried Sweet Potato
@@ -42,6 +44,10 @@ item.potato_knife.name=Potato Knife
 item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 item.useless_potato.name=Useless Potato
 
+# Placeable Item
+tile.glowing_mana_flower.name=Glowing Mana Flower
+tile.glowing_mana_torch.name=Glowing Mana Torch
+
 # Food Blocks
 tile.cooked_dirt.name=Cooked Dirt
 tile.potato_planks.name=Potato Planks
@@ -52,6 +58,8 @@ tile.baked_potato_block.name=Baked Potato Block
 tile.potato_block.name=Potato Block
 tile.sweet_potato_block.name=Sweet Potato Block
 tile.sweet_machine_frame.name=Sweet Machine Frame
+tile.glowing_potato_block.name=Glowing Potato Block
+tile.glowing_mana_block.name=Glowing Mana Block
 tile.dimensional_glass.name=Dimensional Glass
 
 # Machines
@@ -61,6 +69,7 @@ tile.sweet_potato_generator.name=Sweet Potato Generator
 tile.sweet_freezer.name=Sweet Freezer
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
+tile.mana_extractor.name=Mana Extractor
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

@@ -80,7 +80,7 @@ public class ContainerManaCollector extends Container {
                     return ItemStack.EMPTY;
                 }
             } else {
-                ItemStack result = TileEntityManaCollector.getResult(stack);
+                ItemStack result = this.tileEntity.getResult(stack);
 
                 if (!result.isEmpty()) {
                     if (this.mergeItemStack(stack, 0, 1, false)) {

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "particle": "potatoheadshot:blocks/glowing_mana_flower",
+    "cross": "potatoheadshot:blocks/glowing_mana_flower"
+  }
+}

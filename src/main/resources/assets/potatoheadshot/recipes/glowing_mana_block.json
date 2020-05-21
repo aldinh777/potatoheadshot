@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#":
+    {
+      "item": "potatoheadshot:glowing_mana_dust"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:glowing_mana_block"
+  }
+}

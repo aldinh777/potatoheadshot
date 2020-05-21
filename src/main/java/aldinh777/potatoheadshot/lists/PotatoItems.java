@@ -38,6 +38,8 @@ public class PotatoItems {
     public static Item DRIED_SWEET_POTATO;
     public static Item SWEET_POTATO_DUST;
     public static Item SWEET_POTATO_INGOT;
+    public static Item GLOWING_POTATO_DUST;
+    public static Item GLOWING_MANA_DUST;
 
     public static Item POTATO_KNIFE;
     public static Item SWEET_POTATO_BUCKET;
@@ -92,6 +94,8 @@ public class PotatoItems {
         DRIED_SWEET_POTATO = new PotatoItem("dried_sweet_potato");
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
+        GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
+        GLOWING_MANA_DUST = new PotatoItem("glowing_mana_dust");
 
         // Bucket
         SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");

@@ -1,13 +1,5 @@
 SEVERE:
-  -
-    name: Tile Entity always facing NORTH after relog
-    description:
-      Just as the title says, when leave game and play again,
-      all the Custom Tile Entity goes facing north
-    expected behaviour:
-      It facing when it is as it placed
-    reality:
-      NORTH IS THE WAY!!!
+  - NO SEVERE BUG YAY
 
 
 FINE:
@@ -22,6 +14,17 @@ FINE:
       The value shown in gui is the value player seen in gui last time
 
 
+  -
+    name: Flying mana flower
+    description:
+      You can place mana flower on top of any other flower or blocks,
+      And weird behaviour when placed on blocks other than dirt or grass
+    expected behaviour:
+      You dont
+    reality:
+      Yes you can
+
+
 IGNORABLE:
   -
     name: Custom Name that dont change the name
@@ -31,6 +34,17 @@ IGNORABLE:
 
 
 SOLVED:
+  -
+    name: Tile Entity always facing NORTH after relog
+    description:
+      Just as the title says, when leave game and play again,
+      all the Custom Tile Entity goes facing north
+    expected behaviour:
+      It facing when it is as it placed
+    reality:
+      NORTH IS THE WAY!!!
+
+
   -
     name: Hopper Problem
     description:
