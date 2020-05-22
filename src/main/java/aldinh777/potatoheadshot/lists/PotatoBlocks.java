@@ -42,6 +42,7 @@ public class PotatoBlocks {
     public static Block GLOWING_MANA_BLOCK;
     public static Block GLOWING_MANA_FLOWER;
     public static Block GLOWING_MANA_TORCH;
+    public static Block GLOWING_MANA_STONE;
 
     public static Block POTATO_DRIER;
     public static Block LIT_POTATO_DRIER;
@@ -50,6 +51,7 @@ public class PotatoBlocks {
     public static Block SWEET_INFUSER;
     public static Block MANA_COLLECTOR;
     public static Block MANA_EXTRACTOR;
+    public static Block MANA_CAULDRON;
 
     public static Block DIMENSIONAL_GLASS;
 
@@ -95,6 +97,8 @@ public class PotatoBlocks {
                 return PotatoItems.GLOWING_MANA_DUST;
             }
         }.setLightLevel(1.0f);
+        GLOWING_MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE)
+                .setLightLevel(0.7f).setResistance(6000);
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
@@ -104,6 +108,7 @@ public class PotatoBlocks {
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
         MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
+        MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

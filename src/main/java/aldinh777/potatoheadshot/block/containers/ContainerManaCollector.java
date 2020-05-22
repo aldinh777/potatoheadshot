@@ -52,9 +52,9 @@ public class ContainerManaCollector extends Container {
         for (IContainerListener listener : this.listeners) {
 
             int manaSize = this.tileEntity.getField("manaSize");
-            int manaMaxSize = this.tileEntity.getField("manaMaxSize");
+            int maxManaSize = this.tileEntity.getField("maxManaSize");
 
-            if (this.manaSize != manaSize || this.manaSize <= 0 || this.manaSize >= manaMaxSize)
+            if (this.manaSize != manaSize || this.manaSize <= 0 || this.manaSize >= maxManaSize)
                 listener.sendWindowProperty(this, 0, manaSize);
         }
 

@@ -5,10 +5,6 @@ import net.minecraftforge.energy.EnergyStorage;
 
 public class PotatoEnergyStorage extends EnergyStorage {
 
-    public PotatoEnergyStorage(int capacity, int maxReceive, int maxExtract, int energy) {
-        super(capacity, maxReceive, maxExtract, energy);
-    }
-
     public PotatoEnergyStorage(int capacity, int maxReceive, int maxExtract) {
         super(capacity, maxReceive, maxExtract);
     }

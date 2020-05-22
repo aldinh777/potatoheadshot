@@ -67,7 +67,7 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
                 this.energy = this.storage.getEnergyStored();
             }
 
-            markDirty();
+            this.markDirty();
         }
     }
 

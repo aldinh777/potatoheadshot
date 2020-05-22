@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:glowing_mana_stone"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:mana_cauldron"
+  }
+}

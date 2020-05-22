@@ -6,6 +6,8 @@ import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -27,5 +29,10 @@ public class ManaFlower extends BlockBush {
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+    }
+
+    @Override
+    protected boolean canSustainBush(IBlockState state) {
+        return !state.getBlock().equals(Blocks.AIR);
     }
 }

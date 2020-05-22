@@ -14,7 +14,7 @@ public class SweetInfuserRecipes {
     public static final SweetInfuserRecipes INSTANCE = new SweetInfuserRecipes();
     private final Map<Item, Object> mainMap = new HashMap<>();
 
-    public SweetInfuserRecipes() {
+    private SweetInfuserRecipes() {
 
         Item lava = Items.LAVA_BUCKET;
         Item water = Items.WATER_BUCKET;

@@ -31,7 +31,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!this.world.isRemote) {
-            if (canInfuse()) {
+            if (this.canInfuse()) {
                 if (this.currentInfuseTime >= this.totalInfuseTime) {
                     infuseItem();
                     this.currentInfuseTime = 0;
@@ -45,7 +45,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
                 this.energy = this.storage.getEnergyStored();
             }
 
-            markDirty();
+            this.markDirty();
         }
     }
 
