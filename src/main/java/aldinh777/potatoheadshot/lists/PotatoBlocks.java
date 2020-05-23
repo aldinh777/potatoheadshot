@@ -6,6 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -16,6 +21,8 @@ import java.util.Random;
 public class PotatoBlocks {
 
     public static List<Block> LISTS = new ArrayList<>();
+
+    public static Block LAVA_FARMLAND = new FarmlandLava("lava_farmland");
 
     public static Block SWEET_POTATOES = new PotatoCrops("sweet_potatoes");
     public static Block GLOWING_POTATOES = new PotatoCrops("glowing_potatoes") {
@@ -29,6 +36,37 @@ public class PotatoBlocks {
             return PotatoItems.GLOWING_POTATO;
         }
     }.setLightLevel(0.8f);
+    public static Block LAVA_POTATOES = new PotatoCrops("lava_potatoes") {
+        @Override
+        protected Item getCrop() {
+            return PotatoItems.LAVA_POTATO;
+        }
+
+        @Override
+        protected Item getSeed() {
+            return PotatoItems.LAVA_POTATO_SEED;
+        }
+
+        @Override
+        protected boolean canSustainBush(IBlockState state) {
+            return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
+        }
+
+        @Override
+        public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+            return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
+        }
+
+        @Override
+        public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+            return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
+        }
+
+        @Override
+        public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+            return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
+        }
+    }.setLightLevel(1.0f);
 
     public static Block COOKED_DIRT;
     public static Block BAKED_POTATO_PLANKS;

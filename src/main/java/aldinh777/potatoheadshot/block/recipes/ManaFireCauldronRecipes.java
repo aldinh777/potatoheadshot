@@ -1,5 +1,7 @@
 package aldinh777.potatoheadshot.block.recipes;
 
+import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -10,11 +12,17 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
 
     @Override
     public ItemStack getResult(Item input) {
-        return FurnaceRecipes.instance().getSmeltingResult(new ItemStack(input));
+        if (input == Items.IRON_HOE) {
+            return new ItemStack(PotatoItems.LAVA_HOE);
+        } else {
+            return FurnaceRecipes.instance().getSmeltingResult(new ItemStack(input));
+        }
     }
 
     @Override
     public int getCost(Item input) {
-        return 4000;
+        if (input == Items.IRON_HOE) return 32000;
+        if (!FurnaceRecipes.instance().getSmeltingResult(new ItemStack(input)).isEmpty()) return 4000;
+        return 0;
     }
 }

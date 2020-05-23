@@ -40,8 +40,10 @@ public class PotatoItems {
     public static Item SWEET_POTATO_INGOT;
     public static Item GLOWING_POTATO_DUST;
     public static Item GLOWING_MANA_DUST;
+    public static Item LAVA_POTATO_SEED;
 
     public static Item POTATO_KNIFE;
+    public static Item LAVA_HOE;
     public static Item SWEET_POTATO_BUCKET;
     public static Item SWEET_EMPTY_BUCKET;
     public static Item SWEET_LAVA_BUCKET;
@@ -96,6 +98,7 @@ public class PotatoItems {
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
         GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
         GLOWING_MANA_DUST = new PotatoItem("glowing_mana_dust");
+        LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
 
         // Bucket
         SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");
@@ -106,6 +109,7 @@ public class PotatoItems {
 
         // Potato other thing
         POTATO_KNIFE = new PotatoKnife("potato_knife");
+        LAVA_HOE = new LavaHoe("lava_hoe");
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 200);
         USELESS_POTATO = new UselessPotato();
 

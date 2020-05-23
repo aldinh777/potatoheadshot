@@ -19,6 +19,7 @@ public class SweetInfuserRecipes {
         Item lava = Items.LAVA_BUCKET;
         Item water = Items.WATER_BUCKET;
         Item enderPearl = Items.ENDER_PEARL;
+        Item string = Items.STRING;
         Item potatoLeaves = PotatoItems.POTATO_LEAVES;
 
         Item ironOre = Item.getItemFromBlock(Blocks.IRON_ORE);
@@ -35,6 +36,9 @@ public class SweetInfuserRecipes {
         Item brownMushroom = Item.getItemFromBlock(Blocks.BROWN_MUSHROOM);
         Item glowStone = Item.getItemFromBlock(Blocks.GLOWSTONE);
         Item endStone = Item.getItemFromBlock(Blocks.END_STONE);
+        Item ice = Item.getItemFromBlock(Blocks.ICE);
+        Item packedIce = Item.getItemFromBlock(Blocks.PACKED_ICE);
+        Item cobweb = Item.getItemFromBlock(Blocks.WEB);
 
         basicOreRecipes();
 
@@ -62,6 +66,12 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(endStone), stone,
                 enderPearl, enderPearl, enderPearl,
                 enderPearl, enderPearl, enderPearl);
+        addRecipe(new ItemStack(packedIce), ice,
+                ice, ice, ice,
+                ice, ice, ice);
+        addRecipe(new ItemStack(cobweb), string,
+                string, string, string,
+                string, string, string);
     }
 
     public <K, V> Map<K, V> getMap(Map<K, V> map, Item key) {

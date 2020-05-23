@@ -11,6 +11,8 @@ public interface IManaRecipes {
 
     static IManaRecipes getRecipeById(int id) {
         switch (id) {
+            case 1:
+                return ManaLifeCauldronRecipes.INSTANCE;
             case 3:
                 return ManaFireCauldronRecipes.INSTANCE;
             default:

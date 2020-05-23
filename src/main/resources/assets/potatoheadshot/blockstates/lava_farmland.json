@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "moisture=0": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=1": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=2": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=3": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=4": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=5": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=6": { "model": "potatoheadshot:farmland_lava_dry" },
+    "moisture=7": { "model": "potatoheadshot:farmland_lava_moist" }
+  }
+}

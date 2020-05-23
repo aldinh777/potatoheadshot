@@ -13,24 +13,24 @@ FINE:
     reality:
       The value shown in gui is the value player seen in gui last time
 
+  -
+    name: Sugarcane and Soul Sand is Weird
+    description:
+      I dont even know how to describe it...
+
+
+IGNORED:
+  -
+    name: Custom Name that dont change the name
+    description:
+      Change block name with anvil, and when the block is put,
+      The name of the block displayed in gui still not changed
 
   -
     name: Flying mana flower
     description:
       You can place mana flower on top of any other flower or blocks,
       And weird behaviour when placed on blocks other than dirt or grass
-    expected behaviour:
-      You dont
-    reality:
-      Yes you can
-
-
-IGNORABLE:
-  -
-    name: Custom Name that dont change the name
-    description:
-      Change block name with anvil, and when the block is put,
-      The name of the block displayed in gui still not changed
 
 
 SOLVED:
@@ -44,7 +44,6 @@ SOLVED:
     reality:
       NORTH IS THE WAY!!!
 
-
   -
     name: Hopper Problem
     description:
@@ -53,7 +52,6 @@ SOLVED:
       Currently don't really know what to expect
     reality:
       It just break
-
 
   -
     name: Another GUI weirdness

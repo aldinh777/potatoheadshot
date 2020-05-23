@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#S#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:glowing_mana_dust"
+    }
+    ,
+    "S": {
+      "item": "minecraft:sand",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "minecraft:soul_sand"
+  }
+}
