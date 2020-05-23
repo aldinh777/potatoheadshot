@@ -7,6 +7,7 @@ import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -16,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -28,6 +30,8 @@ import java.util.Random;
 public class ManaCauldron extends Block {
 
     public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
+    public static final PropertyEnum<Element> ELEMENT = PropertyEnum.create("element", Element.class);
+
     protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
     protected static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
     protected static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
@@ -41,7 +45,9 @@ public class ManaCauldron extends Block {
         this.setHardness(3.0f);
         this.setResistance(6000.0f);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, 0));
+        this.setDefaultState(this.blockState.getBaseState()
+                .withProperty(LEVEL, 0)
+                .withProperty(ELEMENT, Element.MANA));
 
         PotatoBlocks.LISTS.add(this);
         PotatoItems.LISTS.add(new PotatoItemBlock(this));
@@ -93,17 +99,27 @@ public class ManaCauldron extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(LEVEL, meta);
+        int elementValue = meta / 4;
+        int level = meta - (4 * elementValue);
+
+        return this.getDefaultState()
+                .withProperty(LEVEL, level)
+                .withProperty(ELEMENT, Element.withValue(elementValue));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(LEVEL);
+        int level = state.getValue(LEVEL);
+        Element element = state.getValue(ELEMENT);
+
+        int elementValue = element.getValue();
+
+        return (elementValue * 4) + level;
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, LEVEL);
+        return new BlockStateContainer(this, LEVEL, ELEMENT);
     }
 
     @Override
@@ -117,6 +133,39 @@ public class ManaCauldron extends Block {
             return BlockFaceShape.BOWL;
         } else {
             return face == EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
+        }
+    }
+
+    public enum Element implements IStringSerializable {
+        MANA("mana", 0),
+        LIFE("life", 1),
+        NATURE("nature", 2),
+        FIRE("fire", 3);
+
+        private final String name;
+        private final int value;
+
+        Element(String name, int value) {
+            this.name = name;
+            this.value = value;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
+
+        public static Element withValue(int value) {
+            switch (value) {
+                case 1: return LIFE;
+                case 2: return NATURE;
+                case 3: return FIRE;
+                default: return MANA;
+            }
         }
     }
 }

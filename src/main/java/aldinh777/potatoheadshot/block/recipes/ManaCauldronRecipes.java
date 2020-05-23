@@ -5,13 +5,14 @@ import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ManaCauldronRecipes {
+public class ManaCauldronRecipes implements IManaRecipes {
 
-    public static ManaCauldronRecipes INSTANCE = new ManaCauldronRecipes();
+    public static IManaRecipes INSTANCE = new ManaCauldronRecipes();
     private final Map<Item, ItemStack> recipes = new HashMap<>();
     private final Map<Item, Integer> costs = new HashMap<>();
 
@@ -32,6 +33,7 @@ public class ManaCauldronRecipes {
         this.costs.put(input, manaCost);
     }
 
+    @Override
     public ItemStack getResult(Item input) {
         ItemStack result = this.recipes.get(input);
 
@@ -42,6 +44,7 @@ public class ManaCauldronRecipes {
         }
     }
 
+    @Override
     public int getCost(Item input) {
         Integer result = this.costs.get(input);
 

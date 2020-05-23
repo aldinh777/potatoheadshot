@@ -1,8 +1,20 @@
 {
   "variants": {
-    "level=0": { "model": "potatoheadshot:mana_cauldron_empty" },
-    "level=1": { "model": "potatoheadshot:mana_cauldron_level1" },
-    "level=2": { "model": "potatoheadshot:mana_cauldron_level2" },
-    "level=3": { "model": "potatoheadshot:mana_cauldron_level3" }
+    "element=mana,level=0": { "model": "potatoheadshot:mana_cauldron_empty" },
+    "element=mana,level=1": { "model": "potatoheadshot:mana_cauldron_level1" },
+    "element=mana,level=2": { "model": "potatoheadshot:mana_cauldron_level2" },
+    "element=mana,level=3": { "model": "potatoheadshot:mana_cauldron_level3" },
+    "element=life,level=0": { "model": "potatoheadshot:mana_cauldron_empty" },
+    "element=life,level=1": { "model": "potatoheadshot:mana_cauldron_life_level1" },
+    "element=life,level=2": { "model": "potatoheadshot:mana_cauldron_life_level2" },
+    "element=life,level=3": { "model": "potatoheadshot:mana_cauldron_life_level3" },
+    "element=nature,level=0": { "model": "potatoheadshot:mana_cauldron_empty" },
+    "element=nature,level=1": { "model": "potatoheadshot:mana_cauldron_nature_level1" },
+    "element=nature,level=2": { "model": "potatoheadshot:mana_cauldron_nature_level2" },
+    "element=nature,level=3": { "model": "potatoheadshot:mana_cauldron_nature_level3" },
+    "element=fire,level=0": { "model": "potatoheadshot:mana_cauldron_empty" },
+    "element=fire,level=1": { "model": "potatoheadshot:mana_cauldron_fire_level1" },
+    "element=fire,level=2": { "model": "potatoheadshot:mana_cauldron_fire_level2" },
+    "element=fire,level=3": { "model": "potatoheadshot:mana_cauldron_fire_level3" }
   }
 }
