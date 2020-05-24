@@ -19,7 +19,7 @@ import java.util.List;
 
 public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
-    private final PotatoManaStorage storage = new PotatoManaStorage(64000);
+    private final PotatoManaStorage storage = new PotatoManaStorage(800000);
     private ManaCauldron.Element element = ManaCauldron.Element.MANA;
     private IManaRecipes recipes = IManaRecipes.getRecipeById(0);
     private int level = 0;
@@ -29,9 +29,8 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (!this.world.isRemote) {
-            if (this.storage.getManaStored() >= 1000) {
-                this.transformItemsInside();
-            }
+
+            this.transformItemsInside();
 
             this.detectLevelChange();
 
@@ -72,19 +71,27 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
         for (EntityItem entity : entities) {
             ItemStack stack = entity.getItem();
 
-            if (stack.getItem().equals(Items.LAVA_BUCKET)) {
-                this.setElement(ManaCauldron.Element.FIRE);
+            if (stack.getItem().equals(PotatoItems.ROD_MANA)) {
+                this.setElement(ManaCauldron.Element.MANA);
                 stack.shrink(1);
-            } else if (stack.getItem().equals(PotatoItems.POTATO_LEAVES)) {
-                this.setElement(ManaCauldron.Element.NATURE);
-                stack.shrink(1);
-            } else if (stack.getItem().equals(Items.ROTTEN_FLESH)) {
+
+            } else if (stack.getItem().equals(PotatoItems.ROD_LIFE)) {
                 this.setElement(ManaCauldron.Element.LIFE);
                 stack.shrink(1);
+
+            } else if (stack.getItem().equals(PotatoItems.ROD_NATURE)) {
+                this.setElement(ManaCauldron.Element.NATURE);
+                stack.shrink(1);
+
+            } else if (stack.getItem().equals(PotatoItems.ROD_FIRE)) {
+                this.setElement(ManaCauldron.Element.FIRE);
+                stack.shrink(1);
+
             } else {
                 ItemStack result = recipes.getResult(stack.getItem());
+                int cost = recipes.getCost(stack.getItem());
 
-                if (!result.isEmpty()) {
+                if (!result.isEmpty() && this.storage.getManaStored() >= cost) {
                     int manaCost = recipes.getCost(stack.getItem());
                     float posX = this.pos.getX() + 0.5f;
                     float posY = this.pos.getY() + 0.5f;
@@ -92,8 +99,8 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
                     EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
                     this.world.spawnEntity(entityResult);
-                    stack.shrink(1);
                     this.storage.useMana(manaCost);
+                    stack.shrink(1);
                 }
             }
         }

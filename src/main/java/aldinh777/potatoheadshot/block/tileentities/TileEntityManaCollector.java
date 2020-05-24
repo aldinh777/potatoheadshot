@@ -143,7 +143,7 @@ public class TileEntityManaCollector extends TileEntityPotatoMachine {
             int transferable = 200;
             int manaLeftToFull = this.storage.getMaxManaStored() - this.storage.getManaStored();
             if (targetStorage.getManaStored() < 200) {
-                transferable = this.storage.getManaStored();
+                transferable = targetStorage.getManaStored();
             }
             if (manaLeftToFull < 200) {
                 transferable = Math.min(manaLeftToFull, transferable);

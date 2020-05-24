@@ -29,6 +29,13 @@ item.raw_salt.name=Raw Salt
 item.glowing_potato_dust.name=Glowing Potato Dust
 item.glowing_mana_dust.name=Glowing Mana Dust
 item.lava_potato_seed.name=Lava Potato Seed
+item.essence_life.name=Life Essence
+item.essence_nature.name=Nature Essence
+item.essence_fire.name=Fire Essence
+item.rod_mana.name=Glowing Mana Rod
+item.rod_life.name=Glowing Life Rod
+item.rod_nature.name=Glowing Nature Rod
+item.rod_fire.name=Glowing Fire Rod
 
 # Sweet Items
 item.dried_sweet_potato.name=Dried Sweet Potato
@@ -42,6 +49,7 @@ item.sweet_bucket_milk.name=Sweet Milk Bucket
 
 # Tools
 item.potato_knife.name=Potato Knife
+item.potato_mana_knife.name=Potato Mana Knife
 item.lava_hoe.name=Lava Hoe
 item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 item.useless_potato.name=Useless Potato

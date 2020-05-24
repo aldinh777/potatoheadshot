@@ -41,8 +41,16 @@ public class PotatoItems {
     public static Item GLOWING_POTATO_DUST;
     public static Item GLOWING_MANA_DUST;
     public static Item LAVA_POTATO_SEED;
+    public static Item ESSENCE_LIFE;
+    public static Item ESSENCE_NATURE;
+    public static Item ESSENCE_FIRE;
+    public static Item ROD_MANA;
+    public static Item ROD_LIFE;
+    public static Item ROD_NATURE;
+    public static Item ROD_FIRE;
 
     public static Item POTATO_KNIFE;
+    public static Item POTATO_MANA_KNIFE;
     public static Item LAVA_HOE;
     public static Item SWEET_POTATO_BUCKET;
     public static Item SWEET_EMPTY_BUCKET;
@@ -99,6 +107,13 @@ public class PotatoItems {
         GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
         GLOWING_MANA_DUST = new PotatoItem("glowing_mana_dust");
         LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
+        ESSENCE_LIFE = new PotatoItem("essence_life");
+        ESSENCE_NATURE = new PotatoItem("essence_nature");
+        ESSENCE_FIRE = new PotatoItem("essence_fire");
+        ROD_MANA = new PotatoItem("rod_mana");
+        ROD_LIFE = new PotatoItem("rod_life");
+        ROD_NATURE = new PotatoItem("rod_nature");
+        ROD_FIRE = new PotatoItem("rod_fire");
 
         // Bucket
         SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");
@@ -109,10 +124,10 @@ public class PotatoItems {
 
         // Potato other thing
         POTATO_KNIFE = new PotatoKnife("potato_knife");
+        POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
         LAVA_HOE = new LavaHoe("lava_hoe");
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 200);
         USELESS_POTATO = new UselessPotato();
-
 
         // Configuration Definition
         PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) EXTRA_HOT_POTATO;
