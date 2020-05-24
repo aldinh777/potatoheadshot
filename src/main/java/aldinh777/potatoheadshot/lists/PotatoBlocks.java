@@ -25,48 +25,8 @@ public class PotatoBlocks {
     public static Block LAVA_FARMLAND = new FarmlandLava("lava_farmland");
 
     public static Block SWEET_POTATOES = new PotatoCrops("sweet_potatoes");
-    public static Block GLOWING_POTATOES = new PotatoCrops("glowing_potatoes") {
-        @Override
-        protected Item getCrop() {
-            return PotatoItems.GLOWING_POTATO;
-        }
-
-        @Override
-        protected Item getSeed() {
-            return PotatoItems.GLOWING_POTATO;
-        }
-    }.setLightLevel(0.8f);
-    public static Block LAVA_POTATOES = new PotatoCrops("lava_potatoes") {
-        @Override
-        protected Item getCrop() {
-            return PotatoItems.LAVA_POTATO;
-        }
-
-        @Override
-        protected Item getSeed() {
-            return PotatoItems.LAVA_POTATO_SEED;
-        }
-
-        @Override
-        protected boolean canSustainBush(IBlockState state) {
-            return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
-        }
-
-        @Override
-        public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
-            return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
-        }
-
-        @Override
-        public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-            return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
-        }
-
-        @Override
-        public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-            return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
-        }
-    }.setLightLevel(1.0f);
+    public static Block GLOWING_POTATOES = new GlowingPotatoCrops("glowing_potatoes");
+    public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
 
     public static Block COOKED_DIRT;
     public static Block BAKED_POTATO_PLANKS;
@@ -83,7 +43,6 @@ public class PotatoBlocks {
     public static Block GLOWING_MANA_STONE;
 
     public static Block POTATO_DRIER;
-    public static Block LIT_POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
     public static Block SWEET_FREEZER;
     public static Block SWEET_INFUSER;
@@ -121,7 +80,6 @@ public class PotatoBlocks {
             {
                 return false;
             }
-
         };
         GLOWING_POTATO_BLOCK = new PotatoBlock("glowing_potato_block", BlockType.GLASS) {
             @Override
@@ -140,7 +98,6 @@ public class PotatoBlocks {
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
-        LIT_POTATO_DRIER = new PotatoDrier("lit_potato_drier", BlockType.STONE, true);
         SWEET_POTATO_GENERATOR = new SweetPotatoGenerator("sweet_potato_generator", BlockType.METAL);
         SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);

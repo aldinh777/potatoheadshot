@@ -88,18 +88,17 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                 stack.shrink(1);
 
             } else {
-                ItemStack result = recipes.getResult(stack.getItem());
-                int cost = recipes.getCost(stack.getItem());
+                ItemStack result = recipes.getResult(stack);
+                int cost = recipes.getCost(stack);
 
                 if (!result.isEmpty() && this.storage.getManaStored() >= cost) {
-                    int manaCost = recipes.getCost(stack.getItem());
                     float posX = this.pos.getX() + 0.5f;
                     float posY = this.pos.getY() + 0.5f;
                     float posZ = this.pos.getZ() + 0.5f;
 
                     EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
                     this.world.spawnEntity(entityResult);
-                    this.storage.useMana(manaCost);
+                    this.storage.useMana(cost);
                     stack.shrink(1);
                 }
             }

@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import aldinh777.potatoheadshot.block.ManaCauldron;
 import aldinh777.potatoheadshot.block.PotatoDrier;
 import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
@@ -152,6 +153,11 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         if (dryingFlag || wettingFlag) {
             this.markDirty();
         }
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() != newSate.getBlock();
     }
 
     @Nullable
@@ -447,26 +453,15 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         }
     }
 
-    private static void setState(boolean active, World worldIn, BlockPos pos) {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    private void setState(boolean active, World worldIn, BlockPos pos) {
         PotatoDrier.keepInventory = true;
 
-        if (active) {
-            worldIn.setBlockState(pos, PotatoBlocks.LIT_POTATO_DRIER.getDefaultState().withProperty(PotatoDrier.FACING, iblockstate.getValue(PotatoDrier.FACING)), 3);
-            worldIn.setBlockState(pos, PotatoBlocks.LIT_POTATO_DRIER.getDefaultState().withProperty(PotatoDrier.FACING, iblockstate.getValue(PotatoDrier.FACING)), 3);
-        }
-        else {
-            worldIn.setBlockState(pos, PotatoBlocks.POTATO_DRIER.getDefaultState().withProperty(PotatoDrier.FACING, iblockstate.getValue(PotatoDrier.FACING)), 3);
-            worldIn.setBlockState(pos, PotatoBlocks.POTATO_DRIER.getDefaultState().withProperty(PotatoDrier.FACING, iblockstate.getValue(PotatoDrier.FACING)), 3);
-        }
+        IBlockState newState = this.world.getBlockState(this.pos)
+                .withProperty(PotatoDrier.ACTIVE, active);
+
+        worldIn.setBlockState(pos, newState, 3);
 
         PotatoDrier.keepInventory = false;
-
-        if (tileentity != null) {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
-        }
     }
 
     public static boolean isItemFuel(ItemStack fuel) {

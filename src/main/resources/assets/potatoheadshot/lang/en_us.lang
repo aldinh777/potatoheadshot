@@ -77,7 +77,6 @@ tile.dimensional_glass.name=Dimensional Glass
 
 # Machines
 tile.potato_drier.name=Potato Drier
-tile.lit_potato_drier.name=Lit Potato Drier
 tile.sweet_potato_generator.name=Sweet Potato Generator
 tile.sweet_freezer.name=Sweet Freezer
 tile.sweet_infuser.name=Sweet Infuser

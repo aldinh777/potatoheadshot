@@ -11,18 +11,18 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
     public static IManaRecipes INSTANCE = new ManaFireCauldronRecipes();
 
     @Override
-    public ItemStack getResult(Item input) {
-        if (input == Items.IRON_HOE) {
+    public ItemStack getResult(ItemStack input) {
+        if (input.getItem() == Items.IRON_HOE) {
             return new ItemStack(PotatoItems.LAVA_HOE);
         } else {
-            return FurnaceRecipes.instance().getSmeltingResult(new ItemStack(input));
+            return FurnaceRecipes.instance().getSmeltingResult(input);
         }
     }
 
     @Override
-    public int getCost(Item input) {
-        if (input == Items.IRON_HOE) return 32000;
-        if (!FurnaceRecipes.instance().getSmeltingResult(new ItemStack(input)).isEmpty()) return 4000;
+    public int getCost(ItemStack input) {
+        if (input.getItem() == Items.IRON_HOE) return 32000;
+        if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 4000;
         return 0;
     }
 }

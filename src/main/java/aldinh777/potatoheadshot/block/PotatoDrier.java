@@ -6,12 +6,17 @@ import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.BlockType;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -22,15 +27,15 @@ import java.util.Random;
 
 public class PotatoDrier extends PotatoMachine {
 
+    public static PropertyBool ACTIVE = PropertyBool.create("active");
     public static boolean keepInventory;
 
     public PotatoDrier(String name, BlockType blockType) {
-        this(name, blockType, false);
-    }
-
-    public PotatoDrier(String name, BlockType blockType, boolean isBurning) {
         super(name, blockType, 1);
-        initBurning(isBurning);
+        this.setDefaultState(this.getBlockState().getBaseState().withProperty(ACTIVE, false));
+        this.setCreativeTab(PotatoTab.POTATO_TAB);
+
+        PotatoItems.LISTS.add(new PotatoItemBlock(this));
     }
 
     @Override
@@ -39,18 +44,90 @@ public class PotatoDrier extends PotatoMachine {
         PotatoBlocks.LISTS.add(this);
     }
 
-    protected void initBurning(boolean isBurning) {
-        if (!isBurning) {
-            PotatoItems.LISTS.add(new PotatoItemBlock(this));
-            this.setCreativeTab(PotatoTab.POTATO_TAB);
-        } else {
-            this.setLightLevel(0.875f);
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        if (!worldIn.isRemote) {
+            IBlockState north = worldIn.getBlockState(pos.north());
+            IBlockState south = worldIn.getBlockState(pos.south());
+            IBlockState west = worldIn.getBlockState(pos.west());
+            IBlockState east = worldIn.getBlockState(pos.east());
+            EnumFacing enumfacing = state.getValue(FACING);
+
+            if (enumfacing == EnumFacing.NORTH && north.isFullBlock() && !south.isFullBlock()) {
+                enumfacing = EnumFacing.SOUTH;
+            } else if (enumfacing == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) {
+                enumfacing = EnumFacing.NORTH;
+            } else if (enumfacing == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) {
+                enumfacing = EnumFacing.EAST;
+            } else if (enumfacing == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) {
+                enumfacing = EnumFacing.WEST;
+            }
+
+            worldIn.setBlockState(pos, state
+                    .withProperty(FACING, enumfacing)
+                    .withProperty(ACTIVE, false));
         }
+
+    }
+
+    @Override
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING, ACTIVE);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int facing = state.getValue(FACING).getIndex();
+        boolean active = state.getValue(ACTIVE);
+
+        return facing + (active ? 8 : 0);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        int facing = meta;
+        boolean active = false;
+
+        if (meta >= 8) {
+            active = true;
+            facing = meta - 8;
+        }
+
+        IBlockState iblockstate = this.getDefaultState().withProperty(ACTIVE, active);
+
+        switch (facing) {
+            case 0:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.DOWN);
+                break;
+            case 1:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.UP);
+                break;
+            case 2:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.NORTH);
+                break;
+            case 3:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.SOUTH);
+                break;
+            case 4:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.WEST);
+                break;
+            case 5:
+                iblockstate = iblockstate.withProperty(FACING, EnumFacing.EAST);
+                break;
+        }
+
+        return iblockstate;
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(PotatoBlocks.POTATO_DRIER);
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        boolean active = state.getValue(ACTIVE);
+        return active ? 13 : 0;
     }
 
     @Nullable

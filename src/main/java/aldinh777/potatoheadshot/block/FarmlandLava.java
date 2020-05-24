@@ -19,7 +19,7 @@ public class FarmlandLava extends BlockFarmland {
     public FarmlandLava(String name) {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
-        this.setLightLevel(0.75f);
+        this.setLightLevel(0.50f);
         PotatoBlocks.LISTS.add(this);
     }
 

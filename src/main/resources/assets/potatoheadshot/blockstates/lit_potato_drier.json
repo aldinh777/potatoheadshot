@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "potatoheadshot:lit_potato_drier" },
-        "facing=south": { "model": "potatoheadshot:lit_potato_drier", "y": 180 },
-        "facing=west":  { "model": "potatoheadshot:lit_potato_drier", "y": 270 },
-        "facing=east":  { "model": "potatoheadshot:lit_potato_drier", "y": 90 }
-    }
-}

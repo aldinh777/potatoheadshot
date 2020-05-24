@@ -5,7 +5,6 @@ import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +22,7 @@ public class ManaCauldronRecipes implements IManaRecipes {
         Item stone = Item.getItemFromBlock(Blocks.STONE);
 
         addRecipe(PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.GLOWING_MANA_DUST), 1000);
+        addRecipe(PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 2000);
         addRecipe(flower, new ItemStack(PotatoBlocks.GLOWING_MANA_FLOWER), 1000);
         addRecipe(torch, new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH), 1000);
         addRecipe(stone, new ItemStack(PotatoBlocks.GLOWING_MANA_STONE), 1000);
@@ -34,8 +34,8 @@ public class ManaCauldronRecipes implements IManaRecipes {
     }
 
     @Override
-    public ItemStack getResult(Item input) {
-        ItemStack result = this.recipes.get(input);
+    public ItemStack getResult(ItemStack input) {
+        ItemStack result = this.recipes.get(input.getItem());
 
         if (result != null) {
             return result;
@@ -45,8 +45,8 @@ public class ManaCauldronRecipes implements IManaRecipes {
     }
 
     @Override
-    public int getCost(Item input) {
-        Integer result = this.costs.get(input);
+    public int getCost(ItemStack input) {
+        Integer result = this.costs.get(input.getItem());
 
         if (result != null) {
             return result;

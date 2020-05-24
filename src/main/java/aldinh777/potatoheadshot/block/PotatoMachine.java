@@ -57,7 +57,7 @@ public abstract class PotatoMachine extends PotatoBlock {
                 enumfacing = EnumFacing.WEST;
             }
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), this.modGuiId);
+            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing));
         }
     }
 
