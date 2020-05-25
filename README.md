@@ -83,9 +83,77 @@ Freeze water with "Raw Salt" to make ice
 ### Sweet Infuser
 Infuse any item with other materials to get another items
 
+
+
+## Glowing Potato
+Surround potato with glowstone dust, and you will get new crop "Glowing Potato"
+
+Dry with PotatoDrier to get "Glowing Potato Dust" and craft 4 of it to create "Glowing Potato Block"
+
+### Mana Collector
+Mana Collector will collect any magical energy from your surrounding.
+
+You can put any item in it to give magical energy to that item
+
+- Glowing Potato Dust => Glowing Mana Dust
+- Torch => Glowing Mana Torch
+- Flower => Glowing Mana Flower
+- Stone => Glowing Mana Stone
+
+### Mana Extractor
+Works opposite with the collector, it extracts any item's magical energy and turn it into normal item
+
+"Mana Extractor" won't collect mana unless there is a "Glowing Mana Flower" on top of it
+
+### Mana Cauldron
+This is a Storage for mana
+
+Put it behind "Mana Extractor", and it will pull mana from the extractor to the cauldron
+
+Put it behind "Mana Collector", and the collector will pull mana from the cauldron
+
+Drop item to the cauldron, and it will consume some mana to transform the item you drop
+based on the elements you have in the cauldron
+
+### Mana Potato Knife
+Right click on something to transform it into essence
+
+- Grass Block => Nature Essence
+- Any Entity => Life Essence
+- Lava => Fire Essence
+
+This will consume the knife itself
+
+### Glowing Mana Rod
+Drop this to the "Mana Cauldron" to transform element of the cauldron into pure mana
+
+### Glowing Life Rod
+Drop this to the "Mana Cauldron" to transform element of the cauldron into life mana
+
+Cauldron with life mana will transform any item dropped into seed or sapling
+
+Drop "Lava Potato" and it will into "Lava Potato Seed"
+
+You can plant it in "Lava Farmland"
+
+### Glowing Nature Rod
+Drop this to the "Mana Cauldron" to transform element of the cauldron into nature mana
+
+Cauldron with nature mana will transform any plant dropped into it next variant
+
+### Glowing Fire Rod
+Drop this to the "Mana Cauldron" to transform element of the cauldron into fire mana
+
+Cauldron with fire mana will cook any item dropped into it
+
+Drop iron hoe to mana fire, and it will transform to "Lava Hoe" which
+works like a normal hoe but instead a normal farmland, you will get "Lava Farmland"
+
+Lava farmland needs lava instead of water
+
 ## Broken Item
 
-These item just exists when developing
+These item just exists when developing, and some of them are exciting, so I make it as a feature
 
 ### Infinite Broken Fuel
 Works like coal, but won't consume when used

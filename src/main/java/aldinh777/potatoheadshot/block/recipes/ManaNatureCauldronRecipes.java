@@ -23,7 +23,7 @@ public class ManaNatureCauldronRecipes implements IManaRecipes {
         addRecipe(Items.WHEAT_SEEDS, new ItemStack(Items.MELON_SEEDS));
         addRecipe(Items.MELON_SEEDS, new ItemStack(Items.PUMPKIN_SEEDS));
         addRecipe(Items.PUMPKIN_SEEDS, new ItemStack(Items.BEETROOT_SEEDS));
-        addRecipe(Items.BEETROOT_SEEDS, new ItemStack(Items.WHEAT_SEEDS));
+        addRecipe(Items.BEETROOT_SEEDS, new ItemStack(Items.DYE, 1, 3));
         addRecipe(Items.NETHER_WART, new ItemStack(redMushroom));
         addRecipe(redMushroom, new ItemStack(brownMushroom));
         addRecipe(brownMushroom, new ItemStack(Items.NETHER_WART));
@@ -72,6 +72,10 @@ public class ManaNatureCauldronRecipes implements IManaRecipes {
 
     @Override
     public ItemStack getResult(ItemStack input) {
+        if (input.getItem() == Items.DYE && input.getMetadata() == 3) {
+            return new ItemStack(Items.WHEAT_SEEDS);
+        }
+
         ItemStack seedResult = recipes.get(input.getItem());
         if (seedResult != null && !seedResult.isEmpty()) {
             return seedResult;

@@ -13,6 +13,7 @@ public class SweetInfuserRecipes {
     
     public static final SweetInfuserRecipes INSTANCE = new SweetInfuserRecipes();
     private final Map<Item, Object> mainMap = new HashMap<>();
+    private final Item LAPIS_PLACEHOLDER = new Item();
 
     private SweetInfuserRecipes() {
 
@@ -24,7 +25,7 @@ public class SweetInfuserRecipes {
 
         Item ironOre = Item.getItemFromBlock(Blocks.IRON_ORE);
         Item goldOre = Item.getItemFromBlock(Blocks.GOLD_ORE);
-        
+
         Item grass = Item.getItemFromBlock(Blocks.GRASS);
         Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
         Item dirt = Item.getItemFromBlock(Blocks.DIRT);
@@ -92,26 +93,14 @@ public class SweetInfuserRecipes {
 
         for (int i = 0; i < 5; i++) {
             Item recipe = recipes[i];
-            if (recipes[i] == PotatoItems.LAVA_POTATO || recipes[i] == PotatoItems.SWEET_LAVA_BUCKET) {
-                recipe = Items.LAVA_BUCKET;
-            }
-            if (recipes[i] == PotatoItems.WATER_POTATO || recipes[i] == PotatoItems.SWEET_WATER_BUCKET) {
-                recipe = Items.WATER_BUCKET;
-            }
             map = getMap(map, recipe);
         }
 
         Item lastRecipe = recipes[5];
-        if (recipes[5] == PotatoItems.LAVA_POTATO || recipes[5] == PotatoItems.SWEET_LAVA_BUCKET) {
-            lastRecipe = Items.LAVA_BUCKET;
-        }
-        if (recipes[5] == PotatoItems.WATER_POTATO || recipes[5] == PotatoItems.SWEET_WATER_BUCKET) {
-            lastRecipe = Items.WATER_BUCKET;
-        }
         map.put((K)lastRecipe, (V)output);
     }
 
-    public <K, V> ItemStack getResult(Item middle, Item ...recipes) {
+    public <K, V> ItemStack getResult(Item middle, ItemStack ...recipes) {
         Map<K, V> map = (Map<K, V>)mainMap;
         map = (Map<K, V>)map.get((K)middle);
 
@@ -120,27 +109,32 @@ public class SweetInfuserRecipes {
         }
 
         for (int i = 0; i < 5; i++) {
-            Item recipe = recipes[i];
-            if (recipes[i] == PotatoItems.LAVA_POTATO || recipes[i] == PotatoItems.SWEET_LAVA_BUCKET) {
-                recipe = Items.LAVA_BUCKET;
+            if (isLapis(recipes[i])) {
+                map = (Map<K, V>)map.get((K)LAPIS_PLACEHOLDER);
+            } else {
+                Item recipe = recipes[i].getItem();
+                Item currentRecipe = liquidify(recipe);
+
+
+                map = (Map<K, V>)map.get((K)currentRecipe);
             }
-            if (recipes[i] == PotatoItems.WATER_POTATO || recipes[i] == PotatoItems.SWEET_WATER_BUCKET) {
-                recipe = Items.WATER_BUCKET;
-            }
-            map = (Map<K, V>)map.get((K)recipe);
+
             if (map == null) {
                 return ItemStack.EMPTY;
             }
         }
 
-        Item lastRecipe = recipes[5];
-        if (recipes[5] == PotatoItems.LAVA_POTATO || recipes[5] == PotatoItems.SWEET_LAVA_BUCKET) {
-            lastRecipe = Items.LAVA_BUCKET;
+        ItemStack result;
+
+        if (isLapis(recipes[5])) {
+            result = (ItemStack)map.get((K)LAPIS_PLACEHOLDER);
+        } else {
+            Item lastRecipe = recipes[5].getItem();
+            Item currentLastRecipe = liquidify(lastRecipe);
+
+            result = (ItemStack)map.get((K)currentLastRecipe);
         }
-        if (recipes[5] == PotatoItems.WATER_POTATO || recipes[5] == PotatoItems.SWEET_WATER_BUCKET) {
-            lastRecipe = Items.WATER_BUCKET;
-        }
-        ItemStack result = (ItemStack)map.get((K)lastRecipe);
+
         if (result == null) {
             return ItemStack.EMPTY;
         } else {
@@ -156,6 +150,7 @@ public class SweetInfuserRecipes {
         Item coalOre = Item.getItemFromBlock(Blocks.COAL_ORE);
         Item redstoneOre = Item.getItemFromBlock(Blocks.REDSTONE_ORE);
         Item quartzOre = Item.getItemFromBlock(Blocks.QUARTZ_ORE);
+        Item lapisOre = Item.getItemFromBlock(Blocks.LAPIS_ORE);
 
         Item stone = Item.getItemFromBlock(Blocks.STONE);
         Item rack = Item.getItemFromBlock(Blocks.NETHERRACK);
@@ -181,5 +176,22 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(quartzOre), rack,
                 Items.QUARTZ, Items.QUARTZ, Items.QUARTZ,
                 Items.QUARTZ, Items.QUARTZ, Items.QUARTZ);
+        addRecipe(new ItemStack(lapisOre), stone,
+                LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER,
+                LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER);
+    }
+
+    public boolean isLapis(ItemStack item) {
+        return item.getItem() == Items.DYE && item.getMetadata() == 4;
+    }
+
+    public Item liquidify(Item item) {
+        if (item == PotatoItems.LAVA_POTATO || item == PotatoItems.SWEET_LAVA_BUCKET) {
+            return Items.LAVA_BUCKET;
+        }
+        if (item == PotatoItems.WATER_POTATO || item == PotatoItems.SWEET_WATER_BUCKET) {
+            return Items.WATER_BUCKET;
+        }
+        return item;
     }
 }

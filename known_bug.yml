@@ -13,11 +13,6 @@ FINE:
     reality:
       The value shown in gui is the value player seen in gui last time
 
-  -
-    name: Sugarcane and Soul Sand is Weird
-    description:
-      I dont even know how to describe it...
-
 
 IGNORED:
   -
@@ -31,33 +26,3 @@ IGNORED:
     description:
       You can place mana flower on top of any other flower or blocks,
       And weird behaviour when placed on blocks other than dirt or grass
-
-
-SOLVED:
-  -
-    name: Tile Entity always facing NORTH after relog
-    description:
-      Just as the title says, when leave game and play again,
-      all the Custom Tile Entity goes facing north
-    expected behaviour:
-      It facing when it is as it placed
-    reality:
-      NORTH IS THE WAY!!!
-
-  -
-    name: Hopper Problem
-    description:
-      When hopper is put on top or bottom of any TileEntity... it just go mess
-    expected behaviour:
-      Currently don't really know what to expect
-    reality:
-      It just break
-
-  -
-    name: Another GUI weirdness
-    description:
-      At Sweet Potato Generator, the progress bar didn't match up with variables got from tileEntity
-    expected behaviour:
-      Getting currentCookTime and totalCookTime of the generator got by getField method
-    reality:
-      Getting current energy

@@ -147,14 +147,14 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
             return false;
         }
 
-        Item[] inputs = new Item[6];
+        ItemStack[] inputs = new ItemStack[6];
 
         for (int i = 0; i < 6; i++) {
             ItemStack input = this.inputHandler.getStackInSlot(i);
             if (input.isEmpty()) {
                 return false;
             }
-            inputs[i] = input.getItem();
+            inputs[i] = input;
         }
 
         ItemStack result = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
@@ -165,14 +165,12 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     private void infuseItem() {
         ItemStack middle = this.middleHandler.getStackInSlot(0);
         ItemStack[] inputs = new ItemStack[6];
-        Item[] itemInputs = new Item[6];
 
         for (int i = 0; i < 6; i++) {
             inputs[i] = this.inputHandler.getStackInSlot(i);
-            itemInputs[i] = inputs[i].getItem();
         }
 
-        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), itemInputs);
+        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
         ItemStack result = infuseResult.copy();
 
         if (middle.getCount() > 1) {
