@@ -36,6 +36,8 @@ item.rod_mana.name=Glowing Mana Rod
 item.rod_life.name=Glowing Life Rod
 item.rod_nature.name=Glowing Nature Rod
 item.rod_fire.name=Glowing Fire Rod
+item.crystal_shard.name=Crystal Shard
+item.crystal_gem.name=Crystal Gem
 
 # Sweet Items
 item.dried_sweet_potato.name=Dried Sweet Potato
@@ -79,6 +81,7 @@ tile.dimensional_glass.name=Dimensional Glass
 tile.potato_drier.name=Potato Drier
 tile.sweet_potato_generator.name=Sweet Potato Generator
 tile.sweet_freezer.name=Sweet Freezer
+tile.sweet_crystal_maker.name=Sweet Crystal Maker
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor

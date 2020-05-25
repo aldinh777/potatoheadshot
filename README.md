@@ -83,6 +83,9 @@ Freeze water with "Raw Salt" to make ice
 ### Sweet Infuser
 Infuse any item with other materials to get another items
 
+### Sweet Crystal Maker
+Make "Crystal Shard" by using "Ice" and "Raw Salt"
+
 
 
 ## Glowing Potato
@@ -150,6 +153,8 @@ Drop iron hoe to mana fire, and it will transform to "Lava Hoe" which
 works like a normal hoe but instead a normal farmland, you will get "Lava Farmland"
 
 Lava farmland needs lava instead of water
+
+
 
 ## Broken Item
 

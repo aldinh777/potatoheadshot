@@ -3,7 +3,6 @@ package aldinh777.potatoheadshot.block.tileentities;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,13 +16,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
+public class TileEntitySweetCrystalMaker extends TileEntityPotatoMachine {
 
-    private final ItemStackHandler saltHandler = new ItemStackHandler(1) {
+    private final ItemStackHandler iceHandler = new ItemStackHandler(1) {
         @Nonnull
         @Override
         public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-            return stack.getItem() == PotatoItems.RAW_SALT ? super.insertItem(slot, stack, simulate) : stack;
+            Item ice = Item.getItemFromBlock(Blocks.ICE);
+            return stack.getItem() == ice ? super.insertItem(slot, stack, simulate) : stack;
         }
     };
     private final ItemStackHandler inputHandler = new ItemStackHandler(1);
@@ -31,22 +31,29 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
 
     private final PotatoEnergyStorage storage = new PotatoEnergyStorage(40000, 40, 0);
     private int energy = this.storage.getEnergyStored();
-    private int currentFreezeTime = 0;
-    private int totalFreezeTime = 200;
+    private final int totalCrystalTime = 100;
+    private final int totalCrystalization = 800;
+    private int crystalTime = 0;
+    private int crystalization = 0;
 
     // Override Methods
 
     @Override
     public void update() {
         if (!this.world.isRemote) {
-            if (this.canFreeze()) {
-                if (this.currentFreezeTime >= this.totalFreezeTime) {
-                    ItemStack salt = this.saltHandler.getStackInSlot(0);
-                    this.freezeItem();
-                    this.currentFreezeTime = 0;
-                    salt.shrink(1);
+            if (this.crystalization >= this.totalCrystalization) {
+                this.createCrystal();
+                this.crystalization = 0;
+            }
+
+            if (this.canCrystalize()) {
+                if (this.crystalTime >= this.totalCrystalTime) {
+                    ItemStack ice = this.iceHandler.getStackInSlot(0);
+                    this.crystalizeItem();
+                    this.crystalTime = 0;
+                    ice.shrink(1);
                 } else if (this.storage.getEnergyStored() >= 20) {
-                    this.currentFreezeTime++;
+                    this.crystalTime++;
                     this.storage.useEnergy(20);
                 }
             }
@@ -76,7 +83,7 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
             } else if (facing == EnumFacing.DOWN) {
                 return (T)this.outputHandler;
             } else {
-                return (T)this.saltHandler;
+                return (T)this.iceHandler;
             }
         }
         return super.getCapability(capability, facing);
@@ -85,30 +92,30 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
     @Nullable
     @Override
     public ITextComponent getDisplayName() {
-        return customOrDefaultName("Sweet Freezer");
+        return customOrDefaultName("Sweet Crystal Maker");
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        this.saltHandler.deserializeNBT(compound.getCompoundTag("InventorySalt"));
+        this.iceHandler.deserializeNBT(compound.getCompoundTag("InventoryIce"));
         this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
         this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
         this.energy = compound.getInteger("GuiEnergy");
-        this.currentFreezeTime = compound.getInteger("CurrentFreezeTime");
-        this.totalFreezeTime = compound.getInteger("TotalFreezeTime");
+        this.crystalTime = compound.getInteger("CrystalTime");
+        this.crystalization = compound.getInteger("Crystalization");
         this.storage.readFromNBT(compound);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
+        compound.setTag("InventoryIce", this.iceHandler.serializeNBT());
         compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
-        compound.setTag("InventorySalt", this.saltHandler.serializeNBT());
         compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
         compound.setInteger("GuiEnergy", this.energy);
-        compound.setInteger("CurrentFreezeTime", (short)this.currentFreezeTime);
-        compound.setInteger("TotalFreezeTime", (short)this.totalFreezeTime);
+        compound.setInteger("CrystalTime", (short)this.crystalTime);
+        compound.setInteger("Crystalization", (short)this.crystalization);
         this.storage.writeToNBT(compound);
         return compound;
     }
@@ -118,10 +125,14 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
         switch (id) {
             case "energy":
                 return this.energy;
-            case "totalFreezeTime":
-                return this.totalFreezeTime;
-            case "currentFreezeTime":
-                return this.currentFreezeTime;
+            case "crystalTime":
+                return this.crystalTime;
+            case "totalCrystalTime":
+                return this.totalCrystalTime;
+            case "crystalization":
+                return this.crystalization;
+            case "totalCrystalization":
+                return this.totalCrystalization;
             default:
                 return 0;
         }
@@ -134,10 +145,10 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
                 this.energy = value;
                 break;
             case 1:
-                this.totalFreezeTime = value;
+                this.crystalTime = value;
                 break;
             case 2:
-                this.currentFreezeTime = value;
+                this.crystalization = value;
                 break;
         }
     }
@@ -148,61 +159,51 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
         return this.storage.getMaxEnergyStored();
     }
 
-    private boolean canFreeze() {
-        ItemStack salt = this.saltHandler.getStackInSlot(0);
-        ItemStack freezeInput = this.inputHandler.getStackInSlot(0);
-        ItemStack freezeOutput = this.outputHandler.getStackInSlot(0);
+    private void createCrystal() {
+        ItemStack crystalOutput = this.outputHandler.getStackInSlot(0);
+        ItemStack result = new ItemStack(PotatoItems.CRYSTAL_SHARD);
 
-        if (salt.isEmpty() || freezeInput.isEmpty()) {
+        if (crystalOutput.isEmpty()) {
+            this.outputHandler.setStackInSlot(0, result);
+        } else if (crystalOutput.isItemEqual(result)) {
+            crystalOutput.grow(result.getCount());
+        }
+    }
+
+    private void crystalizeItem() {
+        ItemStack salt = this.inputHandler.getStackInSlot(0);
+
+        salt.shrink(1);
+        this.crystalization += this.totalCrystalTime;
+    }
+
+    private boolean canCrystalize() {
+        ItemStack iceFuel = this.iceHandler.getStackInSlot(0);
+        ItemStack salt = this.inputHandler.getStackInSlot(0);
+        ItemStack crystalOutput = this.outputHandler.getStackInSlot(0);
+
+        if (iceFuel.isEmpty() || salt.isEmpty()) {
             return false;
 
         } else {
-            ItemStack result = getResult(freezeInput);
-
-            if (result.isEmpty()) {
+            Item ice = Item.getItemFromBlock(Blocks.ICE);
+            if (!ice.equals(iceFuel.getItem()) || !salt.getItem().equals(PotatoItems.RAW_SALT)) {
                 return false;
+
             } else {
-                if (freezeOutput.isEmpty()) {
+                if (crystalOutput.isEmpty()) {
                     return true;
                 } else {
-                    if (freezeOutput.isItemEqual(result)) {
-                        int res = freezeOutput.getCount() + result.getCount();
-                        return res <= freezeOutput.getMaxStackSize();
+                    ItemStack result = new ItemStack(PotatoItems.CRYSTAL_SHARD);
+
+                    if (crystalOutput.isItemEqual(result)) {
+                        int res = crystalOutput.getCount() + result.getCount();
+                        return res <= crystalOutput.getMaxStackSize();
                     } else {
                         return false;
                     }
                 }
             }
         }
-    }
-
-    private void freezeItem() {
-        ItemStack freezeInput = this.inputHandler.getStackInSlot(0);
-        ItemStack freezeOutput = this.outputHandler.getStackInSlot(0);
-        ItemStack result = getResult(freezeInput);
-
-        if (freezeOutput.isEmpty()) {
-            this.outputHandler.setStackInSlot(0, result.copy());
-        } else if (freezeOutput.isItemEqual(result)) {
-            freezeOutput.grow(result.getCount());
-        }
-
-        if (freezeInput.getItem() == Items.WATER_BUCKET) {
-            this.inputHandler.setStackInSlot(0, new ItemStack(Items.BUCKET));
-        } else if (freezeInput.getItem() == PotatoItems.SWEET_WATER_BUCKET) {
-            this.inputHandler.setStackInSlot(0, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET));
-        } else {
-            freezeInput.shrink(1);
-        }
-    }
-
-    // Static Methods
-
-    public static ItemStack getResult(ItemStack stack) {
-        ItemStack ice = new ItemStack(Item.getItemFromBlock(Blocks.ICE));
-        if (stack.getItem() == Items.WATER_BUCKET) return ice;
-        if (stack.getItem() == PotatoItems.SWEET_WATER_BUCKET) return ice;
-        if (stack.getItem() == PotatoItems.WATER_POTATO) return ice;
-        return ItemStack.EMPTY;
     }
 }

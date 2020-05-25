@@ -13,7 +13,11 @@ public class SweetInfuserRecipes {
     
     public static final SweetInfuserRecipes INSTANCE = new SweetInfuserRecipes();
     private final Map<Item, Object> mainMap = new HashMap<>();
-    private final Item LAPIS_PLACEHOLDER = new Item();
+    private final Item LAPIS = new Item();
+    private final Item DYE_LIGHT_BLUE = new Item();
+    private final Item DYE_RED = new Item();
+    private final Item DYE_LIME = new Item();
+    private final Item DYE_WHITE = new Item();
 
     private SweetInfuserRecipes() {
 
@@ -22,9 +26,6 @@ public class SweetInfuserRecipes {
         Item enderPearl = Items.ENDER_PEARL;
         Item string = Items.STRING;
         Item potatoLeaves = PotatoItems.POTATO_LEAVES;
-
-        Item ironOre = Item.getItemFromBlock(Blocks.IRON_ORE);
-        Item goldOre = Item.getItemFromBlock(Blocks.GOLD_ORE);
 
         Item grass = Item.getItemFromBlock(Blocks.GRASS);
         Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
@@ -42,6 +43,8 @@ public class SweetInfuserRecipes {
         Item cobweb = Item.getItemFromBlock(Blocks.WEB);
 
         basicOreRecipes();
+        customOreRecipes();
+        gemRecipes();
 
         addRecipe(new ItemStack(gravel), stone,
                 cobble, cobble, cobble,
@@ -49,12 +52,6 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(rack), stone,
                 cobble, lava, cobble,
                 cobble, lava, cobble);
-        addRecipe(new ItemStack(ironOre), stone,
-                gravel, lava, gravel,
-                cobble, water, cobble);
-        addRecipe(new ItemStack(goldOre), stone,
-                rack, lava, rack,
-                cobble, water, cobble);
         addRecipe(new ItemStack(grass), dirt,
                 potatoLeaves, potatoLeaves, potatoLeaves,
                 dirt, water, dirt);
@@ -109,15 +106,15 @@ public class SweetInfuserRecipes {
         }
 
         for (int i = 0; i < 5; i++) {
-            if (isLapis(recipes[i])) {
-                map = (Map<K, V>)map.get((K)LAPIS_PLACEHOLDER);
+            Item recipe;
+
+            if (recipes[i].getItem() == Items.DYE) {
+                recipe = getDye(recipes[i]);
             } else {
-                Item recipe = recipes[i].getItem();
-                Item currentRecipe = liquidify(recipe);
-
-
-                map = (Map<K, V>)map.get((K)currentRecipe);
+                recipe = liquidify(recipes[i]);
             }
+
+            map = (Map<K, V>)map.get((K)recipe);
 
             if (map == null) {
                 return ItemStack.EMPTY;
@@ -125,15 +122,14 @@ public class SweetInfuserRecipes {
         }
 
         ItemStack result;
+        Item lastRecipe;
 
-        if (isLapis(recipes[5])) {
-            result = (ItemStack)map.get((K)LAPIS_PLACEHOLDER);
+        if (recipes[5].getItem() == Items.DYE) {
+            lastRecipe = getDye(recipes[5]);
         } else {
-            Item lastRecipe = recipes[5].getItem();
-            Item currentLastRecipe = liquidify(lastRecipe);
-
-            result = (ItemStack)map.get((K)currentLastRecipe);
+            lastRecipe = liquidify(recipes[5]);
         }
+        result = (ItemStack)map.get((K)lastRecipe);
 
         if (result == null) {
             return ItemStack.EMPTY;
@@ -177,15 +173,81 @@ public class SweetInfuserRecipes {
                 Items.QUARTZ, Items.QUARTZ, Items.QUARTZ,
                 Items.QUARTZ, Items.QUARTZ, Items.QUARTZ);
         addRecipe(new ItemStack(lapisOre), stone,
-                LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER,
-                LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER, LAPIS_PLACEHOLDER);
+                LAPIS, LAPIS, LAPIS,
+                LAPIS, LAPIS, LAPIS);
     }
 
-    public boolean isLapis(ItemStack item) {
-        return item.getItem() == Items.DYE && item.getMetadata() == 4;
+    public void customOreRecipes() {
+        Item lava = Items.LAVA_BUCKET;
+        Item water = Items.WATER_BUCKET;
+        Item driedSweet = PotatoItems.DRIED_SWEET_POTATO;
+
+        Item stone = Item.getItemFromBlock(Blocks.STONE);
+        Item gravel = Item.getItemFromBlock(Blocks.GRAVEL);
+        Item rack = Item.getItemFromBlock(Blocks.NETHERRACK);
+        Item cobble = Item.getItemFromBlock(Blocks.COBBLESTONE);
+
+        Item ironOre = Item.getItemFromBlock(Blocks.IRON_ORE);
+        Item goldOre = Item.getItemFromBlock(Blocks.GOLD_ORE);
+        Item redstoneOre = Item.getItemFromBlock(Blocks.REDSTONE_ORE);
+
+        addRecipe(new ItemStack(ironOre), stone,
+                gravel, lava, gravel,
+                cobble, water, cobble);
+        addRecipe(new ItemStack(goldOre), stone,
+                rack, lava, rack,
+                cobble, water, cobble);
+        addRecipe(new ItemStack(redstoneOre), stone,
+                DYE_RED, driedSweet, DYE_RED,
+                DYE_RED, driedSweet, DYE_RED);
     }
 
-    public Item liquidify(Item item) {
+    public void gemRecipes() {
+        Item diamond = Items.DIAMOND;
+        Item emerald = Items.EMERALD;
+        Item quartz = Items.QUARTZ;
+        Item dye = Items.DYE;
+
+        Item crystalShard = PotatoItems.CRYSTAL_SHARD;
+        Item crystalGem = PotatoItems.CRYSTAL_GEM;
+
+        addRecipe(new ItemStack(crystalGem), crystalShard,
+                crystalShard, crystalShard, crystalShard,
+                crystalShard, crystalShard, crystalShard);
+        addRecipe(new ItemStack(quartz), crystalShard,
+                DYE_WHITE, DYE_WHITE, DYE_WHITE,
+                DYE_WHITE, DYE_WHITE, DYE_WHITE);
+        addRecipe(new ItemStack(dye, 1, 4), crystalShard,
+                DYE_LIGHT_BLUE, DYE_LIGHT_BLUE, DYE_LIGHT_BLUE,
+                DYE_LIGHT_BLUE, DYE_LIGHT_BLUE, DYE_LIGHT_BLUE);
+        addRecipe(new ItemStack(diamond), crystalGem,
+                crystalShard, DYE_LIGHT_BLUE, crystalShard,
+                DYE_LIGHT_BLUE, crystalShard, DYE_LIGHT_BLUE);
+        addRecipe(new ItemStack(emerald), crystalGem,
+                crystalShard, DYE_LIME, crystalShard,
+                DYE_LIME, crystalShard, DYE_LIME);
+    }
+
+    public Item getDye(ItemStack stack) {
+        switch (stack.getMetadata()) {
+            case 1:
+                return DYE_RED;
+            case 4:
+                return LAPIS;
+            case 10:
+                return DYE_LIME;
+            case 12:
+                return DYE_LIGHT_BLUE;
+            case 15:
+                return DYE_WHITE;
+            default:
+                return stack.getItem();
+        }
+    }
+
+    public Item liquidify(ItemStack stack) {
+        Item item = stack.getItem();
+
         if (item == PotatoItems.LAVA_POTATO || item == PotatoItems.SWEET_LAVA_BUCKET) {
             return Items.LAVA_BUCKET;
         }

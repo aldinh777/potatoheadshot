@@ -174,7 +174,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
         ItemStack result = infuseResult.copy();
 
         if (middle.getCount() > 1) {
-            EntityItem item = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), result);
+            EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.75, pos.getZ() + 0.5, result);
             this.world.spawnEntity(item);
             middle.shrink(1);
         } else {

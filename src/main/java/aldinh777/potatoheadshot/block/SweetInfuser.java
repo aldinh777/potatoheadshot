@@ -15,7 +15,7 @@ import java.util.Objects;
 public class SweetInfuser extends PotatoMachine {
 
     public SweetInfuser(String name, BlockType blockType) {
-        super(name, blockType, 4);
+        super(name, blockType, 5);
     }
 
     @Nullable

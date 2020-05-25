@@ -48,6 +48,8 @@ public class PotatoItems {
     public static Item ROD_LIFE;
     public static Item ROD_NATURE;
     public static Item ROD_FIRE;
+    public static Item CRYSTAL_SHARD;
+    public static Item CRYSTAL_GEM;
 
     public static Item POTATO_KNIFE;
     public static Item POTATO_MANA_KNIFE;
@@ -114,6 +116,8 @@ public class PotatoItems {
         ROD_LIFE = new PotatoItem("rod_life");
         ROD_NATURE = new PotatoItem("rod_nature");
         ROD_FIRE = new PotatoItem("rod_fire");
+        CRYSTAL_SHARD = new PotatoItem("crystal_shard");
+        CRYSTAL_GEM = new PotatoItem("crystal_gem");
 
         // Bucket
         SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");
