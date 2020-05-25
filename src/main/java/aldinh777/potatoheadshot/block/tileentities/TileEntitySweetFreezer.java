@@ -39,23 +39,31 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!this.world.isRemote) {
+            boolean flag = false;
+
             if (this.canFreeze()) {
                 if (this.currentFreezeTime >= this.totalFreezeTime) {
                     ItemStack salt = this.saltHandler.getStackInSlot(0);
                     this.freezeItem();
                     this.currentFreezeTime = 0;
                     salt.shrink(1);
+                    flag = true;
+
                 } else if (this.storage.getEnergyStored() >= 20) {
                     this.currentFreezeTime++;
                     this.storage.useEnergy(20);
+                    flag = true;
                 }
             }
 
             if (this.energy != this.storage.getEnergyStored()) {
                 this.energy = this.storage.getEnergyStored();
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

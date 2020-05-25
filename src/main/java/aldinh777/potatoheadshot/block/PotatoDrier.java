@@ -159,5 +159,6 @@ public class PotatoDrier extends PotatoMachine {
                 }
             }
         }
+        super.breakBlock(worldIn, pos, state);
     }
 }

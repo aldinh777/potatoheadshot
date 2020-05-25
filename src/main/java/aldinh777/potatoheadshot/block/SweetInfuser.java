@@ -43,5 +43,6 @@ public class SweetInfuser extends PotatoMachine {
                 }
             }
         }
+        super.breakBlock(worldIn, pos, state);
     }
 }

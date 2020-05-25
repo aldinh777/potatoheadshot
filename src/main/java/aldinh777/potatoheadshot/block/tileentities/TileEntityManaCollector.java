@@ -31,10 +31,13 @@ public class TileEntityManaCollector extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!world.isRemote) {
+            boolean flag = false;
+
             this.collectMana();
 
             if (this.canFuse()) {
                 this.fuseItemWithMana();
+                flag = true;
             }
 
             if (this.canTakeMana()) {
@@ -43,9 +46,12 @@ public class TileEntityManaCollector extends TileEntityPotatoMachine {
 
             if (this.manaSize != this.storage.getManaStored()) {
                 this.manaSize = this.storage.getManaStored();
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

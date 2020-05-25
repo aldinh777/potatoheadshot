@@ -23,6 +23,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
     private ManaCauldron.Element element = ManaCauldron.Element.MANA;
     private IManaRecipes recipes = IManaRecipes.getRecipeById(0);
     private int level = 0;
+    private int checkMana = 0;
 
 //     Override Methods
 
@@ -30,11 +31,18 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
     public void update() {
         if (!this.world.isRemote) {
 
-            this.transformItemsInside();
+            boolean flag = this.transformItemsInside();
 
             this.detectLevelChange();
 
-            this.markDirty();
+            if (checkMana != this.storage.getManaStored()) {
+                this.checkMana = this.storage.getManaStored();
+                flag = true;
+            }
+
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 
@@ -65,7 +73,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
         return this.storage;
     }
 
-    public void transformItemsInside() {
+    public boolean transformItemsInside() {
         AxisAlignedBB bb = new AxisAlignedBB(pos);
         List<EntityItem> entities = this.world.getEntitiesWithinAABB(EntityItem.class, bb);
         for (EntityItem entity : entities) {
@@ -74,18 +82,22 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
             if (stack.getItem().equals(PotatoItems.ROD_MANA)) {
                 this.setElement(ManaCauldron.Element.MANA);
                 stack.shrink(1);
+                return true;
 
             } else if (stack.getItem().equals(PotatoItems.ROD_LIFE)) {
                 this.setElement(ManaCauldron.Element.LIFE);
                 stack.shrink(1);
+                return true;
 
             } else if (stack.getItem().equals(PotatoItems.ROD_NATURE)) {
                 this.setElement(ManaCauldron.Element.NATURE);
                 stack.shrink(1);
+                return true;
 
             } else if (stack.getItem().equals(PotatoItems.ROD_FIRE)) {
                 this.setElement(ManaCauldron.Element.FIRE);
                 stack.shrink(1);
+                return true;
 
             } else {
                 ItemStack result = recipes.getResult(stack);
@@ -101,11 +113,13 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                     this.storage.useMana(cost);
                     stack.shrink(1);
                 }
+                return false;
             }
         }
+        return false;
     }
 
-    public void setManaLevel(int level) {
+    public void  setManaLevel(int level) {
         IBlockState newState = this.world.getBlockState(this.pos)
                 .withProperty(ManaCauldron.LEVEL, level);
 

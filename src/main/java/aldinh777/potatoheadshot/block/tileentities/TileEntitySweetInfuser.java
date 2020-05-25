@@ -31,21 +31,29 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!this.world.isRemote) {
+            boolean flag = false;
+
             if (this.canInfuse()) {
                 if (this.currentInfuseTime >= this.totalInfuseTime) {
                     infuseItem();
                     this.currentInfuseTime = 0;
+                    flag = true;
+
                 } else if (this.storage.getEnergyStored() >= 20) {
                     this.currentInfuseTime++;
                     this.storage.useEnergy(20);
+                    flag = true;
                 }
             }
 
             if (this.energy != this.storage.getEnergyStored()) {
                 this.energy = this.storage.getEnergyStored();
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

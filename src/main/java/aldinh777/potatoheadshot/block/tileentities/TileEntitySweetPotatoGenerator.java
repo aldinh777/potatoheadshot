@@ -33,6 +33,7 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!world.isRemote) {
+            boolean flag = false;
             ItemStack input = this.inputHandler.getStackInSlot(0);
             ItemStack process = this.processHandler.getStackInSlot(0);
 
@@ -41,12 +42,14 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
                     if (this.currentCookTime < this.totalCookTime) {
                         ++this.currentCookTime;
                         this.storage.generateEnergy(10);
+                        flag = true;
                     }
                 }
                 if (this.currentCookTime >= this.totalCookTime) {
                     if (this.cookProcess()) {
                         this.currentCookTime = 0;
                         process.shrink(1);
+                        flag = true;
                     }
                 }
             } else if (!input.isEmpty() && isItemFuel(input)) {
@@ -54,6 +57,7 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
                 this.currentCookTime = 0;
                 this.processHandler.setStackInSlot(0, new ItemStack(input.getItem()));
                 input.shrink(1);
+                flag = true;
             }
 
             if (this.energy > 0) {
@@ -65,9 +69,12 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
 
             if (this.energy != this.storage.getEnergyStored()) {
                 this.energy = this.storage.getEnergyStored();
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

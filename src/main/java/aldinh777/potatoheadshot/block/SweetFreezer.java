@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -35,13 +36,13 @@ public class SweetFreezer extends PotatoMachine {
                 IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
                 if (saltHandler != null) {
-                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), saltHandler.getStackInSlot(0)));
+                    spawnAsEntity(worldIn, pos, saltHandler.getStackInSlot(0));
                 }
                 if (inputHandler != null) {
-                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), inputHandler.getStackInSlot(0)));
+                    spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
                 }
                 if (outputHandler != null) {
-                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), outputHandler.getStackInSlot(0)));
+                    spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
                 }
             }
         }

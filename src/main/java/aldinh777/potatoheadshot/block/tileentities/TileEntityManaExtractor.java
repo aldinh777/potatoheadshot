@@ -21,6 +21,8 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
     @Override
     public void update() {
         if (!this.world.isRemote) {
+            boolean flag = false;
+
             if (this.canExtract()) {
                 this.extractMana();
             }
@@ -35,9 +37,12 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
 
             if (this.manaSize != this.storage.getManaStored()) {
                 this.manaSize = this.storage.getManaStored();
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

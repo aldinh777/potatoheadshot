@@ -34,10 +34,10 @@ public class ManaCollector extends PotatoMachine {
                 IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
                 if (inputHandler != null) {
-                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), inputHandler.getStackInSlot(0)));
+                    spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
                 }
                 if (outputHandler != null) {
-                    worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), outputHandler.getStackInSlot(0)));
+                    spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
                 }
             }
         }
