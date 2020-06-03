@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "#M#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "potatoheadshot:sweet_potato_block"
+    },
+    "M": {
+      "item": "potatoheadshot:sweet_machine_frame"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:sweet_crystal_maker"
+  }
+}
