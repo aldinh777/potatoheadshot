@@ -1,11 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "# #",
+    "I I",
     "# #",
     "###"
   ],
   "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
     "#": {
       "item": "potatoheadshot:glowing_mana_stone"
     }

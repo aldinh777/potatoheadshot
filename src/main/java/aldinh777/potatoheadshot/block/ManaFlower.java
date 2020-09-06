@@ -8,10 +8,20 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class ManaFlower extends BlockBush {
+
+    protected static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(
+            0.30000001192092896D,
+            0.0D,
+            0.30000001192092896D,
+            0.699999988079071D,
+            1.0D,
+            0.699999988079071D);
 
     public ManaFlower(String name) {
         this.setRegistryName(name);
@@ -34,5 +44,10 @@ public class ManaFlower extends BlockBush {
     @Override
     protected boolean canSustainBush(IBlockState state) {
         return !state.getBlock().equals(Blocks.AIR);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BUSH_AABB;
     }
 }

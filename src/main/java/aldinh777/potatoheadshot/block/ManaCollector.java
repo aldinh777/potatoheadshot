@@ -15,8 +15,12 @@ import javax.annotation.Nullable;
 
 public class ManaCollector extends PotatoMachine {
 
+    public ManaCollector(String name, BlockType blockType, int modGuiId) {
+        super(name, blockType, modGuiId);
+    }
+
     public ManaCollector(String name, BlockType blockType) {
-        super(name, blockType, 6);
+        super(name, blockType, 7);
     }
 
     @Nullable

@@ -62,6 +62,7 @@ public class RegistryHandler {
         ResourceLocation sweetPotatoGenerator = new ResourceLocation("potatoheadshot:sweet_potato_generator");
         ResourceLocation sweetFreezer = new ResourceLocation("potatoheadshot:sweet_freezer");
         ResourceLocation sweetCrystalMaker = new ResourceLocation("potatoheadshot:sweet_crystal_maker");
+        ResourceLocation sweetCrystalCharger = new ResourceLocation("potatoheadshot:sweet_crystal_charger");
         ResourceLocation sweetInfuser = new ResourceLocation("potatoheadshot:sweet_infuser");
         ResourceLocation manaCollector = new ResourceLocation("potatoheadshot:mana_collector");
         ResourceLocation manaExtractor = new ResourceLocation("potatoheadshot:mana_extractor");
@@ -71,6 +72,7 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
         GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
         GameRegistry.registerTileEntity(TileEntitySweetCrystalMaker.class, sweetCrystalMaker);
+        GameRegistry.registerTileEntity(TileEntitySweetCrystalCharger.class, sweetCrystalCharger);
         GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, sweetInfuser);
         GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
         GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);

@@ -10,19 +10,19 @@ This mod adds more functionality to vanilla minecraft potato
 - Potato Stick
 - Potato Block
 
-They come with cooked variant
+They come with cooked variant too
 
-Also, you can cook the dirt
+Also, dirt is cook able
 
-Cook the poisonous potato, and you can get
+Cook the poisonous potato to get
 - Hot Potato
 - Extra Hot Potato
 - Extreme Hot Potato
 - Lava Potato
 
-It will give you a lot bad effects if you eat it
+It will give a lot bad effects if you eat it
 
-Also, they have various effect when placed on block
+Have various effect when placed on block
 
 
 
@@ -35,7 +35,7 @@ With this, you can dry some potatoes to get these another items
 - Potato Starch
 - Raw Salt
 
-You can also wet the potatoes with this tools to get
+You can also wet the potatoes to get
 - Wet Potato
 - Super Wet Potato
 - Water Potato
@@ -46,20 +46,18 @@ Water potato will turn into water if placed on block
 
 ### Potato Knife
 
-Cut the potato crops, and you will get "Potato Leaves"
+Cut potato crops with it, and get "Potato Leaves"
 
 Craft 3 leaves to get 1 string
 
-Craft potato knife with dried potato, and you will get potato chip
+Craft potato knife with dried potato, and get potato chip
 
 
 
 ## Very Sweet Potato :
-Surround potato with sugar, and you will get new crop "Very Sweet Potato"
+Surround potato with sugar, and get new crop "Very Sweet Potato"
 
-Just like potato, you can cook sweet potato
-
-Dry with potato drier, and you will get
+Dry with potato drier to get
 - Dried Sweet Potato
 - Sweet Potato Dust
 
@@ -70,9 +68,9 @@ You can craft "Sweet Potato Block" with it
 ### Sweet Potato Bucket
 Cook the "Sweet Potato Bucket" to make it usable and edible
 
-Be careful to don't accidentally drink the lava and get burn
+Be careful, don't drink the lava with the bucket
 
-If you did, then you can drink the water with the bucket
+In case you drink lava, drink the water with the bucket to cool down
 
 ### Sweet Potato Generator
 A simple generator that can produce RF by cooking "Potato" or "Very Sweet Potato"
@@ -84,19 +82,21 @@ Freeze water with "Raw Salt" to make ice
 Infuse any item with other materials to get another items
 
 ### Sweet Crystal Maker
-Make "Crystal Shard" by using "Ice" and "Raw Salt"
+Create "Crystal Shard" using "Ice" and "Raw Salt"
 
+### Sweet Crystal Charger
+Charge crystal with power to create "Ultimate Charged Crystal"
 
 
 ## Glowing Potato
-Surround potato with glowstone dust, and you will get new crop "Glowing Potato"
+Surround potato with glowstone dust to get new crop "Glowing Potato"
 
-Dry with PotatoDrier to get "Glowing Potato Dust" and craft 4 of it to create "Glowing Potato Block"
+Dry it with Potato Drier to get "Glowing Potato Dust" and craft 4 of it to create "Glowing Potato Block"
 
 ### Mana Collector
-Mana Collector will collect any magical energy from your surrounding.
+Mana Collector will collect any magical energy from it surrounding.
 
-You can put any item in it to give magical energy to that item
+Put any item inside it to give magical energy to that item
 
 - Glowing Potato Dust => Glowing Mana Dust
 - Torch => Glowing Mana Torch
@@ -137,7 +137,7 @@ Cauldron with life mana will transform any item dropped into seed or sapling
 
 Drop "Lava Potato" and it will into "Lava Potato Seed"
 
-You can plant it in "Lava Farmland"
+Plant it in "Lava Farmland" to farm "Lava Potato"
 
 ### Glowing Nature Rod
 Drop this to the "Mana Cauldron" to transform element of the cauldron into nature mana
@@ -149,8 +149,9 @@ Drop this to the "Mana Cauldron" to transform element of the cauldron into fire 
 
 Cauldron with fire mana will cook any item dropped into it
 
-Drop iron hoe to mana fire, and it will transform to "Lava Hoe" which
-works like a normal hoe but instead a normal farmland, you will get "Lava Farmland"
+Drop iron hoe to mana fire, and it will transform to "Lava Hoe"
+
+Works like a normal hoe but give "Lava Farmland" instead
 
 Lava farmland needs lava instead of water
 
@@ -158,10 +159,12 @@ Lava farmland needs lava instead of water
 
 ## Broken Item
 
-These item just exists when developing, and some of them are exciting, so I make it as a feature
+These item just exists when developing, and some of them are exciting
 
-### Infinite Broken Fuel
+### Ultimate Broken Fuel
 Works like coal, but won't consume when used
+
+Become Feature instead...
 
 ### Useless Potato
 Dupeable potato with no use

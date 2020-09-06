@@ -18,26 +18,33 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
-        if (ID == 1) {
-            TileEntityPotatoDrier te = (TileEntityPotatoDrier) tileEntity;
-            return new ContainerPotatoDrier(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 2) {
-            TileEntitySweetPotatoGenerator te = (TileEntitySweetPotatoGenerator) tileEntity;
-            return new ContainerSweetPotatoGenerator(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 3) {
-            TileEntitySweetFreezer te = (TileEntitySweetFreezer) tileEntity;
-            return new ContainerSweetFreezer(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 4) {
-            TileEntitySweetCrystalMaker te = (TileEntitySweetCrystalMaker) tileEntity;
-            return new ContainerSweetCrystalMaker(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 5) {
-            TileEntitySweetInfuser te = (TileEntitySweetInfuser) tileEntity;
-            return new ContainerSweetInfuser(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 6) {
-            TileEntityManaCollector te = (TileEntityManaCollector) tileEntity;
-            return new ContainerManaCollector(player.inventory, Objects.requireNonNull(te));
-        } else {
-            return  null;
+        switch (ID) {
+            case 1:
+                TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
+                return new ContainerPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+            case 2:
+                TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
+                return new ContainerSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
+            case 3:
+                TileEntitySweetFreezer freezer = (TileEntitySweetFreezer) tileEntity;
+                return new ContainerSweetFreezer(player.inventory, Objects.requireNonNull(freezer));
+            case 4:
+                TileEntitySweetCrystalMaker crystalMaker = (TileEntitySweetCrystalMaker) tileEntity;
+                return new ContainerSweetCrystalMaker(player.inventory, Objects.requireNonNull(crystalMaker));
+            case 5:
+                TileEntitySweetCrystalCharger crystalCharger = (TileEntitySweetCrystalCharger) tileEntity;
+                return new ContainerSweetCrystalCharger(player.inventory, Objects.requireNonNull(crystalCharger));
+            case 6:
+                TileEntitySweetInfuser infuser = (TileEntitySweetInfuser) tileEntity;
+                return new ContainerSweetInfuser(player.inventory, Objects.requireNonNull(infuser));
+            case 7:
+                TileEntityManaCollector collector = (TileEntityManaCollector) tileEntity;
+                return new ContainerManaCollector(player.inventory, Objects.requireNonNull(collector));
+            case 8:
+                TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
+                return new ContainerManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+            default:
+                return  null;
         }
     }
 
@@ -45,26 +52,33 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
-        if (ID == 1) {
-            TileEntityPotatoDrier te = (TileEntityPotatoDrier) tileEntity;
-            return new GuiPotatoDrier(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 2) {
-            TileEntitySweetPotatoGenerator te = (TileEntitySweetPotatoGenerator) tileEntity;
-            return new GuiSweetPotatoGenerator(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 3) {
-            TileEntitySweetFreezer te = (TileEntitySweetFreezer) tileEntity;
-            return new GuiSweetFreezer(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 4) {
-            TileEntitySweetCrystalMaker te = (TileEntitySweetCrystalMaker) tileEntity;
-            return new GuiSweetCrystalMaker(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 5) {
-            TileEntitySweetInfuser te = (TileEntitySweetInfuser) tileEntity;
-            return new GuiSweetInfuser(player.inventory, Objects.requireNonNull(te));
-        } else if (ID == 6) {
-            TileEntityManaCollector te = (TileEntityManaCollector) tileEntity;
-            return new GuiManaCollector(player.inventory, Objects.requireNonNull(te));
-        } else {
-            return  null;
+        switch (ID) {
+            case 1:
+                TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
+                return new GuiPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+            case 2:
+                TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
+                return new GuiSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
+            case 3:
+                TileEntitySweetFreezer freezer = (TileEntitySweetFreezer) tileEntity;
+                return new GuiSweetFreezer(player.inventory, Objects.requireNonNull(freezer));
+            case 4:
+                TileEntitySweetCrystalMaker crystalMaker = (TileEntitySweetCrystalMaker) tileEntity;
+                return new GuiSweetCrystalMaker(player.inventory, Objects.requireNonNull(crystalMaker));
+            case 5:
+                TileEntitySweetCrystalCharger crystalCharger = (TileEntitySweetCrystalCharger) tileEntity;
+                return new GuiSweetCrystalCharger(player.inventory, Objects.requireNonNull(crystalCharger));
+            case 6:
+                TileEntitySweetInfuser infuser = (TileEntitySweetInfuser) tileEntity;
+                return new GuiSweetInfuser(player.inventory, Objects.requireNonNull(infuser));
+            case 7:
+                TileEntityManaCollector collector = (TileEntityManaCollector) tileEntity;
+                return new GuiManaCollector(player.inventory, Objects.requireNonNull(collector));
+            case 8:
+                TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
+                return new GuiManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+            default:
+                return  null;
         }
     }
 }

@@ -25,7 +25,13 @@ public class SweetInfuserRecipes {
         Item water = Items.WATER_BUCKET;
         Item enderPearl = Items.ENDER_PEARL;
         Item string = Items.STRING;
+        Item coal = Items.COAL;
         Item potatoLeaves = PotatoItems.POTATO_LEAVES;
+        Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
+        Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
+        Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
+        Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
+        Item concentratedCrystal = PotatoItems.CONCENTRATED_CRYSTAL;
 
         Item grass = Item.getItemFromBlock(Blocks.GRASS);
         Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
@@ -70,6 +76,9 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(cobweb), string,
                 string, string, string,
                 string, string, string);
+        addRecipe(new ItemStack(ultimateBrokenFuel), coal,
+                concentratedCrystal, ultimateChargedCrystal, concentratedCrystal,
+                chargedCrystal, ultimateConcentratedCrystal, chargedCrystal);
     }
 
     public <K, V> Map<K, V> getMap(Map<K, V> map, Item key) {
@@ -209,9 +218,13 @@ public class SweetInfuserRecipes {
         Item dye = Items.DYE;
 
         Item crystalShard = PotatoItems.CRYSTAL_SHARD;
-        Item crystalGem = PotatoItems.CRYSTAL_GEM;
+        Item crystal = PotatoItems.CRYSTAL;
+        Item chargedCrystalShard = PotatoItems.CHARGED_CRYSTAL_SHARD;
+        Item concentratedCrystalShard = PotatoItems.CONCENTRATED_CRYSTAL_SHARD;
+        Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
+        Item concentratedCrystal = PotatoItems.CONCENTRATED_CRYSTAL;
 
-        addRecipe(new ItemStack(crystalGem), crystalShard,
+        addRecipe(new ItemStack(crystal), crystalShard,
                 crystalShard, crystalShard, crystalShard,
                 crystalShard, crystalShard, crystalShard);
         addRecipe(new ItemStack(quartz), crystalShard,
@@ -220,12 +233,18 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(dye, 1, 4), crystalShard,
                 DYE_LIGHT_BLUE, DYE_LIGHT_BLUE, DYE_LIGHT_BLUE,
                 DYE_LIGHT_BLUE, DYE_LIGHT_BLUE, DYE_LIGHT_BLUE);
-        addRecipe(new ItemStack(diamond), crystalGem,
+        addRecipe(new ItemStack(diamond), crystal,
                 crystalShard, DYE_LIGHT_BLUE, crystalShard,
                 DYE_LIGHT_BLUE, crystalShard, DYE_LIGHT_BLUE);
-        addRecipe(new ItemStack(emerald), crystalGem,
+        addRecipe(new ItemStack(emerald), crystal,
                 crystalShard, DYE_LIME, crystalShard,
                 DYE_LIME, crystalShard, DYE_LIME);
+        addRecipe(new ItemStack(chargedCrystal), crystalShard,
+                chargedCrystalShard, chargedCrystalShard, chargedCrystalShard,
+                chargedCrystalShard, chargedCrystalShard, chargedCrystalShard);
+        addRecipe(new ItemStack(concentratedCrystal), crystalShard,
+                concentratedCrystalShard, concentratedCrystalShard, concentratedCrystalShard,
+                concentratedCrystalShard, concentratedCrystalShard, concentratedCrystalShard);
     }
 
     public Item getDye(ItemStack stack) {

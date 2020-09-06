@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 public class ManaExtractor extends ManaCollector {
 
     public ManaExtractor(String name, BlockType blockType) {
-        super(name, blockType);
+        super(name, blockType, 8);
     }
 
     @Nullable

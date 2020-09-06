@@ -5,6 +5,7 @@ import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -107,6 +108,12 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                     float posX = this.pos.getX() + 0.5f;
                     float posY = this.pos.getY() + 0.5f;
                     float posZ = this.pos.getZ() + 0.5f;
+
+                    if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL) {
+                        if (!world.isRemote) {
+                            world.createExplosion(null, pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, 5.0f, true);
+                        }
+                    }
 
                     EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
                     this.world.spawnEntity(entityResult);

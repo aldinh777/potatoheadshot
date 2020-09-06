@@ -37,7 +37,13 @@ item.rod_life.name=Glowing Life Rod
 item.rod_nature.name=Glowing Nature Rod
 item.rod_fire.name=Glowing Fire Rod
 item.crystal_shard.name=Crystal Shard
-item.crystal_gem.name=Crystal Gem
+item.crystal.name=Crystal
+item.charged_crystal_shard.name=Charged Crystal Shard
+item.charged_crystal.name=Charged Crystal
+item.concentrated_crystal_shard.name=Concentrated Crystal Shard
+item.concentrated_crystal.name=Concentrated Crystal
+item.ultimate_charged_crystal.name=Ultimate Charged Crystal
+item.ultimate_concentrated_crystal.name=Ultimate Concentrated Crystal
 
 # Sweet Items
 item.dried_sweet_potato.name=Dried Sweet Potato
@@ -82,6 +88,7 @@ tile.potato_drier.name=Potato Drier
 tile.sweet_potato_generator.name=Sweet Potato Generator
 tile.sweet_freezer.name=Sweet Freezer
 tile.sweet_crystal_maker.name=Sweet Crystal Maker
+tile.sweet_crystal_charger.name=Sweet Crystal Charger
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor

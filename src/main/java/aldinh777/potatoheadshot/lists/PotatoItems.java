@@ -49,7 +49,13 @@ public class PotatoItems {
     public static Item ROD_NATURE;
     public static Item ROD_FIRE;
     public static Item CRYSTAL_SHARD;
-    public static Item CRYSTAL_GEM;
+    public static Item CRYSTAL;
+    public static Item CHARGED_CRYSTAL_SHARD;
+    public static Item CHARGED_CRYSTAL;
+    public static Item CONCENTRATED_CRYSTAL_SHARD;
+    public static Item CONCENTRATED_CRYSTAL;
+    public static Item ULTIMATE_CHARGED_CRYSTAL;
+    public static Item ULTIMATE_CONCENTRATED_CRYSTAL;
 
     public static Item POTATO_KNIFE;
     public static Item POTATO_MANA_KNIFE;
@@ -117,7 +123,13 @@ public class PotatoItems {
         ROD_NATURE = new PotatoItem("rod_nature");
         ROD_FIRE = new PotatoItem("rod_fire");
         CRYSTAL_SHARD = new PotatoItem("crystal_shard");
-        CRYSTAL_GEM = new PotatoItem("crystal_gem");
+        CRYSTAL = new PotatoItem("crystal");
+        CHARGED_CRYSTAL_SHARD = new PotatoItem("charged_crystal_shard");
+        CONCENTRATED_CRYSTAL_SHARD = new PotatoItem("concentrated_crystal_shard");
+        CHARGED_CRYSTAL = new PotatoItem("charged_crystal");
+        CONCENTRATED_CRYSTAL = new PotatoItem("concentrated_crystal");
+        ULTIMATE_CHARGED_CRYSTAL = new PotatoItem("ultimate_charged_crystal");
+        ULTIMATE_CONCENTRATED_CRYSTAL = new PotatoItem("ultimate_concentrated_crystal");
 
         // Bucket
         SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");

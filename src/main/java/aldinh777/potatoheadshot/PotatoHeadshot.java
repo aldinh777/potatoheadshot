@@ -1,7 +1,6 @@
 package aldinh777.potatoheadshot;
 
 import aldinh777.potatoheadshot.handler.RegistryHandler;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,8 +27,6 @@ public class PotatoHeadshot {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
         RegistryHandler.init();
     }
 }

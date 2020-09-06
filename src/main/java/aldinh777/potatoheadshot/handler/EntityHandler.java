@@ -2,12 +2,10 @@ package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.lists.PotatoItems;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -36,8 +34,8 @@ public class EntityHandler {
         }
 
         if (!currentItem.isEmpty() && currentItem.getItem() == PotatoItems.POTATO_MANA_KNIFE) {
-            if (event.getTarget() instanceof EntityCreature) {
-                EntityCreature target = (EntityCreature) event.getTarget();
+            if (event.getTarget() instanceof EntityAnimal) {
+                EntityAnimal target = (EntityAnimal) event.getTarget();
                 World world = event.getWorld();
                 float x = target.getPosition().getX() + 0.5f;
                 float y = target.getPosition().getY() + 0.5f;
