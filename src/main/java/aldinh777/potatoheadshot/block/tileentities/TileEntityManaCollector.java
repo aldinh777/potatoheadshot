@@ -23,7 +23,7 @@ public class TileEntityManaCollector extends TileEntityMana {
 
     @Override
     public void update() {
-        if (!world.isRemote) {
+        if (!this.world.isRemote) {
             boolean flag = false;
 
             this.collectMana();

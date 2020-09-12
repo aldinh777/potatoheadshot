@@ -26,7 +26,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
     private int level = 0;
     private int checkMana = 0;
 
-//     Override Methods
+    // Override Methods
 
     @Override
     public void update() {

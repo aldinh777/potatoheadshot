@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "#M#",
+    "CCC"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:sweet_potato_block"
+    },
+    "M": {
+      "item": "potatoheadshot:sweet_machine_frame"
+    },
+    "C": {
+      "item": "potatoheadshot:crystal"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:sweet_crystal_charger"
+  }
+}
