@@ -92,10 +92,10 @@ tile.sweet_potato_generator.name=Sweet Potato Generator
 tile.sweet_freezer.name=Sweet Freezer
 tile.sweet_crystal_maker.name=Sweet Crystal Maker
 tile.sweet_crystal_charger.name=Sweet Crystal Charger
+tile.ultimate_crystal_charger.name=Ultimate Crystal Charger
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor
-tile.ultimate_crystal_charger.name=Ultimate Crystal Charger
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

@@ -108,11 +108,11 @@ public class PotatoBlocks {
         SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
         SWEET_CRYSTAL_MAKER = new SweetCrystalMaker("sweet_crystal_maker", BlockType.METAL);
         SWEET_CRYSTAL_CHARGER = new SweetCrystalCharger("sweet_crystal_charger", BlockType.METAL);
+        ULTIMATE_CRYSTAL_CHARGER = new SweetCrystalCharger("ultimate_crystal_charger", BlockType.METAL).setUltimate();
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
         MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
-        ULTIMATE_CRYSTAL_CHARGER = new SweetCrystalCharger("ultimate_crystal_charger", BlockType.METAL).setUltimate();
         ULTIMATE_MANA_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
 
         // Bugged Feature

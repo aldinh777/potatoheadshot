@@ -20,7 +20,7 @@ Cook the poisonous potato to get
 - Extreme Hot Potato
 - Lava Potato
 
-It will give a lot bad effects if you eat it
+It will give a lot bad effects when eaten
 
 Have various effect when placed on block
 
@@ -88,13 +88,14 @@ Create "Crystal Shard" using "Ice" and "Raw Salt"
 Charge crystal with power to create "Ultimate Charged Crystal"
 
 
+
 ## Glowing Potato
 Surround potato with glowstone dust to get new crop "Glowing Potato"
 
 Dry it with Potato Drier to get "Glowing Potato Dust" and craft 4 of it to create "Glowing Potato Block"
 
 ### Mana Collector
-Mana Collector will collect any magical energy from it surrounding.
+Mana Collector will collect any magical energy around it.
 
 Put any item inside it to give magical energy to that item
 

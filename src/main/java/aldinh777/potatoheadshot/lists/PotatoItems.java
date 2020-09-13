@@ -123,10 +123,12 @@ public class PotatoItems {
         ROD_LIFE = new PotatoItem("rod_life");
         ROD_NATURE = new PotatoItem("rod_nature");
         ROD_FIRE = new PotatoItem("rod_fire");
+
+        // Crystal
         CRYSTAL_SHARD = new PotatoItem("crystal_shard");
-        CRYSTAL = new PotatoItem("crystal");
         CHARGED_CRYSTAL_SHARD = new PotatoItem("charged_crystal_shard");
         CONCENTRATED_CRYSTAL_SHARD = new PotatoItem("concentrated_crystal_shard");
+        CRYSTAL = new PotatoItem("crystal");
         CHARGED_CRYSTAL = new PotatoItem("charged_crystal");
         CONCENTRATED_CRYSTAL = new PotatoItem("concentrated_crystal");
         ULTIMATE_CRYSTAL = new PotatoItem("ultimate_crystal");
