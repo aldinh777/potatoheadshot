@@ -5,9 +5,7 @@ import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,11 +18,12 @@ import java.util.List;
 
 public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
-    private final PotatoManaStorage storage = new PotatoManaStorage(800000);
+    private PotatoManaStorage storage = new PotatoManaStorage(800000);
     private ManaCauldron.Element element = ManaCauldron.Element.MANA;
     private IManaRecipes recipes = IManaRecipes.getRecipeById(0);
     private int level = 0;
     private int checkMana = 0;
+    private boolean ultimate = false;
 
     // Override Methods
 
@@ -70,6 +69,12 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
     // Custom Methods
 
+    public TileEntityManaCauldron setUltimate() {
+        this.ultimate = true;
+        this.storage = new PotatoManaStorage(32000000);
+        return this;
+    }
+
     public PotatoManaStorage getManaStorage() {
         return this.storage;
     }
@@ -109,10 +114,10 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                     float posY = this.pos.getY() + 0.5f;
                     float posZ = this.pos.getZ() + 0.5f;
 
-                    if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL) {
-                        if (!world.isRemote) {
-                            world.createExplosion(null, pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, 5.0f, true);
-                        }
+                    if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL && !this.ultimate) {
+                        world.createExplosion(null,
+                                (this.pos.getX() + 0.5f), (this.pos.getY() + 1.0f), (pos.getZ() + 0.5f),
+                                5.0f, true);
                     }
 
                     EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
@@ -149,9 +154,9 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
         if (manaStored <= 0) {
             currentLevel = 0;
-        } else if (manaStored <= this.storage.getMaxManaStored() / 3) {
+        } else if (manaStored < this.storage.getMaxManaStored() / 2) {
             currentLevel = 1;
-        } else if (manaStored <= this.storage.getMaxManaStored() / 3 * 2) {
+        } else if (manaStored < this.storage.getMaxManaStored()) {
             currentLevel = 2;
         } else {
             currentLevel = 3;

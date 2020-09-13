@@ -27,8 +27,7 @@ public class ManaCauldronRecipes implements IManaRecipes {
         addRecipe(torch, new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH), 1000);
         addRecipe(stone, new ItemStack(PotatoBlocks.GLOWING_MANA_STONE), 1000);
         addRecipe(PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), 100000);
-        addRecipe(PotatoItems.CONCENTRATED_CRYSTAL,
-                new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 800000);
+        addRecipe(PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 800000);
     }
 
     public void addRecipe(Item input, ItemStack output, int manaCost) {

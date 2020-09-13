@@ -16,12 +16,9 @@ import net.minecraft.world.World;
 public class ManaFlower extends BlockBush {
 
     protected static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(
-            0.30000001192092896D,
-            0.0D,
-            0.30000001192092896D,
-            0.699999988079071D,
-            1.0D,
-            0.699999988079071D);
+            0.30000001192092896D, 0.0D,
+            0.30000001192092896D, 0.699999988079071D,
+            1.0D, 0.699999988079071D);
 
     public ManaFlower(String name) {
         this.setRegistryName(name);
@@ -42,12 +39,23 @@ public class ManaFlower extends BlockBush {
     }
 
     @Override
-    protected boolean canSustainBush(IBlockState state) {
-        return !state.getBlock().equals(Blocks.AIR);
+    public boolean canBlockStay(World world, BlockPos pos, IBlockState blockState) {
+        if (blockState.getBlock() == this) {
+            IBlockState roof = world.getBlockState(pos.up());
+            IBlockState soil = world.getBlockState(pos.down());
+
+            return !isAirOrFlower(roof) || !isAirOrFlower(soil);
+        } else {
+             return this.canSustainBush(world.getBlockState(pos.down()));
+        }
     }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BUSH_AABB;
+    }
+
+    private boolean isAirOrFlower(IBlockState blockState) {
+        return blockState.getBlock() == Blocks.AIR || blockState.getBlock() instanceof ManaFlower;
     }
 }

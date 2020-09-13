@@ -28,8 +28,7 @@ public class ManaCauldronRecipe extends AbstractCauldronRecipe {
 		addRecipe(jeiRecipes, torch, new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH));
 		addRecipe(jeiRecipes, stone, new ItemStack(PotatoBlocks.GLOWING_MANA_STONE));
 		addRecipe(jeiRecipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD));
-		addRecipe(jeiRecipes, PotatoItems.CONCENTRATED_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL));
-
+		addRecipe(jeiRecipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL));
 		
 		return jeiRecipes;
 	}

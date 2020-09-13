@@ -54,6 +54,7 @@ public class PotatoItems {
     public static Item CHARGED_CRYSTAL;
     public static Item CONCENTRATED_CRYSTAL_SHARD;
     public static Item CONCENTRATED_CRYSTAL;
+    public static Item ULTIMATE_CRYSTAL;
     public static Item ULTIMATE_CHARGED_CRYSTAL;
     public static Item ULTIMATE_CONCENTRATED_CRYSTAL;
 
@@ -128,6 +129,7 @@ public class PotatoItems {
         CONCENTRATED_CRYSTAL_SHARD = new PotatoItem("concentrated_crystal_shard");
         CHARGED_CRYSTAL = new PotatoItem("charged_crystal");
         CONCENTRATED_CRYSTAL = new PotatoItem("concentrated_crystal");
+        ULTIMATE_CRYSTAL = new PotatoItem("ultimate_crystal");
         ULTIMATE_CHARGED_CRYSTAL = new PotatoItem("ultimate_charged_crystal");
         ULTIMATE_CONCENTRATED_CRYSTAL = new PotatoItem("ultimate_concentrated_crystal");
 

@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.recipes;
 
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -27,11 +28,16 @@ public class SweetInfuserRecipes {
         Item string = Items.STRING;
         Item coal = Items.COAL;
         Item potatoLeaves = PotatoItems.POTATO_LEAVES;
-        Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
-        Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
-        Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
+
+        Item crystal = PotatoItems.CRYSTAL;
         Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
         Item concentratedCrystal = PotatoItems.CONCENTRATED_CRYSTAL;
+        Item manaFlower = Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_FLOWER);
+        Item ultimateCrystal = PotatoItems.ULTIMATE_CRYSTAL;
+        Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
+        Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
+        Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
+        Item ultimateManaFlower = Item.getItemFromBlock(PotatoBlocks.ULTIMATE_MANA_FLOWER);
 
         Item grass = Item.getItemFromBlock(Blocks.GRASS);
         Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
@@ -76,9 +82,15 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(cobweb), string,
                 string, string, string,
                 string, string, string);
+        addRecipe(new ItemStack(ultimateCrystal), crystal,
+                chargedCrystal, chargedCrystal, chargedCrystal,
+                concentratedCrystal, concentratedCrystal, concentratedCrystal);
         addRecipe(new ItemStack(ultimateBrokenFuel), coal,
-                concentratedCrystal, ultimateChargedCrystal, concentratedCrystal,
-                chargedCrystal, ultimateConcentratedCrystal, chargedCrystal);
+                ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
+                ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+        addRecipe(new ItemStack(ultimateManaFlower), manaFlower,
+                ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
+                ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
     }
 
     public <K, V> Map<K, V> getMap(Map<K, V> map, Item key) {

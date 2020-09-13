@@ -2,9 +2,7 @@ package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
-import javax.annotation.Nullable;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
@@ -13,15 +11,18 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nullable;
+
 public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 		
 	private final ItemStackHandler inputHandler = new ItemStackHandler(1);
 	private final ItemStackHandler outputHandler = new ItemStackHandler(1);
 	
-	private final PotatoEnergyStorage storage = new PotatoEnergyStorage(800000, 400, 0);
+	private PotatoEnergyStorage storage = new PotatoEnergyStorage(800000, 400, 0);
 	private int energy = this.storage.getEnergyStored();
 	private int currentCharged = 0;
 	private int fullCharge = 100000;
+	private boolean ultimate = false;
 
 	// Override Methods
 
@@ -108,8 +109,8 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		compound.setTag("InventoryInput", (NBTBase)this.inputHandler.serializeNBT());
-		compound.setTag("InventoryOutput", (NBTBase)this.outputHandler.serializeNBT());
+		compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
+		compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
 		compound.setInteger("GuiEnergy", this.energy);
 		compound.setInteger("CurrentCharged", (short)this.currentCharged);
 		compound.setInteger("FullCharge", (short)this.fullCharge);
@@ -147,6 +148,12 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 
 	// Custom Methods
 
+	public TileEntitySweetCrystalCharger setUltimate() {
+		this.ultimate = true;
+		this.storage = new PotatoEnergyStorage(32000000, 1600, 0);
+		return this;
+	}
+
 	public int getMaxEnergyStored() {
 		return this.storage.getMaxEnergyStored();
 	}
@@ -183,14 +190,12 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 			this.outputHandler.setStackInSlot(0, result.copy());
 		} else if (output.isItemEqual(result)) {
 			output.grow(result.getCount());
-		} 
+		}
 		
-		if (input.getItem() == PotatoItems.CHARGED_CRYSTAL && !this.world.isRemote) {
-			this.world.createExplosion(null, 
-							(this.pos.getX() + 0.5F), 
-							this.pos.getY(),
-							(this.pos.getZ() + 0.5F),
-							5.0F, true
+		if (result.getItem() == PotatoItems.ULTIMATE_CHARGED_CRYSTAL && !this.ultimate) {
+			this.world.createExplosion(null,
+					(this.pos.getX() + 0.5F), this.pos.getY(), (this.pos.getZ() + 0.5F),
+					5.0F, true
 			);
 		}
 		
@@ -198,11 +203,11 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	}
 
 	// Static Methods
-	
+
 	public static ItemStack getResult(ItemStack stack) {
 		if (stack.getItem() == PotatoItems.CRYSTAL_SHARD)
 			return new ItemStack(PotatoItems.CHARGED_CRYSTAL_SHARD); 
-		if (stack.getItem() == PotatoItems.CHARGED_CRYSTAL) {
+		if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL) {
 			return new ItemStack(PotatoItems.ULTIMATE_CHARGED_CRYSTAL);
 		}
 		return ItemStack.EMPTY;

@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.ManaExtractor;
+import aldinh777.potatoheadshot.block.ManaFlower;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -28,7 +29,12 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
             }
 
             if (this.canCollect()) {
-                this.storage.collectMana(1);
+                Block flower = this.world.getBlockState(this.pos.up()).getBlock();
+                if (flower.equals(PotatoBlocks.GLOWING_MANA_FLOWER)) {
+                    this.storage.collectMana(1);
+                } else if (flower.equals(PotatoBlocks.ULTIMATE_MANA_FLOWER)) {
+                    this.storage.collectMana(200);
+                }
             }
 
             if (this.canTransferMana()) {
@@ -92,7 +98,7 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
 
     private boolean canCollect() {
         Block blockTop = this.world.getBlockState(this.pos.up()).getBlock();
-        return blockTop.equals(PotatoBlocks.GLOWING_MANA_FLOWER);
+        return blockTop instanceof ManaFlower;
     }
 
     private boolean canExtract() {

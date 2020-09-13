@@ -41,6 +41,7 @@ public class PotatoBlocks {
     public static Block GLOWING_MANA_FLOWER;
     public static Block GLOWING_MANA_TORCH;
     public static Block GLOWING_MANA_STONE;
+    public static Block ULTIMATE_MANA_FLOWER;
 
     public static Block POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
@@ -51,14 +52,17 @@ public class PotatoBlocks {
     public static Block MANA_COLLECTOR;
     public static Block MANA_EXTRACTOR;
     public static Block MANA_CAULDRON;
+    public static Block ULTIMATE_CRYSTAL_CHARGER;
+    public static Block ULTIMATE_MANA_CAULDRON;
 
     public static Block DIMENSIONAL_GLASS;
 
     public static void init() {
 
         // Place able Item
-        GLOWING_MANA_FLOWER = new ManaFlower("glowing_mana_flower");
         GLOWING_MANA_TORCH = new Potatorch("glowing_mana_torch");
+        GLOWING_MANA_FLOWER = new ManaFlower("glowing_mana_flower");
+        ULTIMATE_MANA_FLOWER = new ManaFlower("ultimate_mana_flower").setLightLevel(1.0f);
 
         // Food Block
         COOKED_DIRT = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND, 3, 0.2f);
@@ -108,6 +112,8 @@ public class PotatoBlocks {
         MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
+        ULTIMATE_CRYSTAL_CHARGER = new SweetCrystalCharger("ultimate_crystal_charger", BlockType.METAL).setUltimate();
+        ULTIMATE_MANA_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {

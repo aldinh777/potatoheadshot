@@ -42,6 +42,7 @@ item.charged_crystal_shard.name=Charged Crystal Shard
 item.charged_crystal.name=Charged Crystal
 item.concentrated_crystal_shard.name=Concentrated Crystal Shard
 item.concentrated_crystal.name=Concentrated Crystal
+item.ultimate_crystal.name=Ultimate Crystal
 item.ultimate_charged_crystal.name=Ultimate Charged Crystal
 item.ultimate_concentrated_crystal.name=Ultimate Concentrated Crystal
 
@@ -63,9 +64,11 @@ item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 item.useless_potato.name=Useless Potato
 
 # Placeable Item
-tile.glowing_mana_flower.name=Glowing Mana Flower
 tile.glowing_mana_torch.name=Glowing Mana Torch
+tile.glowing_mana_flower.name=Glowing Mana Flower
+tile.ultimate_mana_flower.name=Ultimate Mana Flower
 tile.mana_cauldron.name=Mana Cauldron
+tile.ultimate_mana_cauldron.name=Ultimate Mana Flower
 
 # Food Blocks
 tile.cooked_dirt.name=Cooked Dirt
@@ -92,6 +95,7 @@ tile.sweet_crystal_charger.name=Sweet Crystal Charger
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor
+tile.ultimate_crystal_charger.name=Ultimate Crystal Charger
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

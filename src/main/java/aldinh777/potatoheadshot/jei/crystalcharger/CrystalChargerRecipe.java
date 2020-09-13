@@ -25,7 +25,7 @@ public class CrystalChargerRecipe implements IRecipeWrapper {
 						new ItemStack(PotatoItems.CHARGED_CRYSTAL_SHARD)
 		));
 		jeiRecipes.add(new CrystalChargerRecipe(
-						new ItemStack(PotatoItems.CHARGED_CRYSTAL),
+						new ItemStack(PotatoItems.ULTIMATE_CRYSTAL),
 						new ItemStack(PotatoItems.ULTIMATE_CHARGED_CRYSTAL)
 		));
 		

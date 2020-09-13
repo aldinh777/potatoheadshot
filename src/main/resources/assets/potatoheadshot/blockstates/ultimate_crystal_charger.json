@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "potatoheadshot:ultimate_crystal_charger" },
+    "facing=south": { "model": "potatoheadshot:ultimate_crystal_charger", "y": 180 },
+    "facing=west":  { "model": "potatoheadshot:ultimate_crystal_charger", "y": 270 },
+    "facing=east":  { "model": "potatoheadshot:ultimate_crystal_charger", "y": 90 }
+  }
+}

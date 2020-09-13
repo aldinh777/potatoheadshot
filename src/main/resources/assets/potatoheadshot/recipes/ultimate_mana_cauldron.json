@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "|^|",
+    "|#|",
+    "|v|"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:mana_cauldron"
+    },
+    "|": {
+      "item": "potatoheadshot:ultimate_crystal"
+    },
+    "^": {
+      "item": "potatoheadshot:ultimate_charged_crystal"
+    },
+    "v": {
+      "item": "potatoheadshot:ultimate_concentrated_crystal"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:ultimate_mana_cauldron"
+  }
+}

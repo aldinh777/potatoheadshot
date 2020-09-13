@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.jei.infuser;
 
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import mezz.jei.api.ingredients.IIngredients;
@@ -36,11 +37,16 @@ public class InfuserRecipe implements IRecipeWrapper {
 		Item string = Items.STRING;
 		Item coal = Items.COAL;
 		Item potatoLeaves = PotatoItems.POTATO_LEAVES;
-		Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
-		Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
-		Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
+
+		Item crystal = PotatoItems.CRYSTAL;
 		Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
 		Item concentratedCrystal = PotatoItems.CONCENTRATED_CRYSTAL;
+		Item manaFlower = Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_FLOWER);
+		Item ultimateCrystal = PotatoItems.ULTIMATE_CRYSTAL;
+		Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
+		Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
+		Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
+		Item ultimateManaFlower = Item.getItemFromBlock(PotatoBlocks.ULTIMATE_MANA_FLOWER);
 		
 		Item grass = Item.getItemFromBlock(Blocks.GRASS);
 		Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
@@ -63,41 +69,38 @@ public class InfuserRecipe implements IRecipeWrapper {
 		
 		addRecipe(jeiRecipes, new ItemStack(gravel), stone,
 						cobble, cobble, cobble,
-						sand, sand, sand
-		);		
+						sand, sand, sand);
 		addRecipe(jeiRecipes, new ItemStack(rack), stone,
 						cobble, lava, cobble,
-						cobble, lava, cobble
-		);		
+						cobble, lava, cobble);
 		addRecipe(jeiRecipes, new ItemStack(grass), dirt,
 						potatoLeaves, potatoLeaves, potatoLeaves,
-						dirt, water, dirt
-		);		
+						dirt, water, dirt);
 		addRecipe(jeiRecipes, new ItemStack(mycelium), dirt,
 						brownMushroom, brownMushroom, brownMushroom,
-						dirt, water, dirt
-		);		
+						dirt, water, dirt);
 		addRecipe(jeiRecipes, new ItemStack(glowStone), stone,
 						lava, lava, lava,
-						lava, lava, lava
-		);		
+						lava, lava, lava);
 		addRecipe(jeiRecipes, new ItemStack(endStone), stone,
 						enderPearl, enderPearl, enderPearl,
-						enderPearl, enderPearl, enderPearl
-		);		
+						enderPearl, enderPearl, enderPearl);
 		addRecipe(jeiRecipes, new ItemStack(packedIce), ice,
 						ice, ice, ice,
-						ice, ice, ice
-		);		
+						ice, ice, ice);
 		addRecipe(jeiRecipes, new ItemStack(cobweb), string,
 						string, string, string,
-						string, string, string
-		);		
+						string, string, string);
+		addRecipe(jeiRecipes, new ItemStack(ultimateCrystal), crystal,
+				chargedCrystal, chargedCrystal, chargedCrystal,
+				concentratedCrystal, concentratedCrystal, concentratedCrystal);
 		addRecipe(jeiRecipes, new ItemStack(ultimateBrokenFuel), coal,
-						concentratedCrystal, ultimateChargedCrystal, concentratedCrystal,
-						chargedCrystal, ultimateConcentratedCrystal, chargedCrystal
-		);
-		
+				ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
+				ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+		addRecipe(jeiRecipes, new ItemStack(ultimateManaFlower), manaFlower,
+				ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
+				ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+
 		return jeiRecipes;
 	}
 	
