@@ -1,11 +1,16 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public abstract class TileEntityPotatoMachine extends TileEntity implements ITickable {
 
@@ -37,12 +42,25 @@ public abstract class TileEntityPotatoMachine extends TileEntity implements ITic
         return false;
     }
 
+    @Nonnull
+    @Override
+    public final NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState state, IBlockState newState) {
+        return state.getBlock() != newState.getBlock();
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return super.getDisplayName();
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        if (compound.hasKey("CustomName", 8)) {
-            this.customName = compound.getString("CustomName");
-        }
     }
 
     @Override

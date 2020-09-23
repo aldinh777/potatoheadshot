@@ -15,6 +15,10 @@
     "element=fire,level=0": { "model": "potatoheadshot:ultimate_mana_cauldron_empty" },
     "element=fire,level=1": { "model": "potatoheadshot:ultimate_mana_cauldron_fire_level1" },
     "element=fire,level=2": { "model": "potatoheadshot:ultimate_mana_cauldron_fire_level2" },
-    "element=fire,level=3": { "model": "potatoheadshot:ultimate_mana_cauldron_fire_level3" }
+    "element=fire,level=3": { "model": "potatoheadshot:ultimate_mana_cauldron_fire_level3" },
+    "element=void,level=0": { "model": "potatoheadshot:ultimate_mana_cauldron_empty" },
+    "element=void,level=1": { "model": "potatoheadshot:ultimate_mana_cauldron_void_level1" },
+    "element=void,level=2": { "model": "potatoheadshot:ultimate_mana_cauldron_void_level2" },
+    "element=void,level=3": { "model": "potatoheadshot:ultimate_mana_cauldron_void_level3" }
   }
 }

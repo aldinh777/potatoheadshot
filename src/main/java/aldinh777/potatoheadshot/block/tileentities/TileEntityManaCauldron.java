@@ -35,7 +35,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
             this.detectLevelChange();
 
-            if (checkMana != this.storage.getManaStored()) {
+            if (this.checkMana != this.storage.getManaStored()) {
                 this.checkMana = this.storage.getManaStored();
                 flag = true;
             }
@@ -105,6 +105,15 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                 stack.shrink(1);
                 return true;
 
+            } else if (stack.getItem().equals(PotatoItems.ROD_VOID)) {
+                this.setElement(ManaCauldron.Element.VOID);
+                stack.shrink(64);
+                return true;
+
+            } else if (this.element == ManaCauldron.Element.VOID) {
+                stack.shrink(stack.getCount());
+                return false;
+
             } else {
                 ItemStack result = recipes.getResult(stack);
                 int cost = recipes.getCost(stack);
@@ -131,7 +140,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
         return false;
     }
 
-    public void  setManaLevel(int level) {
+    public void setManaLevel(int level) {
         IBlockState newState = this.world.getBlockState(this.pos)
                 .withProperty(ManaCauldron.LEVEL, level);
 

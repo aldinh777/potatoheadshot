@@ -44,10 +44,12 @@ public class PotatoItems {
     public static Item ESSENCE_LIFE;
     public static Item ESSENCE_NATURE;
     public static Item ESSENCE_FIRE;
+    public static Item ESSENCE_VOID;
     public static Item ROD_MANA;
     public static Item ROD_LIFE;
     public static Item ROD_NATURE;
     public static Item ROD_FIRE;
+    public static Item ROD_VOID;
     public static Item CRYSTAL_SHARD;
     public static Item CRYSTAL;
     public static Item CHARGED_CRYSTAL_SHARD;
@@ -67,7 +69,6 @@ public class PotatoItems {
     public static Item SWEET_WATER_BUCKET;
     public static Item SWEET_MILK_BUCKET;
     public static Item ULTIMATE_BROKEN_FUEL;
-    public static Item USELESS_POTATO;
 
     public static void addFoodEffects(Item item, FoodEffects... effects) {
         if (item instanceof PotatoFood) {
@@ -119,10 +120,12 @@ public class PotatoItems {
         ESSENCE_LIFE = new PotatoItem("essence_life");
         ESSENCE_NATURE = new PotatoItem("essence_nature");
         ESSENCE_FIRE = new PotatoItem("essence_fire");
+        ESSENCE_VOID = new PotatoItem("essence_void");
         ROD_MANA = new PotatoItem("rod_mana");
         ROD_LIFE = new PotatoItem("rod_life");
         ROD_NATURE = new PotatoItem("rod_nature");
         ROD_FIRE = new PotatoItem("rod_fire");
+        ROD_VOID = new PotatoItem("rod_void");
 
         // Crystal
         CRYSTAL_SHARD = new PotatoItem("crystal_shard");
@@ -146,8 +149,7 @@ public class PotatoItems {
         POTATO_KNIFE = new PotatoKnife("potato_knife");
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
         LAVA_HOE = new LavaHoe("lava_hoe");
-        ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 200);
-        USELESS_POTATO = new UselessPotato();
+        ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 12800);
 
         // Configuration Definition
         PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) EXTRA_HOT_POTATO;

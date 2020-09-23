@@ -27,15 +27,17 @@ item.potato_leaves.name=Potato Leaves
 item.potato_starch.name=Potato Starch
 item.raw_salt.name=Raw Salt
 item.glowing_potato_dust.name=Glowing Potato Dust
-item.glowing_mana_dust.name=Glowing Mana Dust
+item.glowing_mana_dust.name=Mana Dust
 item.lava_potato_seed.name=Lava Potato Seed
 item.essence_life.name=Life Essence
 item.essence_nature.name=Nature Essence
 item.essence_fire.name=Fire Essence
-item.rod_mana.name=Glowing Mana Rod
-item.rod_life.name=Glowing Life Rod
-item.rod_nature.name=Glowing Nature Rod
-item.rod_fire.name=Glowing Fire Rod
+item.essence_void.name=Void Essence
+item.rod_mana.name=Mana Rod
+item.rod_life.name=Life Rod
+item.rod_nature.name=Nature Rod
+item.rod_fire.name=Fire Rod
+item.rod_void.name=Void Rod
 item.crystal_shard.name=Crystal Shard
 item.crystal.name=Crystal
 item.charged_crystal_shard.name=Charged Crystal Shard
@@ -58,17 +60,16 @@ item.sweet_bucket_milk.name=Sweet Milk Bucket
 
 # Tools
 item.potato_knife.name=Potato Knife
-item.potato_mana_knife.name=Mana Potato Knife
+item.potato_mana_knife.name=Mana Knife
 item.lava_hoe.name=Lava Hoe
 item.ultimate_broken_fuel.name=Ultimate Broken Fuel
-item.useless_potato.name=Useless Potato
 
 # Placeable Item
-tile.glowing_mana_torch.name=Glowing Mana Torch
-tile.glowing_mana_flower.name=Glowing Mana Flower
-tile.ultimate_mana_flower.name=Ultimate Mana Flower
+tile.glowing_mana_torch.name=Mana Torch
+tile.glowing_mana_flower.name=Mana Flower
+tile.ultimate_mana_flower.name=Ultimate Flower
 tile.mana_cauldron.name=Mana Cauldron
-tile.ultimate_mana_cauldron.name=Ultimate Mana Flower
+tile.ultimate_mana_cauldron.name=Ultimate Cauldron
 
 # Food Blocks
 tile.cooked_dirt.name=Cooked Dirt
@@ -81,8 +82,8 @@ tile.potato_block.name=Potato Block
 tile.sweet_potato_block.name=Sweet Potato Block
 tile.sweet_machine_frame.name=Sweet Machine Frame
 tile.glowing_potato_block.name=Glowing Potato Block
-tile.glowing_mana_block.name=Glowing Mana Block
-tile.glowing_mana_stone.name=Glowing Mana Stone
+tile.glowing_mana_block.name=Mana Block
+tile.glowing_mana_stone.name=Mana Stone
 tile.lava_farmland.name=Lava Farmland
 tile.dimensional_glass.name=Dimensional Glass
 

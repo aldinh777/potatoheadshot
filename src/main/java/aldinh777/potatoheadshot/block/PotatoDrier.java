@@ -6,15 +6,14 @@ import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.BlockType;
+import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,7 +30,7 @@ public class PotatoDrier extends PotatoMachine {
     public static boolean keepInventory;
 
     public PotatoDrier(String name, BlockType blockType) {
-        super(name, blockType, 1);
+        super(name, blockType, Constants.DRIER);
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(ACTIVE, false));
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 

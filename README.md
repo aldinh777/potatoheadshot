@@ -128,10 +128,10 @@ Right click on something to transform it into essence
 
 This will consume the knife itself
 
-### Glowing Mana Rod
+### Mana Rod
 Drop this to the "Mana Cauldron" to transform element of the cauldron into pure mana
 
-### Glowing Life Rod
+### Life Rod
 Drop this to the "Mana Cauldron" to transform element of the cauldron into life mana
 
 Cauldron with life mana will transform any item dropped into seed or sapling
@@ -140,12 +140,12 @@ Drop "Lava Potato" and it will into "Lava Potato Seed"
 
 Plant it in "Lava Farmland" to farm "Lava Potato"
 
-### Glowing Nature Rod
+### Nature Rod
 Drop this to the "Mana Cauldron" to transform element of the cauldron into nature mana
 
 Cauldron with nature mana will transform any plant dropped into it next variant
 
-### Glowing Fire Rod
+### Fire Rod
 Drop this to the "Mana Cauldron" to transform element of the cauldron into fire mana
 
 Cauldron with fire mana will cook any item dropped into it
@@ -156,19 +156,17 @@ Works like a normal hoe but give "Lava Farmland" instead
 
 Lava farmland needs lava instead of water
 
+### Void Rod
+Drop this to the "Mana Cauldron" to transform element of the cauldron into fire mana
+
+Cauldron with void mana will suck any item dropped into it, be careful
+
 
 
 ## Broken Item
 
-These item just exists when developing, and some of them are exciting
-
 ### Ultimate Broken Fuel
 Works like coal, but won't consume when used
-
-Become Feature instead...
-
-### Useless Potato
-Dupeable potato with no use
 
 ### Dimensional Glass
 Glass who can see through any other block around it

@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.block;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import aldinh777.potatoheadshot.util.BlockType;
+import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class SweetInfuser extends PotatoMachine {
 
     public SweetInfuser(String name, BlockType blockType) {
-        super(name, blockType, 6);
+        super(name, blockType, Constants.INFUSER);
     }
 
     @Nullable

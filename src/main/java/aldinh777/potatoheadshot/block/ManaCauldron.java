@@ -95,32 +95,33 @@ public class ManaCauldron extends Block {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
+        if (this.ultimate) {
+            return Item.getItemFromBlock(PotatoBlocks.ULTIMATE_MANA_CAULDRON);
+        } else {
+            return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
+        }
     }
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(PotatoBlocks.MANA_CAULDRON);
+        if (this.ultimate) {
+            return new ItemStack(PotatoBlocks.ULTIMATE_MANA_CAULDRON);
+        } else {
+            return new ItemStack(PotatoBlocks.MANA_CAULDRON);
+        }
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        int elementValue = meta / 4;
-        int level = meta - (4 * elementValue);
-
         return this.getDefaultState()
-                .withProperty(LEVEL, level)
-                .withProperty(ELEMENT, Element.withValue(elementValue));
+                .withProperty(ELEMENT, Element.withValue(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        int level = state.getValue(LEVEL);
         Element element = state.getValue(ELEMENT);
 
-        int elementValue = element.getValue();
-
-        return (elementValue * 4) + level;
+        return element.getValue();
     }
 
     @Override
@@ -152,7 +153,8 @@ public class ManaCauldron extends Block {
         MANA("mana", 0),
         LIFE("life", 1),
         NATURE("nature", 2),
-        FIRE("fire", 3);
+        FIRE("fire", 3),
+        VOID("void", 4);
 
         private final String name;
         private final int value;
@@ -176,6 +178,7 @@ public class ManaCauldron extends Block {
                 case 1: return LIFE;
                 case 2: return NATURE;
                 case 3: return FIRE;
+                case 4: return VOID;
                 default: return MANA;
             }
         }

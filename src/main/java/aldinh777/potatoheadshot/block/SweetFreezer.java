@@ -2,9 +2,8 @@ package aldinh777.potatoheadshot.block;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
 import aldinh777.potatoheadshot.util.BlockType;
+import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +16,7 @@ import javax.annotation.Nullable;
 public class SweetFreezer extends PotatoMachine {
 
     public SweetFreezer(String name, BlockType blockType) {
-        super(name, blockType, 3);
+        super(name, blockType, Constants.FREEZER);
     }
 
     @Nullable

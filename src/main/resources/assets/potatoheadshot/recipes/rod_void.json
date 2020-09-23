@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "potatoheadshot:glowing_mana_dust"
+    },
+    {
+      "item": "potatoheadshot:essence_void"
+    },
+    {
+      "item": "potatoheadshot:glowing_mana_dust"
+    },
+    {
+      "item": "potatoheadshot:essence_void"
+    },
+    {
+      "item": "potatoheadshot:rod_mana"
+    },
+    {
+      "item": "potatoheadshot:essence_void"
+    },
+    {
+      "item": "potatoheadshot:glowing_mana_dust"
+    },
+    {
+      "item": "potatoheadshot:essence_void"
+    },
+    {
+      "item": "potatoheadshot:glowing_mana_dust"
+    }
+  ],
+  "result": {
+    "item": "potatoheadshot:rod_void"
+  }
+}

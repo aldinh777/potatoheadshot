@@ -13,12 +13,12 @@ import net.minecraft.util.text.ITextComponent;
 public abstract class GuiMana extends GuiContainer {
 	
 	private static final String TEXTURE = "potatoheadshot:textures/gui/container/mana_collector.png";
-	private static final ResourceLocation TEXTURES = new ResourceLocation("potatoheadshot:textures/gui/container/mana_collector.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
 	private final InventoryPlayer player;
 	private final TileEntityManaCollector tileEntity;
 	
 	public GuiMana(InventoryPlayer player, TileEntityManaCollector tileEntity, ContainerMana container) {
-		super((Container)container);
+		super(container);
 		this.player = player;
 		this.tileEntity = tileEntity;
 	}
@@ -32,7 +32,7 @@ public abstract class GuiMana extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		String tileName = ((ITextComponent)Objects.<ITextComponent>requireNonNull(this.tileEntity.getDisplayName())).getFormattedText();
+		String tileName = Objects.requireNonNull(this.tileEntity.getDisplayName()).getFormattedText();
 		this.fontRenderer.drawString(tileName, this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2 + 10, 6, 4210752);
 		this.fontRenderer.drawString(this.player.getDisplayName().getFormattedText(), 7, this.ySize - 96 + 2, 4210752);
 		this.fontRenderer.drawString("Mana : " + this.tileEntity.getField("manaSize"), 100, this.ySize - 96 + 2, 4210752);

@@ -3,6 +3,8 @@ package aldinh777.potatoheadshot.block;
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalCharger;
 import aldinh777.potatoheadshot.util.BlockType;
 import javax.annotation.Nullable;
+
+import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +18,7 @@ public class SweetCrystalCharger extends PotatoMachine {
 	private boolean ultimate = false;
 
 	public SweetCrystalCharger(String name, BlockType blockType) {
-		super(name, blockType, 5);
+		super(name, blockType, Constants.CRYSTAL_CHARGER);
 	}
 	
 	@Nullable

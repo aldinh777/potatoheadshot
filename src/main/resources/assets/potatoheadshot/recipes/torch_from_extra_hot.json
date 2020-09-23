@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:stick"
+      },
+      {
+        "item": "potatoheadshot:potato_stick"
+      }
+    ],
+    "X": [
+      {
+        "item": "potatoheadshot:extra_hot_potato"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:torch"
+  }
+}

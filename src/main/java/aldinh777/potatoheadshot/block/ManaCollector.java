@@ -2,8 +2,8 @@ package aldinh777.potatoheadshot.block;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCollector;
 import aldinh777.potatoheadshot.util.BlockType;
+import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +20,7 @@ public class ManaCollector extends PotatoMachine {
     }
 
     public ManaCollector(String name, BlockType blockType) {
-        super(name, blockType, 7);
+        super(name, blockType, Constants.COLLECTOR);
     }
 
     @Nullable

@@ -156,12 +156,6 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
     }
 
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return oldState.getBlock() != newSate.getBlock();
-    }
-
-    @Nullable
-    @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
@@ -402,12 +396,10 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
 
     // Static Method
 
-    @SideOnly(Side.CLIENT)
     public static boolean isBurning(TileEntityPotatoDrier te) {
         return te.getField("burnTime") > 0;
     }
 
-    @SideOnly(Side.CLIENT)
     public static boolean isWatering(TileEntityPotatoDrier te) {
         return te.getField("wateringTime") > 0;
     }
