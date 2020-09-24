@@ -59,6 +59,7 @@ public class PotatoItems {
     public static Item ULTIMATE_CRYSTAL;
     public static Item ULTIMATE_CHARGED_CRYSTAL;
     public static Item ULTIMATE_CONCENTRATED_CRYSTAL;
+    public static Item POCKET_CAULDRON;
 
     public static Item POTATO_KNIFE;
     public static Item POTATO_MANA_KNIFE;
@@ -126,6 +127,7 @@ public class PotatoItems {
         ROD_NATURE = new PotatoItem("rod_nature");
         ROD_FIRE = new PotatoItem("rod_fire");
         ROD_VOID = new PotatoItem("rod_void");
+        POCKET_CAULDRON = new PocketCauldron("pocket_cauldron");
 
         // Crystal
         CRYSTAL_SHARD = new PotatoItem("crystal_shard");

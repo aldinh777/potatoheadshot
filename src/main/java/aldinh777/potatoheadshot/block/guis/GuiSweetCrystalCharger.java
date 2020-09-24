@@ -18,7 +18,7 @@ public class GuiSweetCrystalCharger extends GuiContainer {
 	private final TileEntitySweetCrystalCharger tileEntity;
 	
 	public GuiSweetCrystalCharger(InventoryPlayer player, TileEntitySweetCrystalCharger tileEntity) {
-		super((Container)new ContainerSweetCrystalCharger(player, tileEntity));
+		super(new ContainerSweetCrystalCharger(player, tileEntity));
 		this.player = player;
 		this.tileEntity = tileEntity;
 	}

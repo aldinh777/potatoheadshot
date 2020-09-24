@@ -1,6 +1,6 @@
-package aldinh777.potatoheadshot.block;
+package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalMaker;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCollector;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.state.IBlockState;
@@ -13,30 +13,30 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-public class SweetCrystalMaker extends PotatoMachine {
+public class ManaCollector extends PotatoMachine {
 
-    public SweetCrystalMaker(String name, BlockType blockType) {
-        super(name, blockType, Constants.CRYSTAL_MAKER);
+    public ManaCollector(String name, BlockType blockType, int modGuiId) {
+        super(name, blockType, modGuiId);
+    }
+
+    public ManaCollector(String name, BlockType blockType) {
+        super(name, blockType, Constants.COLLECTOR);
     }
 
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntitySweetCrystalMaker();
+        return new TileEntityManaCollector();
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         if (!worldIn.isRemote) {
-            TileEntitySweetCrystalMaker tileEntity = (TileEntitySweetCrystalMaker) worldIn.getTileEntity(pos);
+            TileEntityManaCollector tileEntity = (TileEntityManaCollector) worldIn.getTileEntity(pos);
             if (tileEntity != null) {
-                IItemHandler iceHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
                 IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
-                if (iceHandler != null) {
-                    spawnAsEntity(worldIn, pos, iceHandler.getStackInSlot(0));
-                }
                 if (inputHandler != null) {
                     spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
                 }

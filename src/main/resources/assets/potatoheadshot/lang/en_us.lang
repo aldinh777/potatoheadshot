@@ -38,6 +38,9 @@ item.rod_life.name=Life Rod
 item.rod_nature.name=Nature Rod
 item.rod_fire.name=Fire Rod
 item.rod_void.name=Void Rod
+item.pocket_cauldron.name=Pocket Cauldron
+
+# Crystals
 item.crystal_shard.name=Crystal Shard
 item.crystal.name=Crystal
 item.charged_crystal_shard.name=Charged Crystal Shard

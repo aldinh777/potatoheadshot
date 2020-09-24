@@ -3,6 +3,8 @@ package aldinh777.potatoheadshot.handler;
 import aldinh777.potatoheadshot.block.containers.*;
 import aldinh777.potatoheadshot.block.guis.*;
 import aldinh777.potatoheadshot.block.tileentities.*;
+import aldinh777.potatoheadshot.item.container.ContainerPocketCauldron;
+import aldinh777.potatoheadshot.item.guis.GuiPocketCauldron;
 import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -44,6 +46,8 @@ public class GuiHandler implements IGuiHandler {
             case Constants.EXTRACTOR:
                 TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
                 return new ContainerManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+            case Constants.POCKET_CAULDRON:
+                return new ContainerPocketCauldron(player);
             default:
                 return  null;
         }
@@ -78,6 +82,8 @@ public class GuiHandler implements IGuiHandler {
             case Constants.EXTRACTOR:
                 TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
                 return new GuiManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+            case Constants.POCKET_CAULDRON:
+                return new GuiPocketCauldron(player);
             default:
                 return  null;
         }

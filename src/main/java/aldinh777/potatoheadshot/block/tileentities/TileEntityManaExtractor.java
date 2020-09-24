@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.ManaExtractor;
-import aldinh777.potatoheadshot.block.ManaFlower;
+import aldinh777.potatoheadshot.block.blocks.ManaExtractor;
+import aldinh777.potatoheadshot.block.blocks.ManaFlower;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;

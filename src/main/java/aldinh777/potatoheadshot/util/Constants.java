@@ -9,4 +9,6 @@ public interface Constants {
     int INFUSER = 6;
     int COLLECTOR = 7;
     int EXTRACTOR = 8;
+
+    int POCKET_CAULDRON = 9;
 }
