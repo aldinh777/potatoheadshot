@@ -163,12 +163,10 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
         if (manaStored <= 0) {
             currentLevel = 0;
-        } else if (manaStored < this.storage.getMaxManaStored() / 2) {
-            currentLevel = 1;
         } else if (manaStored < this.storage.getMaxManaStored()) {
-            currentLevel = 2;
+            currentLevel = 1;
         } else {
-            currentLevel = 3;
+            currentLevel = 2;
         }
 
         if (this.level != currentLevel) {

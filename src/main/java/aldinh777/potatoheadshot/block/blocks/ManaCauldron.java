@@ -29,7 +29,7 @@ import java.util.Random;
 
 public class ManaCauldron extends Block {
 
-    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
+    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 2);
     public static final PropertyEnum<Element> ELEMENT = PropertyEnum.create("element", Element.class);
 
     protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
@@ -113,15 +113,21 @@ public class ManaCauldron extends Block {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
+        int elementValue = meta / 3;
+        int level = meta % 3;
+
         return this.getDefaultState()
-                .withProperty(ELEMENT, Element.withValue(meta));
+                .withProperty(ELEMENT, Element.withValue(elementValue))
+                .withProperty(LEVEL, level);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
         Element element = state.getValue(ELEMENT);
+        int level = state.getValue(LEVEL);
+        int elementValue = element.getValue();
 
-        return element.getValue();
+        return (elementValue * 3) + level;
     }
 
     @Override
