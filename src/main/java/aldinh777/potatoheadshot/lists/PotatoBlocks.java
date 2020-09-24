@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.lists;
 
-import aldinh777.potatoheadshot.block.*;
+import aldinh777.potatoheadshot.block.blocks.*;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

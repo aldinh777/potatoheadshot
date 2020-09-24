@@ -1,9 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.ManaCauldron;
-import aldinh777.potatoheadshot.block.PotatoDrier;
+import aldinh777.potatoheadshot.block.blocks.PotatoDrier;
 import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
-import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,7 +10,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -20,8 +17,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 

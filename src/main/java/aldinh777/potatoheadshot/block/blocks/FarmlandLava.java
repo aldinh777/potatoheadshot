@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block;
+package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.item.LavaPotatoSeed;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
