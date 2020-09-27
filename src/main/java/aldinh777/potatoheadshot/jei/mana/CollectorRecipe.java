@@ -22,11 +22,11 @@ public class CollectorRecipe extends AbstractManaRecipe {
 		Item stone = Item.getItemFromBlock(Blocks.STONE);
 		Item torch = Item.getItemFromBlock(Blocks.TORCH);
 		
-		Item manaFlower = Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_FLOWER);
-		Item manaStone = Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_STONE);
-		Item manaTorch = Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_TORCH);
+		Item manaFlower = Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER);
+		Item manaStone = Item.getItemFromBlock(PotatoBlocks.MANA_STONE);
+		Item manaTorch = Item.getItemFromBlock(PotatoBlocks.MANA_TORCH);
 		
-		addRecipe(jeiRecipes, PotatoItems.GLOWING_POTATO_DUST, PotatoItems.GLOWING_MANA_DUST);
+		addRecipe(jeiRecipes, PotatoItems.GLOWING_POTATO_DUST, PotatoItems.MANA_DUST);
 		addRecipe(jeiRecipes, flower, manaFlower);
 		addRecipe(jeiRecipes, stone, manaStone);
 		addRecipe(jeiRecipes, torch, manaTorch);

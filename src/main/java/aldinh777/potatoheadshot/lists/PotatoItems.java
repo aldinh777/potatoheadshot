@@ -39,7 +39,7 @@ public class PotatoItems {
     public static Item SWEET_POTATO_DUST;
     public static Item SWEET_POTATO_INGOT;
     public static Item GLOWING_POTATO_DUST;
-    public static Item GLOWING_MANA_DUST;
+    public static Item MANA_DUST;
     public static Item LAVA_POTATO_SEED;
     public static Item ESSENCE_LIFE;
     public static Item ESSENCE_NATURE;
@@ -116,7 +116,7 @@ public class PotatoItems {
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
         GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
-        GLOWING_MANA_DUST = new PotatoItem("glowing_mana_dust");
+        MANA_DUST = new PotatoItem("glowing_mana_dust");
         LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
         ESSENCE_LIFE = new PotatoItem("essence_life");
         ESSENCE_NATURE = new PotatoItem("essence_nature");

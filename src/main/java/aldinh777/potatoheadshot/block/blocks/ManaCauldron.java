@@ -99,7 +99,7 @@ public class ManaCauldron extends Block {
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
         if (this.ultimate) {
-            return Item.getItemFromBlock(PotatoBlocks.ULTIMATE_MANA_CAULDRON);
+            return Item.getItemFromBlock(PotatoBlocks.ULTIMATE_CAULDRON);
         } else {
             return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
         }
@@ -109,7 +109,7 @@ public class ManaCauldron extends Block {
     @Override
     public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (this.ultimate) {
-            return new ItemStack(PotatoBlocks.ULTIMATE_MANA_CAULDRON);
+            return new ItemStack(PotatoBlocks.ULTIMATE_CAULDRON);
         } else {
             return new ItemStack(PotatoBlocks.MANA_CAULDRON);
         }

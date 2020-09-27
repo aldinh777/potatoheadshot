@@ -41,12 +41,12 @@ public class InfuserRecipe implements IRecipeWrapper {
 		Item crystal = PotatoItems.CRYSTAL;
 		Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
 		Item concentratedCrystal = PotatoItems.CONCENTRATED_CRYSTAL;
-		Item manaFlower = Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_FLOWER);
+		Item manaFlower = Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER);
 		Item ultimateCrystal = PotatoItems.ULTIMATE_CRYSTAL;
 		Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
 		Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
 		Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
-		Item ultimateManaFlower = Item.getItemFromBlock(PotatoBlocks.ULTIMATE_MANA_FLOWER);
+		Item ultimateManaFlower = Item.getItemFromBlock(PotatoBlocks.ULTIMATE_FLOWER);
 		
 		Item grass = Item.getItemFromBlock(Blocks.GRASS);
 		Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);

@@ -22,11 +22,11 @@ public class ManaCauldronRecipe extends AbstractCauldronRecipe {
 		Item torch = Item.getItemFromBlock(Blocks.TORCH);
 		Item stone = Item.getItemFromBlock(Blocks.STONE);
 		
-		addRecipe(jeiRecipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.GLOWING_MANA_DUST));
+		addRecipe(jeiRecipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST));
 		addRecipe(jeiRecipes, PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE));
-		addRecipe(jeiRecipes, flower, new ItemStack(PotatoBlocks.GLOWING_MANA_FLOWER));
-		addRecipe(jeiRecipes, torch, new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH));
-		addRecipe(jeiRecipes, stone, new ItemStack(PotatoBlocks.GLOWING_MANA_STONE));
+		addRecipe(jeiRecipes, flower, new ItemStack(PotatoBlocks.MANA_FLOWER));
+		addRecipe(jeiRecipes, torch, new ItemStack(PotatoBlocks.MANA_TORCH));
+		addRecipe(jeiRecipes, stone, new ItemStack(PotatoBlocks.MANA_STONE));
 		addRecipe(jeiRecipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD));
 		addRecipe(jeiRecipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL));
 		

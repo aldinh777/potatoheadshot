@@ -1,13 +1,14 @@
 package aldinh777.potatoheadshot.lists;
 
 import aldinh777.potatoheadshot.block.blocks.*;
+import aldinh777.potatoheadshot.block.crops.GlowingPotatoCrops;
+import aldinh777.potatoheadshot.block.crops.LavaPotatoCrops;
+import aldinh777.potatoheadshot.block.crops.SweetPotatoCrops;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class PotatoBlocks {
 
     public static Block LAVA_FARMLAND = new FarmlandLava("lava_farmland");
 
-    public static Block SWEET_POTATOES = new PotatoCrops("sweet_potatoes");
+    public static Block SWEET_POTATOES = new SweetPotatoCrops("sweet_potatoes");
     public static Block GLOWING_POTATOES = new GlowingPotatoCrops("glowing_potatoes");
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
 
@@ -33,11 +34,11 @@ public class PotatoBlocks {
     public static Block SWEET_POTATO_BLOCK;
     public static Block SWEET_MACHINE_FRAME;
     public static Block GLOWING_POTATO_BLOCK;
-    public static Block GLOWING_MANA_BLOCK;
-    public static Block GLOWING_MANA_FLOWER;
-    public static Block GLOWING_MANA_TORCH;
-    public static Block GLOWING_MANA_STONE;
-    public static Block ULTIMATE_MANA_FLOWER;
+    public static Block MANA_BLOCK;
+    public static Block MANA_FLOWER;
+    public static Block MANA_TORCH;
+    public static Block MANA_STONE;
+    public static Block ULTIMATE_FLOWER;
 
     public static Block POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
@@ -49,16 +50,14 @@ public class PotatoBlocks {
     public static Block MANA_EXTRACTOR;
     public static Block MANA_CAULDRON;
     public static Block ULTIMATE_CRYSTAL_CHARGER;
-    public static Block ULTIMATE_MANA_CAULDRON;
-
-    public static Block DIMENSIONAL_GLASS;
+    public static Block ULTIMATE_CAULDRON;
 
     public static void init() {
 
         // Place able Item
-        GLOWING_MANA_TORCH = new Potatorch("glowing_mana_torch");
-        GLOWING_MANA_FLOWER = new ManaFlower("glowing_mana_flower");
-        ULTIMATE_MANA_FLOWER = new ManaFlower("ultimate_mana_flower").setLightLevel(1.0f);
+        MANA_TORCH = new Potatorch("glowing_mana_torch");
+        MANA_FLOWER = new ManaFlower("glowing_mana_flower");
+        ULTIMATE_FLOWER = new ManaFlower("ultimate_mana_flower").setLightLevel(1.0f);
 
         // Food Block
         COOKED_DIRT = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND, 3, 0.2f);
@@ -77,13 +76,13 @@ public class PotatoBlocks {
             }
 
             @Override
-            public boolean isOpaqueCube(IBlockState state)
+            public boolean isOpaqueCube(@Nonnull IBlockState state)
             {
                 return false;
             }
 
             @Override
-            public boolean isFullCube(IBlockState state)
+            public boolean isFullCube(@Nonnull IBlockState state)
             {
                 return false;
             }
@@ -95,15 +94,14 @@ public class PotatoBlocks {
                 return PotatoItems.GLOWING_POTATO_DUST;
             }
         }.setLightLevel(1.0f);
-        GLOWING_MANA_BLOCK = new PotatoBlock("glowing_mana_block", BlockType.GLASS) {
+        MANA_BLOCK = new PotatoBlock("glowing_mana_block", BlockType.GLASS) {
             @Nonnull
             @Override
             public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-                return PotatoItems.GLOWING_MANA_DUST;
+                return PotatoItems.MANA_DUST;
             }
         }.setLightLevel(1.0f);
-        GLOWING_MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE)
-                .setLightLevel(0.7f).setResistance(6000);
+        MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE).setLightLevel(0.7f).setResistance(6000);
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
@@ -116,16 +114,6 @@ public class PotatoBlocks {
         MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
-        ULTIMATE_MANA_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
-
-        // Bugged Feature
-        DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {
-            @Nonnull
-            @SideOnly(Side.CLIENT)
-            public BlockRenderLayer getBlockLayer()
-            {
-                return BlockRenderLayer.TRANSLUCENT;
-            }
-        }.setLightOpacity(0);
+        ULTIMATE_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
     }
 }

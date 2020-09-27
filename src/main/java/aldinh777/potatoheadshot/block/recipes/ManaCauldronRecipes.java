@@ -21,11 +21,11 @@ public class ManaCauldronRecipes implements IManaRecipes {
         Item torch = Item.getItemFromBlock(Blocks.TORCH);
         Item stone = Item.getItemFromBlock(Blocks.STONE);
 
-        addRecipe(PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.GLOWING_MANA_DUST), 1000);
+        addRecipe(PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST), 1000);
         addRecipe(PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 2000);
-        addRecipe(flower, new ItemStack(PotatoBlocks.GLOWING_MANA_FLOWER), 1000);
-        addRecipe(torch, new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH), 1000);
-        addRecipe(stone, new ItemStack(PotatoBlocks.GLOWING_MANA_STONE), 1000);
+        addRecipe(flower, new ItemStack(PotatoBlocks.MANA_FLOWER), 1000);
+        addRecipe(torch, new ItemStack(PotatoBlocks.MANA_TORCH), 1000);
+        addRecipe(stone, new ItemStack(PotatoBlocks.MANA_STONE), 1000);
         addRecipe(PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), 100000);
         addRecipe(PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 800000);
     }

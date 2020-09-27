@@ -30,9 +30,9 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
 
             if (this.canCollect()) {
                 Block flower = this.world.getBlockState(this.pos.up()).getBlock();
-                if (flower.equals(PotatoBlocks.GLOWING_MANA_FLOWER)) {
+                if (flower.equals(PotatoBlocks.MANA_FLOWER)) {
                     this.storage.collectMana(1);
-                } else if (flower.equals(PotatoBlocks.ULTIMATE_MANA_FLOWER)) {
+                } else if (flower.equals(PotatoBlocks.ULTIMATE_FLOWER)) {
                     this.storage.collectMana(200);
                 }
             }
@@ -145,13 +145,13 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
 
     @Override
     public ItemStack getResult(ItemStack stack) {
-        if (stack.getItem() == PotatoItems.GLOWING_MANA_DUST) {
+        if (stack.getItem() == PotatoItems.MANA_DUST) {
             return new ItemStack(PotatoItems.GLOWING_POTATO_DUST);
-        } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_FLOWER)) {
+        } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER)) {
             return new ItemStack(Blocks.RED_FLOWER);
-        } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_TORCH)) {
+        } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_TORCH)) {
             return new ItemStack(Blocks.TORCH);
-        } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_STONE)) {
+        } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_STONE)) {
             return new ItemStack(Blocks.STONE);
         }
         return ItemStack.EMPTY;
@@ -160,10 +160,10 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
     // Static Methods
 
     private static int getManaValue(ItemStack stack) {
-        if (stack.getItem() == PotatoItems.GLOWING_MANA_DUST) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_FLOWER)) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_TORCH)) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_MANA_STONE)) return 1000;
+        if (stack.getItem() == PotatoItems.MANA_DUST) return 1000;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER)) return 1000;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_TORCH)) return 1000;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_STONE)) return 1000;
         return 0;
     }
 }

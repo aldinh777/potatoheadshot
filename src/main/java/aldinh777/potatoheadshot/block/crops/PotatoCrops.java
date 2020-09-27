@@ -1,7 +1,6 @@
-package aldinh777.potatoheadshot.block.blocks;
+package aldinh777.potatoheadshot.block.crops;
 
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -11,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
 
-public class PotatoCrops extends BlockCrops {
+public abstract class PotatoCrops extends BlockCrops {
 
     private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
@@ -32,15 +31,11 @@ public class PotatoCrops extends BlockCrops {
 
     @Nonnull
     @Override
-    protected Item getSeed() {
-        return PotatoItems.SWEET_POTATO;
-    }
+    protected abstract Item getSeed();
 
     @Nonnull
     @Override
-    protected Item getCrop() {
-        return PotatoItems.SWEET_POTATO;
-    }
+    protected abstract Item getCrop();
 
     @Nonnull
     @Override

@@ -140,13 +140,13 @@ public class TileEntityManaCollector extends TileEntityMana {
 
     public ItemStack getResult(ItemStack stack) {
         if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) {
-            return new ItemStack(PotatoItems.GLOWING_MANA_DUST);
+            return new ItemStack(PotatoItems.MANA_DUST);
         } else if (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) {
-            return new ItemStack(PotatoBlocks.GLOWING_MANA_FLOWER);
+            return new ItemStack(PotatoBlocks.MANA_FLOWER);
         } else if (stack.getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
-            return new ItemStack(PotatoBlocks.GLOWING_MANA_TORCH);
+            return new ItemStack(PotatoBlocks.MANA_TORCH);
         } else if (stack.getItem() == Item.getItemFromBlock(Blocks.STONE)) {
-            return new ItemStack(PotatoBlocks.GLOWING_MANA_STONE);
+            return new ItemStack(PotatoBlocks.MANA_STONE);
         }
         return ItemStack.EMPTY;
     }

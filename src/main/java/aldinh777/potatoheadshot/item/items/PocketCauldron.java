@@ -84,9 +84,6 @@ public class PocketCauldron extends Item {
             int posY = pos.getY();
             int posZ = pos.getZ();
 
-            int mana = getManaSize(stack);
-            System.out.println("NBT Mana : " + mana);
-
             playerIn.openGui(PotatoHeadshot.INSTANCE, Constants.POCKET_CAULDRON, worldIn, posX, posY, posZ);
             return ActionResult.newResult(EnumActionResult.PASS, stack);
         }
@@ -132,6 +129,10 @@ public class PocketCauldron extends Item {
 
             ItemStack result = recipes.getResult(inputSlot);
             int cost = recipes.getCost(inputSlot);
+
+            if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL) {
+                return;
+            }
 
             if (result.isEmpty() || cost > manaSize) {
                 return;
