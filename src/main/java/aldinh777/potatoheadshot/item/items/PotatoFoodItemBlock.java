@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,6 +13,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class PotatoFoodItemBlock extends PotatoItemBlock {
 
     private final ItemFood food;
@@ -23,11 +25,13 @@ public class PotatoFoodItemBlock extends PotatoItemBlock {
     }
 
     @Override
-    public int getItemBurnTime(ItemStack itemStack) {
+    public int getItemBurnTime(@Nonnull ItemStack itemStack) {
         return 0;
     }
 
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+    @Nonnull
+    @Override
+    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
         if (entityLiving instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             entityplayer.getFoodStats().addStats(this.food, stack);
@@ -38,17 +42,22 @@ public class PotatoFoodItemBlock extends PotatoItemBlock {
         return stack;
     }
 
-    public int getMaxItemUseDuration(ItemStack stack)
+    @Override
+    public int getMaxItemUseDuration(@Nonnull ItemStack stack)
     {
         return 32;
     }
 
-    public EnumAction getItemUseAction(ItemStack stack)
+    @Nonnull
+    @Override
+    public EnumAction getItemUseAction(@Nonnull ItemStack stack)
     {
         return EnumAction.EAT;
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    @Nonnull
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
 
         if (playerIn.canEat(false)) {

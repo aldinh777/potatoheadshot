@@ -2,12 +2,12 @@ package aldinh777.potatoheadshot.jei.cauldron;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
-import java.util.List;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class NatureCauldronRecipe extends AbstractCauldronRecipe {
 	
@@ -85,9 +85,3 @@ public class NatureCauldronRecipe extends AbstractCauldronRecipe {
 		list.add(new NatureCauldronRecipe(new ItemStack(input), output));
 	}
 }
-
-
-/* Location:							C:\Users\ASUS\Downloads\jd-gui-windows-1.6.6\potatoheadshot-1.0.1-1.12.2.jar!\aldinh777\potatoheadshot\jei\cauldron\NatureCauldronRecipe.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:			 1.1.3
- */

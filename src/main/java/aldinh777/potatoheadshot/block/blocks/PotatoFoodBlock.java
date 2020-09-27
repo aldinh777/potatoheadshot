@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.item.PotatoFoodItemBlock;
+import aldinh777.potatoheadshot.item.items.PotatoFoodItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;

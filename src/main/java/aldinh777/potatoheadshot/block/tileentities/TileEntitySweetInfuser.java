@@ -5,7 +5,6 @@ import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -14,6 +13,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
@@ -58,7 +58,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
             return true;
         }
@@ -67,10 +67,11 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
 
     @Nullable
     @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
             return (T)this.storage;
         }
+
         return super.getCapability(capability, facing);
     }
 
@@ -81,7 +82,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
+    public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
         this.middleHandler.deserializeNBT(compound.getCompoundTag("InventoryMiddle"));
@@ -91,8 +92,9 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
         this.storage.readFromNBT(compound);
     }
 
+    @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
         compound.setTag("InventoryMiddle", this.middleHandler.serializeNBT());

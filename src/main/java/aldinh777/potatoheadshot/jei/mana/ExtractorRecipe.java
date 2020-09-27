@@ -3,11 +3,11 @@ package aldinh777.potatoheadshot.jei.mana;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
-import java.util.List;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class ExtractorRecipe extends AbstractManaRecipe {
 

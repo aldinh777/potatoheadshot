@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -8,6 +8,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,7 @@ public class PotatoFood extends ItemFood {
     }
 
     @Override
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
+    protected void onFoodEaten(@Nonnull ItemStack stack, World worldIn, @Nonnull EntityPlayer player) {
         if (!worldIn.isRemote) {
             for (FoodEffects effect : this.effects) {
                 effect.applyEffects(stack, worldIn, player);

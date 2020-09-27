@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -12,6 +12,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class LavaPotatoSeed extends ItemSeeds {
 
@@ -29,8 +31,9 @@ public class LavaPotatoSeed extends ItemSeeds {
         PotatoItems.LISTS.add(this);
     }
 
+    @Nonnull
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
         net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
         if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock() == this.soil && worldIn.isAirBlock(pos.up())) {
@@ -38,6 +41,7 @@ public class LavaPotatoSeed extends ItemSeeds {
 
             itemstack.shrink(1);
             return EnumActionResult.SUCCESS;
+
         } else {
             return EnumActionResult.FAIL;
         }

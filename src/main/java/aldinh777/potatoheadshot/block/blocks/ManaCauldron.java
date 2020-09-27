@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
-import aldinh777.potatoheadshot.item.PotatoItemBlock;
+import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -23,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
@@ -56,13 +57,13 @@ public class ManaCauldron extends Block {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         if (this.ultimate) {
             return new TileEntityManaCauldron().setUltimate();
         } else {
@@ -71,7 +72,7 @@ public class ManaCauldron extends Block {
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+    public void addCollisionBoxToList(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox, @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
@@ -79,22 +80,24 @@ public class ManaCauldron extends Block {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
     }
 
+    @Nonnull
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return FULL_BLOCK_AABB;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
 
+    @Nonnull
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
         if (this.ultimate) {
             return Item.getItemFromBlock(PotatoBlocks.ULTIMATE_MANA_CAULDRON);
         } else {
@@ -102,8 +105,9 @@ public class ManaCauldron extends Block {
         }
     }
 
+    @Nonnull
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+    public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (this.ultimate) {
             return new ItemStack(PotatoBlocks.ULTIMATE_MANA_CAULDRON);
         } else {
@@ -111,6 +115,7 @@ public class ManaCauldron extends Block {
         }
     }
 
+    @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
         int elementValue = meta / 3;
@@ -130,18 +135,20 @@ public class ManaCauldron extends Block {
         return (elementValue * 3) + level;
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, LEVEL, ELEMENT);
     }
 
     @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    public boolean isPassable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos) {
         return true;
     }
 
+    @Nonnull
     @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
         if (face == EnumFacing.UP) {
             return BlockFaceShape.BOWL;
         } else {
@@ -170,6 +177,7 @@ public class ManaCauldron extends Block {
             this.value = value;
         }
 
+        @Nonnull
         @Override
         public String getName() {
             return this.name;

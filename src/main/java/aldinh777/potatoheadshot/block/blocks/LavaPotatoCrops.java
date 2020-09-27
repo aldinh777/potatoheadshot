@@ -10,17 +10,21 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
+import javax.annotation.Nonnull;
+
 public class LavaPotatoCrops extends GlowingPotatoCrops {
 
     public LavaPotatoCrops(String name) {
         super(name);
     }
 
+    @Nonnull
     @Override
     protected Item getCrop() {
         return PotatoItems.LAVA_POTATO;
     }
 
+    @Nonnull
     @Override
     protected Item getSeed() {
         return PotatoItems.LAVA_POTATO_SEED;
@@ -32,8 +36,7 @@ public class LavaPotatoCrops extends GlowingPotatoCrops {
     }
 
     @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing
-            direction, IPlantable plantable) {
+    public boolean canSustainPlant(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
         return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
     }
 
@@ -43,7 +46,7 @@ public class LavaPotatoCrops extends GlowingPotatoCrops {
     }
 
     @Override
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+    public boolean canBlockStay(World worldIn, BlockPos pos, @Nonnull IBlockState state) {
         return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
     }
 }

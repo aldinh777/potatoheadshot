@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -13,6 +13,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
@@ -30,12 +31,13 @@ public class PotatoFoodBucket extends PotatoFood {
     }
 
     @Override
-    public int getItemBurnTime(ItemStack itemStack) {
+    public int getItemBurnTime(@Nonnull ItemStack itemStack) {
         return this.burnTime;
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
 
         // Bucket Operation
@@ -51,6 +53,7 @@ public class PotatoFoodBucket extends PotatoFood {
                 playerIn.setActiveHand(handIn);
                 return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
             }
+
             return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 
         } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
@@ -61,17 +64,21 @@ public class PotatoFoodBucket extends PotatoFood {
 
             if (!worldIn.isBlockModifiable(playerIn, blockpos)) {
                 return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+
             } else {
                 boolean flag = worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos);
                 BlockPos placing_position = flag && raytraceresult.sideHit == EnumFacing.UP ? blockpos : blockpos.offset(raytraceresult.sideHit);
 
                 if (!playerIn.canPlayerEdit(placing_position, raytraceresult.sideHit, itemstack)) {
                     return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+
                 } else if (this.tryPlaceContainedLiquid(playerIn, worldIn, placing_position)) {
                     if (!playerIn.capabilities.isCreativeMode) {
                         itemstack.setCount(itemstack.getCount() - 1);
                     }
+
                     return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+
                 } else {
                     return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                 }
@@ -84,9 +91,8 @@ public class PotatoFoodBucket extends PotatoFood {
         return this;
     }
 
-    public PotatoFoodBucket setExplodeOnPlaced() {
+    public void setExplodeOnPlaced() {
         this.explodeOnPlaced = true;
-        return this;
     }
 
     public PotatoFoodBucket setBurnTime(int burnTime) {

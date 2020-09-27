@@ -10,6 +10,7 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public abstract class AbstractCauldronRecipeCategory<T extends AbstractCauldronRecipe> implements IRecipeCategory<T> {
@@ -26,11 +27,13 @@ public abstract class AbstractCauldronRecipeCategory<T extends AbstractCauldronR
 		this.icon = gui.createDrawableIngredient(icon);
 	}
 
+	@Nonnull
 	@Override
 	public String getModName() {
 		return PotatoHeadshot.NAME;
 	}
 
+	@Nonnull
 	@Override
 	public IDrawable getBackground() {
 		return this.background;
@@ -43,12 +46,12 @@ public abstract class AbstractCauldronRecipeCategory<T extends AbstractCauldronR
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, T recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, @Nonnull T recipeWrapper, @Nonnull IIngredients ingredients) {
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-		stacks.init(0, true, 32, 3);
-		stacks.init(1, true, 8, 45);
-		stacks.init(2, true, 32, 23);
-		stacks.init(3, false, 91, 23);
+		stacks.init(input, true, 32, 3);
+		stacks.init(rod, true, 8, 45);
+		stacks.init(cauldron, true, 32, 23);
+		stacks.init(output, false, 91, 23);
 		stacks.set(ingredients);
 	}
 }

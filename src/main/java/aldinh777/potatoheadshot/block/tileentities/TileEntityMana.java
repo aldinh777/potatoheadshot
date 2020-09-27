@@ -1,14 +1,15 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
-import javax.annotation.Nullable;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class TileEntityMana extends TileEntityPotatoMachine {
 
@@ -22,7 +23,7 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 	public abstract ItemStack getResult(ItemStack paramItemStack);
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && (
 			facing == EnumFacing.UP || facing == EnumFacing.DOWN)) {
 			return true;
@@ -33,7 +34,7 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 	
 	@Nullable
 	@Override
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == EnumFacing.UP)
 				return (T)this.inputHandler; 
@@ -41,11 +42,11 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 				return (T)this.outputHandler;
 			}
 		} 
-		return (T)super.getCapability(capability, facing);
+		return super.getCapability(capability, facing);
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
+	public void readFromNBT(@Nonnull NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
 		this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
@@ -53,11 +54,12 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 		this.storage.readFromNBT(compound);
 	}
 
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+	@Nonnull
+    @Override
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		compound.setTag("InventoryInput", (NBTBase)this.inputHandler.serializeNBT());
-		compound.setTag("InventoryOutput", (NBTBase)this.outputHandler.serializeNBT());
+		compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
+		compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
 		compound.setInteger("ManaVolume", this.manaSize);
 		this.storage.writeToNBT(compound);
 		return compound;

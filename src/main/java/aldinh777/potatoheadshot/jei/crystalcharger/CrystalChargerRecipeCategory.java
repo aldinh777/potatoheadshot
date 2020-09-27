@@ -9,18 +9,19 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 public class CrystalChargerRecipeCategory implements IRecipeCategory<CrystalChargerRecipe> {
 	
 	private static final String path = "potatoheadshot:textures/gui/container/sweet_crystal_charger.png";
-	private static final ResourceLocation TEXTURE = new ResourceLocation("potatoheadshot:textures/gui/container/sweet_crystal_charger.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 	
 	private static final int input = 0;
-	
 	private static final int output = 1;
+
 	private final IDrawable background;
 	private final IDrawable icon;
 	
@@ -29,21 +30,25 @@ public class CrystalChargerRecipeCategory implements IRecipeCategory<CrystalChar
 		this.icon = gui.createDrawableIngredient(new ItemStack(PotatoBlocks.SWEET_CRYSTAL_MAKER));
 	}
 
+	@Nonnull
 	@Override
 	public String getUid() {
 		return JeiPotatoPlugin.CRYSTAL_CHARGER.toString();
 	}
 
+	@Nonnull
 	@Override
 	public String getTitle() {
 		return "Crystal Charger";
 	}
 
+	@Nonnull
 	@Override
 	public String getModName() {
 		return PotatoHeadshot.NAME;
 	}
 
+	@Nonnull
 	@Override
 	public IDrawable getBackground() {
 		return this.background;
@@ -55,10 +60,10 @@ public class CrystalChargerRecipeCategory implements IRecipeCategory<CrystalChar
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, CrystalChargerRecipe recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, @Nonnull CrystalChargerRecipe recipeWrapper, @Nonnull IIngredients ingredients) {
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-		stacks.init(0, true, 3, 4);
-		stacks.init(1, false, 104, 8);
+		stacks.init(input, true, 3, 4);
+		stacks.init(output, false, 104, 8);
 		stacks.set(ingredients);
 	}
 }

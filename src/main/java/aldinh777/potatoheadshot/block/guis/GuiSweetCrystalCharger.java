@@ -2,18 +2,17 @@ package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.block.containers.ContainerSweetCrystalCharger;
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalCharger;
-import java.util.Objects;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+
+import java.util.Objects;
 
 public class GuiSweetCrystalCharger extends GuiContainer {
 
 	private static final String TEXTURE = "potatoheadshot:textures/gui/container/sweet_crystal_charger.png";
-	private static final ResourceLocation TEXTURES = new ResourceLocation("potatoheadshot:textures/gui/container/sweet_crystal_charger.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
 	private final InventoryPlayer player;
 	private final TileEntitySweetCrystalCharger tileEntity;
 	
@@ -32,7 +31,7 @@ public class GuiSweetCrystalCharger extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		String tileName = ((ITextComponent)Objects.<ITextComponent>requireNonNull(this.tileEntity.getDisplayName())).getUnformattedText();
+		String tileName = Objects.requireNonNull(this.tileEntity.getDisplayName()).getUnformattedText();
 		this.fontRenderer.drawString(tileName, this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2 + 10, 6, 4210752);
 		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 7, this.ySize - 96 + 2, 4210752);
 		this.fontRenderer.drawString("RF : " + this.tileEntity.getField("energy"), 100, 72, 4210752);

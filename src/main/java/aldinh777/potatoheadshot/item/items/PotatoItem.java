@@ -1,9 +1,11 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class PotatoItem extends Item {
 
@@ -22,7 +24,7 @@ public class PotatoItem extends Item {
     }
 
     @Override
-    public int getItemBurnTime(ItemStack itemStack) {
+    public int getItemBurnTime(@Nonnull ItemStack itemStack) {
         return this.burn_time;
     }
 }

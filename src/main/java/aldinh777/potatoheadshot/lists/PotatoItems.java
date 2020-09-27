@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.lists;
 
-import aldinh777.potatoheadshot.item.*;
+import aldinh777.potatoheadshot.item.items.*;
 import aldinh777.potatoheadshot.util.FoodEffects;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;

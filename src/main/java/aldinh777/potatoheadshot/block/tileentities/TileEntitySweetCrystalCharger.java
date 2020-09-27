@@ -11,6 +11,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
@@ -67,7 +68,7 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityEnergy.ENERGY) return true; 
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return (facing == EnumFacing.UP || facing == EnumFacing.DOWN);
@@ -77,8 +78,11 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	
 	@Nullable
 	@Override
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		if (capability == CapabilityEnergy.ENERGY) return (T)this.storage; 
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		if (capability == CapabilityEnergy.ENERGY) {
+			return (T)this.storage;
+		}
+
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == EnumFacing.UP)
 				return (T)this.inputHandler; 
@@ -86,7 +90,8 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 				return (T)this.outputHandler;
 			}
 		} 
-		return (T)super.getCapability(capability, facing);
+
+		return super.getCapability(capability, facing);
 	}
 	
 	@Nullable
@@ -96,7 +101,7 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
+	public void readFromNBT(@Nonnull NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
 		this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
@@ -106,8 +111,9 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 		this.storage.readFromNBT(compound);
 	}
 
+	@Nonnull
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
 		compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());

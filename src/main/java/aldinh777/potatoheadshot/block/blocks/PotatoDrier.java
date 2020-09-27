@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.item.PotatoItemBlock;
+import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Random;
@@ -44,7 +45,7 @@ public class PotatoDrier extends PotatoMachine {
     }
 
     @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    public void onBlockAdded(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (!worldIn.isRemote) {
             IBlockState north = worldIn.getBlockState(pos.north());
             IBlockState south = worldIn.getBlockState(pos.south());
@@ -69,6 +70,7 @@ public class PotatoDrier extends PotatoMachine {
 
     }
 
+    @Nonnull
     @Override
     public BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, ACTIVE);
@@ -82,6 +84,7 @@ public class PotatoDrier extends PotatoMachine {
         return facing + (active ? 8 : 0);
     }
 
+    @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
         int facing = meta;
@@ -118,25 +121,26 @@ public class PotatoDrier extends PotatoMachine {
         return iblockstate;
     }
 
+    @Nonnull
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
         return Item.getItemFromBlock(PotatoBlocks.POTATO_DRIER);
     }
 
     @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public int getLightValue(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         boolean active = state.getValue(ACTIVE);
         return active ? 13 : 0;
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TileEntityPotatoDrier();
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (!worldIn.isRemote) {
             if (!keepInventory) {
                 TileEntityPotatoDrier te = (TileEntityPotatoDrier) worldIn.getTileEntity(pos);

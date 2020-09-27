@@ -2,13 +2,12 @@ package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.block.containers.ContainerMana;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCollector;
-import java.util.Objects;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+
+import java.util.Objects;
 
 public abstract class GuiMana extends GuiContainer {
 	

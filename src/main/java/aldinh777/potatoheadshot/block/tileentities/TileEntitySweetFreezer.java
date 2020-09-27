@@ -68,7 +68,7 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) return true;
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
@@ -76,8 +76,11 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
 
     @Nullable
     @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityEnergy.ENERGY) return (T) this.storage;
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityEnergy.ENERGY) {
+            return (T) this.storage;
+        }
+
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == EnumFacing.UP) {
                 return (T)this.inputHandler;
@@ -87,6 +90,7 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
                 return (T)this.saltHandler;
             }
         }
+
         return super.getCapability(capability, facing);
     }
 
@@ -97,7 +101,7 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
+    public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.saltHandler.deserializeNBT(compound.getCompoundTag("InventorySalt"));
         this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
@@ -108,8 +112,9 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
         this.storage.readFromNBT(compound);
     }
 
+    @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
         compound.setTag("InventorySalt", this.saltHandler.serializeNBT());

@@ -18,8 +18,9 @@ public class SlotOutputHandler extends SlotItemHandler {
         return false;
     }
 
+    @Nonnull
     @Override
-    public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+    public ItemStack onTake(@Nonnull EntityPlayer thePlayer, @Nonnull ItemStack stack) {
         this.onCrafting(stack);
         super.onTake(thePlayer, stack);
         return stack;

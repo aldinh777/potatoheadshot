@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class GlowingPotatoCrops extends PotatoCrops {
@@ -15,18 +16,20 @@ public class GlowingPotatoCrops extends PotatoCrops {
         super(name);
     }
 
+    @Nonnull
     @Override
     protected Item getCrop() {
         return PotatoItems.GLOWING_POTATO;
     }
 
+    @Nonnull
     @Override
     protected Item getSeed() {
         return PotatoItems.GLOWING_POTATO;
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         this.checkAndDropBlock(worldIn, pos, state);
 
         if (!worldIn.isAreaLoaded(pos, 1)) return;
@@ -45,7 +48,7 @@ public class GlowingPotatoCrops extends PotatoCrops {
     }
 
     @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public int getLightValue(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         int stage = state.getValue(AGE);
 
         switch (stage) {

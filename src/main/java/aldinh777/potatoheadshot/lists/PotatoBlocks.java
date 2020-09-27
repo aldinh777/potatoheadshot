@@ -9,6 +9,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -69,28 +70,35 @@ public class PotatoBlocks {
         POTATO_BLOCK = new PotatoBlock("potato_block", BlockType.POTATO);
         SWEET_POTATO_BLOCK = new PotatoBlock("sweet_potato_block", BlockType.METAL);
         SWEET_MACHINE_FRAME = new PotatoBlock("sweet_machine_frame", BlockType.METAL) {
+            @Nonnull
             @Override
             public BlockRenderLayer getBlockLayer() {
                 return BlockRenderLayer.CUTOUT;
             }
+
+            @Override
             public boolean isOpaqueCube(IBlockState state)
             {
                 return false;
             }
+
+            @Override
             public boolean isFullCube(IBlockState state)
             {
                 return false;
             }
         };
         GLOWING_POTATO_BLOCK = new PotatoBlock("glowing_potato_block", BlockType.GLASS) {
+            @Nonnull
             @Override
-            public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+            public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
                 return PotatoItems.GLOWING_POTATO_DUST;
             }
         }.setLightLevel(1.0f);
         GLOWING_MANA_BLOCK = new PotatoBlock("glowing_mana_block", BlockType.GLASS) {
+            @Nonnull
             @Override
-            public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+            public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
                 return PotatoItems.GLOWING_MANA_DUST;
             }
         }.setLightLevel(1.0f);
@@ -112,6 +120,7 @@ public class PotatoBlocks {
 
         // Bugged Feature
         DIMENSIONAL_GLASS = new PotatoBlock("dimensional_glass", BlockType.GLASS) {
+            @Nonnull
             @SideOnly(Side.CLIENT)
             public BlockRenderLayer getBlockLayer()
             {

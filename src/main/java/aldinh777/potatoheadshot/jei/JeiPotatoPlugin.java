@@ -18,7 +18,6 @@ import aldinh777.potatoheadshot.jei.mana.CollectorRecipeCategory;
 import aldinh777.potatoheadshot.jei.mana.ExtractorRecipe;
 import aldinh777.potatoheadshot.jei.mana.ExtractorRecipeCategory;
 import mezz.jei.api.*;
-import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.util.ResourceLocation;

@@ -6,20 +6,24 @@ import mezz.jei.api.IGuiHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class FireCauldronRecipeCategory extends AbstractCauldronRecipeCategory {
+import javax.annotation.Nonnull;
+
+public class FireCauldronRecipeCategory extends AbstractCauldronRecipeCategory<FireCauldronRecipe> {
 	
 	private static final String path = "potatoheadshot:textures/gui/cauldron/cauldron_fire.png";
-	private static final ResourceLocation TEXTURE = new ResourceLocation("potatoheadshot:textures/gui/cauldron/cauldron_fire.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 	
 	public FireCauldronRecipeCategory(IGuiHelper gui) {
 		super(gui, TEXTURE, new ItemStack(PotatoItems.ROD_FIRE));
 	}
 
-	@Override	
+	@Nonnull
+	@Override
 	public String getUid() {
 		return JeiPotatoPlugin.CAULDRON_FIRE.toString();
 	}
 
+	@Nonnull
 	@Override
 	public String getTitle() {
 		return "Mana Fire Cauldron";

@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -23,6 +23,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,17 +48,19 @@ public class SweetBucket extends Item {
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
+    public int getMaxItemUseDuration(@Nonnull ItemStack stack) {
         return 32;
     }
 
+    @Nonnull
     @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
+    public EnumAction getItemUseAction(@Nonnull ItemStack stack) {
         return EnumAction.DRINK;
     }
 
+    @Nonnull
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, World worldIn, @Nonnull EntityLivingBase entityLiving) {
         if (!worldIn.isRemote) {
             if (entityLiving instanceof EntityPlayer) {
                 onDrink(new ItemStack(Items.MILK_BUCKET), worldIn, (EntityPlayer) entityLiving);
@@ -71,8 +74,9 @@ public class SweetBucket extends Item {
         return stack.isEmpty() ? new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET) : stack;
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
 
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, false);
@@ -81,23 +85,28 @@ public class SweetBucket extends Item {
 
         if (raytraceresult == null) {
             return drink(playerIn, itemstack, handIn);
+
         } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
+
         } else {
             BlockPos blockpos = raytraceresult.getBlockPos();
 
             if (!worldIn.isBlockModifiable(playerIn, blockpos)) {
                 return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+
             } else {
                 boolean flag1 = worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos);
                 BlockPos sidePos = flag1 && raytraceresult.sideHit == EnumFacing.UP ? blockpos : blockpos.offset(raytraceresult.sideHit);
 
                 if (!playerIn.canPlayerEdit(sidePos, raytraceresult.sideHit, itemstack)) {
                     return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+
                 } else if (this.tryPlaceContainedLiquid(playerIn, worldIn, sidePos)) {
                     if (!playerIn.capabilities.isCreativeMode) {
                         return new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET));
                     }
+
                     return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
                 } else {
                     return drink(playerIn, itemstack, handIn);
@@ -107,7 +116,7 @@ public class SweetBucket extends Item {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         if (this.getClass() == SweetBucket.class) {
             return new FluidBucketWrapper(stack);
         } else {

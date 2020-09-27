@@ -151,13 +151,13 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Nullable
     @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == EnumFacing.UP) {
                 return (T)this.inputHandler;
@@ -167,6 +167,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
                 return (T)this.fuelHandler;
             }
         }
+
         return super.getCapability(capability, facing);
     }
 
@@ -177,7 +178,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
+    public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.fuelHandler.deserializeNBT(compound.getCompoundTag("InventoryFuel"));
         this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
@@ -192,8 +193,9 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         this.currentBurnTime = getItemBurnTime(this.fuelHandler.getStackInSlot(0));
     }
 
+    @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("InventoryFuel", this.fuelHandler.serializeNBT());
         compound.setTag("InventoryInput", this.inputHandler.serializeNBT());

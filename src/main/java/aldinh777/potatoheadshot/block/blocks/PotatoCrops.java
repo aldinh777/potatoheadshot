@@ -8,7 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class PotatoCrops extends BlockCrops {
 
@@ -29,18 +30,21 @@ public class PotatoCrops extends BlockCrops {
         PotatoBlocks.LISTS.add(this);
     }
 
+    @Nonnull
     @Override
     protected Item getSeed() {
         return PotatoItems.SWEET_POTATO;
     }
 
+    @Nonnull
     @Override
     protected Item getCrop() {
         return PotatoItems.SWEET_POTATO;
     }
 
+    @Nonnull
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return CROPS_AABB[state.getValue(this.getAgeProperty())];
     }
 }

@@ -2,6 +2,8 @@ package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalCharger;
 import aldinh777.potatoheadshot.util.BlockType;
+
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import aldinh777.potatoheadshot.util.Constants;
@@ -23,7 +25,7 @@ public class SweetCrystalCharger extends PotatoMachine {
 	
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
 		if (this.ultimate) {
 			return new TileEntitySweetCrystalCharger().setUltimate();
 		} else {
@@ -32,7 +34,7 @@ public class SweetCrystalCharger extends PotatoMachine {
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+	public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
 		TileEntitySweetCrystalCharger tileEntity = (TileEntitySweetCrystalCharger)worldIn.getTileEntity(pos);
 		if (tileEntity != null) {
 			IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);

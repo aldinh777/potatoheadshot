@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SweetCrystalMaker extends PotatoMachine {
@@ -21,12 +22,12 @@ public class SweetCrystalMaker extends PotatoMachine {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TileEntitySweetCrystalMaker();
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (!worldIn.isRemote) {
             TileEntitySweetCrystalMaker tileEntity = (TileEntitySweetCrystalMaker) worldIn.getTileEntity(pos);
             if (tileEntity != null) {

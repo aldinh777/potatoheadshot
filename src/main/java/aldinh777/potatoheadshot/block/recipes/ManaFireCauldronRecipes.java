@@ -2,7 +2,6 @@ package aldinh777.potatoheadshot.block.recipes;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 

@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.BlockLiquid;
@@ -20,6 +20,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SweetFoodBucket extends PotatoFood {
@@ -29,8 +30,9 @@ public class SweetFoodBucket extends PotatoFood {
         this.setMaxStackSize(16);
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);
         ActionResult<ItemStack> ret = ForgeEventFactory.onBucketUse(playerIn, worldIn, itemstack, raytraceresult);
@@ -38,8 +40,10 @@ public class SweetFoodBucket extends PotatoFood {
 
         if (raytraceresult == null) {
             return eatItem(playerIn, itemstack, handIn);
+
         } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
+
         } else {
             BlockPos blockpos = raytraceresult.getBlockPos();
 
@@ -48,6 +52,7 @@ public class SweetFoodBucket extends PotatoFood {
             } else {
                 if (!playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack)) {
                     return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+
                 } else {
                     IBlockState iblockstate = worldIn.getBlockState(blockpos);
                     Material material = iblockstate.getMaterial();
@@ -71,7 +76,7 @@ public class SweetFoodBucket extends PotatoFood {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         if (this.getClass() == SweetFoodBucket.class) {
             return new FluidBucketWrapper(stack);
         } else {

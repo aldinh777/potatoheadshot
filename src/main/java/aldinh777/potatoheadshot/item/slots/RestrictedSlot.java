@@ -19,7 +19,7 @@ public class RestrictedSlot extends Slot {
     }
 
     @Override
-    public boolean canTakeStack(EntityPlayer playerIn) {
+    public boolean canTakeStack(@Nonnull EntityPlayer playerIn) {
         return false;
     }
 }

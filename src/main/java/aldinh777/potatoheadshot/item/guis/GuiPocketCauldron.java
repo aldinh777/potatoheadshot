@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.item.guis;
 
-import aldinh777.potatoheadshot.item.PocketCauldron;
+import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.item.container.ContainerPocketCauldron;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

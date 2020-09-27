@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.item.LavaPotatoSeed;
+import aldinh777.potatoheadshot.item.items.LavaPotatoSeed;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -12,6 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class FarmlandLava extends BlockFarmland {
@@ -25,7 +26,7 @@ public class FarmlandLava extends BlockFarmland {
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nonnull Random rand) {
         int i = state.getValue(MOISTURE);
 
         if (!this.hasWater(worldIn, pos) && !worldIn.isRainingAt(pos.up())) {
@@ -55,7 +56,7 @@ public class FarmlandLava extends BlockFarmland {
     }
 
     @Override
-    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+    public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
         return plantable instanceof LavaPotatoSeed;
     }
 }

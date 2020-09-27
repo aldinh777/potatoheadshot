@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class SweetPotatoGenerator extends PotatoMachine {
 
     public SweetPotatoGenerator(String name, BlockType blockType) {
@@ -18,12 +20,12 @@ public class SweetPotatoGenerator extends PotatoMachine {
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TileEntitySweetPotatoGenerator();
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (!worldIn.isRemote) {
             TileEntitySweetPotatoGenerator tileEntity = (TileEntitySweetPotatoGenerator) worldIn.getTileEntity(pos);
             if (tileEntity != null) {

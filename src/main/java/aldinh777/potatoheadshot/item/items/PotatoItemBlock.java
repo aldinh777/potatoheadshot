@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.item;
+package aldinh777.potatoheadshot.item.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;

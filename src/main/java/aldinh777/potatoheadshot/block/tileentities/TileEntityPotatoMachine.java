@@ -49,7 +49,7 @@ public abstract class TileEntityPotatoMachine extends TileEntity implements ITic
     }
 
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState state, IBlockState newState) {
+    public boolean shouldRefresh(@Nonnull World world, @Nonnull BlockPos pos, IBlockState state, IBlockState newState) {
         return state.getBlock() != newState.getBlock();
     }
 
@@ -59,12 +59,13 @@ public abstract class TileEntityPotatoMachine extends TileEntity implements ITic
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
+    public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
     }
 
+    @Nonnull
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         if (this.hasCustomName()) {
             compound.setString("CustomName", this.customName);

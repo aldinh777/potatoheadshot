@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.item.PotatoItemBlock;
+import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -12,6 +12,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ManaFlower extends BlockBush {
 
@@ -34,28 +36,30 @@ public class ManaFlower extends BlockBush {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+    public boolean canPlaceBlockAt(World worldIn, @Nonnull BlockPos pos) {
         return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
     }
 
     @Override
-    public boolean canBlockStay(World world, BlockPos pos, IBlockState blockState) {
+    public boolean canBlockStay(@Nonnull World world, @Nonnull BlockPos pos, IBlockState blockState) {
         if (blockState.getBlock() == this) {
             IBlockState roof = world.getBlockState(pos.up());
             IBlockState soil = world.getBlockState(pos.down());
 
-            return !isAirOrFlower(roof) || !isAirOrFlower(soil);
+            return isNotAirAndFlower(roof) || isNotAirAndFlower(soil);
+
         } else {
              return this.canSustainBush(world.getBlockState(pos.down()));
         }
     }
 
+    @Nonnull
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return BUSH_AABB;
     }
 
-    private boolean isAirOrFlower(IBlockState blockState) {
-        return blockState.getBlock() == Blocks.AIR || blockState.getBlock() instanceof ManaFlower;
+    private boolean isNotAirAndFlower(IBlockState blockState) {
+        return blockState.getBlock() != Blocks.AIR && !(blockState.getBlock() instanceof ManaFlower);
     }
 }

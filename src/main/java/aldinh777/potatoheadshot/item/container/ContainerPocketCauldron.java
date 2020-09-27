@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.item.container;
 
 import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
-import aldinh777.potatoheadshot.item.PocketCauldron;
+import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.item.slots.RestrictedSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -12,6 +12,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+
+import javax.annotation.Nonnull;
 
 public class ContainerPocketCauldron extends Container {
 
@@ -57,7 +59,7 @@ public class ContainerPocketCauldron extends Container {
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
+    public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
         return true;
     }
 
@@ -80,8 +82,9 @@ public class ContainerPocketCauldron extends Container {
         this.manaSize = PocketCauldron.getManaSize(stack);
     }
 
+    @Nonnull
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+    public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
 
@@ -93,7 +96,11 @@ public class ContainerPocketCauldron extends Container {
                 if (!this.mergeItemStack(stack, 3, 39, false)) {
                     return ItemStack.EMPTY;
                 }
+
             } else if (index < 30) {
+                if (!this.mergeItemStack(stack, 30, 39, false)) {
+                    return ItemStack.EMPTY;
+                }
 
             } else if (index < 39 && !this.mergeItemStack(stack, 3, 30, false)) {
                 return ItemStack.EMPTY;
@@ -101,6 +108,7 @@ public class ContainerPocketCauldron extends Container {
 
             if (stack.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
+
             } else {
                 slot.onSlotChanged();
             }
