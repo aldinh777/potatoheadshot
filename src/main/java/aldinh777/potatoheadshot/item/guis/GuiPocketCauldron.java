@@ -22,11 +22,18 @@ public class GuiPocketCauldron extends GuiContainer {
     }
 
     @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String tileName = "Pocket Cauldron";
         this.fontRenderer.drawString(tileName, this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2 + 10, 6, 4210752);
         this.fontRenderer.drawString(this.player.getDisplayName().getFormattedText(), 7, this.ySize - 96 + 2, 4210752);
-        this.fontRenderer.drawString("Mana : " + PocketCauldron.getEnergy(stack).getManaStored(), 100, this.ySize - 96 + 2, 4210752);
+        this.fontRenderer.drawString("Mana : " + PocketCauldron.getManaSize(stack), 100, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
@@ -39,8 +46,8 @@ public class GuiPocketCauldron extends GuiContainer {
     }
 
     private void drawManaStored() {
-        int manaSize = PocketCauldron.getEnergy(stack).getManaStored();
-        int manaMaxSize = PocketCauldron.getEnergy(stack).getMaxManaStored();
+        int manaSize = PocketCauldron.getManaSize(stack);
+        int manaMaxSize = PocketCauldron.getMaxManaSize();
         int i = (manaSize == 0 || manaMaxSize == 0) ? 0 : (manaSize * 146 / manaMaxSize);
 
         this.drawTexturedModalRect(

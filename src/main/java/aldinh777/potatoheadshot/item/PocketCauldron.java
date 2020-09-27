@@ -36,6 +36,8 @@ import java.util.Objects;
 
 public class PocketCauldron extends Item {
 
+    public static final int maxManaSize = 800000;
+
     public PocketCauldron(String name) {
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
@@ -59,14 +61,15 @@ public class PocketCauldron extends Item {
                     if (te instanceof TileEntityManaCauldron) {
                         TileEntityManaCauldron manaCauldron = (TileEntityManaCauldron) te;
                         PotatoManaStorage cauldronStorage = manaCauldron.getManaStorage();
-                        PotatoManaStorage pocketStorage = getEnergy(stack);
+                        int pocketMana = getManaSize(stack);
 
-                        int transferRate = pocketStorage.getMaxManaStored() - pocketStorage.getManaStored();
+                        int transferRate = maxManaSize - pocketMana;
                         if (transferRate > cauldronStorage.getManaStored()) {
                             transferRate = cauldronStorage.getManaStored();
                         }
 
-                        pocketStorage.collectMana(transferRate);
+                        int result = pocketMana + transferRate;
+                        setManaSize(stack, result);
                         cauldronStorage.useMana(transferRate);
 
                         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
@@ -79,13 +82,14 @@ public class PocketCauldron extends Item {
             int posY = pos.getY();
             int posZ = pos.getZ();
 
-            System.out.println("Current Storage : " + getEnergy(stack).getManaStored());
+            int mana = getManaSize(stack);
+            System.out.println("NBT Mana : " + mana);
 
             playerIn.openGui(PotatoHeadshot.INSTANCE, Constants.POCKET_CAULDRON, worldIn, posX, posY, posZ);
-            return ActionResult.newResult(EnumActionResult.PASS, stack);
+            return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
         }
 
-        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+        return ActionResult.newResult(EnumActionResult.PASS, stack);
     }
 
     @Override
@@ -105,18 +109,16 @@ public class PocketCauldron extends Item {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
             IItemHandler inputHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
             IItemHandler outputHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
-            PotatoManaStorage storage = getEnergy(stack);
             NBTTagCompound compound = stack.getTagCompound();
 
             if (compound == null) {
                 compound = new NBTTagCompound();
             }
 
-            storage.writeToNBT(compound);
-
             if (inputHandler instanceof ItemStackHandler) {
                 compound.setTag("InventoryInput", ((ItemStackHandler) inputHandler).serializeNBT());
             }
+
             if (outputHandler instanceof ItemStackHandler) {
                 compound.setTag("InventoryOutput", ((ItemStackHandler) outputHandler).serializeNBT());
             }
@@ -146,9 +148,6 @@ public class PocketCauldron extends Item {
                     ((ItemStackHandler) outputHandler).deserializeNBT(compound.getCompoundTag("InventoryOutput"));
                 }
             }
-
-            PotatoManaStorage storage = getEnergy(stack);
-            storage.readFromNBT(compound);
         }
     }
 
@@ -166,8 +165,34 @@ public class PocketCauldron extends Item {
         throw new NullPointerException("No Pocket Cauldron Found in Hand");
     }
 
-    public static PotatoManaStorage getEnergy(ItemStack stack) {
-        return (PotatoManaStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
+    public static int getManaSize(ItemStack stack) {
+        NBTTagCompound compound = stack.getTagCompound();
+
+        if (compound == null) {
+            compound = new NBTTagCompound();
+            stack.setTagCompound(compound);
+        }
+
+        if (!compound.hasKey("Mana")) {
+            compound.setInteger("Mana", 0);
+        }
+
+        return compound.getInteger("Mana");
+    }
+
+    public static void setManaSize(ItemStack stack, int value) {
+        NBTTagCompound compound = stack.getTagCompound();
+
+        if (compound == null) {
+            compound = new NBTTagCompound();
+            stack.setTagCompound(compound);
+        }
+
+        compound.setInteger("Mana", value);
+    }
+
+    public static int getMaxManaSize() {
+        return maxManaSize;
     }
 
     static class PocketCapability implements ICapabilitySerializable<NBTBase> {
@@ -175,7 +200,6 @@ public class PocketCauldron extends Item {
         public final ItemStack stack;
         public IItemHandler inputHandler = new ItemStackHandler(2);
         public IItemHandler outputHandler = new ItemStackHandler(1);
-        public PotatoManaStorage storage = new PotatoManaStorage(800000);
 
         public PocketCapability(ItemStack stack) {
             this.stack = stack;
@@ -194,9 +218,7 @@ public class PocketCauldron extends Item {
         @Nullable
         @Override
         public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-            if (capability == CapabilityEnergy.ENERGY) {
-                return (T) this.storage;
-            } else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
                 if (facing == EnumFacing.UP) {
                     return (T) this.inputHandler;
                 } else if (facing == EnumFacing.DOWN) {

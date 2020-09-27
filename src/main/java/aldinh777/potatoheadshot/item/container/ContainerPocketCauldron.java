@@ -66,11 +66,11 @@ public class ContainerPocketCauldron extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-            int manaSize = PocketCauldron.getEnergy(stack).getManaStored();
+            int manaSize = PocketCauldron.getManaSize(stack);
             listener.sendWindowProperty(this, 0, manaSize);
         }
 
-        this.manaSize = PocketCauldron.getEnergy(stack).getManaStored();
+        this.manaSize = PocketCauldron.getManaSize(stack);
     }
 
     @Override
