@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "potatoheadshot:items/mana_cauldron"
+    "layer0": "potatoheadshot:items/pocket_cauldron"
   }
 }
