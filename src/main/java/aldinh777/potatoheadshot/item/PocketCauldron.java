@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.item;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
+import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -86,15 +87,70 @@ public class PocketCauldron extends Item {
             System.out.println("NBT Mana : " + mana);
 
             playerIn.openGui(PotatoHeadshot.INSTANCE, Constants.POCKET_CAULDRON, worldIn, posX, posY, posZ);
-            return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+            return ActionResult.newResult(EnumActionResult.PASS, stack);
         }
 
-        return ActionResult.newResult(EnumActionResult.PASS, stack);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+        if (!worldIn.isRemote) {
+            ItemStackHandler inputHandler = (ItemStackHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+            ItemStackHandler outputHandler = (ItemStackHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+
+            if (inputHandler == null || outputHandler == null) {
+                throw new NullPointerException("Item Stack don't have Item capabilities");
+            }
+
+            ItemStack rodSlot = inputHandler.getStackInSlot(0);
+            ItemStack inputSlot = inputHandler.getStackInSlot(1);
+            ItemStack outputSlot = outputHandler.getStackInSlot(0);
+            int manaSize = getManaSize(stack);
+
+            if (rodSlot.isEmpty() || inputSlot.isEmpty()) {
+                return;
+            }
+
+            if (rodSlot.getItem() == PotatoItems.ROD_VOID) {
+                inputSlot.shrink(inputSlot.getCount());
+                return;
+            }
+
+            IManaRecipes recipes = IManaRecipes.getRecipeById(0);
+
+            if (rodSlot.getItem() == PotatoItems.ROD_MANA) {
+                recipes = IManaRecipes.getRecipeById(0);
+            } else if (rodSlot.getItem() == PotatoItems.ROD_LIFE) {
+                recipes = IManaRecipes.getRecipeById(1);
+            } else if (rodSlot.getItem() == PotatoItems.ROD_NATURE) {
+                recipes = IManaRecipes.getRecipeById(2);
+            } else if (rodSlot.getItem() == PotatoItems.ROD_FIRE) {
+                recipes = IManaRecipes.getRecipeById(3);
+            }
+
+            ItemStack result = recipes.getResult(inputSlot);
+            int cost = recipes.getCost(inputSlot);
+
+            if (result.isEmpty() || cost > manaSize) {
+                return;
+            }
+
+            if (result.isItemEqual(outputSlot)) {
+                if (outputSlot.getCount() + result.getCount() <= outputSlot.getMaxStackSize()) {
+                    outputSlot.grow(result.getCount());
+
+                    inputSlot.shrink(1);
+                    setManaSize(stack, manaSize - cost);
+                }
+
+            } else {
+                outputHandler.setStackInSlot(0, result.copy());
+
+                inputSlot.shrink(1);
+                setManaSize(stack, manaSize - cost);
+            }
+        }
     }
 
     @Nullable
