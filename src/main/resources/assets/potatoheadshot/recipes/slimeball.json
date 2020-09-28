@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "potatoheadshot:sticky_potato"
+    }
+  ],
+  "result": {
+    "item": "minecraft:slime_ball"
+  }
+}
