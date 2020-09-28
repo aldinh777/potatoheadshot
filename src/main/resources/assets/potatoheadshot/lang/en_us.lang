@@ -18,6 +18,11 @@ item.sweet_potato.name=Very Sweet Potato
 item.baked_sweet_potato.name=Baked Very Sweet Potato
 item.glowing_potato.name=Glowing Potato
 
+# Seeds
+item.lava_potato_seed.name=Lava Potato Seed
+item.water_potato_seed.name=Water Potato Seed
+
+
 # Items
 item.small_potato_planks.name=Small Potato Planks
 item.potato_stick.name=Potato Stick
@@ -28,7 +33,6 @@ item.potato_starch.name=Potato Starch
 item.raw_salt.name=Raw Salt
 item.glowing_potato_dust.name=Glowing Potato Dust
 item.glowing_mana_dust.name=Mana Dust
-item.lava_potato_seed.name=Lava Potato Seed
 item.essence_life.name=Life Essence
 item.essence_nature.name=Nature Essence
 item.essence_fire.name=Fire Essence

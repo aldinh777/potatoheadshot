@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.block.blocks.*;
 import aldinh777.potatoheadshot.block.crops.GlowingPotatoCrops;
 import aldinh777.potatoheadshot.block.crops.LavaPotatoCrops;
 import aldinh777.potatoheadshot.block.crops.SweetPotatoCrops;
+import aldinh777.potatoheadshot.block.crops.WaterPotatoCrops;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,6 +25,7 @@ public class PotatoBlocks {
     public static Block SWEET_POTATOES = new SweetPotatoCrops("sweet_potatoes");
     public static Block GLOWING_POTATOES = new GlowingPotatoCrops("glowing_potatoes");
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
+    public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
 
     public static Block COOKED_DIRT;
     public static Block BAKED_POTATO_PLANKS;
@@ -76,14 +78,12 @@ public class PotatoBlocks {
             }
 
             @Override
-            public boolean isOpaqueCube(@Nonnull IBlockState state)
-            {
+            public boolean isOpaqueCube(@Nonnull IBlockState state) {
                 return false;
             }
 
             @Override
-            public boolean isFullCube(@Nonnull IBlockState state)
-            {
+            public boolean isFullCube(@Nonnull IBlockState state) {
                 return false;
             }
         };

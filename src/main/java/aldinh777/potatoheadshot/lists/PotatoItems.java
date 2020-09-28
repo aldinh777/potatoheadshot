@@ -28,6 +28,9 @@ public class PotatoItems {
     public static Item BAKED_SWEET_POTATO;
     public static Item GLOWING_POTATO;
 
+    public static Item LAVA_POTATO_SEED;
+    public static Item WATER_POTATO_SEED;
+
     public static Item SMALL_POTATO_PLANKS;
     public static Item POTATO_STICK;
     public static Item POTATO_LEAVES;
@@ -40,7 +43,6 @@ public class PotatoItems {
     public static Item SWEET_POTATO_INGOT;
     public static Item GLOWING_POTATO_DUST;
     public static Item MANA_DUST;
-    public static Item LAVA_POTATO_SEED;
     public static Item ESSENCE_LIFE;
     public static Item ESSENCE_NATURE;
     public static Item ESSENCE_FIRE;
@@ -104,6 +106,10 @@ public class PotatoItems {
         // Glowing Potato Food Section
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
 
+        // Seeds
+        LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
+        WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
+
         // Potato Items
         SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");
         DRIED_POTATO = new PotatoItem("dried_potato");
@@ -117,7 +123,6 @@ public class PotatoItems {
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
         GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
         MANA_DUST = new PotatoItem("glowing_mana_dust");
-        LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
         ESSENCE_LIFE = new PotatoItem("essence_life");
         ESSENCE_NATURE = new PotatoItem("essence_nature");
         ESSENCE_FIRE = new PotatoItem("essence_fire");
