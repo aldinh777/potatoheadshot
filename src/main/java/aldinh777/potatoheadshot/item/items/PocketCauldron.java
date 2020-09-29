@@ -38,6 +38,8 @@ import java.util.Objects;
 public class PocketCauldron extends Item {
 
     public static final int maxManaSize = 800000;
+    public static final int ultimateMaxManaSize = 32000000;
+    private boolean ultimate = false;
 
     public PocketCauldron(String name) {
         this.setUnlocalizedName(name);
@@ -64,8 +66,9 @@ public class PocketCauldron extends Item {
                         TileEntityManaCauldron manaCauldron = (TileEntityManaCauldron) te;
                         PotatoManaStorage cauldronStorage = manaCauldron.getManaStorage();
                         int pocketMana = getManaSize(stack);
+                        int maxMana = this.ultimate ? ultimateMaxManaSize : maxManaSize;
 
-                        int transferRate = maxManaSize - pocketMana;
+                        int transferRate = maxMana - pocketMana;
                         if (transferRate > cauldronStorage.getManaStored()) {
                             transferRate = cauldronStorage.getManaStored();
                         }
@@ -131,7 +134,9 @@ public class PocketCauldron extends Item {
             int cost = recipes.getCost(inputSlot);
 
             if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL) {
-                return;
+                if (!this.ultimate) {
+                    return;
+                }
             }
 
             if (result.isEmpty() || cost > manaSize) {
@@ -249,8 +254,18 @@ public class PocketCauldron extends Item {
         compound.setInteger("Mana", value);
     }
 
-    public static int getMaxManaSize() {
-        return maxManaSize;
+    public static int getMaxManaSize(ItemStack stack) {
+        if (stack.getItem() == PotatoItems.POCKET_CAULDRON) {
+            return maxManaSize;
+        } else if (stack.getItem() == PotatoItems.ULTIMATE_POCKET_CAULDRON) {
+            return ultimateMaxManaSize;
+        }
+        return 0;
+    }
+
+    public PocketCauldron setUltimate() {
+        this.ultimate = true;
+        return this;
     }
 
     static class PocketCapability implements ICapabilitySerializable<NBTBase> {
