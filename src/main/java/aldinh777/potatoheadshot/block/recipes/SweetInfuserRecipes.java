@@ -28,6 +28,8 @@ public class SweetInfuserRecipes {
         Item string = Items.STRING;
         Item coal = Items.COAL;
         Item potatoLeaves = PotatoItems.POTATO_LEAVES;
+        Item frozenPotato = PotatoItems.FROZEN_POTATO;
+        Item icePotato = PotatoItems.ICE_POTATO;
 
         Item crystal = PotatoItems.CRYSTAL;
         Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
@@ -91,6 +93,9 @@ public class SweetInfuserRecipes {
         addRecipe(new ItemStack(ultimateManaFlower), manaFlower,
                 ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
                 ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+        addRecipe(new ItemStack(icePotato), frozenPotato,
+                ice, ice, ice,
+                ice, ice, ice);
     }
 
     public <K, V> Map<K, V> getMap(Map<K, V> map, Item key) {

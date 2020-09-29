@@ -212,10 +212,11 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
     // Static Methods
 
     public static ItemStack getResult(ItemStack stack) {
-        ItemStack ice = new ItemStack(Item.getItemFromBlock(Blocks.ICE));
-        if (stack.getItem() == Items.WATER_BUCKET) return ice;
-        if (stack.getItem() == PotatoItems.SWEET_WATER_BUCKET) return ice;
-        if (stack.getItem() == PotatoItems.WATER_POTATO) return ice;
+        Item ice = Item.getItemFromBlock(Blocks.ICE);
+        if (stack.getItem() == Items.POTATO) return new ItemStack(PotatoItems.FROZEN_POTATO);
+        if (stack.getItem() == Items.WATER_BUCKET) return new ItemStack(ice);
+        if (stack.getItem() == PotatoItems.SWEET_WATER_BUCKET) return new ItemStack(ice);
+        if (stack.getItem() == PotatoItems.WATER_POTATO) return new ItemStack(ice);
         return ItemStack.EMPTY;
     }
 }

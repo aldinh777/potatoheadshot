@@ -30,6 +30,8 @@ public class LifeCauldronRecipe extends AbstractCauldronRecipe {
 		
 		addRecipe(jeiRecipes, PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED));
 		addRecipe(jeiRecipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED));
+		addRecipe(jeiRecipes, PotatoItems.ICE_POTATO, new ItemStack(PotatoItems.ICE_POTATO_SEED));
+
 		addRecipe(jeiRecipes, Items.FISH, new ItemStack(Items.PRISMARINE_SHARD));
 		addRecipe(jeiRecipes, Items.PRISMARINE_SHARD, new ItemStack(Items.PRISMARINE_CRYSTALS));
 		addRecipe(jeiRecipes, Items.CLAY_BALL, new ItemStack(Items.SLIME_BALL));

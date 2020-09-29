@@ -37,6 +37,8 @@ public class InfuserRecipe implements IRecipeWrapper {
 		Item string = Items.STRING;
 		Item coal = Items.COAL;
 		Item potatoLeaves = PotatoItems.POTATO_LEAVES;
+		Item frozenPotato = PotatoItems.FROZEN_POTATO;
+		Item icePotato = PotatoItems.ICE_POTATO;
 
 		Item crystal = PotatoItems.CRYSTAL;
 		Item chargedCrystal = PotatoItems.CHARGED_CRYSTAL;
@@ -68,29 +70,29 @@ public class InfuserRecipe implements IRecipeWrapper {
 		gemRecipes(jeiRecipes);
 		
 		addRecipe(jeiRecipes, new ItemStack(gravel), stone,
-						cobble, cobble, cobble,
-						sand, sand, sand);
+				cobble, cobble, cobble,
+				sand, sand, sand);
 		addRecipe(jeiRecipes, new ItemStack(rack), stone,
-						cobble, lava, cobble,
-						cobble, lava, cobble);
+				cobble, lava, cobble,
+				cobble, lava, cobble);
 		addRecipe(jeiRecipes, new ItemStack(grass), dirt,
-						potatoLeaves, potatoLeaves, potatoLeaves,
-						dirt, water, dirt);
+				potatoLeaves, potatoLeaves, potatoLeaves,
+				dirt, water, dirt);
 		addRecipe(jeiRecipes, new ItemStack(mycelium), dirt,
-						brownMushroom, brownMushroom, brownMushroom,
-						dirt, water, dirt);
+				brownMushroom, brownMushroom, brownMushroom,
+				dirt, water, dirt);
 		addRecipe(jeiRecipes, new ItemStack(glowStone), stone,
-						lava, lava, lava,
-						lava, lava, lava);
+				lava, lava, lava,
+				lava, lava, lava);
 		addRecipe(jeiRecipes, new ItemStack(endStone), stone,
-						enderPearl, enderPearl, enderPearl,
-						enderPearl, enderPearl, enderPearl);
+				enderPearl, enderPearl, enderPearl,
+				enderPearl, enderPearl, enderPearl);
 		addRecipe(jeiRecipes, new ItemStack(packedIce), ice,
-						ice, ice, ice,
-						ice, ice, ice);
+				ice, ice, ice,
+				ice, ice, ice);
 		addRecipe(jeiRecipes, new ItemStack(cobweb), string,
-						string, string, string,
-						string, string, string);
+				string, string, string,
+				string, string, string);
 		addRecipe(jeiRecipes, new ItemStack(ultimateCrystal), crystal,
 				chargedCrystal, chargedCrystal, chargedCrystal,
 				concentratedCrystal, concentratedCrystal, concentratedCrystal);
@@ -100,6 +102,9 @@ public class InfuserRecipe implements IRecipeWrapper {
 		addRecipe(jeiRecipes, new ItemStack(ultimateManaFlower), manaFlower,
 				ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
 				ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+		addRecipe(jeiRecipes, new ItemStack(icePotato), frozenPotato,
+				ice, ice, ice,
+				ice, ice, ice);
 
 		return jeiRecipes;
 	}

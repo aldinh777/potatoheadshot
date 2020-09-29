@@ -29,6 +29,8 @@ public interface FoodEffects {
             player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 150, 1));
     FoodEffects blindPlayer = (stack, worldIn, player) ->
             player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150, 1));
+    FoodEffects visionPlayer = (stack, worldIn, player) ->
+            player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 600, 1));
     FoodEffects tirePlayer = (stack, worldIn, player) ->
             player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 600, 1));
     FoodEffects fireResistPlayer = (stack, worldIn, player) ->

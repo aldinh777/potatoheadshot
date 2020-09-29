@@ -1,0 +1,6 @@
+{
+    "parent": "block/stem_growth2",
+    "textures": {
+        "stem": "potatoheadshot:blocks/ice_potato_stem"
+    }
+}

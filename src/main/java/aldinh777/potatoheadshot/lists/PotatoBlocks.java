@@ -24,6 +24,7 @@ public class PotatoBlocks {
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block STICKY_POTATOES = new StickyPotatoCrops("sticky_potatoes");
+    public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
     public static Block COOKED_DIRT;
     public static Block BAKED_POTATO_PLANKS;

@@ -1,7 +1,9 @@
 package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.item.items.LavaPotatoSeed;
+import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;
@@ -23,6 +25,7 @@ public class FarmlandLava extends BlockFarmland {
         this.setHardness(0.5f);
         this.setLightLevel(0.50f);
         PotatoBlocks.LISTS.add(this);
+        PotatoItems.LISTS.add(new PotatoItemBlock(this));
     }
 
     @Override

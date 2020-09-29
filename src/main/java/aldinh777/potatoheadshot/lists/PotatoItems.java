@@ -28,9 +28,12 @@ public class PotatoItems {
     public static Item BAKED_SWEET_POTATO;
     public static Item GLOWING_POTATO;
     public static Item STICKY_POTATO;
+    public static Item FROZEN_POTATO;
+    public static Item ICE_POTATO;
 
     public static Item LAVA_POTATO_SEED;
     public static Item WATER_POTATO_SEED;
+    public static Item ICE_POTATO_SEED;
 
     public static Item SMALL_POTATO_PLANKS;
     public static Item POTATO_STICK;
@@ -103,6 +106,8 @@ public class PotatoItems {
         // Sweet Potato Food Section
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
+        FROZEN_POTATO = new PotatoFood("frozen_potato", 1, 0.3f);
+        ICE_POTATO = new PotatoItem("ice_potato");
 
         // Crop
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
@@ -111,6 +116,7 @@ public class PotatoItems {
         // Seeds
         LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
         WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
+        ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
 
         // Potato Items
         SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");
@@ -174,6 +180,7 @@ public class PotatoItems {
         FoodEffects superWetPotatoEffects = FoodEffects.combine(wetPotatoEffects, FoodEffects.blindPlayer);
         FoodEffects waterPotatoEffects = FoodEffects.combine(superWetPotatoEffects,
                 FoodEffects.tirePlayer, FoodEffects.fireResistPlayer);
+        FoodEffects glowingPotatoEffects = FoodEffects.visionPlayer;
 
         // Configuration
         extraHotPotato.setSoundEvent(SoundEvents.ENTITY_BLAZE_SHOOT).setBurnTime(1600);
@@ -188,6 +195,7 @@ public class PotatoItems {
         addFoodEffects(WET_POTATO, wetPotatoEffects);
         addFoodEffects(SUPER_WET_POTATO, superWetPotatoEffects);
         addFoodEffects(WATER_POTATO, waterPotatoEffects);
+        addFoodEffects(GLOWING_POTATO, glowingPotatoEffects);
 
         addFoodEffects(SWEET_LAVA_BUCKET, FoodEffects.burnPlayer);
         addFoodEffects(SWEET_WATER_BUCKET, FoodEffects.unBurnPlayer);
