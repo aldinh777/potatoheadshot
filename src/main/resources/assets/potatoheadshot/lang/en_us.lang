@@ -71,6 +71,10 @@ item.potato_mana_knife.name=Mana Knife
 item.lava_hoe.name=Lava Hoe
 item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 
+# Splash Mana
+item.splash_mana_fire.name=Splash Potion of Fire Mana
+item.splash_mana_life.name=Splash Potion of Life Mana
+
 # Placeable Item
 tile.glowing_mana_torch.name=Mana Torch
 tile.glowing_mana_flower.name=Mana Flower

@@ -17,7 +17,8 @@ public class FireCauldronRecipe extends AbstractCauldronRecipe {
 		List<FireCauldronRecipe> jeiRecipes = Lists.newArrayList();
 		
 		addRecipe(jeiRecipes, Items.IRON_HOE, new ItemStack(PotatoItems.LAVA_HOE));
-		
+		addRecipe(jeiRecipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_FIRE));
+
 		return jeiRecipes;
 	}
 	

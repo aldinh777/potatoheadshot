@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class ManaLifeCauldronRecipes implements IManaRecipes {
         addRecipe(mycelium, new ItemStack(Blocks.BROWN_MUSHROOM));
         addRecipe(endStone, new ItemStack(Blocks.CHORUS_FLOWER));
         addRecipe(ice, new ItemStack(Blocks.SNOW));
+        addRecipe(Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 8000);
     }
 
     private void addRecipe(Item input, ItemStack result) {
@@ -56,6 +58,19 @@ public class ManaLifeCauldronRecipes implements IManaRecipes {
     @Override
     public ItemStack getResult(ItemStack input) {
         ItemStack result = this.recipes.get(input.getItem());
+
+        if (input.getItem() instanceof ItemSplashPotion) {
+            ItemSplashPotion splash = (ItemSplashPotion) input.getItem();
+            if (!splash.getItemStackDisplayName(input).equals("Awkward Splash Potion")) {
+                return ItemStack.EMPTY;
+            }
+        }
+
+        if (input.getItem() instanceof ItemSplashPotion) {
+            ItemSplashPotion splash = (ItemSplashPotion) input.getItem();
+            String name = splash.getItemStackDisplayName(input);
+            System.out.println(name);
+        }
 
         if (result != null) {
             return result;

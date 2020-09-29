@@ -44,7 +44,8 @@ public class LifeCauldronRecipe extends AbstractCauldronRecipe {
 		addRecipe(jeiRecipes, mycelium, new ItemStack(Blocks.BROWN_MUSHROOM));
 		addRecipe(jeiRecipes, endStone, new ItemStack(Blocks.CHORUS_FLOWER));
 		addRecipe(jeiRecipes, ice, new ItemStack(Blocks.SNOW));
-		
+		addRecipe(jeiRecipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE));
+
 		return jeiRecipes;
 	}
 	
