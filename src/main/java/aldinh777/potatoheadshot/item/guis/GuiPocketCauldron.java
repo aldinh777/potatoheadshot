@@ -33,7 +33,7 @@ public class GuiPocketCauldron extends GuiContainer {
         String tileName = "Pocket Cauldron";
         this.fontRenderer.drawString(tileName, this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2 + 10, 6, 4210752);
         this.fontRenderer.drawString(this.player.getDisplayName().getFormattedText(), 7, this.ySize - 96 + 2, 4210752);
-        this.fontRenderer.drawString("Mana : " + PocketCauldron.getManaSize(stack), 100, this.ySize - 96 + 2, 4210752);
+        this.fontRenderer.drawString("Mana : " + PocketCauldron.getManaSize(stack), 85, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
@@ -46,14 +46,14 @@ public class GuiPocketCauldron extends GuiContainer {
     }
 
     private void drawManaStored() {
-        int manaSize = PocketCauldron.getManaSize(stack);
-        int manaMaxSize = PocketCauldron.getMaxManaSize();
-        int i = (manaSize == 0 || manaMaxSize == 0) ? 0 : (manaSize * 146 / manaMaxSize);
+        double manaSize = PocketCauldron.getManaSize(stack);
+        double manaMaxSize = PocketCauldron.getMaxManaSize(stack);
+        double i = (manaSize == 0 || manaMaxSize == 0) ? 0 : (manaSize * 146 / manaMaxSize);
 
         this.drawTexturedModalRect(
                 this.guiLeft + 15, this.guiTop + 16,
                 0, 166,
-                i - 1, 18
+                (int)i - 1, 18
         );
     }
 }

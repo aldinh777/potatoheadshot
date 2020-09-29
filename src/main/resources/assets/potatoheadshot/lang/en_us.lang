@@ -43,6 +43,7 @@ item.rod_nature.name=Nature Rod
 item.rod_fire.name=Fire Rod
 item.rod_void.name=Void Rod
 item.pocket_cauldron.name=Pocket Cauldron
+item.ultimate_pocket_cauldron.name=Ultimate Pocket Cauldron
 
 # Crystals
 item.crystal_shard.name=Crystal Shard
