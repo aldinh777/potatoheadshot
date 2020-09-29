@@ -27,7 +27,7 @@ public class ManaLifeCauldronRecipes implements IManaRecipes {
         Item ice = Item.getItemFromBlock(Blocks.ICE);
 
         addRecipe(PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 12000);
-        addRecipe(PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED, 12000));
+        addRecipe(PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12000);
         addRecipe(Items.FISH, new ItemStack(Items.PRISMARINE_SHARD));
         addRecipe(Items.PRISMARINE_SHARD, new ItemStack(Items.PRISMARINE_CRYSTALS), 8000);
         addRecipe(Items.CLAY_BALL, new ItemStack(Items.SLIME_BALL), 8000);
