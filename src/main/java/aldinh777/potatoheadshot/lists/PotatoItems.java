@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.lists;
 
+import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
 import aldinh777.potatoheadshot.item.items.*;
 import aldinh777.potatoheadshot.util.FoodEffects;
 import net.minecraft.init.Blocks;
@@ -77,6 +78,9 @@ public class PotatoItems {
     public static Item SWEET_WATER_BUCKET;
     public static Item SWEET_MILK_BUCKET;
     public static Item ULTIMATE_BROKEN_FUEL;
+
+    public static Item SPLASH_MANA_FIRE;
+    public static Item SPLASH_MANA_LIFE;
 
     public static void addFoodEffects(Item item, FoodEffects... effects) {
         if (item instanceof PotatoFood) {
@@ -167,6 +171,10 @@ public class PotatoItems {
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
         LAVA_HOE = new LavaHoe("lava_hoe");
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 12800);
+
+        // Potato Potions
+        SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", ManaCauldron.Element.FIRE);
+        SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", ManaCauldron.Element.LIFE);
 
         // Configuration Definition
         PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) EXTRA_HOT_POTATO;
