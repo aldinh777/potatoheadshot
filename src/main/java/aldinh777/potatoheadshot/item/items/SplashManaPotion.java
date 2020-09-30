@@ -4,14 +4,13 @@ import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -62,6 +61,9 @@ public class SplashManaPotion extends PotatoItem {
 
     static class EntityManaPotion extends EntityPotion {
 
+        private static final int fireColor = 15473700;
+        private static final int lifeColor = 16777215;
+
         private final ManaCauldron.Element element;
 
         public EntityManaPotion(World worldIn) {
@@ -70,7 +72,7 @@ public class SplashManaPotion extends PotatoItem {
         }
 
         public EntityManaPotion(World worldIn, EntityLivingBase throwerIn, ManaCauldron.Element element) {
-            super(worldIn, throwerIn, new ItemStack(Items.SPLASH_POTION));
+            super(worldIn, throwerIn, createFakePotion(element));
             this.element = element;
         }
 
@@ -79,11 +81,12 @@ public class SplashManaPotion extends PotatoItem {
             if (!this.world.isRemote) {
                 if (this.element == ManaCauldron.Element.FIRE) {
                     applyFireSplash(result);
+                    this.world.playEvent(2007, new BlockPos(this), fireColor);
                 } else if (this.element == ManaCauldron.Element.LIFE) {
                     applyLifeSplash(result);
+                    this.world.playEvent(2007, new BlockPos(this), lifeColor);
                 }
 
-                this.world.playEvent(2007, new BlockPos(this), 0);
                 this.setDead();
             }
         }
@@ -159,6 +162,20 @@ public class SplashManaPotion extends PotatoItem {
                     }
                 }
             }
+        }
+
+        private static ItemStack createFakePotion(ManaCauldron.Element element) {
+            ItemStack potion = new ItemStack(Items.SPLASH_POTION);
+            NBTTagCompound compound = new NBTTagCompound();
+
+            if (element == ManaCauldron.Element.FIRE) {
+                compound.setInteger("CustomPotionColor", fireColor);
+            } else if (element == ManaCauldron.Element.LIFE) {
+                compound.setInteger("CustomPotionColor", lifeColor);
+            }
+
+            potion.setTagCompound(compound);
+            return potion;
         }
     }
 }
