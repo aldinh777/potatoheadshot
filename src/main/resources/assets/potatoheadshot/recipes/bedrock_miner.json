@@ -5,10 +5,10 @@
       "item": "potatoheadshot:quantum_miner_part"
     },
     {
-      "item": "potatoheadshot:quantum_drill"
+      "item": "potatoheadshot:void_drill"
     }
   ],
   "result": {
-    "item": "potatoheadshot:quantum_miner"
+    "item": "potatoheadshot:bedrock_miner"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "NIN",
+    "III"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:void_ingot"
+    },
+    "N": {
+      "item": "potatoheadshot:void_nugget"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:quantum_miner_part"
+  }
+}

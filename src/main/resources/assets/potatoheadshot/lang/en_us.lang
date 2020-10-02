@@ -20,6 +20,7 @@ item.glowing_potato.name=Glowing Potato
 item.sticky_potato.name=Sticky Potato
 item.frozen_potato.name=Frozen Potato
 item.ice_potato.name=Ice Potato
+item.void_potato.name=Void Potato
 
 # Seeds
 item.lava_potato_seed.name=Lava Potato Seed

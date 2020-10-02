@@ -91,10 +91,10 @@ public class PotatoBlocks {
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
 
-        QUANTUM_MINER_PART = new PotatoBlock("quantum_miner_part", BlockType.METAL);
-        QUANTUM_MINER = new PotatoBlock("quantum_miner", BlockType.METAL);
-        BEDROCK_MINER = new PotatoBlock("bedrock_miner", BlockType.METAL);
-        VOID_CHARGER = new PotatoBlock("void_charger", BlockType.METAL);
-        VOID_EXCHANGER = new PotatoBlock("void_exchanger", BlockType.METAL);
+        QUANTUM_MINER_PART = new DummyMachine("quantum_miner_part", BlockType.METAL);
+        QUANTUM_MINER = new DummyMachine("quantum_miner", BlockType.METAL);
+        BEDROCK_MINER = new DummyMachine("bedrock_miner", BlockType.METAL);
+        VOID_CHARGER = new DummyMachine("void_charger", BlockType.METAL);
+        VOID_EXCHANGER = new DummyMachine("void_exchanger", BlockType.METAL);
     }
 }
