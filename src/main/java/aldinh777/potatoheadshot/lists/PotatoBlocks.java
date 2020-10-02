@@ -4,14 +4,9 @@ import aldinh777.potatoheadshot.block.blocks.*;
 import aldinh777.potatoheadshot.block.crops.*;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
-import net.minecraft.util.BlockRenderLayer;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PotatoBlocks {
 
@@ -24,6 +19,7 @@ public class PotatoBlocks {
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block STICKY_POTATOES = new StickyPotatoCrops("sticky_potatoes");
+    public static Block VOID_POTATOES = new VoidPotatoCrops("void_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
     public static Block COOKED_DIRT;
@@ -35,6 +31,7 @@ public class PotatoBlocks {
     public static Block SWEET_POTATO_BLOCK;
     public static Block SWEET_MACHINE_FRAME;
     public static Block GLOWING_POTATO_BLOCK;
+    public static Block VOID_BLOCK;
     public static Block MANA_BLOCK;
     public static Block MANA_FLOWER;
     public static Block MANA_TORCH;
@@ -53,6 +50,12 @@ public class PotatoBlocks {
     public static Block ULTIMATE_CRYSTAL_CHARGER;
     public static Block ULTIMATE_CAULDRON;
 
+    public static Block QUANTUM_MINER_PART;
+    public static Block QUANTUM_MINER;
+    public static Block BEDROCK_MINER;
+    public static Block VOID_CHARGER;
+    public static Block VOID_EXCHANGER;
+
     public static void init() {
 
         // Place able Item
@@ -69,38 +72,11 @@ public class PotatoBlocks {
         POTATO_PLANKS = new PotatoBlock("potato_planks", BlockType.WOOD);
         POTATO_BLOCK = new PotatoBlock("potato_block", BlockType.POTATO);
         SWEET_POTATO_BLOCK = new PotatoBlock("sweet_potato_block", BlockType.METAL);
-        SWEET_MACHINE_FRAME = new PotatoBlock("sweet_machine_frame", BlockType.METAL) {
-            @Nonnull
-            @Override
-            public BlockRenderLayer getBlockLayer() {
-                return BlockRenderLayer.CUTOUT;
-            }
-
-            @Override
-            public boolean isOpaqueCube(@Nonnull IBlockState state) {
-                return false;
-            }
-
-            @Override
-            public boolean isFullCube(@Nonnull IBlockState state) {
-                return false;
-            }
-        };
-        GLOWING_POTATO_BLOCK = new PotatoBlock("glowing_potato_block", BlockType.GLASS) {
-            @Nonnull
-            @Override
-            public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-                return PotatoItems.GLOWING_POTATO_DUST;
-            }
-        }.setLightLevel(1.0f);
-        MANA_BLOCK = new PotatoBlock("glowing_mana_block", BlockType.GLASS) {
-            @Nonnull
-            @Override
-            public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-                return PotatoItems.MANA_DUST;
-            }
-        }.setLightLevel(1.0f);
+        SWEET_MACHINE_FRAME = new SweetMachineFrame("sweet_machine_frame", BlockType.METAL);
+        GLOWING_POTATO_BLOCK = new BlockCustomDrop("glowing_potato_block", PotatoItems.GLOWING_POTATO_DUST);
+        MANA_BLOCK = new BlockCustomDrop("glowing_mana_block", PotatoItems.MANA_DUST);
         MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE).setLightLevel(0.7f).setResistance(6000);
+        VOID_BLOCK = new PotatoBlock("void_block", BlockType.METAL);
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
@@ -114,5 +90,11 @@ public class PotatoBlocks {
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
+
+        QUANTUM_MINER_PART = new PotatoBlock("quantum_miner_part", BlockType.METAL);
+        QUANTUM_MINER = new PotatoBlock("quantum_miner", BlockType.METAL);
+        BEDROCK_MINER = new PotatoBlock("bedrock_miner", BlockType.METAL);
+        VOID_CHARGER = new PotatoBlock("void_charger", BlockType.METAL);
+        VOID_EXCHANGER = new PotatoBlock("void_exchanger", BlockType.METAL);
     }
 }

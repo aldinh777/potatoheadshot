@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "III",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:void_block"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:void_exchanger"
+  }
+}

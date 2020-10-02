@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "VVV"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "potatoheadshot:void_bottle"
+    },
+    "V": {
+      "item": "potatoheadshot:void_block"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:void_charger"
+  }
+}

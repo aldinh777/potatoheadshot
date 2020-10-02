@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "I*I",
+    " I "
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:void_block"
+    },
+    "*": {
+      "item": "potatoheadshot:ultimate_crystal"
+    },
+    "I": {
+      "item": "potatoheadshot:void_ingot"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:void_drill"
+  }
+}

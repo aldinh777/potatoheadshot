@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "potatoheadshot:quantum_miner_part" },
+    "facing=south": { "model": "potatoheadshot:quantum_miner_part", "y": 180 },
+    "facing=west":  { "model": "potatoheadshot:quantum_miner_part", "y": 270 },
+    "facing=east":  { "model": "potatoheadshot:quantum_miner_part", "y": 90 }
+  }
+}
