@@ -1,12 +1,8 @@
 package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
-import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.lists.PotatoTab;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
@@ -28,7 +24,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class ManaCauldron extends Block {
+public class ManaCauldron extends PotatoBlock {
 
     public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 2);
     public static final PropertyEnum<Element> ELEMENT = PropertyEnum.create("element", Element.class);
@@ -40,18 +36,12 @@ public class ManaCauldron extends Block {
     protected static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
 
     public ManaCauldron(String name) {
-        super(Material.ROCK);
-        this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        super(name, BlockType.STONE);
         this.setHardness(3.0f);
         this.setResistance(6000.0f);
-        this.setCreativeTab(PotatoTab.POTATO_TAB);
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(LEVEL, 0)
                 .withProperty(ELEMENT, Element.MANA));
-
-        PotatoBlocks.LISTS.add(this);
-        PotatoItems.LISTS.add(new PotatoItemBlock(this));
     }
 
     @Override
