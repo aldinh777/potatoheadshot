@@ -67,6 +67,8 @@ public class RegistryHandler {
         ResourceLocation manaCollector = new ResourceLocation("potatoheadshot:mana_collector");
         ResourceLocation manaExtractor = new ResourceLocation("potatoheadshot:mana_extractor");
         ResourceLocation manaCauldron = new ResourceLocation("potatoheadshot:mana_cauldron");
+        ResourceLocation ultManaCauldron = new ResourceLocation("potatoheadshot:ultimate_mana_cauldron");
+        ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
@@ -77,6 +79,8 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
         GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);
         GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
+        GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
+        GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
     }
 
     @SubscribeEvent

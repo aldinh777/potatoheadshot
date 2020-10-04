@@ -19,7 +19,6 @@ public class PotatoBlocks {
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block STICKY_POTATOES = new StickyPotatoCrops("sticky_potatoes");
-    public static Block VOID_POTATOES = new VoidPotatoCrops("void_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
     public static Block COOKED_DIRT;
@@ -84,12 +83,12 @@ public class PotatoBlocks {
         SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
         SWEET_CRYSTAL_MAKER = new SweetCrystalMaker("sweet_crystal_maker", BlockType.METAL);
         SWEET_CRYSTAL_CHARGER = new SweetCrystalCharger("sweet_crystal_charger", BlockType.METAL);
-        ULTIMATE_CRYSTAL_CHARGER = new SweetCrystalCharger("ultimate_crystal_charger", BlockType.METAL).setUltimate();
+        ULTIMATE_CRYSTAL_CHARGER = new UltCrystalCharger("ultimate_crystal_charger", BlockType.METAL);
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
         MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
-        ULTIMATE_CAULDRON = new ManaCauldron("ultimate_mana_cauldron").setUltimate();
+        ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
 
         QUANTUM_MINER_PART = new DummyMachine("quantum_miner_part", BlockType.METAL);
         QUANTUM_MINER = new DummyMachine("quantum_miner", BlockType.METAL);

@@ -1,12 +1,8 @@
 package aldinh777.potatoheadshot.block.blocks;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
-import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.lists.PotatoTab;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
@@ -28,7 +24,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class ManaCauldron extends Block {
+public class ManaCauldron extends PotatoBlock {
 
     public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 2);
     public static final PropertyEnum<Element> ELEMENT = PropertyEnum.create("element", Element.class);
@@ -39,21 +35,13 @@ public class ManaCauldron extends Block {
     protected static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
 
-    private boolean ultimate = false;
-
     public ManaCauldron(String name) {
-        super(Material.ROCK);
-        this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        super(name, BlockType.STONE);
         this.setHardness(3.0f);
         this.setResistance(6000.0f);
-        this.setCreativeTab(PotatoTab.POTATO_TAB);
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(LEVEL, 0)
                 .withProperty(ELEMENT, Element.MANA));
-
-        PotatoBlocks.LISTS.add(this);
-        PotatoItems.LISTS.add(new PotatoItemBlock(this));
     }
 
     @Override
@@ -64,11 +52,7 @@ public class ManaCauldron extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-        if (this.ultimate) {
-            return new TileEntityManaCauldron().setUltimate();
-        } else {
-            return new TileEntityManaCauldron();
-        }
+        return new TileEntityManaCauldron();
     }
 
     @Override
@@ -98,21 +82,13 @@ public class ManaCauldron extends Block {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        if (this.ultimate) {
-            return Item.getItemFromBlock(PotatoBlocks.ULTIMATE_CAULDRON);
-        } else {
-            return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
-        }
+        return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
     }
 
     @Nonnull
     @Override
     public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-        if (this.ultimate) {
-            return new ItemStack(PotatoBlocks.ULTIMATE_CAULDRON);
-        } else {
-            return new ItemStack(PotatoBlocks.MANA_CAULDRON);
-        }
+        return new ItemStack(PotatoBlocks.MANA_CAULDRON);
     }
 
     @Nonnull
@@ -154,12 +130,6 @@ public class ManaCauldron extends Block {
         } else {
             return face == EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
         }
-    }
-
-    public ManaCauldron setUltimate() {
-        this.ultimate = true;
-        this.setHardness(50.0f);
-        return this;
     }
 
     public enum Element implements IStringSerializable {

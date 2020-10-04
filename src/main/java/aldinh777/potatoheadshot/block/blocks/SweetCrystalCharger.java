@@ -17,8 +17,6 @@ import net.minecraftforge.items.IItemHandler;
 
 public class SweetCrystalCharger extends PotatoMachine {
 
-	private boolean ultimate = false;
-
 	public SweetCrystalCharger(String name, BlockType blockType) {
 		super(name, blockType, Constants.CRYSTAL_CHARGER);
 	}
@@ -26,11 +24,7 @@ public class SweetCrystalCharger extends PotatoMachine {
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-		if (this.ultimate) {
-			return new TileEntitySweetCrystalCharger().setUltimate();
-		} else {
-			return new TileEntitySweetCrystalCharger();
-		}
+		return new TileEntitySweetCrystalCharger();
 	}
 
 	@Override
@@ -48,12 +42,5 @@ public class SweetCrystalCharger extends PotatoMachine {
 			}
 		} 
 		super.breakBlock(worldIn, pos, state);
-	}
-
-	public SweetCrystalCharger setUltimate() {
-		this.ultimate = true;
-		this.setHardness(50.0f);
-		this.setResistance(6000.0f);
-		return this;
 	}
 }
