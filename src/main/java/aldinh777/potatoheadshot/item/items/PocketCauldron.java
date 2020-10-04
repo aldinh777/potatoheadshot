@@ -7,6 +7,7 @@ import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.Constants;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -33,6 +34,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Objects;
 
 public class PocketCauldron extends Item {
@@ -47,6 +49,26 @@ public class PocketCauldron extends Item {
         this.setMaxStackSize(1);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
         PotatoItems.LISTS.add(this);
+    }
+
+    @Override
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        int mana = getManaSize(stack);
+        int maxMana = getMaxManaSize(stack);
+
+        tooltip.add("Mana : " + mana + "/" + maxMana);
+    }
+
+    @Override
+    public boolean showDurabilityBar(@Nonnull ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public double getDurabilityForDisplay(@Nonnull ItemStack stack) {
+        return 1.0 - (double) getManaSize(stack) / (double) getMaxManaSize(stack);
     }
 
     @Nonnull
