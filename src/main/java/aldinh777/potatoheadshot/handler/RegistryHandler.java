@@ -51,6 +51,7 @@ public class RegistryHandler {
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.BAKED_SWEET_POTATO), 0.35f);
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_DUST, new ItemStack(PotatoItems.SWEET_POTATO_INGOT), 0.075f);
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
+        GameRegistry.addSmelting(PotatoItems.VOID_POTATO, new ItemStack(PotatoItems.VOID_MATTER), 0f);
 
         GameRegistry.addSmelting(Blocks.DIRT, cookedDirt, 0.15f);
         GameRegistry.addSmelting(PotatoBlocks.POTATO_PLANKS, bakedPotatoPlanks, 0.45f);
