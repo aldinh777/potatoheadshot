@@ -19,6 +19,7 @@ public class PotatoBlocks {
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block STICKY_POTATOES = new StickyPotatoCrops("sticky_potatoes");
+    public static Block VOID_POTATOES = new VoidPotatoCrops("void_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
     public static Block COOKED_DIRT;
@@ -90,8 +91,9 @@ public class PotatoBlocks {
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
 
+        // Void Tools
         QUANTUM_MINER_PART = new DummyMachine("quantum_miner_part", BlockType.METAL);
-        QUANTUM_MINER = new DummyMachine("quantum_miner", BlockType.METAL);
+        QUANTUM_MINER = new QuantumMiner("quantum_miner", BlockType.METAL);
         BEDROCK_MINER = new DummyMachine("bedrock_miner", BlockType.METAL);
         VOID_CHARGER = new DummyMachine("void_charger", BlockType.METAL);
         VOID_EXCHANGER = new DummyMachine("void_exchanger", BlockType.METAL);

@@ -42,13 +42,16 @@ public abstract class PotatoMachine extends PotatoBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            if (this.haveGui) {
+    public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (this.haveGui) {
+            if (!worldIn.isRemote) {
                 playerIn.openGui(PotatoHeadshot.INSTANCE, this.modGuiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
+            return true;
+
+        } else {
+            return false;
         }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
     @Override
