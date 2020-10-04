@@ -19,11 +19,10 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	private final ItemStackHandler inputHandler = new ItemStackHandler(1);
 	private final ItemStackHandler outputHandler = new ItemStackHandler(1);
 	
-	private PotatoEnergyStorage storage = new PotatoEnergyStorage(800000, 400, 0);
+	protected PotatoEnergyStorage storage = new PotatoEnergyStorage(800000, 400, 0);
 	private int energy = this.storage.getEnergyStored();
 	private int currentCharged = 0;
 	private int fullCharge = 100000;
-	private boolean ultimate = false;
 
 	// Override Methods
 
@@ -154,12 +153,6 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 
 	// Custom Methods
 
-	public TileEntitySweetCrystalCharger setUltimate() {
-		this.ultimate = true;
-		this.storage = new PotatoEnergyStorage(32000000, 1600, 0);
-		return this;
-	}
-
 	public int getMaxEnergyStored() {
 		return this.storage.getMaxEnergyStored();
 	}
@@ -198,7 +191,7 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 			output.grow(result.getCount());
 		}
 		
-		if (result.getItem() == PotatoItems.ULTIMATE_CHARGED_CRYSTAL && !this.ultimate) {
+		if (result.getItem() == PotatoItems.ULTIMATE_CHARGED_CRYSTAL && !this.isUltimate()) {
 			this.world.createExplosion(null,
 					(this.pos.getX() + 0.5F), this.pos.getY(), (this.pos.getZ() + 0.5F),
 					5.0F, true
@@ -206,6 +199,10 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 		}
 		
 		input.shrink(1);
+	}
+
+	public boolean isUltimate() {
+		return false;
 	}
 
 	// Static Methods

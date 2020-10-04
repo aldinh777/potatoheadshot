@@ -19,12 +19,15 @@ import java.util.List;
 
 public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
-    private PotatoManaStorage storage = new PotatoManaStorage(800000);
-    private ManaCauldron.Element element = ManaCauldron.Element.MANA;
-    private IManaRecipes recipes = IManaRecipes.getRecipeById(0);
-    private int level = 0;
-    private int checkMana = 0;
-    private boolean ultimate = false;
+    protected PotatoManaStorage storage;
+    protected ManaCauldron.Element element = ManaCauldron.Element.MANA;
+    protected IManaRecipes recipes = IManaRecipes.getRecipeById(0);
+    protected int level = 0;
+    protected int checkMana = 0;
+
+    public TileEntityManaCauldron() {
+        this.storage = new PotatoManaStorage(800000);
+    }
 
     // Override Methods
 
@@ -70,12 +73,6 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
     }
 
     // Custom Methods
-
-    public TileEntityManaCauldron setUltimate() {
-        this.ultimate = true;
-        this.storage = new PotatoManaStorage(32000000);
-        return this;
-    }
 
     public PotatoManaStorage getManaStorage() {
         return this.storage;
@@ -125,7 +122,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                     float posY = this.pos.getY() + 0.5f;
                     float posZ = this.pos.getZ() + 0.5f;
 
-                    if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL && !this.ultimate) {
+                    if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL && !this.isUltimate()) {
                         world.createExplosion(null,
                                 (this.pos.getX() + 0.5f), (this.pos.getY() + 1.0f), (pos.getZ() + 0.5f),
                                 5.0f, true);
@@ -139,6 +136,10 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                 return false;
             }
         }
+        return false;
+    }
+
+    public boolean isUltimate() {
         return false;
     }
 

@@ -39,8 +39,6 @@ public class ManaCauldron extends Block {
     protected static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
 
-    private boolean ultimate = false;
-
     public ManaCauldron(String name) {
         super(Material.ROCK);
         this.setRegistryName(name);
@@ -64,11 +62,7 @@ public class ManaCauldron extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-        if (this.ultimate) {
-            return new TileEntityManaCauldron().setUltimate();
-        } else {
-            return new TileEntityManaCauldron();
-        }
+        return new TileEntityManaCauldron();
     }
 
     @Override
@@ -98,21 +92,13 @@ public class ManaCauldron extends Block {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        if (this.ultimate) {
-            return Item.getItemFromBlock(PotatoBlocks.ULTIMATE_CAULDRON);
-        } else {
-            return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
-        }
+        return Item.getItemFromBlock(PotatoBlocks.MANA_CAULDRON);
     }
 
     @Nonnull
     @Override
     public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-        if (this.ultimate) {
-            return new ItemStack(PotatoBlocks.ULTIMATE_CAULDRON);
-        } else {
-            return new ItemStack(PotatoBlocks.MANA_CAULDRON);
-        }
+        return new ItemStack(PotatoBlocks.MANA_CAULDRON);
     }
 
     @Nonnull
@@ -154,12 +140,6 @@ public class ManaCauldron extends Block {
         } else {
             return face == EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
         }
-    }
-
-    public ManaCauldron setUltimate() {
-        this.ultimate = true;
-        this.setHardness(50.0f);
-        return this;
     }
 
     public enum Element implements IStringSerializable {
