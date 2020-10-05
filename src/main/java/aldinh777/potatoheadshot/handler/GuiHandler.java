@@ -52,6 +52,9 @@ public class GuiHandler implements IGuiHandler {
             case Constants.VOID_EXCHANGER:
                 TileEntityVoidExchanger voidExchanger = (TileEntityVoidExchanger) tileEntity;
                 return new ContainerVoidExchanger(player.inventory, Objects.requireNonNull(voidExchanger));
+            case Constants.BEDROCK_MINER:
+                TileEntityBedrockMiner bedrockMiner = (TileEntityBedrockMiner) tileEntity;
+                return new ContainerBedrockMiner(player.inventory, Objects.requireNonNull(bedrockMiner));
             case Constants.POCKET_CAULDRON:
                 return new ContainerPocketCauldron(player);
             default:
@@ -94,6 +97,9 @@ public class GuiHandler implements IGuiHandler {
             case Constants.VOID_EXCHANGER:
                 TileEntityVoidExchanger voidExchanger = (TileEntityVoidExchanger) tileEntity;
                 return new GuiVoidExchanger(player.inventory, Objects.requireNonNull(voidExchanger));
+            case Constants.BEDROCK_MINER:
+                TileEntityBedrockMiner bedrockMiner = (TileEntityBedrockMiner) tileEntity;
+                return new GuiBedrockMiner(player.inventory, Objects.requireNonNull(bedrockMiner));
             case Constants.POCKET_CAULDRON:
                 return new GuiPocketCauldron(player);
             default:

@@ -35,10 +35,13 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
             if (!input.isEmpty() && bottle.getItem() == PotatoItems.VOID_BOTTLE) {
                 int voidSize = VoidBottle.getVoidSize(bottle);
                 if (voidSize < VoidBottle.maxVoid) {
-                    input.shrink(1);
-                    VoidBottle.setVoidSize(bottle, voidSize + 1);
+                    int count = input.getCount();
+                    input.shrink(count);
+                    VoidBottle.setVoidSize(bottle, voidSize + count);
                 }
             }
+
+            this.markDirty();
         }
     }
 
@@ -74,7 +77,7 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
-        this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
+        this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryBottle"));
     }
 
     @Nonnull
@@ -82,7 +85,7 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
-        compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
+        compound.setTag("InventoryBottle", this.outputHandler.serializeNBT());
         return compound;
     }
 

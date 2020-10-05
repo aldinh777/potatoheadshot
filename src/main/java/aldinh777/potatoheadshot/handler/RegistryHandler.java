@@ -72,6 +72,7 @@ public class RegistryHandler {
         ResourceLocation quantumMiner = new ResourceLocation("potatoheadshot:quantum_miner");
         ResourceLocation voidCharger = new ResourceLocation("potatoheadshot:void_charger");
         ResourceLocation voidExchanger = new ResourceLocation("potatoheadshot:void_exchanger");
+        ResourceLocation bedrockMiner = new ResourceLocation("potatoheadshot:bedrock_miner");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
@@ -87,6 +88,7 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TileEntityQuantumMiner.class, quantumMiner);
         GameRegistry.registerTileEntity(TileEntityVoidCharger.class, voidCharger);
         GameRegistry.registerTileEntity(TileEntityVoidExchanger.class, voidExchanger);
+        GameRegistry.registerTileEntity(TileEntityBedrockMiner.class, bedrockMiner);
     }
 
     @SubscribeEvent
