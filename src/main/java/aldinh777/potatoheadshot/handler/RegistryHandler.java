@@ -71,6 +71,7 @@ public class RegistryHandler {
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
         ResourceLocation quantumMiner = new ResourceLocation("potatoheadshot:quantum_miner");
         ResourceLocation voidCharger = new ResourceLocation("potatoheadshot:void_charger");
+        ResourceLocation voidExchanger = new ResourceLocation("potatoheadshot:void_exchanger");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
@@ -85,6 +86,7 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
         GameRegistry.registerTileEntity(TileEntityQuantumMiner.class, quantumMiner);
         GameRegistry.registerTileEntity(TileEntityVoidCharger.class, voidCharger);
+        GameRegistry.registerTileEntity(TileEntityVoidExchanger.class, voidExchanger);
     }
 
     @SubscribeEvent

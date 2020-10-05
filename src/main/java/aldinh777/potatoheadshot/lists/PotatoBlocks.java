@@ -96,6 +96,6 @@ public class PotatoBlocks {
         QUANTUM_MINER = new QuantumMiner("quantum_miner", BlockType.METAL);
         BEDROCK_MINER = new DummyMachine("bedrock_miner", BlockType.METAL);
         VOID_CHARGER = new VoidCharger("void_charger", BlockType.METAL);
-        VOID_EXCHANGER = new DummyMachine("void_exchanger", BlockType.METAL);
+        VOID_EXCHANGER = new VoidExchanger("void_exchanger", BlockType.METAL);
     }
 }
