@@ -9,6 +9,7 @@ public interface Constants {
     int INFUSER = 6;
     int COLLECTOR = 7;
     int EXTRACTOR = 8;
+    int VOID_CHARGER = 10;
 
     int POCKET_CAULDRON = 9;
 }

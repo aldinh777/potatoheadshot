@@ -46,6 +46,9 @@ public class GuiHandler implements IGuiHandler {
             case Constants.EXTRACTOR:
                 TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
                 return new ContainerManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+            case Constants.VOID_CHARGER:
+                TileEntityVoidCharger voidCharger = (TileEntityVoidCharger) tileEntity;
+                return new ContainerVoidCharger(player.inventory, Objects.requireNonNull(voidCharger));
             case Constants.POCKET_CAULDRON:
                 return new ContainerPocketCauldron(player);
             default:
@@ -82,6 +85,9 @@ public class GuiHandler implements IGuiHandler {
             case Constants.EXTRACTOR:
                 TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
                 return new GuiManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+            case Constants.VOID_CHARGER:
+                TileEntityVoidCharger voidCharger = (TileEntityVoidCharger) tileEntity;
+                return new GuiVoidCharger(player.inventory, Objects.requireNonNull(voidCharger));
             case Constants.POCKET_CAULDRON:
                 return new GuiPocketCauldron(player);
             default:

@@ -5,6 +5,6 @@ import aldinh777.potatoheadshot.util.BlockType;
 public class DummyMachine extends PotatoMachine {
 
     public DummyMachine(String name, BlockType blockType) {
-        super(name, blockType, -1);
+        super(name, blockType);
     }
 }
