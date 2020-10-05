@@ -190,7 +190,7 @@ public class PotatoItems {
         // Potato other thing
         POTATO_KNIFE = new PotatoKnife("potato_knife");
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
-        VOID_BOTTLE = new PotatoItem("void_bottle");
+        VOID_BOTTLE = new VoidBottle("void_bottle");
         LAVA_HOE = new LavaHoe("lava_hoe");
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 12800);
 
