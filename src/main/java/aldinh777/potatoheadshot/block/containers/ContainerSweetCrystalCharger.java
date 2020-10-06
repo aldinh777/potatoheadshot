@@ -20,8 +20,6 @@ import javax.annotation.Nonnull;
 public class ContainerSweetCrystalCharger extends Container {
 	
 	private final TileEntitySweetCrystalCharger tileEntity;
-	private int energy;
-	private int fullCharge;
 
 	public ContainerSweetCrystalCharger(InventoryPlayer player, TileEntitySweetCrystalCharger tileEntity) {
 		this.tileEntity = tileEntity;
@@ -45,30 +43,20 @@ public class ContainerSweetCrystalCharger extends Container {
 	public void func_75137_b(int id, int data) {
 		this.tileEntity.setField(id, data);
 	}
-	private int currentCharged;
 
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 		
 		for (IContainerListener listener : this.listeners) {
-			
 			int energy = this.tileEntity.getField("energy");
 			int fullCharge = this.tileEntity.getField("fullCharge");
 			int currentCharged = this.tileEntity.getField("currentCharged");
-			int maxCapacity = this.tileEntity.getMaxEnergyStored();
-			
-			if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
-				listener.sendWindowProperty(this, 0, energy);
-			if (this.fullCharge != fullCharge)
-				listener.sendWindowProperty(this, 1, fullCharge);
-			if (this.currentCharged != currentCharged) {
-				listener.sendWindowProperty(this, 2, currentCharged);
-			}
-		} 
-		this.energy = this.tileEntity.getField("energy");
-		this.fullCharge = this.tileEntity.getField("fullCharge");
-		this.currentCharged = this.tileEntity.getField("currentCharged");
+
+			listener.sendWindowProperty(this, 0, energy);
+			listener.sendWindowProperty(this, 1, fullCharge);
+			listener.sendWindowProperty(this, 2, currentCharged);
+		}
 	}
 
 	@Override

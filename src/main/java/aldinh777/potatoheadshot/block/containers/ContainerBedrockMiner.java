@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 public class ContainerBedrockMiner extends Container {
 
     private final TileEntityBedrockMiner tileEntity;
-    private int progress, cost;
 
     public ContainerBedrockMiner(InventoryPlayer player, TileEntityBedrockMiner tileEntity) {
         this.tileEntity = tileEntity;
@@ -53,18 +52,12 @@ public class ContainerBedrockMiner extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-
             int progress = this.tileEntity.getField("progress");
             int cost = this.tileEntity.getField("cost");
 
-            if (this.progress != progress)
-                listener.sendWindowProperty(this, 0, progress);
-            if (this.cost != cost)
-                listener.sendWindowProperty(this, 1, cost);
+            listener.sendWindowProperty(this, 0, progress);
+            listener.sendWindowProperty(this, 1, cost);
         }
-
-        this.progress = this.tileEntity.getField("totalFreezeTime");
-        this.cost = this.tileEntity.getField("currentFreezeTime");
     }
 
     @Override

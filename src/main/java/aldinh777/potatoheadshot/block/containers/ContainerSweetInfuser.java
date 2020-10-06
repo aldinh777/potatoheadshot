@@ -15,7 +15,6 @@ import javax.annotation.Nonnull;
 public class ContainerSweetInfuser extends Container {
 
     private final TileEntitySweetInfuser tileEntity;
-    private int energy, totalInfuseTime, currentInfuseTime;
 
     public ContainerSweetInfuser(InventoryPlayer player, TileEntitySweetInfuser tileEntity) {
         this.tileEntity = tileEntity;
@@ -55,19 +54,11 @@ public class ContainerSweetInfuser extends Container {
             int energy = this.tileEntity.getField("energy");
             int totalInfuseTime = this.tileEntity.getField("totalInfuseTime");
             int currentInfuseTime = this.tileEntity.getField("currentInfuseTime");
-            int maxCapacity = this.tileEntity.getMaxEnergyStored();
 
-            if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
-                listener.sendWindowProperty(this, 0, energy);
-            if (this.totalInfuseTime != totalInfuseTime)
-                listener.sendWindowProperty(this, 1, totalInfuseTime);
-            if (this.currentInfuseTime != currentInfuseTime)
-                listener.sendWindowProperty(this, 2, currentInfuseTime);
+            listener.sendWindowProperty(this, 0, energy);
+            listener.sendWindowProperty(this, 1, totalInfuseTime);
+            listener.sendWindowProperty(this, 2, currentInfuseTime);
         }
-
-        this.energy = this.tileEntity.getField("energy");
-        this.totalInfuseTime = this.tileEntity.getField("totalInfuseTime");
-        this.currentInfuseTime = this.tileEntity.getField("currentInfuseTime");
     }
 
     @Override

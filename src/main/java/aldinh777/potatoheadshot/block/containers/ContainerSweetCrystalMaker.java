@@ -24,7 +24,6 @@ import javax.annotation.Nonnull;
 public class ContainerSweetCrystalMaker extends Container {
 
     private final TileEntitySweetCrystalMaker tileEntity;
-    private int energy, crystalTime, crystalization;
 
     public ContainerSweetCrystalMaker(InventoryPlayer player, TileEntitySweetCrystalMaker tileEntity) {
         this.tileEntity = tileEntity;
@@ -58,23 +57,14 @@ public class ContainerSweetCrystalMaker extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-
             int energy = this.tileEntity.getField("energy");
             int crystalTime = this.tileEntity.getField("crystalTime");
             int crystalization = this.tileEntity.getField("crystalization");
-            int maxCapacity = this.tileEntity.getMaxEnergyStored();
 
-            if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
-                listener.sendWindowProperty(this, 0, energy);
-            if (this.crystalTime != crystalTime)
-                listener.sendWindowProperty(this, 1, crystalTime);
-            if (this.crystalization != crystalization)
-                listener.sendWindowProperty(this, 2, crystalization);
+            listener.sendWindowProperty(this, 0, energy);
+            listener.sendWindowProperty(this, 1, crystalTime);
+            listener.sendWindowProperty(this, 2, crystalization);
         }
-
-        this.energy = this.tileEntity.getField("energy");
-        this.crystalTime = this.tileEntity.getField("crystalTime");
-        this.crystalization = this.tileEntity.getField("crystalization");
     }
 
     @Override
@@ -92,7 +82,7 @@ public class ContainerSweetCrystalMaker extends Container {
             ItemStack stack = slot.getStack();
             itemstack = stack.copy();
 
-            if (index == 0 || index == 1) {
+            if (index == 0 || index == 1 || index == 2) {
                 if (!this.mergeItemStack(stack, 3, 39, false)) {
                     return ItemStack.EMPTY;
                 }

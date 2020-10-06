@@ -20,8 +20,7 @@ import javax.annotation.Nonnull;
 public abstract class ContainerMana extends Container {
 
 	protected final TileEntityMana tileEntity;
-	protected int manaSize;
-	
+
 	protected ContainerMana(InventoryPlayer player, TileEntityMana tileEntity) {
 		this.tileEntity = tileEntity;
 		IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
@@ -57,15 +56,10 @@ public abstract class ContainerMana extends Container {
 		super.detectAndSendChanges();
 		
 		for (IContainerListener listener : this.listeners) {
-			
 			int manaSize = this.tileEntity.getField("manaSize");
-			int maxManaSize = this.tileEntity.getField("maxManaSize");
-			
-			if (this.manaSize != manaSize || this.manaSize <= 0 || this.manaSize >= maxManaSize) {
-				listener.sendWindowProperty(this, 0, manaSize);
-			}
-		} 
-		this.manaSize = this.tileEntity.getField("manaSize");
+
+			listener.sendWindowProperty(this, 0, manaSize);
+		}
 	}
 
 	@Nonnull

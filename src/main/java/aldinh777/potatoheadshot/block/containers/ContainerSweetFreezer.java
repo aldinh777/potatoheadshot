@@ -22,7 +22,6 @@ import javax.annotation.Nonnull;
 public class ContainerSweetFreezer extends Container {
 
     private final TileEntitySweetFreezer tileEntity;
-    private int energy, totalFreezeTime, currentFreezeTime;
 
     public ContainerSweetFreezer(InventoryPlayer player, TileEntitySweetFreezer tileEntity) {
         this.tileEntity = tileEntity;
@@ -56,23 +55,14 @@ public class ContainerSweetFreezer extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-
             int energy = this.tileEntity.getField("energy");
             int totalFreezeTime = this.tileEntity.getField("totalFreezeTime");
             int currentFreezeTime = this.tileEntity.getField("currentFreezeTime");
-            int maxCapacity = this.tileEntity.getMaxEnergyStored();
 
-            if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
-                listener.sendWindowProperty(this, 0, energy);
-            if (this.totalFreezeTime != totalFreezeTime)
-                listener.sendWindowProperty(this, 1, totalFreezeTime);
-            if (this.currentFreezeTime != currentFreezeTime)
-                listener.sendWindowProperty(this, 2, currentFreezeTime);
+            listener.sendWindowProperty(this, 0, energy);
+            listener.sendWindowProperty(this, 1, totalFreezeTime);
+            listener.sendWindowProperty(this, 2, currentFreezeTime);
         }
-
-        this.energy = this.tileEntity.getField("energy");
-        this.totalFreezeTime = this.tileEntity.getField("totalFreezeTime");
-        this.currentFreezeTime = this.tileEntity.getField("currentFreezeTime");
     }
 
     @Override
@@ -90,7 +80,7 @@ public class ContainerSweetFreezer extends Container {
             ItemStack stack = slot.getStack();
             itemstack = stack.copy();
 
-            if (index == 0 || index == 1) {
+            if (index == 0 || index == 1 || index == 2) {
                 if (!this.mergeItemStack(stack, 3, 39, false)) {
                     return ItemStack.EMPTY;
                 }

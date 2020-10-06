@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 public class ContainerSweetPotatoGenerator extends Container {
 
     private final TileEntitySweetPotatoGenerator tileEntity;
-    private int energy, totalCookTime, currentCookTime;
 
     public ContainerSweetPotatoGenerator(InventoryPlayer player, TileEntitySweetPotatoGenerator tileEntity) {
         this.tileEntity = tileEntity;
@@ -55,23 +54,14 @@ public class ContainerSweetPotatoGenerator extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-
             int energy = this.tileEntity.getField("energy");
             int totalCookTime = this.tileEntity.getField("totalCookTime");
             int currentCookTime = this.tileEntity.getField("currentCookTime");
-            int maxCapacity = this.tileEntity.getMaxEnergyStored();
 
-            if (this.energy != energy || this.energy <= 0 || this.energy >= maxCapacity)
-                listener.sendWindowProperty(this, 0, energy);
-            if (this.totalCookTime != totalCookTime)
-                listener.sendWindowProperty(this, 1, totalCookTime);
-            if (this.currentCookTime != currentCookTime)
-                listener.sendWindowProperty(this, 2, currentCookTime);
+            listener.sendWindowProperty(this, 0, energy);
+            listener.sendWindowProperty(this, 1, totalCookTime);
+            listener.sendWindowProperty(this, 2, currentCookTime);
         }
-
-        this.energy = this.tileEntity.getField("energy");
-        this.totalCookTime = this.tileEntity.getField("totalCookTime");
-        this.currentCookTime = this.tileEntity.getField("currentCookTime");
     }
 
     @Override

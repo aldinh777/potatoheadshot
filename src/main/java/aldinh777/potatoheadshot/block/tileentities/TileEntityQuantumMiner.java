@@ -11,7 +11,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class TileEntityQuantumMiner extends TileEntityPotatoMachine {
 
-    int coolDown = 20;
+    int coolDown = 8;
     int currentCoolDown = 0;
 
     @Override

@@ -56,6 +56,10 @@ public class VoidBottle extends PotatoItem {
             stack.setTagCompound(compound);
         }
 
+        if (value > maxVoid) {
+            value = maxVoid;
+        }
+
         compound.setInteger("Void", value);
     }
 }

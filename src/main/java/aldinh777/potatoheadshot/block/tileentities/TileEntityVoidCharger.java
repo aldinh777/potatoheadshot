@@ -1,7 +1,9 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.item.items.VoidBottle;
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -36,8 +38,11 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
                 int voidSize = VoidBottle.getVoidSize(bottle);
                 if (voidSize < VoidBottle.maxVoid) {
                     int count = input.getCount();
+                    int voidValue = getValue(input);
+                    int totalVoidValue = count * voidValue;
+
                     input.shrink(count);
-                    VoidBottle.setVoidSize(bottle, voidSize + count);
+                    VoidBottle.setVoidSize(bottle, voidSize + totalVoidValue);
                 }
             }
 
@@ -97,5 +102,20 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
     @Override
     public void setField(int id, int value) {
 
+    }
+
+    // Static Methods
+
+    public int getValue(ItemStack stack) {
+        Item voidBlock = Item.getItemFromBlock(PotatoBlocks.VOID_BLOCK);
+
+        if (stack.getItem() == PotatoItems.VOID_QUANTUM) return 1;
+        if (stack.getItem() == PotatoItems.VOID_MATTER) return 9;
+        if (stack.getItem() == PotatoItems.VOID_PILE) return (int) Math.pow(9, 2);
+        if (stack.getItem() == PotatoItems.VOID_NUGGET) return (int) Math.pow(9, 3);
+        if (stack.getItem() == PotatoItems.VOID_INGOT) return (int) Math.pow(9, 4);
+        if (stack.getItem() == voidBlock) return (int) Math.pow(9, 5);
+
+        return 1;
     }
 }

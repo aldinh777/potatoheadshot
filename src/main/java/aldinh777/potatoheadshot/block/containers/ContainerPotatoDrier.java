@@ -22,11 +22,6 @@ import javax.annotation.Nonnull;
 public class ContainerPotatoDrier extends Container {
 
     private final TileEntityPotatoDrier tileEntity;
-    private int burnTime, currentBurnTime;
-    private int wateringTime, currentWateringTime;
-    private int dryTime, totalDryTime;
-    private int wetTime, totalWetTime;
-    private int waterSize;
 
     public ContainerPotatoDrier(InventoryPlayer player, TileEntityPotatoDrier tileEntity) {
         this.tileEntity = tileEntity;
@@ -56,7 +51,6 @@ public class ContainerPotatoDrier extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : this.listeners) {
-
             int waterSize = this.tileEntity.getField("waterSize");
             int wateringTime = this.tileEntity.getField("wateringTime");
             int burnTime = this.tileEntity.getField("burnTime");
@@ -66,37 +60,17 @@ public class ContainerPotatoDrier extends Container {
             int currentWateringTime = this.tileEntity.getField("currentWateringTime");
             int totalDryTime = this.tileEntity.getField("totalDryTime");
             int totalWetTime = this.tileEntity.getField("totalWetTime");
-            int maxWaterCapacity = this.tileEntity.getMaxWaterSize();
 
-            if (this.waterSize != waterSize || waterSize <= 0 || waterSize >= maxWaterCapacity)
-                listener.sendWindowProperty(this, 0, waterSize);
-            if (this.burnTime != burnTime)
-                listener.sendWindowProperty(this, 1, burnTime);
-            if (this.wateringTime != wateringTime)
-                listener.sendWindowProperty(this, 2, wateringTime);
-            if (this.dryTime != dryTime)
-                listener.sendWindowProperty(this, 3, dryTime);
-            if (this.wetTime != wetTime)
-                listener.sendWindowProperty(this, 4, wetTime);
-            if (this.currentBurnTime != currentBurnTime)
-                listener.sendWindowProperty(this, 5, currentBurnTime);
-            if (this.currentWateringTime != currentWateringTime)
-                listener.sendWindowProperty(this, 6, currentWateringTime);
-            if (this.totalDryTime != totalDryTime)
-                listener.sendWindowProperty(this, 7, totalDryTime);
-            if (this.totalWetTime != totalWetTime)
-                listener.sendWindowProperty(this, 8, totalWetTime);
-        }
-
-        this.waterSize = this.tileEntity.getField("waterSize");
-        this.burnTime = this.tileEntity.getField("burnTime");
-        this.wateringTime = this.tileEntity.getField("wateringTime");
-        this.dryTime = this.tileEntity.getField("dryTime");
-        this.wetTime = this.tileEntity.getField("wetTime");
-        this.currentBurnTime = this.tileEntity.getField("currentBurnTime");
-        this.currentWateringTime = this.tileEntity.getField("currentWateringTime");
-        this.totalDryTime = this.tileEntity.getField("totalDryTime");
-        this.totalWetTime = this.tileEntity.getField("totalWetTime");
+            listener.sendWindowProperty(this, 0, waterSize);
+            listener.sendWindowProperty(this, 1, burnTime);
+            listener.sendWindowProperty(this, 2, wateringTime);
+            listener.sendWindowProperty(this, 3, dryTime);
+            listener.sendWindowProperty(this, 4, wetTime);
+            listener.sendWindowProperty(this, 5, currentBurnTime);
+            listener.sendWindowProperty(this, 6, currentWateringTime);
+            listener.sendWindowProperty(this, 7, totalDryTime);
+            listener.sendWindowProperty(this, 8, totalWetTime);
+    }
     }
 
     @Override
