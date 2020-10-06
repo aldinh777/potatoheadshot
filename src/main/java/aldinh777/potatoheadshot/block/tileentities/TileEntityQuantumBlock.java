@@ -27,9 +27,11 @@ public class TileEntityQuantumBlock extends TileEntity implements ITickable {
         if (!this.world.isRemote) {
             List<BlockPos> freePos = this.getFreePos();
 
-            if (freePos.size() > 0 && this.stage == 0) {
+            if (freePos.size() > 0) {
                 if (this.progress >= duration) {
-                    this.spreadQuantum(freePos);
+                    if (this.stage == 0) {
+                        this.spreadQuantum(freePos);
+                    }
 
                     this.progress = 0;
                     this.decay();
@@ -39,8 +41,11 @@ public class TileEntityQuantumBlock extends TileEntity implements ITickable {
                 }
             } else {
                 if (this.progress >= duration) {
+                    if (this.stage != 0) {
+                        this.decay();
+                    }
+
                     this.progress = 0;
-                    this.decay();
 
                 } else {
                     this.progress++;
@@ -100,7 +105,7 @@ public class TileEntityQuantumBlock extends TileEntity implements ITickable {
     private void spreadQuantum(List<BlockPos> freePos) {
         int random = (int) Math.floor(Math.random() * freePos.size());
 
-        this.world.setBlockState(freePos.get(random), PotatoBlocks.QUANTUM_BLOCK.getDefaultState());
+        this.world.setBlockState(freePos.get(random), PotatoBlocks.QUANTUM_STONE.getDefaultState());
     }
 
     private void decay() {
