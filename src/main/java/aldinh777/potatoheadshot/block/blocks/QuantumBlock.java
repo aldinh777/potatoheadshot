@@ -5,6 +5,7 @@ import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -24,7 +25,11 @@ public class QuantumBlock extends PotatoBlock {
     @Nonnull
     @Override
     public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
-        return super.getItemDropped(state, rand, fortune);
+        if (state.getValue(STAGE) == 0) {
+            return super.getItemDropped(state, rand, fortune);
+        } else {
+            return Items.AIR;
+        }
     }
 
     @Override

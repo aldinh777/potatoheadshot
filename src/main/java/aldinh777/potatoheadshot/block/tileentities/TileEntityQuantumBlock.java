@@ -27,20 +27,27 @@ public class TileEntityQuantumBlock extends TileEntity implements ITickable {
         if (!this.world.isRemote) {
             List<BlockPos> freePos = this.getFreePos();
 
-            if (freePos.size() > 0) {
+            if (freePos.size() > 0 && this.stage == 0) {
                 if (this.progress >= duration) {
-                    if (this.stage == 0) {
-                        this.spreadQuantum(freePos);
-                    }
+                    this.spreadQuantum(freePos);
 
                     this.progress = 0;
                     this.decay();
-                    this.markDirty();
+
+                } else {
+                    this.progress++;
+                }
+            } else {
+                if (this.progress >= duration) {
+                    this.progress = 0;
+                    this.decay();
 
                 } else {
                     this.progress++;
                 }
             }
+
+            this.markDirty();
         }
     }
 
@@ -48,6 +55,7 @@ public class TileEntityQuantumBlock extends TileEntity implements ITickable {
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.stage = compound.getInteger("Stage");
+        this.progress = compound.getInteger("Progress");
     }
 
     @Nonnull
@@ -55,6 +63,7 @@ public class TileEntityQuantumBlock extends TileEntity implements ITickable {
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setInteger("Stage", this.stage);
+        compound.setInteger("Progress", this.progress);
         return compound;
     }
 
