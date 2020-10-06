@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalCharger;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityUltCrystalCharger;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.state.IBlockState;

@@ -37,6 +37,7 @@ public class PotatoBlocks {
     public static Block MANA_TORCH;
     public static Block MANA_STONE;
     public static Block ULTIMATE_FLOWER;
+    public static Block QUANTUM_BLOCK;
 
     public static Block POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
@@ -77,6 +78,7 @@ public class PotatoBlocks {
         MANA_BLOCK = new BlockCustomDrop("glowing_mana_block", PotatoItems.MANA_DUST);
         MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE).setLightLevel(0.7f).setResistance(6000);
         VOID_BLOCK = new PotatoBlock("void_block", BlockType.METAL);
+        QUANTUM_BLOCK = new QuantumBlock("quantum_block", BlockType.STONE);
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
