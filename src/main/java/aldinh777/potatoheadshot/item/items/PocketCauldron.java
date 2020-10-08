@@ -285,6 +285,42 @@ public class PocketCauldron extends Item {
         return 0;
     }
 
+    public static void chargeCauldronMana(ItemStack stack, PotatoManaStorage storage, int size) {
+        int transferable = size;
+        int manaSize = getManaSize(stack);
+        int manaLeftUntilFull = getMaxManaSize(stack) - manaSize;
+
+        if (storage.getManaStored() < transferable) {
+            transferable = storage.getManaStored();
+        }
+        if (manaLeftUntilFull < transferable) {
+            transferable = manaLeftUntilFull;
+        }
+
+        if (transferable > 0) {
+            setManaSize(stack, manaSize + transferable);
+            storage.useMana(transferable);
+        }
+    }
+
+    public static void extractCauldronMana(ItemStack stack, PotatoManaStorage storage, int size) {
+        int transferable = size;
+        int manaSize = getManaSize(stack);
+        int storageLeftUntilFull = storage.getMaxManaStored() - storage.getManaStored();
+
+        if (manaSize < transferable) {
+            transferable = manaSize;
+        }
+        if (storageLeftUntilFull < transferable) {
+            transferable = storageLeftUntilFull;
+        }
+
+        if (transferable > 0) {
+            setManaSize(stack, manaSize - transferable);
+            storage.collectMana(transferable);
+        }
+    }
+
     public PocketCauldron setUltimate() {
         this.ultimate = true;
         return this;

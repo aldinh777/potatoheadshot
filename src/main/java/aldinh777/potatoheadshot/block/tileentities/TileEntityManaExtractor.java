@@ -2,7 +2,9 @@ package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.blocks.ManaExtractor;
 import aldinh777.potatoheadshot.block.blocks.ManaFlower;
+import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -40,6 +42,8 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
             if (this.canTransferMana()) {
                 this.transferMana();
             }
+
+            this.extractManaItem();
 
             if (this.manaSize != this.storage.getManaStored()) {
                 this.manaSize = this.storage.getManaStored();
@@ -141,6 +145,21 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
 
         this.storage.collectMana(manaValue);
         input.shrink(1);
+    }
+
+    private void extractManaItem() {
+        ItemStack stack = this.inputHandler.getStackInSlot(0);
+
+        if (stack.getItem() instanceof PocketCauldron) {
+            PocketCauldron.extractCauldronMana(stack, this.storage, 200);
+            return;
+        }
+
+        if (BotaniaCompat.isBotaniaAvailable()) {
+            if (BotaniaCompat.isInstanceOfManaItem(stack.getItem())) {
+                BotaniaCompat.extractMana(stack, this.storage, 200);
+            }
+        }
     }
 
     @Override
