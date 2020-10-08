@@ -408,6 +408,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             if (item == Items.POTATO || item == PotatoItems.SWEET_POTATO) return 100;
             if (item == PotatoItems.WET_POTATO) return 200;
             if (item == PotatoItems.SUPER_WET_POTATO) return 400;
+            if (item == Item.getItemFromBlock(Blocks.SPONGE)) return 800;
             if (item == Items.WATER_BUCKET || item == PotatoItems.WATER_POTATO) return 800;
             if (item == PotatoItems.SWEET_WATER_BUCKET) return 800;
         }
