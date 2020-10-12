@@ -1,9 +1,8 @@
 package aldinh777.potatoheadshot.compat.jei.cauldron;
 
-import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.CauldronRecipe;
 import com.google.common.collect.Lists;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -18,18 +17,10 @@ public class ManaCauldronRecipe extends AbstractCauldronRecipe {
 	public static List<ManaCauldronRecipe> getRecipes() {
 		List<ManaCauldronRecipe> jeiRecipes = Lists.newArrayList();
 		
-		Item flower = Item.getItemFromBlock(Blocks.RED_FLOWER);
-		Item torch = Item.getItemFromBlock(Blocks.TORCH);
-		Item stone = Item.getItemFromBlock(Blocks.STONE);
-		
-		addRecipe(jeiRecipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST));
-		addRecipe(jeiRecipes, PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE));
-		addRecipe(jeiRecipes, flower, new ItemStack(PotatoBlocks.MANA_FLOWER));
-		addRecipe(jeiRecipes, torch, new ItemStack(PotatoBlocks.MANA_TORCH));
-		addRecipe(jeiRecipes, stone, new ItemStack(PotatoBlocks.MANA_STONE));
-		addRecipe(jeiRecipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD));
-		addRecipe(jeiRecipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL));
-		
+		for (CauldronRecipe recipe : CauldronRecipe.getManaRecipes()) {
+			addRecipe(jeiRecipes, recipe.getInput(), recipe.getOutput());
+		}
+
 		return jeiRecipes;
 	}
 

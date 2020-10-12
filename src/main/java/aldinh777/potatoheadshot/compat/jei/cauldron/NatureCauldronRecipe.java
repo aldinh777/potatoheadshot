@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.compat.jei.cauldron;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.CauldronRecipe;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,28 +18,16 @@ public class NatureCauldronRecipe extends AbstractCauldronRecipe {
 	
 	public static List<NatureCauldronRecipe> getRecipes() {
 		List<NatureCauldronRecipe> jeiRecipes = Lists.newArrayList();
-		
-		Item redMushroom = Item.getItemFromBlock(Blocks.RED_MUSHROOM);
-		Item brownMushroom = Item.getItemFromBlock(Blocks.BROWN_MUSHROOM);
-		Item cactus = Item.getItemFromBlock(Blocks.CACTUS);
-		Item leaves = Item.getItemFromBlock(Blocks.LEAVES);
-		
+
 		Item redFlower = Item.getItemFromBlock(Blocks.RED_FLOWER);
 		Item yellowFlower = Item.getItemFromBlock(Blocks.YELLOW_FLOWER);
 		Item doublePlant = Item.getItemFromBlock(Blocks.DOUBLE_PLANT);
 		Item sapling = Item.getItemFromBlock(Blocks.SAPLING);
 		
-		addRecipe(jeiRecipes, Items.WHEAT_SEEDS, new ItemStack(Items.MELON_SEEDS));
-		addRecipe(jeiRecipes, Items.MELON_SEEDS, new ItemStack(Items.PUMPKIN_SEEDS));
-		addRecipe(jeiRecipes, Items.PUMPKIN_SEEDS, new ItemStack(Items.BEETROOT_SEEDS));
-		addRecipe(jeiRecipes, Items.BEETROOT_SEEDS, new ItemStack(Items.DYE, 1, 3));
-		addRecipe(jeiRecipes, Items.NETHER_WART, new ItemStack(redMushroom));
-		addRecipe(jeiRecipes, redMushroom, new ItemStack(brownMushroom));
-		addRecipe(jeiRecipes, brownMushroom, new ItemStack(Items.NETHER_WART));
-		addRecipe(jeiRecipes, cactus, new ItemStack(Items.REEDS));
-		addRecipe(jeiRecipes, Items.REEDS, new ItemStack(cactus));
-		addRecipe(jeiRecipes, PotatoItems.POTATO_LEAVES, new ItemStack(leaves));
-		
+		for (CauldronRecipe recipe : CauldronRecipe.getNatureRecipes()) {
+			addRecipe(jeiRecipes, recipe.getInput(), recipe.getOutput());
+		}
+
 		addRecipe(jeiRecipes, createStack(Items.DYE, 3), createStack(Items.WHEAT_SEEDS));
 		
 		addRecipe(jeiRecipes, createStack(redFlower, 0), createStack(yellowFlower));

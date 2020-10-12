@@ -1,8 +1,9 @@
-package aldinh777.potatoheadshot.block.blocks;
+package aldinh777.potatoheadshot.block.machines;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetPotatoGenerator;
+import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetFreezer;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -12,31 +13,37 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class SweetPotatoGenerator extends PotatoMachine {
+public class SweetFreezer extends PotatoMachine {
 
-    public SweetPotatoGenerator(String name, BlockType blockType) {
-        super(name, blockType, Constants.POTATO_GEN);
+    public SweetFreezer(String name, BlockType blockType) {
+        super(name, blockType, Constants.FREEZER);
     }
 
+    @Nullable
     @Override
     public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-        return new TileEntitySweetPotatoGenerator();
+        return new TileEntitySweetFreezer();
     }
 
     @Override
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (!worldIn.isRemote) {
-            TileEntitySweetPotatoGenerator tileEntity = (TileEntitySweetPotatoGenerator) worldIn.getTileEntity(pos);
+            TileEntitySweetFreezer tileEntity = (TileEntitySweetFreezer) worldIn.getTileEntity(pos);
             if (tileEntity != null) {
+                IItemHandler saltHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
                 IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
                 IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
+                if (saltHandler != null) {
+                    Block.spawnAsEntity(worldIn, pos, saltHandler.getStackInSlot(0));
+                }
                 if (inputHandler != null) {
-                    spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
+                    Block.spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
                 }
                 if (outputHandler != null) {
-                    spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
+                    Block.spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
                 }
             }
         }

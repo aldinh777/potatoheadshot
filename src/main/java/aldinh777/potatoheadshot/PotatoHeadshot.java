@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = PotatoHeadshot.MODID, name = PotatoHeadshot.NAME, version = PotatoHeadshot.VERSION)
 public class PotatoHeadshot {
     public static final String MODID = "potatoheadshot";
-    public static final String NAME = "PotatoHeadshot";
-    public static final String VERSION = "1.0";
+    public static final String NAME = "Potato Headshot";
+    public static final String VERSION = "1.3.2";
 
     public static Logger logger;
 

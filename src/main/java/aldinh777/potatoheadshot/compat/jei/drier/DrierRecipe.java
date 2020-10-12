@@ -1,12 +1,11 @@
 package aldinh777.potatoheadshot.compat.jei.drier;
 
-import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.PotatoDrierRecipe;
 import com.google.common.collect.Lists;
 import java.util.List;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -22,32 +21,15 @@ public class DrierRecipe implements IRecipeWrapper {
 	
 	public static List<DrierRecipe> getRecipes() {
 		List<DrierRecipe> jeiRecipes = Lists.newArrayList();
-		
-		Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
-		
-		addDryRecipe(jeiRecipes, Items.POTATO, new ItemStack(PotatoItems.DRIED_POTATO));
-		addDryRecipe(jeiRecipes, PotatoItems.DRIED_POTATO, new ItemStack(PotatoItems.POTATO_STARCH));
-		addDryRecipe(jeiRecipes, PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.DRIED_SWEET_POTATO));
-		addDryRecipe(jeiRecipes, PotatoItems.DRIED_SWEET_POTATO, new ItemStack(PotatoItems.SWEET_POTATO_DUST));
-		addDryRecipe(jeiRecipes, PotatoItems.GLOWING_POTATO, new ItemStack(PotatoItems.GLOWING_POTATO_DUST));
-		addDryRecipe(jeiRecipes, PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL));
-		addDryRecipe(jeiRecipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
-		addDryRecipe(jeiRecipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT));
-		addDryRecipe(jeiRecipes, Items.WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
-		addDryRecipe(jeiRecipes, PotatoItems.SWEET_WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
-		addDryRecipe(jeiRecipes, sponge, new ItemStack(sponge));
-		
-		addWetRecipe(jeiRecipes, Items.POTATO, new ItemStack(PotatoItems.WET_POTATO));
-		addWetRecipe(jeiRecipes, PotatoItems.WET_POTATO, new ItemStack(PotatoItems.SUPER_WET_POTATO));
-		addWetRecipe(jeiRecipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.WATER_POTATO));
-		addWetRecipe(jeiRecipes, Items.BUCKET, new ItemStack(Items.WATER_BUCKET));
-		addWetRecipe(jeiRecipes, PotatoItems.SWEET_EMPTY_BUCKET, new ItemStack(PotatoItems.SWEET_WATER_BUCKET));
-		addWetRecipe(jeiRecipes, PotatoItems.DRIED_POTATO, new ItemStack(Items.POTATO));
-		addWetRecipe(jeiRecipes, PotatoItems.EXTRA_HOT_POTATO, new ItemStack(Items.COAL, 1, 1));
-		addWetRecipe(jeiRecipes, PotatoItems.EXTREME_HOT_POTATO, new ItemStack(Items.COAL));
-		addWetRecipe(jeiRecipes, PotatoItems.LAVA_POTATO, new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)));
-		addWetRecipe(jeiRecipes, sponge, new ItemStack(sponge, 1, 1));
-		
+
+		for (PotatoDrierRecipe dryRecipe : PotatoDrierRecipe.getDryRecipes()) {
+			addDryRecipe(jeiRecipes, dryRecipe.getInput(), dryRecipe.getOutput());
+		}
+
+		for (PotatoDrierRecipe wetRecipe : PotatoDrierRecipe.getWetRecipes()) {
+			addWetRecipe(jeiRecipes, wetRecipe.getInput(), wetRecipe.getOutput());
+		}
+
 		return jeiRecipes;
 	}
 	

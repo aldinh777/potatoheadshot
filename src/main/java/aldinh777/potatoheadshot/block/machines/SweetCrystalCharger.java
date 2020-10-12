@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.blocks;
+package aldinh777.potatoheadshot.block.machines;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalCharger;
 import aldinh777.potatoheadshot.util.BlockType;
@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import aldinh777.potatoheadshot.util.Constants;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -35,10 +36,10 @@ public class SweetCrystalCharger extends PotatoMachine {
 			IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 			
 			if (inputHandler != null) {
-				spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
+				Block.spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
 			}
 			if (outputHandler != null) {
-				spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
+				Block.spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
 			}
 		} 
 		super.breakBlock(worldIn, pos, state);

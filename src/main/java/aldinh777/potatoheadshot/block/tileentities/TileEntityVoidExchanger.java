@@ -37,6 +37,8 @@ public class TileEntityVoidExchanger extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!this.world.isRemote) {
+            boolean flag = false;
+
             if (this.canExchange()) {
                 if (this.progress >= this.cost) {
                     this.exchangeItem();
@@ -45,12 +47,16 @@ public class TileEntityVoidExchanger extends TileEntityPotatoMachine {
                 } else {
                     this.progress += this.progressExchange();
                 }
+                flag = true;
 
             } else if (progress > 0) {
                 this.progress--;
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

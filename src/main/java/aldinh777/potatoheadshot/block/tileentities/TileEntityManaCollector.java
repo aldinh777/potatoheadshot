@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.blocks.ManaExtractor;
+import aldinh777.potatoheadshot.block.machines.ManaExtractor;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;

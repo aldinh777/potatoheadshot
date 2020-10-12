@@ -1,6 +1,7 @@
-package aldinh777.potatoheadshot.block.blocks;
+package aldinh777.potatoheadshot.block.machines;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
+import aldinh777.potatoheadshot.block.blocks.PotatoBlock;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.properties.PropertyDirection;

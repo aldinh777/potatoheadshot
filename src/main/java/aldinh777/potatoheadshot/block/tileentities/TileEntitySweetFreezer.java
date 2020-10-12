@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.SweetFreezerRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -212,11 +213,9 @@ public class TileEntitySweetFreezer extends TileEntityPotatoMachine {
     // Static Methods
 
     public static ItemStack getResult(ItemStack stack) {
-        Item ice = Item.getItemFromBlock(Blocks.ICE);
-        if (stack.getItem() == Items.POTATO) return new ItemStack(PotatoItems.FROZEN_POTATO);
-        if (stack.getItem() == Items.WATER_BUCKET) return new ItemStack(ice);
-        if (stack.getItem() == PotatoItems.SWEET_WATER_BUCKET) return new ItemStack(ice);
-        if (stack.getItem() == PotatoItems.WATER_POTATO) return new ItemStack(ice);
+        for (SweetFreezerRecipe recipe :  SweetFreezerRecipe.getRecipes()) {
+            if (stack.getItem() == recipe.getInput()) return recipe.getOutput();
+        }
         return ItemStack.EMPTY;
     }
 }

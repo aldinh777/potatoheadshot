@@ -1,8 +1,6 @@
 package aldinh777.potatoheadshot.block.recipes;
 
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import aldinh777.potatoheadshot.recipes.CauldronRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
@@ -17,39 +15,9 @@ public class ManaLifeCauldronRecipes implements IManaRecipes {
     private final Map<Item, Integer> costs = new HashMap<>();
 
     private ManaLifeCauldronRecipes() {
-        Item grass = Item.getItemFromBlock(Blocks.GRASS);
-        Item dirt = Item.getItemFromBlock(Blocks.DIRT);
-        Item sand = Item.getItemFromBlock(Blocks.SAND);
-        Item log1 = Item.getItemFromBlock(Blocks.LOG);
-        Item log2 = Item.getItemFromBlock(Blocks.LOG2);
-        Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
-        Item netherRack = Item.getItemFromBlock(Blocks.NETHERRACK);
-        Item endStone = Item.getItemFromBlock(Blocks.END_STONE);
-        Item ice = Item.getItemFromBlock(Blocks.ICE);
-
-        addRecipe(PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 12000);
-        addRecipe(PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12000);
-        addRecipe(PotatoItems.ICE_POTATO, new ItemStack(PotatoItems.ICE_POTATO_SEED), 12000);
-
-        addRecipe(Items.FISH, new ItemStack(Items.PRISMARINE_SHARD));
-        addRecipe(Items.PRISMARINE_SHARD, new ItemStack(Items.PRISMARINE_CRYSTALS), 8000);
-        addRecipe(Items.CLAY_BALL, new ItemStack(Items.SLIME_BALL), 8000);
-        addRecipe(Items.STRING, new ItemStack(Blocks.VINE));
-        addRecipe(Items.SUGAR, new ItemStack(Items.REEDS));
-        addRecipe(netherRack, new ItemStack(Items.NETHER_WART));
-        addRecipe(grass, new ItemStack(Items.WHEAT_SEEDS));
-        addRecipe(dirt, new ItemStack(Blocks.GRASS));
-        addRecipe(sand, new ItemStack(Blocks.CACTUS));
-        addRecipe(log1, new ItemStack(Blocks.SAPLING));
-        addRecipe(log2, new ItemStack(Blocks.SAPLING));
-        addRecipe(mycelium, new ItemStack(Blocks.BROWN_MUSHROOM));
-        addRecipe(endStone, new ItemStack(Blocks.CHORUS_FLOWER));
-        addRecipe(ice, new ItemStack(Blocks.SNOW));
-        addRecipe(Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 8000);
-    }
-
-    private void addRecipe(Item input, ItemStack result) {
-        this.addRecipe(input, result, 2000);
+        for (CauldronRecipe recipe : CauldronRecipe.getLifeRecipes()) {
+            addRecipe(recipe.getInput(), recipe.getOutput(), recipe.getCost());
+        }
     }
 
     private void addRecipe(Item input, ItemStack result, int cost) {
@@ -66,12 +34,6 @@ public class ManaLifeCauldronRecipes implements IManaRecipes {
             if (!splash.getItemStackDisplayName(input).equals("Awkward Splash Potion")) {
                 return ItemStack.EMPTY;
             }
-        }
-
-        if (input.getItem() instanceof ItemSplashPotion) {
-            ItemSplashPotion splash = (ItemSplashPotion) input.getItem();
-            String name = splash.getItemStackDisplayName(input);
-            System.out.println(name);
         }
 
         if (result != null) {

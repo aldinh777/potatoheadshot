@@ -33,7 +33,7 @@ public class PotatoFoodItemBlock extends PotatoItemBlock {
     @Override
     public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
         if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer)entityLiving;
+            EntityPlayer entityplayer = (EntityPlayer) entityLiving;
             entityplayer.getFoodStats().addStats(this.food, stack);
             worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
         }

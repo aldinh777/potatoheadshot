@@ -1,8 +1,9 @@
-package aldinh777.potatoheadshot.block.blocks;
+package aldinh777.potatoheadshot.block.machines;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -39,7 +40,7 @@ public class SweetInfuser extends PotatoMachine {
                     for (int i = 0; i < Objects.requireNonNull(handler).getSlots(); ++i) {
                         ItemStack itemStack = handler.getStackInSlot(i);
                         if (!itemStack.isEmpty()) {
-                            spawnAsEntity(worldIn, pos, itemStack);
+                            Block.spawnAsEntity(worldIn, pos, itemStack);
                         }
                     }
                 }

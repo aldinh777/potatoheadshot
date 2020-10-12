@@ -1,8 +1,9 @@
-package aldinh777.potatoheadshot.block.blocks;
+package aldinh777.potatoheadshot.block.machines;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityVoidExchanger;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -36,13 +37,13 @@ public class VoidExchanger extends PotatoMachine {
                 IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
                 if (bottleHandler != null) {
-                    spawnAsEntity(worldIn, pos, bottleHandler.getStackInSlot(0));
+                    Block.spawnAsEntity(worldIn, pos, bottleHandler.getStackInSlot(0));
                 }
                 if (inputHandler != null) {
-                    spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
+                    Block.spawnAsEntity(worldIn, pos, inputHandler.getStackInSlot(0));
                 }
                 if (outputHandler != null) {
-                    spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
+                    Block.spawnAsEntity(worldIn, pos, outputHandler.getStackInSlot(0));
                 }
             }
         }

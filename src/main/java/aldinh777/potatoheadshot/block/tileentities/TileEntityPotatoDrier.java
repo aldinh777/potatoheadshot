@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.blocks.PotatoDrier;
+import aldinh777.potatoheadshot.block.machines.PotatoDrier;
 import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -66,77 +66,12 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             ItemStack dryInput = this.inputHandler.getStackInSlot(0);
             ItemStack wetInput = this.inputHandler.getStackInSlot(1);
 
-            // Burning Section
-            if (this.isBurning() || !fuel.isEmpty() && !dryInput.isEmpty()) {
-                if (!this.isBurning() && this.canDry()) {
-                    this.burnTime = getItemBurnTime(fuel);
-                    this.currentBurnTime = this.burnTime;
-
-                    if (this.isBurning()) {
-                        dryingFlag = true;
-
-                        if (!fuel.isEmpty()) {
-                            Item item = fuel.getItem();
-                            fuel.shrink(1);
-
-                            if (fuel.isEmpty()) {
-                                ItemStack containerItem = item.getContainerItem(fuel);
-                                this.fuelHandler.setStackInSlot(0, containerItem);
-                            }
-                        }
-                    }
-                }
-
-                if (this.isBurning() && this.canDry()) {
-                    ++this.dryTime;
-
-                    if (this.dryTime == this.totalDryTime) {
-                        this.dryTime = 0;
-                        this.totalDryTime = 200;
-                        this.dryItem();
-                        dryingFlag = true;
-                    }
-                }
-                else {
-                    this.dryTime = 0;
-                }
-
-            }
-            else if (!this.isBurning() && this.dryTime > 0) {
-                this.dryTime = MathHelper.clamp(this.dryTime - 2, 0, this.totalDryTime);
+            if (tryDrying(fuel, dryInput)) {
+                flagBurning = true;
             }
 
-            // Wetting Section
-            if (this.isWatering() || this.waterSize >= 1000 && !wetInput.isEmpty()) {
-                if (!this.isWatering() && this.canWet()) {
-                    this.wateringTime = 1000;
-                    this.currentWateringTime = this.wateringTime;
-
-                    if (this.isWatering()) {
-                        wettingFlag = true;
-
-                        if (this.waterSize >= 1000) {
-                            this.waterSize -= 1000;
-                        }
-                    }
-                }
-
-                if (this.isWatering() && this.canWet()) {
-                    ++this.wetTime;
-
-                    if (this.wetTime == this.totalWetTime) {
-                        this.wetTime = 0;
-                        this.totalWetTime = 1000;
-                        this.wetItem();
-                        wettingFlag = true;
-                    }
-                }
-                else {
-                    this.wetTime = 0;
-                }
-            }
-            else if (!this.isWatering() && this.wetTime > 0) {
-                this.wetTime = MathHelper.clamp(this.wetTime - 2, 0, this.totalWetTime);
+            if (tryWetting(wetInput)) {
+                wettingFlag = true;
             }
 
             if (flagBurning != this.isBurning()) {
@@ -364,6 +299,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             if (this.waterSize > this.getMaxWaterSize()) {
                 this.waterSize = this.getMaxWaterSize();
             }
+
             if (dryInput.getItem() == Items.WATER_BUCKET) {
                 this.inputHandler.setStackInSlot(0, new ItemStack(Items.BUCKET));
             } else if (dryInput.getItem() == PotatoItems.SWEET_WATER_BUCKET) {
@@ -382,13 +318,95 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
 
             if (wetOutput.isEmpty()) {
                 this.outputHandler.setStackInSlot(1, result.copy());
-            }
-            else if (wetOutput.getItem() == result.getItem()) {
+            } else if (wetOutput.getItem() == result.getItem()) {
                 wetOutput.grow(result.getCount());
             }
 
             wetInput.shrink(1);
         }
+    }
+
+    private boolean tryDrying(ItemStack fuel, ItemStack dryInput) {
+        boolean dryingFlag = false;
+
+        if (this.isBurning() || !fuel.isEmpty() && !dryInput.isEmpty()) {
+            if (!this.isBurning() && this.canDry()) {
+                this.burnTime = getItemBurnTime(fuel);
+                this.currentBurnTime = this.burnTime;
+
+                if (this.isBurning()) {
+                    dryingFlag = true;
+
+                    if (!fuel.isEmpty()) {
+                        Item item = fuel.getItem();
+                        fuel.shrink(1);
+
+                        if (fuel.isEmpty()) {
+                            ItemStack containerItem = item.getContainerItem(fuel);
+                            this.fuelHandler.setStackInSlot(0, containerItem);
+                        }
+                    }
+                }
+            }
+
+            if (this.isBurning() && this.canDry()) {
+                ++this.dryTime;
+
+                if (this.dryTime == this.totalDryTime) {
+                    this.dryTime = 0;
+                    this.totalDryTime = 200;
+                    this.dryItem();
+                    dryingFlag = true;
+                }
+            }
+            else {
+                this.dryTime = 0;
+            }
+
+        }
+        else if (!this.isBurning() && this.dryTime > 0) {
+            this.dryTime = MathHelper.clamp(this.dryTime - 2, 0, this.totalDryTime);
+        }
+
+        return dryingFlag;
+    }
+
+    private boolean tryWetting(ItemStack wetInput) {
+        boolean wettingFlag = false;
+
+        if (this.isWatering() || this.waterSize >= 1000 && !wetInput.isEmpty()) {
+            if (!this.isWatering() && this.canWet()) {
+                this.wateringTime = 1000;
+                this.currentWateringTime = this.wateringTime;
+
+                if (this.isWatering()) {
+                    wettingFlag = true;
+
+                    if (this.waterSize >= 1000) {
+                        this.waterSize -= 1000;
+                    }
+                }
+            }
+
+            if (this.isWatering() && this.canWet()) {
+                ++this.wetTime;
+
+                if (this.wetTime == this.totalWetTime) {
+                    this.wetTime = 0;
+                    this.totalWetTime = 1000;
+                    this.wetItem();
+                    wettingFlag = true;
+                }
+            }
+            else {
+                this.wetTime = 0;
+            }
+        }
+        else if (!this.isWatering() && this.wetTime > 0) {
+            this.wetTime = MathHelper.clamp(this.wetTime - 2, 0, this.totalWetTime);
+        }
+
+        return wettingFlag;
     }
 
     // Static Method
@@ -416,7 +434,6 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
     }
 
     private static int getItemBurnTime(ItemStack fuel) {
-
         if (fuel.isEmpty()) {
             return 0;
         } else {

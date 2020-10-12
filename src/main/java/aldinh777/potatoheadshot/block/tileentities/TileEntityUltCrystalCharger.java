@@ -12,6 +12,4 @@ public class TileEntityUltCrystalCharger extends TileEntitySweetCrystalCharger {
     public boolean isUltimate() {
         return true;
     }
-
-
 }

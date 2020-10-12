@@ -14,14 +14,11 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,10 +36,10 @@ public class SweetBucket extends Item {
     }
 
     public SweetBucket(String name, Block containedBlockIn) {
-        this.maxStackSize = 1;
         this.containedBlock = containedBlockIn;
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
+        this.setMaxStackSize(1);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
         PotatoItems.LISTS.add(this);
     }
@@ -112,15 +109,6 @@ public class SweetBucket extends Item {
                     return drink(playerIn, itemstack, handIn);
                 }
             }
-        }
-    }
-
-    @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if (this.getClass() == SweetBucket.class) {
-            return new FluidBucketWrapper(stack);
-        } else {
-            return super.initCapabilities(stack, nbt);
         }
     }
 

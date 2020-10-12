@@ -1,8 +1,6 @@
 package aldinh777.potatoheadshot.block.recipes;
 
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import aldinh777.potatoheadshot.recipes.PotatoDrierRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -16,31 +14,13 @@ public class PotatoDrierRecipes {
     private final Map<Item, ItemStack> wetList = new HashMap<>();
 
     private PotatoDrierRecipes() {
+        for (PotatoDrierRecipe dryRecipe : PotatoDrierRecipe.getDryRecipes()) {
+            addDryRecipe(dryRecipe.getInput(), dryRecipe.getOutput());
+        }
 
-        Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
-
-        addDryRecipe(Items.POTATO, new ItemStack(PotatoItems.DRIED_POTATO));
-        addDryRecipe(PotatoItems.DRIED_POTATO, new ItemStack(PotatoItems.POTATO_STARCH));
-        addDryRecipe(PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.DRIED_SWEET_POTATO));
-        addDryRecipe(PotatoItems.DRIED_SWEET_POTATO, new ItemStack(PotatoItems.SWEET_POTATO_DUST));
-        addDryRecipe(PotatoItems.GLOWING_POTATO, new ItemStack(PotatoItems.GLOWING_POTATO_DUST));
-        addDryRecipe(PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL));
-        addDryRecipe(PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
-        addDryRecipe(PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT));
-        addDryRecipe(Items.WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
-        addDryRecipe(PotatoItems.SWEET_WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
-        addDryRecipe(sponge, new ItemStack(sponge));
-
-        addWetRecipe(Items.POTATO, new ItemStack(PotatoItems.WET_POTATO));
-        addWetRecipe(PotatoItems.WET_POTATO, new ItemStack(PotatoItems.SUPER_WET_POTATO));
-        addWetRecipe(PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.WATER_POTATO));
-        addWetRecipe(Items.BUCKET, new ItemStack(Items.WATER_BUCKET));
-        addWetRecipe(PotatoItems.SWEET_EMPTY_BUCKET, new ItemStack(PotatoItems.SWEET_WATER_BUCKET));
-        addWetRecipe(PotatoItems.DRIED_POTATO, new ItemStack(Items.POTATO));
-        addWetRecipe(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(Items.COAL, 1, 1));
-        addWetRecipe(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(Items.COAL));
-        addWetRecipe(PotatoItems.LAVA_POTATO, new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)));
-        addWetRecipe(sponge, new ItemStack(sponge, 1, 1));
+        for (PotatoDrierRecipe wetRecipe : PotatoDrierRecipe.getWetRecipes()) {
+            addWetRecipe(wetRecipe.getInput(), wetRecipe.getOutput());
+        }
     }
 
     public void addDryRecipe(Item input, ItemStack result) {

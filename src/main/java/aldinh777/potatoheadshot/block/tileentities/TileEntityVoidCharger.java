@@ -31,6 +31,8 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!this.world.isRemote) {
+            boolean flag = false;
+
             ItemStack input = inputHandler.getStackInSlot(0);
             ItemStack bottle = outputHandler.getStackInSlot(0);
 
@@ -44,9 +46,12 @@ public class TileEntityVoidCharger extends TileEntityPotatoMachine {
                     input.shrink(count);
                     VoidBottle.setVoidSize(bottle, voidSize + totalVoidValue);
                 }
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

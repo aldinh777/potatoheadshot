@@ -35,6 +35,8 @@ public class TileEntityBedrockMiner extends TileEntityPotatoMachine {
     @Override
     public void update() {
         if (!this.world.isRemote) {
+            boolean flag = false;
+
             if (this.canMine()) {
                 if (this.progress >= cost) {
                     this.mineBlockUnder();
@@ -42,11 +44,15 @@ public class TileEntityBedrockMiner extends TileEntityPotatoMachine {
                 } else {
                     this.progress += this.progressMining();
                 }
+                flag = true;
             } else if (this.progress > 0) {
                 this.progress--;
+                flag = true;
             }
 
-            this.markDirty();
+            if (flag) {
+                this.markDirty();
+            }
         }
     }
 

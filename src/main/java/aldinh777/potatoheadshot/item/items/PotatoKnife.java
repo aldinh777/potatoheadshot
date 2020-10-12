@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 public class PotatoKnife extends ItemSword {
 
     public PotatoKnife(String name) {
-        super(ToolMaterial.STONE);
+        super(ToolMaterial.WOOD);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
