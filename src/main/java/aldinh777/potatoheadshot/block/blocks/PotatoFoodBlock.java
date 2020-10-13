@@ -1,16 +1,23 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.item.items.PotatoFoodItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.BlockType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class PotatoFoodBlock extends PotatoBlock {
 
-    public PotatoFoodBlock(String name, BlockType blockType, int amount, float saturation) {
+    private Item droppedItem;
+
+    public PotatoFoodBlock(String name, BlockType blockType) {
         super(name, blockType);
-        initFood(amount, saturation);
     }
 
     @Override
@@ -21,7 +28,19 @@ public class PotatoFoodBlock extends PotatoBlock {
         PotatoBlocks.LISTS.add(this);
     }
 
-    protected void initFood(int amount, float saturation) {
-        PotatoItems.LISTS.add(new PotatoFoodItemBlock(this, amount, saturation));
+    @Nonnull
+    @Override
+    public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        return this.droppedItem != null ? new ItemStack(this.droppedItem) : super.getItem(worldIn, pos, state);
+    }
+
+    public void setDroppedItem(Item droppedItem) {
+        this.droppedItem = droppedItem;
+    }
+
+    @Nonnull
+    @Override
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+        return this.droppedItem != null ? this.droppedItem : super.getItemDropped(state, rand, fortune);
     }
 }

@@ -1,7 +1,9 @@
 package aldinh777.potatoheadshot.lists;
 
 import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
+import aldinh777.potatoheadshot.block.blocks.PotatoFoodBlock;
 import aldinh777.potatoheadshot.item.items.*;
+import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.FoodEffects;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -92,6 +94,10 @@ public class PotatoItems {
 
     public static Item SPLASH_MANA_FIRE;
     public static Item SPLASH_MANA_LIFE;
+
+    public static Item COOKED_DIRT;
+    public static Item BAKED_POTATO_PLANKS;
+    public static Item BAKED_POTATO_BLOCK;
 
     public static void addFoodEffects(Item item, FoodEffects... effects) {
         if (item instanceof PotatoFood) {
@@ -197,6 +203,20 @@ public class PotatoItems {
         // Potato Potions
         SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", ManaCauldron.Element.FIRE);
         SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", ManaCauldron.Element.LIFE);
+
+        // This is kinda complicated, but i have to put the food block here to access the item
+        // since they are extend ItemFood not ItemBlock so i can't get like Item#getItemFromBlock
+        PotatoFoodBlock cookedDirt = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND);
+        PotatoFoodBlock bakedPotatoPlanks = new PotatoFoodBlock("baked_potato_planks", BlockType.WOOD);
+        PotatoFoodBlock bakedPotatoBlock = new PotatoFoodBlock("baked_potato_block", BlockType.POTATO);
+
+        COOKED_DIRT = new PotatoFoodItemBlock(cookedDirt, 3, 0.2f);
+        BAKED_POTATO_PLANKS = new PotatoFoodItemBlock(bakedPotatoPlanks, 5, 0.5f);
+        BAKED_POTATO_BLOCK = new PotatoFoodItemBlock(bakedPotatoBlock, 10, 0.8f);
+
+        cookedDirt.setDroppedItem(COOKED_DIRT);
+        bakedPotatoPlanks.setDroppedItem(BAKED_POTATO_PLANKS);
+        bakedPotatoBlock.setDroppedItem(BAKED_POTATO_BLOCK);
 
         // Configuration Definition
         PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) EXTRA_HOT_POTATO;

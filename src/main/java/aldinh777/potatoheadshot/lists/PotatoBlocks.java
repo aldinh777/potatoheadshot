@@ -23,10 +23,6 @@ public class PotatoBlocks {
     public static Block VOID_POTATOES = new VoidPotatoCrops("void_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
-    public static Block COOKED_DIRT;
-    public static Block BAKED_POTATO_PLANKS;
-    public static Block BAKED_POTATO_BLOCK;
-
     public static Block POTATO_PLANKS;
     public static Block POTATO_BLOCK;
     public static Block SWEET_POTATO_BLOCK;
@@ -60,16 +56,6 @@ public class PotatoBlocks {
 
     public static void init() {
 
-        // Place able Item
-        MANA_TORCH = new Potatorch("glowing_mana_torch");
-        MANA_FLOWER = new ManaFlower("glowing_mana_flower");
-        ULTIMATE_FLOWER = new ManaFlower("ultimate_mana_flower").setLightLevel(1.0f);
-
-        // Food Block
-        COOKED_DIRT = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND, 3, 0.2f);
-        BAKED_POTATO_PLANKS = new PotatoFoodBlock("baked_potato_planks", BlockType.WOOD, 5, 0.5f);
-        BAKED_POTATO_BLOCK = new PotatoFoodBlock("baked_potato_block", BlockType.POTATO, 10, 0.8f);
-
         // Normal Block
         POTATO_PLANKS = new PotatoBlock("potato_planks", BlockType.WOOD);
         POTATO_BLOCK = new PotatoBlock("potato_block", BlockType.POTATO);
@@ -80,6 +66,11 @@ public class PotatoBlocks {
         MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE).setLightLevel(0.7f).setResistance(6000);
         VOID_BLOCK = new PotatoBlock("void_block", BlockType.METAL);
         QUANTUM_STONE = new QuantumBlock("quantum_stone", BlockType.STONE);
+
+        // Place able Item
+        MANA_TORCH = new Potatorch("glowing_mana_torch");
+        MANA_FLOWER = new ManaFlower("glowing_mana_flower");
+        ULTIMATE_FLOWER = new ManaFlower("ultimate_mana_flower").setLightLevel(1.0f);
 
         // Utility Block
         POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);

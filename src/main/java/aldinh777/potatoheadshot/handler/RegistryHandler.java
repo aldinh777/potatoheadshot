@@ -37,10 +37,6 @@ public class RegistryHandler {
 
     public static void registerSmelting() {
 
-        ItemStack cookedDirt = new ItemStack(Item.getItemFromBlock(PotatoBlocks.COOKED_DIRT));
-        ItemStack bakedPotatoPlanks = new ItemStack(PotatoBlocks.BAKED_POTATO_PLANKS);
-        ItemStack bakedPotatoBlock = new ItemStack(PotatoBlocks.BAKED_POTATO_BLOCK);
-
         GameRegistry.addSmelting(Items.POISONOUS_POTATO, new ItemStack(PotatoItems.HOT_POTATO), 0.075f);
         GameRegistry.addSmelting(PotatoItems.HOT_POTATO, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), 0.075f);
         GameRegistry.addSmelting(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), 0.075f);
@@ -53,9 +49,9 @@ public class RegistryHandler {
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
         GameRegistry.addSmelting(PotatoItems.VOID_POTATO, new ItemStack(PotatoItems.VOID_MATTER), 0f);
 
-        GameRegistry.addSmelting(Blocks.DIRT, cookedDirt, 0.15f);
-        GameRegistry.addSmelting(PotatoBlocks.POTATO_PLANKS, bakedPotatoPlanks, 0.45f);
-        GameRegistry.addSmelting(PotatoBlocks.POTATO_BLOCK, bakedPotatoBlock, 0.45f);
+        GameRegistry.addSmelting(Blocks.DIRT, new ItemStack(PotatoItems.COOKED_DIRT), 0.15f);
+        GameRegistry.addSmelting(PotatoBlocks.POTATO_PLANKS, new ItemStack(PotatoItems.BAKED_POTATO_PLANKS), 0.45f);
+        GameRegistry.addSmelting(PotatoBlocks.POTATO_BLOCK, new ItemStack(PotatoItems.BAKED_POTATO_BLOCK), 0.45f);
     }
 
     public static void registerTileEntity() {

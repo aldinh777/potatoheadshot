@@ -1,70 +1,174 @@
 package aldinh777.potatoheadshot.item.items;
 
+import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.lists.PotatoTab;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Objects;
 
-public class PotatoFoodItemBlock extends PotatoItemBlock {
+public class PotatoFoodItemBlock extends ItemFood {
 
-    private final ItemFood food;
+    private final Block block;
 
     public PotatoFoodItemBlock(Block block, int amount, float saturation) {
-        super(block);
-        this.food = new ItemFood(amount, saturation, false);
-    }
-
-    @Override
-    public int getItemBurnTime(@Nonnull ItemStack itemStack) {
-        return 0;
+        super(amount, saturation, false);
+        this.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
+        this.setCreativeTab(PotatoTab.POTATO_TAB);
+        PotatoItems.LISTS.add(this);
+        this.block = block;
     }
 
     @Nonnull
     @Override
-    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer) entityLiving;
-            entityplayer.getFoodStats().addStats(this.food, stack);
-            worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+    public EnumActionResult onItemUse(@Nonnull EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        Block block = iblockstate.getBlock();
+
+        if (!block.isReplaceable(worldIn, pos)) {
+            pos = pos.offset(facing);
         }
 
-        stack.shrink(1);
-        return stack;
-    }
+        ItemStack itemstack = player.getHeldItem(hand);
 
-    @Override
-    public int getMaxItemUseDuration(@Nonnull ItemStack stack)
-    {
-        return 32;
-    }
+        if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(this.block, pos, false, facing, player))
+        {
+            int i = this.getMetadata(itemstack.getMetadata());
+            IBlockState iblockstate1 = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
 
-    @Nonnull
-    @Override
-    public EnumAction getItemUseAction(@Nonnull ItemStack stack)
-    {
-        return EnumAction.EAT;
-    }
+            if (placeBlockAt(itemstack, player, worldIn, pos, iblockstate1))
+            {
+                iblockstate1 = worldIn.getBlockState(pos);
+                SoundType soundtype = iblockstate1.getBlock().getSoundType(iblockstate1, worldIn, pos, player);
+                worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+                itemstack.shrink(1);
+            }
 
-    @Nonnull
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-
-        if (playerIn.canEat(false)) {
-            playerIn.setActiveHand(handIn);
-            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-        } else {
-            return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+            return EnumActionResult.SUCCESS;
         }
+        else
+        {
+            return EnumActionResult.FAIL;
+        }
+    }
+
+    public static void setTileEntityNBT(World worldIn, @Nullable EntityPlayer player, BlockPos pos, ItemStack stackIn) {
+        MinecraftServer minecraftserver = worldIn.getMinecraftServer();
+
+        if (minecraftserver != null ) {
+            NBTTagCompound nbttagcompound = stackIn.getSubCompound("BlockEntityTag");
+
+            if (nbttagcompound != null) {
+                TileEntity tileentity = worldIn.getTileEntity(pos);
+
+                if (tileentity != null) {
+                    if (!worldIn.isRemote && tileentity.onlyOpsCanSetNbt() && (player == null || !player.canUseCommandBlock())) {
+                        return;
+                    }
+
+                    NBTTagCompound nbttagcompound1 = tileentity.writeToNBT(new NBTTagCompound());
+                    NBTTagCompound nbttagcompound2 = nbttagcompound1.copy();
+                    nbttagcompound1.merge(nbttagcompound);
+                    nbttagcompound1.setInteger("x", pos.getX());
+                    nbttagcompound1.setInteger("y", pos.getY());
+                    nbttagcompound1.setInteger("z", pos.getZ());
+
+                    if (!nbttagcompound1.equals(nbttagcompound2)) {
+                        tileentity.readFromNBT(nbttagcompound1);
+                        tileentity.markDirty();
+                    }
+                }
+            }
+
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player) {
+        Block block = worldIn.getBlockState(pos).getBlock();
+
+        if (block == Blocks.SNOW_LAYER && block.isReplaceable(worldIn, pos)) {
+            side = EnumFacing.UP;
+        } else if (!block.isReplaceable(worldIn, pos)) {
+            pos = pos.offset(side);
+        }
+
+        return worldIn.mayPlace(this.block, pos, false, side, player);
+    }
+
+    @Nonnull
+    @Override
+    public String getUnlocalizedName(@Nonnull ItemStack stack) {
+        return this.block.getUnlocalizedName();
+    }
+
+    @Nonnull
+    @Override
+    public String getUnlocalizedName() {
+        return this.block.getUnlocalizedName();
+    }
+
+    @Override
+    public CreativeTabs getCreativeTab() {
+        return this.block.getCreativeTabToDisplayOn();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        this.block.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    public Block getBlock() {
+        return this.getBlockRaw() == null ? null : this.getBlockRaw().delegate.get();
+    }
+
+    private Block getBlockRaw() {
+        return this.block;
+    }
+
+    /**
+     * Called to actually place the block, after the location is determined
+     * and all permission checks have been made.
+     *
+     * @param stack The item stack that was used to place the block. This can be changed inside the method.
+     * @param player The player who is placing the block. Can be null if the block is not being placed by a player.
+     */
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, IBlockState newState) {
+        if (!world.setBlockState(pos, newState, 11)) return false;
+
+        IBlockState state = world.getBlockState(pos);
+        if (state.getBlock() == this.block) {
+            setTileEntityNBT(world, player, pos, stack);
+            this.block.onBlockPlacedBy(world, pos, state, player, stack);
+
+            if (player instanceof EntityPlayerMP)
+                CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)player, pos, stack);
+        }
+
+        return true;
     }
 }
