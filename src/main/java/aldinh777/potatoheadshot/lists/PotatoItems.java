@@ -33,7 +33,6 @@ public class PotatoItems {
     public static Item STICKY_POTATO;
     public static Item FROZEN_POTATO;
     public static Item ICE_POTATO;
-    public static Item VOID_POTATO;
 
     public static Item LAVA_POTATO_SEED;
     public static Item WATER_POTATO_SEED;
@@ -54,20 +53,10 @@ public class PotatoItems {
     public static Item ESSENCE_LIFE;
     public static Item ESSENCE_NATURE;
     public static Item ESSENCE_FIRE;
-    public static Item ESSENCE_VOID;
     public static Item ROD_MANA;
     public static Item ROD_LIFE;
     public static Item ROD_NATURE;
     public static Item ROD_FIRE;
-    public static Item ROD_VOID;
-
-    public static Item VOID_QUANTUM;
-    public static Item VOID_MATTER;
-    public static Item VOID_PILE;
-    public static Item VOID_NUGGET;
-    public static Item VOID_INGOT;
-    public static Item QUANTUM_DRILL;
-    public static Item VOID_DRILL;
 
     public static Item CRYSTAL_SHARD;
     public static Item CRYSTAL;
@@ -84,7 +73,6 @@ public class PotatoItems {
     public static Item POTATO_KNIFE;
     public static Item POTATO_MANA_KNIFE;
     public static Item LAVA_HOE;
-    public static Item VOID_BOTTLE;
     public static Item SWEET_POTATO_BUCKET;
     public static Item SWEET_EMPTY_BUCKET;
     public static Item SWEET_LAVA_BUCKET;
@@ -134,7 +122,6 @@ public class PotatoItems {
         // Crop
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
         STICKY_POTATO = new PotatoCrop("sticky_potato", 1, 0.3f, PotatoBlocks.STICKY_POTATOES);
-        VOID_POTATO = new PotatoCrop("void_potato", 1, 0.3f, PotatoBlocks.VOID_POTATOES);
 
         // Seeds
         LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
@@ -157,23 +144,12 @@ public class PotatoItems {
         ESSENCE_LIFE = new PotatoItem("essence_life");
         ESSENCE_NATURE = new PotatoItem("essence_nature");
         ESSENCE_FIRE = new PotatoItem("essence_fire");
-        ESSENCE_VOID = new PotatoItem("essence_void");
         ROD_MANA = new PotatoItem("rod_mana");
         ROD_LIFE = new PotatoItem("rod_life");
         ROD_NATURE = new PotatoItem("rod_nature");
         ROD_FIRE = new PotatoItem("rod_fire");
-        ROD_VOID = new PotatoItem("rod_void");
         POCKET_CAULDRON = new PocketCauldron("pocket_cauldron");
         ULTIMATE_POCKET_CAULDRON = new PocketCauldron("ultimate_pocket_cauldron").setUltimate();
-
-        // Void Items
-        VOID_QUANTUM = new PotatoItem("void_quantum");
-        VOID_MATTER = new PotatoItem("void_matter");
-        VOID_PILE = new PotatoItem("void_pile");
-        VOID_NUGGET = new PotatoItem("void_nugget");
-        VOID_INGOT = new PotatoItem("void_ingot");
-        QUANTUM_DRILL = new PotatoItem("quantum_drill");
-        VOID_DRILL = new PotatoItem("void_drill");
 
         // Crystal
         CRYSTAL_SHARD = new PotatoItem("crystal_shard");
@@ -196,7 +172,6 @@ public class PotatoItems {
         // Potato other thing
         POTATO_KNIFE = new PotatoKnife("potato_knife");
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
-        VOID_BOTTLE = new VoidBottle("void_bottle");
         LAVA_HOE = new LavaHoe("lava_hoe");
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 12800);
 

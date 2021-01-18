@@ -1,9 +1,0 @@
-{
-  "parent": "potatoheadshot:block/orientable_with_bottom",
-  "textures": {
-    "top": "potatoheadshot:blocks/bedrock_miner_top",
-    "front": "potatoheadshot:blocks/bedrock_miner_side",
-    "side": "potatoheadshot:blocks/bedrock_miner_side",
-    "bottom": "potatoheadshot:blocks/bedrock_miner_bottom"
-  }
-}

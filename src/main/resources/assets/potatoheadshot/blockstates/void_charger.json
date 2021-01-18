@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "potatoheadshot:void_charger" },
-    "facing=south": { "model": "potatoheadshot:void_charger", "y": 180 },
-    "facing=west":  { "model": "potatoheadshot:void_charger", "y": 270 },
-    "facing=east":  { "model": "potatoheadshot:void_charger", "y": 90 }
-  }
-}

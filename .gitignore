@@ -26,3 +26,5 @@ forge*changelog.txt
 
 # Build File
 build.rb
+build.js
+

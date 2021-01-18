@@ -47,7 +47,6 @@ public class RegistryHandler {
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.BAKED_SWEET_POTATO), 0.35f);
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_DUST, new ItemStack(PotatoItems.SWEET_POTATO_INGOT), 0.075f);
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
-        GameRegistry.addSmelting(PotatoItems.VOID_POTATO, new ItemStack(PotatoItems.VOID_MATTER), 0f);
 
         GameRegistry.addSmelting(Blocks.DIRT, new ItemStack(PotatoItems.COOKED_DIRT), 0.15f);
         GameRegistry.addSmelting(PotatoBlocks.POTATO_PLANKS, new ItemStack(PotatoItems.BAKED_POTATO_PLANKS), 0.45f);
@@ -66,11 +65,6 @@ public class RegistryHandler {
         ResourceLocation manaCauldron = new ResourceLocation("potatoheadshot:mana_cauldron");
         ResourceLocation ultManaCauldron = new ResourceLocation("potatoheadshot:ultimate_mana_cauldron");
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
-        ResourceLocation quantumMiner = new ResourceLocation("potatoheadshot:quantum_miner");
-        ResourceLocation voidCharger = new ResourceLocation("potatoheadshot:void_charger");
-        ResourceLocation voidExchanger = new ResourceLocation("potatoheadshot:void_exchanger");
-        ResourceLocation bedrockMiner = new ResourceLocation("potatoheadshot:bedrock_miner");
-        ResourceLocation quantumBlock = new ResourceLocation("potatoheadshot:quantum_block");
 
         GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
@@ -83,11 +77,6 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
         GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
         GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
-        GameRegistry.registerTileEntity(TileEntityQuantumMiner.class, quantumMiner);
-        GameRegistry.registerTileEntity(TileEntityVoidCharger.class, voidCharger);
-        GameRegistry.registerTileEntity(TileEntityVoidExchanger.class, voidExchanger);
-        GameRegistry.registerTileEntity(TileEntityBedrockMiner.class, bedrockMiner);
-        GameRegistry.registerTileEntity(TileEntityQuantumBlock.class, quantumBlock);
     }
 
     @SubscribeEvent

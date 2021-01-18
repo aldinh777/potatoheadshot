@@ -46,15 +46,6 @@ public class GuiHandler implements IGuiHandler {
             case Constants.EXTRACTOR:
                 TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
                 return new ContainerManaExtractor(player.inventory, Objects.requireNonNull(extractor));
-            case Constants.VOID_CHARGER:
-                TileEntityVoidCharger voidCharger = (TileEntityVoidCharger) tileEntity;
-                return new ContainerVoidCharger(player.inventory, Objects.requireNonNull(voidCharger));
-            case Constants.VOID_EXCHANGER:
-                TileEntityVoidExchanger voidExchanger = (TileEntityVoidExchanger) tileEntity;
-                return new ContainerVoidExchanger(player.inventory, Objects.requireNonNull(voidExchanger));
-            case Constants.BEDROCK_MINER:
-                TileEntityBedrockMiner bedrockMiner = (TileEntityBedrockMiner) tileEntity;
-                return new ContainerBedrockMiner(player.inventory, Objects.requireNonNull(bedrockMiner));
             case Constants.POCKET_CAULDRON:
                 return new ContainerPocketCauldron(player);
             default:
@@ -91,15 +82,6 @@ public class GuiHandler implements IGuiHandler {
             case Constants.EXTRACTOR:
                 TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
                 return new GuiManaExtractor(player.inventory, Objects.requireNonNull(extractor));
-            case Constants.VOID_CHARGER:
-                TileEntityVoidCharger voidCharger = (TileEntityVoidCharger) tileEntity;
-                return new GuiVoidCharger(player.inventory, Objects.requireNonNull(voidCharger));
-            case Constants.VOID_EXCHANGER:
-                TileEntityVoidExchanger voidExchanger = (TileEntityVoidExchanger) tileEntity;
-                return new GuiVoidExchanger(player.inventory, Objects.requireNonNull(voidExchanger));
-            case Constants.BEDROCK_MINER:
-                TileEntityBedrockMiner bedrockMiner = (TileEntityBedrockMiner) tileEntity;
-                return new GuiBedrockMiner(player.inventory, Objects.requireNonNull(bedrockMiner));
             case Constants.POCKET_CAULDRON:
                 return new GuiPocketCauldron(player);
             default:

@@ -4,7 +4,6 @@ import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import vazkii.botania.api.mana.IManaItem;
-import vazkii.botania.common.core.helper.ItemNBTHelper;
 
 public class BotaniaCompat {
 

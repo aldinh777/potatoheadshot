@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.3.3'
+version = '1.4'
 group = 'aldinh777.potatoheadshot'
 archivesBaseName = 'potatoheadshot'
 
@@ -48,13 +48,18 @@ repositories {
         name = "Curse Maven"
         url = "https://www.cursemaven.com"
     }
+    maven {
+        name = "Botania"
+        url = 'https://maven.blamejared.com'
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
     compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
-    compileOnly fg.deobf("curse.maven:botania:2846950") //r1.10-363
+    compileOnly fg.deobf("vazkii.botania:Botania:r1.10-363.148:api")
+    runtimeOnly fg.deobf("vazkii.botania:Botania:r1.10-363.148")
 }
 
 jar {
@@ -62,7 +67,7 @@ jar {
         attributes([
             "Specification-Title": "Potato Headshot",
             "Specification-Vendor": "aldinh777",
-            "Specification-Version": "1.3.3",
+            "Specification-Version": "1.4",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"aldinh777",

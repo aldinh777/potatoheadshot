@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class PotatoHeadshot {
     public static final String MODID = "potatoheadshot";
     public static final String NAME = "Potato Headshot";
-    public static final String VERSION = "1.3.3";
+    public static final String VERSION = "1.4";
 
     public static Logger logger;
 

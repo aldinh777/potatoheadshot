@@ -77,19 +77,6 @@ public class PotatoManaKnife extends PotatoKnife {
 
                         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 
-                    } else if (iblockstate.getBlock() == Blocks.BEDROCK) {
-                        if (!playerIn.capabilities.isCreativeMode) {
-                            itemstack.shrink(1);
-                        }
-
-                        if (!worldIn.isRemote) {
-                            ItemStack voidStack = new ItemStack(PotatoItems.ESSENCE_VOID);
-                            EntityItem voidEssence = new EntityItem(worldIn, x, y + 1, z, voidStack);
-                            worldIn.spawnEntity(voidEssence);
-                        }
-
-                        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-
                     } else if (material == Material.LAVA && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
                         if (!playerIn.capabilities.isCreativeMode) {
                             itemstack.shrink(1);

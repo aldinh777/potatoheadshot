@@ -1,9 +1,0 @@
-{
-  "parent": "potatoheadshot:block/orientable_with_bottom",
-  "textures": {
-    "top": "potatoheadshot:blocks/void_exchanger_top",
-    "front": "potatoheadshot:blocks/void_exchanger_front",
-    "side": "potatoheadshot:blocks/void_exchanger_side",
-    "bottom": "potatoheadshot:blocks/void_exchanger_top"
-  }
-}

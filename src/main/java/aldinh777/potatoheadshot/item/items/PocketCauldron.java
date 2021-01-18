@@ -135,11 +135,6 @@ public class PocketCauldron extends Item {
                 return;
             }
 
-            if (rodSlot.getItem() == PotatoItems.ROD_VOID) {
-                inputSlot.shrink(inputSlot.getCount());
-                return;
-            }
-
             IManaRecipes recipes = IManaRecipes.getRecipeById(0);
 
             if (rodSlot.getItem() == PotatoItems.ROD_MANA) {

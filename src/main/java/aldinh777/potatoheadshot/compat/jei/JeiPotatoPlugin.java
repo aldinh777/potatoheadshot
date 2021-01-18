@@ -9,8 +9,6 @@ import aldinh777.potatoheadshot.compat.jei.crystalmaker.CrystalMakerRecipe;
 import aldinh777.potatoheadshot.compat.jei.crystalmaker.CrystalMakerRecipeCategory;
 import aldinh777.potatoheadshot.compat.jei.drier.DrierRecipe;
 import aldinh777.potatoheadshot.compat.jei.drier.DrierRecipeCategory;
-import aldinh777.potatoheadshot.compat.jei.exchanger.ExchangerRecipe;
-import aldinh777.potatoheadshot.compat.jei.exchanger.ExchangerRecipeCategory;
 import aldinh777.potatoheadshot.compat.jei.freezer.FreezerRecipe;
 import aldinh777.potatoheadshot.compat.jei.freezer.FreezerRecipeCategory;
 import aldinh777.potatoheadshot.compat.jei.infuser.InfuserRecipe;
@@ -41,8 +39,6 @@ public class JeiPotatoPlugin implements IModPlugin {
 	public static final ResourceLocation CAULDRON_LIFE = createUid("life_cauldron");
 	public static final ResourceLocation CAULDRON_NATURE = createUid("nature_cauldron");
 
-	public static final ResourceLocation VOID_EXCHANGER = createUid("void_exchanger");
-	
 	private static ResourceLocation createUid(String name) {
 		return new ResourceLocation("potatoheadshot", name);
 	}
@@ -63,8 +59,7 @@ public class JeiPotatoPlugin implements IModPlugin {
 				new ManaCauldronRecipeCategory(gui),
 				new FireCauldronRecipeCategory(gui),
 				new LifeCauldronRecipeCategory(gui),
-				new NatureCauldronRecipeCategory(gui),
-				new ExchangerRecipeCategory(gui));
+				new NatureCauldronRecipeCategory(gui));
 	}
 	
 	@Override
@@ -78,7 +73,6 @@ public class JeiPotatoPlugin implements IModPlugin {
 		registry.addRecipes(CrystalChargerRecipe.getRecipes(), CRYSTAL_CHARGER.toString());
 		registry.addRecipes(CollectorRecipe.getRecipes(), COLLECTOR.toString());
 		registry.addRecipes(ExtractorRecipe.getRecipes(), EXTRACTOR.toString());
-		registry.addRecipes(ExchangerRecipe.getRecipes(), VOID_EXCHANGER.toString());
 		
 		registry.addRecipes(ManaCauldronRecipe.getRecipes(), CAULDRON_MANA.toString());
 		registry.addRecipes(FireCauldronRecipe.getRecipes(), CAULDRON_FIRE.toString());
@@ -94,8 +88,7 @@ public class JeiPotatoPlugin implements IModPlugin {
 		registry.addRecipeClickArea(GuiSweetCrystalCharger.class, 89, 23, 15, 20, CRYSTAL_CHARGER.toString());
 		registry.addRecipeClickArea(GuiManaCollector.class, 76, 49, 20, 22, COLLECTOR.toString());
 		registry.addRecipeClickArea(GuiManaExtractor.class, 76, 49, 20, 22, EXTRACTOR.toString());
-		registry.addRecipeClickArea(GuiVoidExchanger.class, 75, 47, 20, 22, VOID_EXCHANGER.toString());
-		
+
 		recipeTransfer.addRecipeTransferHandler(ContainerPotatoDrier.class, DRIER.toString(), 1, 4, 5, 36);
 		recipeTransfer.addRecipeTransferHandler(ContainerSweetInfuser.class, INFUSER.toString(), 0, 7, 7, 36);
 		recipeTransfer.addRecipeTransferHandler(ContainerSweetFreezer.class, FREEZER.toString(), 0, 3, 3, 36);

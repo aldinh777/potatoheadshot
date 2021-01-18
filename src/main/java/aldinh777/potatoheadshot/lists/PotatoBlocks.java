@@ -20,7 +20,6 @@ public class PotatoBlocks {
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block STICKY_POTATOES = new StickyPotatoCrops("sticky_potatoes");
-    public static Block VOID_POTATOES = new VoidPotatoCrops("void_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
     public static Block POTATO_PLANKS;
@@ -28,13 +27,11 @@ public class PotatoBlocks {
     public static Block SWEET_POTATO_BLOCK;
     public static Block SWEET_MACHINE_FRAME;
     public static Block GLOWING_POTATO_BLOCK;
-    public static Block VOID_BLOCK;
     public static Block MANA_BLOCK;
     public static Block MANA_FLOWER;
     public static Block MANA_TORCH;
     public static Block MANA_STONE;
     public static Block ULTIMATE_FLOWER;
-    public static Block QUANTUM_STONE;
 
     public static Block POTATO_DRIER;
     public static Block SWEET_POTATO_GENERATOR;
@@ -48,12 +45,6 @@ public class PotatoBlocks {
     public static Block ULTIMATE_CRYSTAL_CHARGER;
     public static Block ULTIMATE_CAULDRON;
 
-    public static Block QUANTUM_MINER_PART;
-    public static Block QUANTUM_MINER;
-    public static Block BEDROCK_MINER;
-    public static Block VOID_CHARGER;
-    public static Block VOID_EXCHANGER;
-
     public static void init() {
 
         // Normal Block
@@ -64,8 +55,6 @@ public class PotatoBlocks {
         GLOWING_POTATO_BLOCK = new BlockCustomDrop("glowing_potato_block", PotatoItems.GLOWING_POTATO_DUST);
         MANA_BLOCK = new BlockCustomDrop("glowing_mana_block", PotatoItems.MANA_DUST);
         MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE).setLightLevel(0.7f).setResistance(6000);
-        VOID_BLOCK = new PotatoBlock("void_block", BlockType.METAL);
-        QUANTUM_STONE = new QuantumBlock("quantum_stone", BlockType.STONE);
 
         // Place able Item
         MANA_TORCH = new Potatorch("glowing_mana_torch");
@@ -84,12 +73,5 @@ public class PotatoBlocks {
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
-
-        // Void Tools
-        QUANTUM_MINER_PART = new DummyMachine("quantum_miner_part", BlockType.METAL);
-        QUANTUM_MINER = new QuantumMiner("quantum_miner", BlockType.METAL);
-        BEDROCK_MINER = new BedrockMiner("bedrock_miner", BlockType.METAL);
-        VOID_CHARGER = new VoidCharger("void_charger", BlockType.METAL);
-        VOID_EXCHANGER = new VoidExchanger("void_exchanger", BlockType.METAL);
     }
 }
