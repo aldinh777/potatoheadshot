@@ -31,6 +31,7 @@ public class PotatoItems {
     public static Item BAKED_SWEET_POTATO;
     public static Item GLOWING_POTATO;
     public static Item STICKY_POTATO;
+    public static Item RED_POTATO;
     public static Item FROZEN_POTATO;
     public static Item ICE_POTATO;
 
@@ -112,16 +113,14 @@ public class PotatoItems {
         BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
         BAKED_POTATO_CHIP = new PotatoFood("baked_potato_chip", 1, 0.2f);
         FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
-
-        // Sweet Potato Food Section
-        SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
         FROZEN_POTATO = new PotatoFood("frozen_potato", 1, 0.3f);
-        ICE_POTATO = new PotatoItem("ice_potato");
 
         // Crop
+        SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
         STICKY_POTATO = new PotatoCrop("sticky_potato", 1, 0.3f, PotatoBlocks.STICKY_POTATOES);
+        RED_POTATO = new PotatoCrop("red_potato", 1, 0.3f, PotatoBlocks.RED_POTATOES);
 
         // Seeds
         LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
@@ -136,6 +135,7 @@ public class PotatoItems {
         POTATO_LEAVES = new PotatoItem("potato_leaves");
         POTATO_STARCH = new PotatoItem("potato_starch");
         RAW_SALT = new PotatoItem("raw_salt");
+        ICE_POTATO = new PotatoItem("ice_potato");
         DRIED_SWEET_POTATO = new PotatoItem("dried_sweet_potato");
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");

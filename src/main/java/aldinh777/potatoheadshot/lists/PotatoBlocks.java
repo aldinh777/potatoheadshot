@@ -20,6 +20,7 @@ public class PotatoBlocks {
     public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block STICKY_POTATOES = new StickyPotatoCrops("sticky_potatoes");
+    public static Block RED_POTATOES = new RedPotatoCrops("red_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
     public static Block POTATO_PLANKS;
