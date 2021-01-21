@@ -5,10 +5,12 @@ import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +37,9 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
     public void update() {
         if (!this.world.isRemote) {
 
-            boolean flag = this.transformItemsInside();
+            boolean flag = false;
+            boolean flagItem = this.transformItemsInside();
+            boolean flagEntity = this.affectEntityInside();
 
             this.detectLevelChange();
 
@@ -44,7 +48,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                 flag = true;
             }
 
-            if (flag) {
+            if (flag && flagItem && flagEntity) {
                 this.markDirty();
             }
         }
@@ -130,6 +134,34 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
         return false;
     }
 
+    public boolean affectEntityInside() {
+        AxisAlignedBB bb = new AxisAlignedBB(pos);
+        List<EntityLivingBase> entities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
+        for (EntityLivingBase entity : entities) {
+            int cost = 200;
+            if (this.storage.getManaStored() > cost) {
+                if (this.element == ManaCauldron.Element.FIRE) {
+                    if (!entity.isBurning()) {
+                        entity.setFire(4);
+                        this.storage.useMana(cost);
+                        return true;
+                    }
+                } else if (this.element == ManaCauldron.Element.LIFE) {
+                    if (entity.isEntityUndead()) {
+                        entity.attackEntityFrom(DamageSource.MAGIC,2f);
+                        this.storage.useMana(cost);
+                        return true;
+                    } else if (entity.getHealth() < entity.getMaxHealth()) {
+                        entity.heal(0.2f);
+                        this.storage.useMana(cost);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean isUltimate() {
         return false;
     }
@@ -157,10 +189,12 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
 
         if (manaStored <= 0) {
             currentLevel = 0;
-        } else if (manaStored < this.storage.getMaxManaStored()) {
+        } else if (manaStored < this.storage.getMaxManaStored() / 2) {
             currentLevel = 1;
-        } else {
+        } else if (manaStored < this.storage.getMaxManaStored()) {
             currentLevel = 2;
+        } else {
+            currentLevel = 3;
         }
 
         if (this.level != currentLevel) {
