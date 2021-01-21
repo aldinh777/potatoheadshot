@@ -26,7 +26,7 @@ import java.util.Random;
 
 public class ManaCauldron extends PotatoBlock {
 
-    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 2);
+    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
     public static final PropertyEnum<Element> ELEMENT = PropertyEnum.create("element", Element.class);
 
     protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
@@ -94,8 +94,8 @@ public class ManaCauldron extends PotatoBlock {
     @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        int elementValue = meta / 3;
-        int level = meta % 3;
+        int elementValue = meta / 4;
+        int level = meta % 4;
 
         return this.getDefaultState()
                 .withProperty(ELEMENT, Element.withValue(elementValue))
@@ -108,7 +108,7 @@ public class ManaCauldron extends PotatoBlock {
         int level = state.getValue(LEVEL);
         int elementValue = element.getValue();
 
-        return (elementValue * 3) + level;
+        return (elementValue * 4) + level;
     }
 
     @Nonnull
@@ -136,8 +136,7 @@ public class ManaCauldron extends PotatoBlock {
         MANA("mana", 0),
         LIFE("life", 1),
         NATURE("nature", 2),
-        FIRE("fire", 3),
-        VOID("void", 4);
+        FIRE("fire", 3);
 
         private final String name;
         private final int value;
@@ -162,7 +161,6 @@ public class ManaCauldron extends PotatoBlock {
                 case 1: return LIFE;
                 case 2: return NATURE;
                 case 3: return FIRE;
-                case 4: return VOID;
                 default: return MANA;
             }
         }

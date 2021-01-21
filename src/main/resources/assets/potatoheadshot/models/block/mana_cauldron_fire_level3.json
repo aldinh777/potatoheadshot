@@ -1,12 +1,12 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "potatoheadshot:blocks/ultimate_mana_cauldron_side",
-        "top": "potatoheadshot:blocks/ultimate_mana_cauldron_top",
-        "bottom": "potatoheadshot:blocks/ultimate_mana_cauldron_bottom",
-        "side": "potatoheadshot:blocks/ultimate_mana_cauldron_side",
-        "inside": "potatoheadshot:blocks/ultimate_mana_cauldron_inner",
-        "water": "potatoheadshot:blocks/mana_void_still"
+        "particle": "potatoheadshot:blocks/mana_cauldron_side",
+        "top": "potatoheadshot:blocks/mana_cauldron_top",
+        "bottom": "potatoheadshot:blocks/mana_cauldron_bottom",
+        "side": "potatoheadshot:blocks/mana_cauldron_side",
+        "inside": "potatoheadshot:blocks/mana_cauldron_inner",
+        "water": "potatoheadshot:blocks/mana_fire_still"
     },
     "elements": [
         {   "from": [ 0, 3, 0 ],
@@ -152,8 +152,8 @@
                 "east":  { "texture": "#side" }
             }
         },
-        {   "from": [ 2, 9, 2 ],
-            "to": [ 14, 9, 14 ],
+        {   "from": [ 2, 15, 2 ],
+            "to": [ 14, 15, 14 ],
             "faces": {
                 "up": { "texture": "#water" }
             }

@@ -6,7 +6,7 @@
         "bottom": "potatoheadshot:blocks/mana_cauldron_bottom",
         "side": "potatoheadshot:blocks/mana_cauldron_side",
         "inside": "potatoheadshot:blocks/mana_cauldron_inner",
-        "water": "potatoheadshot:blocks/mana_void_still"
+        "water": "potatoheadshot:blocks/mana_nature_still"
     },
     "elements": [
         {   "from": [ 0, 3, 0 ],

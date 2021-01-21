@@ -104,10 +104,6 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable {
                 stack.shrink(1);
                 return true;
 
-            } else if (this.element == ManaCauldron.Element.VOID) {
-                stack.shrink(stack.getCount());
-                return false;
-
             } else {
                 ItemStack result = recipes.getResult(stack);
                 int cost = recipes.getCost(stack);

@@ -6,7 +6,7 @@
         "bottom": "potatoheadshot:blocks/mana_cauldron_bottom",
         "side": "potatoheadshot:blocks/mana_cauldron_side",
         "inside": "potatoheadshot:blocks/mana_cauldron_inner",
-        "water": "potatoheadshot:blocks/mana_void_still"
+        "water": "potatoheadshot:blocks/mana_life_still"
     },
     "elements": [
         {   "from": [ 0, 3, 0 ],
@@ -152,8 +152,8 @@
                 "east":  { "texture": "#side" }
             }
         },
-        {   "from": [ 2, 9, 2 ],
-            "to": [ 14, 9, 14 ],
+        {   "from": [ 2, 15, 2 ],
+            "to": [ 14, 15, 14 ],
             "faces": {
                 "up": { "texture": "#water" }
             }
