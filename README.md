@@ -10,6 +10,7 @@ This mod adds more functionality to vanilla minecraft potato
 - Glowing Potato
 - Void Potato
 - Sticky Potato
+- Red Potato
 - Lava Potato
 - Water Potato
 - Ice Potato
@@ -142,36 +143,6 @@ Cauldron with fire mana will cook any item dropped into it <br>
 Drop iron hoe to mana fire, and to transform it into "Lava Hoe" which works like a normal hoe but give "Lava Farmland" instead
 
 Lava farmland needs lava instead of water
-
-#### Void Rod
-This will change the element to void mana
-
-Cauldron with void mana will suck any item dropped into it, be careful not to throw your precious
-
-
-
-## Void Utility
-
-#### Void Bottle
-Work as a battery to store void energy
-
-#### Quantum Miner
-Mine Quantum Void by placing this block on top of bedrock and put chest on top of this block
-
-#### Bedrock Miner
-Mine Bedrock under it
-
-#### Void Charger
-Charge Void Bottle by destroying any item. Careful not to destroy your precious items.
-
-#### Void Exchanger
-Exchange certain item with void energy
-
-Dirt => Diamond
-Stone => Bedrock
-
-#### Quantum Stone
-A wild block that fly freely in the world
 
 
 
