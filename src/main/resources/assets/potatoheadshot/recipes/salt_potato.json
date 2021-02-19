@@ -5,7 +5,8 @@
       "item": "minecraft:potato"
     },
     {
-      "item": "potatoheadshot:raw_salt"
+      "type": "forge:ore_dict",
+      "ore": "salt"
     }
   ],
   "result": {
