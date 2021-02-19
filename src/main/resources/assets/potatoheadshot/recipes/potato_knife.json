@@ -9,7 +9,8 @@
       "item": "potatoheadshot:potato_planks"
     },
     "I": {
-      "item": "potatoheadshot:potato_stick"
+      "type": "forge:ore_dict",
+      "ore": "stick"
     }
   },
   "result": {

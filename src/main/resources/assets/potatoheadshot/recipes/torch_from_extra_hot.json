@@ -5,14 +5,10 @@
     "#"
   ],
   "key": {
-    "#": [
-      {
-        "item": "minecraft:stick"
-      },
-      {
-        "item": "potatoheadshot:potato_stick"
-      }
-    ],
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "stick"
+    },
     "X": [
       {
         "item": "potatoheadshot:extra_hot_potato"

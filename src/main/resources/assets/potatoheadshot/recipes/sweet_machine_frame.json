@@ -13,9 +13,9 @@
       "item": "potatoheadshot:potato_block"
     },
     "I": {
-      "item": "potatoheadshot:potato_stick"
-    }
-  },
+      "type": "forge:ore_dict",
+      "ore": "stick"
+    }  },
   "result": {
     "item": "potatoheadshot:sweet_machine_frame"
   }

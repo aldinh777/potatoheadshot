@@ -14,9 +14,9 @@
       "item": "potatoheadshot:glowing_mana_dust"
     },
     {
-      "item": "potatoheadshot:potato_stick"
-    },
-    {
+      "type": "forge:ore_dict",
+      "ore": "stick"
+    },    {
       "item": "potatoheadshot:glowing_mana_dust"
     },
     {

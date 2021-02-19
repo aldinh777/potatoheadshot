@@ -33,6 +33,7 @@ public class RegistryHandler {
 
     public static void init() {
         registerSmelting();
+        OreDictionaryHandler.register();
     }
 
     public static void registerSmelting() {
