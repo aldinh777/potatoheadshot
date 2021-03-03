@@ -18,9 +18,10 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 	
 	protected final PotatoManaStorage storage = new PotatoManaStorage(64000);
 	protected int manaSize = 0;
-	protected int currentTick = 0;
 
 	public abstract ItemStack getResult(ItemStack paramItemStack);
+	public abstract boolean canCollectMana();
+	protected abstract void collectMana();
 
 	@Override
 	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {

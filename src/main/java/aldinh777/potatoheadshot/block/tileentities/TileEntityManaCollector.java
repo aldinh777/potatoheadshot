@@ -24,7 +24,9 @@ public class TileEntityManaCollector extends TileEntityMana {
         if (!this.world.isRemote) {
             boolean flag = false;
 
-            this.collectMana();
+            if (this.canCollectMana()) {
+                this.collectMana();
+            }
 
             if (this.canFuse()) {
                 this.fuseItemWithMana();
@@ -92,12 +94,13 @@ public class TileEntityManaCollector extends TileEntityMana {
         }
     }
 
-    private void collectMana() {
-        ++this.currentTick;
-        if (currentTick >= 2) {
-            this.storage.collectMana(1);
-            this.currentTick = 0;
-        }
+    @Override
+    public boolean canCollectMana() {
+        return true;
+    }
+
+    protected void collectMana() {
+        this.storage.collectMana(2);
     }
 
     private boolean canFuse() {

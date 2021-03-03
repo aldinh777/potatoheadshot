@@ -17,7 +17,7 @@ import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nullable;
 
-public class TileEntityManaExtractor extends TileEntityManaCollector {
+public class TileEntityManaExtractor extends TileEntityMana {
 
     // Override Method
 
@@ -30,13 +30,8 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
                 this.extractMana();
             }
 
-            if (this.canCollect()) {
-                Block flower = this.world.getBlockState(this.pos.up()).getBlock();
-                if (flower.equals(PotatoBlocks.MANA_FLOWER)) {
-                    this.storage.collectMana(1);
-                } else if (flower.equals(PotatoBlocks.ULTIMATE_FLOWER)) {
-                    this.storage.collectMana(200);
-                }
+            if (this.canCollectMana()) {
+                this.collectMana();
             }
 
             if (this.canTransferMana()) {
@@ -53,6 +48,21 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
             if (flag) {
                 this.markDirty();
             }
+        }
+    }
+
+    public boolean canCollectMana() {
+        Block blockTop = this.world.getBlockState(this.pos.up()).getBlock();
+        return blockTop instanceof ManaFlower;
+    }
+
+    @Override
+    protected void collectMana() {
+        Block flower = this.world.getBlockState(this.pos.up()).getBlock();
+        if (flower.equals(PotatoBlocks.MANA_FLOWER)) {
+            this.storage.collectMana(20);
+        } else if (flower.equals(PotatoBlocks.ULTIMATE_FLOWER)) {
+            this.storage.collectMana(480);
         }
     }
 
@@ -98,11 +108,6 @@ public class TileEntityManaExtractor extends TileEntityManaCollector {
             this.storage.useMana(transferable);
             targetStorage.collectMana(transferable);
         }
-    }
-
-    private boolean canCollect() {
-        Block blockTop = this.world.getBlockState(this.pos.up()).getBlock();
-        return blockTop instanceof ManaFlower;
     }
 
     private boolean canExtract() {

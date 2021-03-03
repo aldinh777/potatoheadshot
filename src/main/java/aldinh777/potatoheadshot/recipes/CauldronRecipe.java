@@ -46,8 +46,8 @@ public class CauldronRecipe {
         addRecipe(recipes, flower, new ItemStack(PotatoBlocks.MANA_FLOWER), 1000);
         addRecipe(recipes, torch, new ItemStack(PotatoBlocks.MANA_TORCH), 1000);
         addRecipe(recipes, stone, new ItemStack(PotatoBlocks.MANA_STONE), 1000);
-        addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), 100000);
-        addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 800000);
+        addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), 32000);
+        addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 320000);
 
         return recipes;
     }

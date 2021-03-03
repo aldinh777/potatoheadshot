@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.block.containers.ContainerMana;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCollector;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityMana;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,9 +14,9 @@ public abstract class GuiMana extends GuiContainer {
 	private static final String TEXTURE = "potatoheadshot:textures/gui/container/mana_collector.png";
 	private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
 	private final InventoryPlayer player;
-	private final TileEntityManaCollector tileEntity;
+	private final TileEntityMana tileEntity;
 	
-	public GuiMana(InventoryPlayer player, TileEntityManaCollector tileEntity, ContainerMana container) {
+	public GuiMana(InventoryPlayer player, TileEntityMana tileEntity, ContainerMana container) {
 		super(container);
 		this.player = player;
 		this.tileEntity = tileEntity;
