@@ -14,7 +14,7 @@
     },
     "I": {
       "type": "forge:ore_dict",
-      "ore": "stick"
+      "ore": "stickWood"
     }  },
   "result": {
     "item": "potatoheadshot:sweet_machine_frame"
