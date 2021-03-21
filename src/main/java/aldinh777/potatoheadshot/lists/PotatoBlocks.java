@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.lists;
 
 import aldinh777.potatoheadshot.block.blocks.*;
-import aldinh777.potatoheadshot.block.crops.*;
-import aldinh777.potatoheadshot.block.machines.*;
+import aldinh777.potatoheadshot.block.blocks.crops.*;
+import aldinh777.potatoheadshot.block.blocks.machines.*;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
 

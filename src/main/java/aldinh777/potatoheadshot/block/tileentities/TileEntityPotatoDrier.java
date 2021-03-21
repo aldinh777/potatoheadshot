@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.machines.PotatoDrier;
+import aldinh777.potatoheadshot.block.blocks.machines.PotatoDrier;
 import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;

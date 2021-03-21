@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.crops;
+package aldinh777.potatoheadshot.block.blocks.crops;
 
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import net.minecraft.block.BlockCrops;

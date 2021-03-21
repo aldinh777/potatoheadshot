@@ -1,16 +1,20 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import aldinh777.potatoheadshot.block.blocks.machines.PotatoMachine;
 import aldinh777.potatoheadshot.block.recipes.SweetInfuserRecipes;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -62,6 +66,11 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
         if (capability == CapabilityEnergy.ENERGY) {
             return true;
         }
+
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return facing != EnumFacing.DOWN;
+        }
+
         return super.hasCapability(capability, facing);
     }
 
@@ -70,6 +79,14 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
             return (T)this.storage;
+        }
+
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (facing == EnumFacing.UP) {
+                return (T)this.middleHandler;
+            } else if (facing != EnumFacing.DOWN) {
+                return (T)this.inputHandler;
+            }
         }
 
         return super.getCapability(capability, facing);
@@ -183,8 +200,13 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
         ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
         ItemStack result = infuseResult.copy();
 
+        IBlockState state = this.world.getBlockState(this.pos);
+        EnumFacing facing = state.getValue(PotatoMachine.FACING);
+
+        BlockPos pos = this.pos.offset(facing);
+
         if (middle.getCount() > 1) {
-            EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.75, pos.getZ() + 0.5, result);
+            EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, result);
             this.world.spawnEntity(item);
             middle.shrink(1);
         } else {

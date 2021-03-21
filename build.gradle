@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.4.3'
+version = '1.4.4'
 group = 'aldinh777.potatoheadshot'
 archivesBaseName = 'potatoheadshot'
 
@@ -67,7 +67,7 @@ jar {
         attributes([
             "Specification-Title": "Potato Headshot",
             "Specification-Vendor": "aldinh777",
-            "Specification-Version": "1.4.3",
+            "Specification-Version": "1.4.4",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"aldinh777",

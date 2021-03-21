@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.crops;
+package aldinh777.potatoheadshot.block.blocks.crops;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.SoundType;
@@ -8,7 +8,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

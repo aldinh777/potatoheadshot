@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.machines;
+package aldinh777.potatoheadshot.block.blocks.machines;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetCrystalCharger;
 import aldinh777.potatoheadshot.util.BlockType;
