@@ -184,10 +184,10 @@ public class TileEntityManaExtractor extends TileEntityMana {
     // Static Methods
 
     private static int getManaValue(ItemStack stack) {
-        if (stack.getItem() == PotatoItems.MANA_DUST) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER)) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_TORCH)) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_STONE)) return 1000;
+        if (stack.getItem() == PotatoItems.MANA_DUST) return 800;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_TORCH)) return 800;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER)) return 6400;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_STONE)) return 6400;
         return 0;
     }
 }

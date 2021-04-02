@@ -68,9 +68,11 @@ public class SweetInfuserRecipe {
         Item ultimateCrystal = PotatoItems.ULTIMATE_CRYSTAL;
         Item ultimateChargedCrystal = PotatoItems.ULTIMATE_CHARGED_CRYSTAL;
         Item ultimateConcentratedCrystal = PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL;
+        Item carbonatedCoal = PotatoItems.CARBONATED_COAL;
         Item ultimateBrokenFuel = PotatoItems.ULTIMATE_BROKEN_FUEL;
         Item ultimateManaFlower = Item.getItemFromBlock(PotatoBlocks.ULTIMATE_FLOWER);
 
+        Item coalBlock = Item.getItemFromBlock(Blocks.COAL_BLOCK);
         Item grass = Item.getItemFromBlock(Blocks.GRASS);
         Item mycelium = Item.getItemFromBlock(Blocks.MYCELIUM);
         Item dirt = Item.getItemFromBlock(Blocks.DIRT);
@@ -113,7 +115,10 @@ public class SweetInfuserRecipe {
         addRecipe(recipes, new ItemStack(ultimateCrystal), crystal,
                 chargedCrystal, chargedCrystal, chargedCrystal,
                 concentratedCrystal, concentratedCrystal, concentratedCrystal);
-        addRecipe(recipes, new ItemStack(ultimateBrokenFuel), coal,
+        addRecipe(recipes, new ItemStack(carbonatedCoal), coal,
+                coalBlock, coalBlock, coalBlock,
+                coalBlock, coalBlock, coalBlock);
+        addRecipe(recipes, new ItemStack(ultimateBrokenFuel), carbonatedCoal,
                 ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
                 ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
         addRecipe(recipes, new ItemStack(ultimateManaFlower), manaFlower,
@@ -194,6 +199,7 @@ public class SweetInfuserRecipe {
         Item quartz = Items.QUARTZ;
         Item dye = Items.DYE;
 
+        Item carbonatedCoal = PotatoItems.CARBONATED_COAL;
         Item crystalShard = PotatoItems.CRYSTAL_SHARD;
         Item crystal = PotatoItems.CRYSTAL;
         Item chargedCrystalShard = PotatoItems.CHARGED_CRYSTAL_SHARD;
@@ -210,12 +216,12 @@ public class SweetInfuserRecipe {
         addRecipe(recipes, new ItemStack(dye, 1, 4), crystalShard,
                 DYE_LIGHT_BLUE, DYE_LIGHT_BLUE, DYE_LIGHT_BLUE,
                 DYE_LIGHT_BLUE, DYE_LIGHT_BLUE, DYE_LIGHT_BLUE);
-        addRecipe(recipes, new ItemStack(diamond), crystal, crystalShard,
-                DYE_LIGHT_BLUE, crystalShard, DYE_LIGHT_BLUE,
-                crystalShard, DYE_LIGHT_BLUE);
+        addRecipe(recipes, new ItemStack(diamond), crystal,
+                crystalShard, carbonatedCoal, crystalShard,
+                carbonatedCoal, crystalShard, carbonatedCoal);
         addRecipe(recipes, new ItemStack(emerald), crystal,
-                crystalShard, DYE_LIME, crystalShard,
-                DYE_LIME, crystalShard, DYE_LIME);
+                crystal, DYE_LIME, crystal,
+                DYE_LIME, crystal, DYE_LIME);
         addRecipe(recipes, new ItemStack(chargedCrystal), crystalShard,
                 chargedCrystalShard, chargedCrystalShard, chargedCrystalShard,
                 chargedCrystalShard, chargedCrystalShard, chargedCrystalShard);

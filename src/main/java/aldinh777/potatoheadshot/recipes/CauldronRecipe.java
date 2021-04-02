@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.recipes;
 
-import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
@@ -37,15 +36,8 @@ public class CauldronRecipe {
     public static List<CauldronRecipe> getManaRecipes() {
         List<CauldronRecipe> recipes = Lists.newArrayList();
 
-        Item flower = Item.getItemFromBlock(Blocks.RED_FLOWER);
-        Item torch = Item.getItemFromBlock(Blocks.TORCH);
-        Item stone = Item.getItemFromBlock(Blocks.STONE);
-
         addRecipe(recipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST), 1000);
         addRecipe(recipes, PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 2000);
-        addRecipe(recipes, flower, new ItemStack(PotatoBlocks.MANA_FLOWER), 1000);
-        addRecipe(recipes, torch, new ItemStack(PotatoBlocks.MANA_TORCH), 1000);
-        addRecipe(recipes, stone, new ItemStack(PotatoBlocks.MANA_STONE), 1000);
         addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), 32000);
         addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 320000);
 

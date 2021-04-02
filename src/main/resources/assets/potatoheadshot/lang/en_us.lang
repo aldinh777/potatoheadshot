@@ -46,6 +46,8 @@ item.rod_nature.name=Nature Rod
 item.rod_fire.name=Fire Rod
 item.pocket_cauldron.name=Pocket Cauldron
 item.ultimate_pocket_cauldron.name=Ultimate Pocket Cauldron
+item.carbonated_coal.name=Carbonated Coal
+item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 
 # Crystals
 item.crystal_shard.name=Crystal Shard
@@ -72,7 +74,6 @@ item.sweet_bucket_milk.name=Sweet Milk Bucket
 item.potato_knife.name=Potato Knife
 item.potato_mana_knife.name=Mana Knife
 item.lava_hoe.name=Lava Hoe
-item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 
 # Splash Mana
 item.splash_mana_fire.name=Splash Potion of Fire Mana
@@ -110,19 +111,6 @@ tile.ultimate_crystal_charger.name=Ultimate Crystal Charger
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor
-
-# Infuser
-tile.infuser_frame.name=Sweet Infuser Frame
-tile.infuser_core.name=Sweet Infuser Core
-tile.infuser_input_slot.name=Sweet Infuser Input Slot
-tile.infuser_output_slot.name=Sweet Infuser Output Slot
-tile.infuser_energy_input.name=Sweet Infuser Energy Input
-tile.infuser_fusion_slot1.name=Sweet Infuser Fusion Slot #1
-tile.infuser_fusion_slot2.name=Sweet Infuser Fusion Slot #2
-tile.infuser_fusion_slot3.name=Sweet Infuser Fusion Slot #3
-tile.infuser_fusion_slot4.name=Sweet Infuser Fusion Slot #4
-tile.infuser_fusion_slot5.name=Sweet Infuser Fusion Slot #5
-tile.infuser_fusion_slot6.name=Sweet Infuser Fusion Slot #6
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

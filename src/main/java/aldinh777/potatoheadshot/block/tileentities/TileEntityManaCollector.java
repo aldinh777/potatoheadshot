@@ -4,10 +4,7 @@ import aldinh777.potatoheadshot.block.blocks.machines.ManaExtractor;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;
-import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -163,12 +160,6 @@ public class TileEntityManaCollector extends TileEntityMana {
     public ItemStack getResult(ItemStack stack) {
         if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) {
             return new ItemStack(PotatoItems.MANA_DUST);
-        } else if (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) {
-            return new ItemStack(PotatoBlocks.MANA_FLOWER);
-        } else if (stack.getItem() == Item.getItemFromBlock(Blocks.TORCH)) {
-            return new ItemStack(PotatoBlocks.MANA_TORCH);
-        } else if (stack.getItem() == Item.getItemFromBlock(Blocks.STONE)) {
-            return new ItemStack(PotatoBlocks.MANA_STONE);
         }
         return ItemStack.EMPTY;
     }
@@ -177,9 +168,6 @@ public class TileEntityManaCollector extends TileEntityMana {
 
     private static int getManaValue(ItemStack stack) {
         if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(Blocks.TORCH)) return 1000;
-        if (stack.getItem() == Item.getItemFromBlock(Blocks.STONE)) return 1000;
         return 0;
     }
 }

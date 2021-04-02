@@ -8,7 +8,9 @@ import aldinh777.potatoheadshot.util.FoodEffects;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +81,7 @@ public class PotatoItems {
     public static Item SWEET_LAVA_BUCKET;
     public static Item SWEET_WATER_BUCKET;
     public static Item SWEET_MILK_BUCKET;
+    public static Item CARBONATED_COAL;
     public static Item ULTIMATE_BROKEN_FUEL;
 
     public static Item SPLASH_MANA_FIRE;
@@ -101,21 +104,6 @@ public class PotatoItems {
 
     public static void init() {
 
-        // Potato Food Section
-        HOT_POTATO = new PotatoFood("hot_potato", 2, 0.3f);
-        EXTRA_HOT_POTATO = new PotatoFoodBucket("extra_hot_potato", Blocks.FIRE, 2, 0.3f);
-        EXTREME_HOT_POTATO = new PotatoFoodBucket("extreme_hot_potato", Blocks.AIR, 2, 0.3f);
-        LAVA_POTATO = new PotatoFoodBucket("lava_potato", Blocks.FLOWING_LAVA, 2, 0.3f);
-        WET_POTATO = new PotatoFood("wet_potato", 2, 0.3f);
-        SUPER_WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
-        WATER_POTATO = new PotatoFoodBucket("water_potato", Blocks.FLOWING_WATER, 2, 0.3f);
-        SALT_POTATO = new PotatoFood("salt_potato", 2, 0.3f);
-        BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
-        BAKED_POTATO_CHIP = new PotatoFood("baked_potato_chip", 1, 0.2f);
-        FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
-        BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
-        FROZEN_POTATO = new PotatoFood("frozen_potato", 1, 0.3f);
-
         // Crop
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
@@ -127,18 +115,32 @@ public class PotatoItems {
         WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
         ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
 
+        // Potato Food Section
+        BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
+        BAKED_POTATO_CHIP = new PotatoFood("baked_potato_chip", 1, 0.2f);
+        FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
+        BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
+        SALT_POTATO = new PotatoFood("salt_potato", 2, 0.3f);
+        HOT_POTATO = new PotatoFood("hot_potato", 2, 0.3f);
+        EXTRA_HOT_POTATO = new PotatoFoodBucket("extra_hot_potato", Blocks.FIRE, 2, 0.3f);
+        EXTREME_HOT_POTATO = new PotatoFoodBucket("extreme_hot_potato", Blocks.AIR, 2, 0.3f);
+        LAVA_POTATO = new PotatoFoodBucket("lava_potato", Blocks.FLOWING_LAVA, 2, 0.3f);
+        WET_POTATO = new PotatoFood("wet_potato", 2, 0.3f);
+        SUPER_WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
+        WATER_POTATO = new PotatoFoodBucket("water_potato", Blocks.FLOWING_WATER, 2, 0.3f);
+        FROZEN_POTATO = new PotatoFood("frozen_potato", 1, 0.3f);
+
         // Potato Items
+        ICE_POTATO = new PotatoItem("ice_potato");
+        POTATO_LEAVES = new PotatoItem("potato_leaves");
         SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");
         DRIED_POTATO = new PotatoItem("dried_potato");
+        DRIED_SWEET_POTATO = new PotatoItem("dried_sweet_potato");
         POTATO_CHIP = new PotatoItem("potato_chip");
         POTATO_STICK = new PotatoItem("potato_stick", 100);
-        POTATO_LEAVES = new PotatoItem("potato_leaves");
         POTATO_STARCH = new PotatoItem("potato_starch");
         RAW_SALT = new PotatoItem("raw_salt");
-        ICE_POTATO = new PotatoItem("ice_potato");
-        DRIED_SWEET_POTATO = new PotatoItem("dried_sweet_potato");
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
-        SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
         GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
         MANA_DUST = new PotatoItem("glowing_mana_dust");
         ESSENCE_LIFE = new PotatoItem("essence_life");
@@ -163,6 +165,7 @@ public class PotatoItems {
         ULTIMATE_CONCENTRATED_CRYSTAL = new PotatoItem("ultimate_concentrated_crystal");
 
         // Bucket
+        SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
         SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");
         SWEET_EMPTY_BUCKET = new SweetFoodBucket("sweet_bucket_empty", 5, 0.3f);
         SWEET_LAVA_BUCKET = new SweetBucket("sweet_bucket_lava", Blocks.FLOWING_LAVA);
@@ -173,7 +176,13 @@ public class PotatoItems {
         POTATO_KNIFE = new PotatoKnife("potato_knife");
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
         LAVA_HOE = new LavaHoe("lava_hoe");
-        ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 12800);
+        CARBONATED_COAL = new PotatoItem("carbonated_coal", 102400);
+        ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 819200) {
+            @Override
+            public boolean hasEffect(@Nonnull ItemStack stack) {
+                return true;
+            }
+        };
 
         // Potato Potions
         SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", ManaCauldron.Element.FIRE);
