@@ -1,16 +1,11 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.blocks.machines.PotatoMachine;
 import aldinh777.potatoheadshot.block.recipes.SweetInfuserRecipes;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -22,8 +17,9 @@ import javax.annotation.Nullable;
 
 public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
 
-    private final ItemStackHandler inputHandler = new ItemStackHandler(6);
-    private final ItemStackHandler middleHandler = new ItemStackHandler(1);
+    private final ItemStackHandler inputHandler = new ItemStackHandler(1);
+    private final ItemStackHandler outputHandler = new ItemStackHandler(1);
+    private final ItemStackHandler fusionHandler = new ItemStackHandler(6);
 
     private final PotatoEnergyStorage storage = new PotatoEnergyStorage(40000, 40, 0);
     private int energy = this.storage.getEnergyStored();
@@ -48,6 +44,11 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
                     this.storage.useEnergy(20);
                     flag = true;
                 }
+            } else if (this.currentInfuseTime > 0) {
+                this.currentInfuseTime-=2;
+                if (this.currentInfuseTime < 0) {
+                    this.currentInfuseTime = 0;
+                }
             }
 
             if (this.energy != this.storage.getEnergyStored()) {
@@ -68,7 +69,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
         }
 
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return facing != EnumFacing.DOWN;
+            return true;
         }
 
         return super.hasCapability(capability, facing);
@@ -83,9 +84,11 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
 
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == EnumFacing.UP) {
-                return (T)this.middleHandler;
-            } else if (facing != EnumFacing.DOWN) {
                 return (T)this.inputHandler;
+            } else if (facing == EnumFacing.DOWN) {
+                return (T)this.outputHandler;
+            } else {
+                return (T)this.fusionHandler;
             }
         }
 
@@ -102,7 +105,8 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.inputHandler.deserializeNBT(compound.getCompoundTag("InventoryInput"));
-        this.middleHandler.deserializeNBT(compound.getCompoundTag("InventoryMiddle"));
+        this.outputHandler.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
+        this.fusionHandler.deserializeNBT(compound.getCompoundTag("InventoryFusion"));
         this.energy = compound.getInteger("GuiEnergy");
         this.currentInfuseTime = compound.getInteger("CurrentInfuseTime");
         this.totalInfuseTime = compound.getInteger("TotalInfuseTime");
@@ -114,7 +118,8 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("InventoryInput", this.inputHandler.serializeNBT());
-        compound.setTag("InventoryMiddle", this.middleHandler.serializeNBT());
+        compound.setTag("InventoryOutput", this.outputHandler.serializeNBT());
+        compound.setTag("InventoryFusion", this.fusionHandler.serializeNBT());
         compound.setInteger("GuiEnergy", this.energy);
         compound.setInteger("CurrentInfuseTime", (short)this.currentInfuseTime);
         compound.setInteger("TotalInfuseTime", (short)this.totalInfuseTime);
@@ -161,67 +166,74 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
         switch (name) {
             case "input":
                 return this.inputHandler;
-            case "middle":
-                return this.middleHandler;
+            case "output":
+                return this.outputHandler;
+            case "fusion":
+                return this.fusionHandler;
             default:
                 return null;
         }
     }
 
     private boolean canInfuse() {
-        ItemStack middle = this.middleHandler.getStackInSlot(0);
-        if (middle.isEmpty()) {
+        ItemStack inputSlot = this.inputHandler.getStackInSlot(0);
+        ItemStack outputSlot = this.outputHandler.getStackInSlot(0);
+        if (inputSlot.isEmpty()) {
             return false;
         }
 
-        ItemStack[] inputs = new ItemStack[6];
+        ItemStack[] fusionItems = new ItemStack[6];
 
         for (int i = 0; i < 6; i++) {
-            ItemStack input = this.inputHandler.getStackInSlot(i);
-            if (input.isEmpty()) {
+            ItemStack fusionItem = this.fusionHandler.getStackInSlot(i);
+            if (fusionItem.isEmpty()) {
                 return false;
             }
-            inputs[i] = input;
+            fusionItems[i] = fusionItem;
         }
 
-        ItemStack result = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
+        ItemStack result = SweetInfuserRecipes.INSTANCE.getResult(inputSlot.getItem(), fusionItems);
 
-        return !result.isEmpty();
+        if (result.isEmpty()) {
+            return false;
+        } else if (outputSlot.isEmpty()) {
+            return true;
+        } else if (result.isItemEqual(outputSlot)) {
+            return outputSlot.getCount() < outputSlot.getMaxStackSize();
+        }
+
+        return false;
     }
 
     private void infuseItem() {
-        ItemStack middle = this.middleHandler.getStackInSlot(0);
-        ItemStack[] inputs = new ItemStack[6];
+        ItemStack inputSlot = this.inputHandler.getStackInSlot(0);
+        ItemStack outputSlot = this.outputHandler.getStackInSlot(0);
+        ItemStack[] fusionItems = new ItemStack[6];
 
         for (int i = 0; i < 6; i++) {
-            inputs[i] = this.inputHandler.getStackInSlot(i);
+            fusionItems[i] = this.fusionHandler.getStackInSlot(i);
         }
 
-        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(middle.getItem(), inputs);
+        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(inputSlot.getItem(), fusionItems);
         ItemStack result = infuseResult.copy();
 
-        IBlockState state = this.world.getBlockState(this.pos);
-        EnumFacing facing = state.getValue(PotatoMachine.FACING);
-
-        BlockPos pos = this.pos.offset(facing);
-
-        if (middle.getCount() > 1) {
-            EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, result);
-            this.world.spawnEntity(item);
-            middle.shrink(1);
+        if (!outputSlot.isEmpty()) {
+            outputSlot.grow(1);
         } else {
-            this.middleHandler.setStackInSlot(0, result);
+            this.outputHandler.setStackInSlot(0, result);
         }
 
+        inputSlot.shrink(1);
+
         for (int i = 0; i < 6; i++) {
-            if (inputs[i].getItem() == Items.WATER_BUCKET || inputs[i].getItem() == Items.LAVA_BUCKET) {
-                this.inputHandler.setStackInSlot(i, new ItemStack(Items.BUCKET));
-            } else if (inputs[i].getItem() == PotatoItems.SWEET_WATER_BUCKET) {
-                this.inputHandler.setStackInSlot(i, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET));
-            } else if (inputs[i].getItem() == PotatoItems.SWEET_LAVA_BUCKET) {
-                this.inputHandler.setStackInSlot(i, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET));
-            } else {
-                inputs[i].shrink(1);
+            ItemStack fusionItem = fusionItems[i];
+            Item item = fusionItem.getItem();
+            ItemStack containerItem = item.getContainerItem(fusionItem);
+
+            fusionItem.shrink(1);
+
+            if (fusionItem.isEmpty()) {
+                this.fusionHandler.setStackInSlot(i, containerItem);
             }
         }
     }

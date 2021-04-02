@@ -62,7 +62,7 @@ public class GuiSweetInfuser extends GuiContainer {
         int i = totalInfuseTime != 0 && currentInfuseTime != 0 ? currentInfuseTime * 44 / totalInfuseTime : 0;
 
         this.drawTexturedModalRect(
-                this.guiLeft + 142, this.guiTop + 21 + 43 - i,
+                this.guiLeft + 151, this.guiTop + 17 + 43 - i,
                 200, 43 - i,
                 15, i + 1
         );

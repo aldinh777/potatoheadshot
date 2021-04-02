@@ -20,7 +20,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfuserRecipe> {
 	private static final String path = "potatoheadshot:textures/gui/container/sweet_infuser_jei.png";
 	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 	
-	private static final int middle = 0;
+	private static final int input = 0;
 	private static final int fuse1 = 1;
 	private static final int fuse2 = 2;
 	private static final int fuse3 = 3;
@@ -70,7 +70,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfuserRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, @Nonnull InfuserRecipe recipeWrapper, @Nonnull IIngredients ingredients) {
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-		stacks.init(middle, true, 32, 29);
+		stacks.init(input, true, 32, 29);
 		stacks.init(fuse1, true, 6, 16);
 		stacks.init(fuse2, true, 32, 3);
 		stacks.init(fuse3, true, 58, 16);

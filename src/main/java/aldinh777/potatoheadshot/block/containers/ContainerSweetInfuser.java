@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.containers;
 
+import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntitySweetInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,15 +20,17 @@ public class ContainerSweetInfuser extends Container {
     public ContainerSweetInfuser(InventoryPlayer player, TileEntitySweetInfuser tileEntity) {
         this.tileEntity = tileEntity;
         IItemHandler inputHandler = tileEntity.getHandler("input");
-        IItemHandler middleHandler = tileEntity.getHandler("middle");
+        IItemHandler outputHandler = tileEntity.getHandler("output");
+        IItemHandler fusionHandler = tileEntity.getHandler("fusion");
 
-        this.addSlotToContainer(new SlotItemHandler(middleHandler, 0, 84, 35));
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 0, 58, 22));
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 1, 84, 9));
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 2, 110, 22));
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 3, 58, 48));
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 4, 84, 61));
-        this.addSlotToContainer(new SlotItemHandler(inputHandler, 5, 110, 48));
+        this.addSlotToContainer(new SlotItemHandler(inputHandler, 0, 63, 35));
+        this.addSlotToContainer(new SlotItemHandler(fusionHandler, 0, 37, 22));
+        this.addSlotToContainer(new SlotItemHandler(fusionHandler, 1, 63, 9));
+        this.addSlotToContainer(new SlotItemHandler(fusionHandler, 2, 89, 22));
+        this.addSlotToContainer(new SlotItemHandler(fusionHandler, 3, 37, 48));
+        this.addSlotToContainer(new SlotItemHandler(fusionHandler, 4, 63, 61));
+        this.addSlotToContainer(new SlotItemHandler(fusionHandler, 5, 89, 48));
+        this.addSlotToContainer(new SlotOutputHandler(outputHandler, 0, 122, 35));
 
         for(int y = 0; y < 3; y++) {
             for(int x = 0; x < 9; x++) {
@@ -76,19 +79,17 @@ public class ContainerSweetInfuser extends Container {
             ItemStack stack = slot.getStack();
             itemstack = stack.copy();
 
-            if (index < 7) {
-                if (!this.mergeItemStack(stack, 7, 43, false)) {
+            if (index < 8) {
+                if (!this.mergeItemStack(stack, 8, 44, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else {
-                if (index < 34) {
-                    if (!this.mergeItemStack(stack, 34, 43, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index < 43) {
-                    if (!this.mergeItemStack(stack, 7, 34, false)) {
-                        return ItemStack.EMPTY;
-                    }
+            } else if (index < 35) {
+                if (!this.mergeItemStack(stack, 35, 44, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (index < 44) {
+                if (!this.mergeItemStack(stack, 8, 35, false)) {
+                    return ItemStack.EMPTY;
                 }
             }
 

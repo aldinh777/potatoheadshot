@@ -81,7 +81,7 @@ public class JeiPotatoPlugin implements IModPlugin {
 		
 		registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 28, 20, 22, DRIER.toString());
 		registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 60, 20, 22, DRIER.toString());
-		registry.addRecipeClickArea(GuiSweetInfuser.class, 141, 20, 16, 45, INFUSER.toString());
+		registry.addRecipeClickArea(GuiSweetInfuser.class, 151, 17, 16, 45, INFUSER.toString());
 		registry.addRecipeClickArea(GuiSweetFreezer.class, 91, 36, 20, 22, FREEZER.toString());
 		registry.addRecipeClickArea(GuiSweetCrystalMaker.class, 62, 29, 24, 19, CRYSTAL_MAKER.toString());
 		registry.addRecipeClickArea(GuiSweetCrystalMaker.class, 112, 28, 19, 20, CRYSTAL_MAKER.toString());

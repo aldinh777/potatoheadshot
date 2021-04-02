@@ -33,8 +33,9 @@ public class SweetInfuser extends PotatoMachine {
             TileEntitySweetInfuser te = (TileEntitySweetInfuser) worldIn.getTileEntity(pos);
             if (te != null) {
                 ItemStackHandler inputHandler = te.getHandler("input");
-                ItemStackHandler middleHandler = te.getHandler("middle");
-                ItemStackHandler[] handlers = new ItemStackHandler[]{inputHandler, middleHandler};
+                ItemStackHandler outputHandler = te.getHandler("output");
+                ItemStackHandler fusionHandler = te.getHandler("fusion");
+                ItemStackHandler[] handlers = new ItemStackHandler[]{inputHandler, outputHandler, fusionHandler};
 
                 for (ItemStackHandler handler : handlers) {
                     for (int i = 0; i < Objects.requireNonNull(handler).getSlots(); ++i) {
