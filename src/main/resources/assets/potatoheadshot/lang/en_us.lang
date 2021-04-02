@@ -111,5 +111,18 @@ tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor
 
+# Infuser
+tile.infuser_frame.name=Sweet Infuser Frame
+tile.infuser_core.name=Sweet Infuser Core
+tile.infuser_input_slot.name=Sweet Infuser Input Slot
+tile.infuser_output_slot.name=Sweet Infuser Output Slot
+tile.infuser_energy_input.name=Sweet Infuser Energy Input
+tile.infuser_fusion_slot1.name=Sweet Infuser Fusion Slot #1
+tile.infuser_fusion_slot2.name=Sweet Infuser Fusion Slot #2
+tile.infuser_fusion_slot3.name=Sweet Infuser Fusion Slot #3
+tile.infuser_fusion_slot4.name=Sweet Infuser Fusion Slot #4
+tile.infuser_fusion_slot5.name=Sweet Infuser Fusion Slot #5
+tile.infuser_fusion_slot6.name=Sweet Infuser Fusion Slot #6
+
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

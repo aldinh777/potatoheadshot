@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.lists;
 
 import aldinh777.potatoheadshot.block.blocks.*;
 import aldinh777.potatoheadshot.block.blocks.crops.*;
+import aldinh777.potatoheadshot.block.blocks.infuser.*;
 import aldinh777.potatoheadshot.block.blocks.machines.*;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
@@ -46,6 +47,18 @@ public class PotatoBlocks {
     public static Block ULTIMATE_CRYSTAL_CHARGER;
     public static Block ULTIMATE_CAULDRON;
 
+    public static Block INFUSER_CORE;
+    public static Block INFUSER_FRAME;
+    public static Block INFUSER_ENERGY_INPUT;
+    public static Block INFUSER_INPUT_SLOT;
+    public static Block INFUSER_OUTPUT_SLOT;
+    public static Block INFUSER_FUSION_SLOT_1;
+    public static Block INFUSER_FUSION_SLOT_2;
+    public static Block INFUSER_FUSION_SLOT_3;
+    public static Block INFUSER_FUSION_SLOT_4;
+    public static Block INFUSER_FUSION_SLOT_5;
+    public static Block INFUSER_FUSION_SLOT_6;
+
     public static void init() {
 
         // Normal Block
@@ -74,5 +87,18 @@ public class PotatoBlocks {
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
+
+        // Infuser
+        INFUSER_CORE = new InfuserCore("infuser_core");
+        INFUSER_FRAME = new InfuserFrame("infuser_frame");
+        INFUSER_ENERGY_INPUT = new InfuserEnergyInput("infuser_energy_input");
+        INFUSER_INPUT_SLOT = new InfuserInputSlot("infuser_input_slot");
+        INFUSER_OUTPUT_SLOT = new InfuserOutputSlot("infuser_output_slot");
+        INFUSER_FUSION_SLOT_1 = new InfuserFusionSlot("infuser_fusion_slot1");
+        INFUSER_FUSION_SLOT_2 = new InfuserFusionSlot("infuser_fusion_slot2");
+        INFUSER_FUSION_SLOT_3 = new InfuserFusionSlot("infuser_fusion_slot3");
+        INFUSER_FUSION_SLOT_4 = new InfuserFusionSlot("infuser_fusion_slot4");
+        INFUSER_FUSION_SLOT_5 = new InfuserFusionSlot("infuser_fusion_slot5");
+        INFUSER_FUSION_SLOT_6 = new InfuserFusionSlot("infuser_fusion_slot6");
     }
 }
