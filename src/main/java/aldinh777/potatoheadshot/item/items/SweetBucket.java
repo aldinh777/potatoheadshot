@@ -41,6 +41,7 @@ public class SweetBucket extends Item {
         this.setRegistryName(name);
         this.setMaxStackSize(1);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
+        this.setContainerItem(PotatoItems.SWEET_EMPTY_BUCKET);
         PotatoItems.LISTS.add(this);
     }
 
