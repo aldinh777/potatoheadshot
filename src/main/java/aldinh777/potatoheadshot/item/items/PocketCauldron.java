@@ -3,6 +3,7 @@ package aldinh777.potatoheadshot.item.items;
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
+import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -39,7 +40,7 @@ import java.util.Objects;
 
 public class PocketCauldron extends Item {
 
-    public static final int maxManaSize = 800000;
+    public static final int maxManaSize = 320000;
     public static final int ultimateMaxManaSize = 32000000;
     private boolean ultimate = false;
 
@@ -83,6 +84,26 @@ public class PocketCauldron extends Item {
                 if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {
                     BlockPos blockPos = raytraceresult.getBlockPos();
                     TileEntity te = worldIn.getTileEntity(blockPos);
+
+                    if (BotaniaCompat.isBotaniaAvailable()) {
+                        if (BotaniaCompat.isInstanceOfManaPool(te)) {
+                            int manaStored = BotaniaCompat.getManaSize(te);
+
+                            int pocketMana = getManaSize(stack);
+                            int maxMana = this.ultimate ? ultimateMaxManaSize : maxManaSize;
+
+                            int transferRate = maxMana - pocketMana;
+                            if (transferRate > manaStored) {
+                                transferRate = manaStored;
+                            }
+
+                            int result = pocketMana + transferRate;
+                            setManaSize(stack, result);
+                            BotaniaCompat.absorbMana(te, new PotatoManaStorage(maxMana), transferRate);
+
+                            return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+                        }
+                    }
 
                     if (te instanceof TileEntityManaCauldron) {
                         TileEntityManaCauldron manaCauldron = (TileEntityManaCauldron) te;

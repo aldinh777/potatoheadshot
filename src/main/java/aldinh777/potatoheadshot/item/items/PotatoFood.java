@@ -3,9 +3,14 @@ package aldinh777.potatoheadshot.item.items;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.FoodEffects;
+import aldinh777.potatoheadshot.util.ItemStickHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -36,5 +41,16 @@ public class PotatoFood extends ItemFood {
 
     public void addEffects(FoodEffects... effects) {
         this.effects.addAll(Arrays.asList(effects));
+    }
+
+    @Nonnull
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn) {
+        RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, false);
+        if (!worldIn.isRemote) {
+            ItemStickHelper.debugBlock(raytraceresult, worldIn, playerIn, handIn);
+        }
+
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

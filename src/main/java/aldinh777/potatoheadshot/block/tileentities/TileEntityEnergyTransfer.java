@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.util.EnergyUtil;
@@ -28,7 +29,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
     @Override
     public void update() {
         if (!this.world.isRemote) {
-            List<IManaStorage> targets = this.getStorageAround(8);
+            List<TileEntity> targets = this.getStorageAround(8);
             this.shareEnergy(targets);
             this.spreadRF();
 
@@ -98,15 +99,23 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         }
     }
 
-    public List<IManaStorage> getStorageAround(int area) {
-        List<IManaStorage> storages = Lists.newArrayList();
+    public List<TileEntity> getStorageAround(int area) {
+        List<TileEntity> storages = Lists.newArrayList();
 
         for (EnumFacing facing : EnumFacing.VALUES) {
             for (int i = 1; i <= area; i++) {
                 BlockPos pos = this.getPos().offset(facing, i);
                 TileEntity tile = this.world.getTileEntity(pos);
+
+                if (BotaniaCompat.isBotaniaAvailable()) {
+                    if (BotaniaCompat.isInstanceOfManaPool(tile)) {
+                        storages.add(tile);
+                        break;
+                    }
+                }
+
                 if (tile instanceof IManaStorage) {
-                    storages.add((IManaStorage) tile);
+                    storages.add(tile);
                     break;
                 }
             }
@@ -115,32 +124,41 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         return storages;
     }
 
-    private void shareEnergy(List<IManaStorage> targets) {
-        for (IManaStorage storage : targets) {
-            PotatoManaStorage targetStorage = storage.getManaStorage();
+    private void shareEnergy(List<TileEntity> targets) {
+        for (TileEntity tileEntity : targets) {
 
-            if (storage instanceof TileEntityManaCauldron) {
-                spreadMana(targetStorage);
+            if (BotaniaCompat.isBotaniaAvailable()) {
+                if (BotaniaCompat.isInstanceOfManaPool(tileEntity)) {
+                    BotaniaCompat.spreadMana(tileEntity, this.manaStorage, 100);
+                }
+            }
 
-            } else if (storage instanceof TileEntityEnergyTransfer) {
-                PotatoEnergyStorage targetEnergyTransfer = ((TileEntityEnergyTransfer) storage).energyStorage;
-                int sourceMana = this.manaStorage.getManaStored();
-                int sourceEnergy = this.energyStorage.getEnergyStored();
-                int targetMana = targetStorage.getManaStored();
-                int targetEnergy = targetEnergyTransfer.getEnergyStored();
-
-                if (sourceMana > targetMana + 100) {
+            if (tileEntity instanceof IManaStorage) {
+                IManaStorage storage = (IManaStorage) tileEntity;
+                PotatoManaStorage targetStorage = storage.getManaStorage();
+                if (storage instanceof TileEntityManaCauldron) {
                     spreadMana(targetStorage);
 
-                } else if (sourceMana < targetMana - 100) {
-                    absorbMana(targetStorage);
-                }
+                } else if (storage instanceof TileEntityEnergyTransfer) {
+                    PotatoEnergyStorage targetEnergyTransfer = ((TileEntityEnergyTransfer) storage).energyStorage;
+                    int sourceMana = this.manaStorage.getManaStored();
+                    int sourceEnergy = this.energyStorage.getEnergyStored();
+                    int targetMana = targetStorage.getManaStored();
+                    int targetEnergy = targetEnergyTransfer.getEnergyStored();
 
-                if (sourceEnergy > targetEnergy + 100) {
-                    spreadEnergy(targetEnergyTransfer);
+                    if (sourceMana > targetMana + 100) {
+                        spreadMana(targetStorage);
 
-                } else if (sourceEnergy < targetEnergy - 100) {
-                    absorbEnergy(targetEnergyTransfer);
+                    } else if (sourceMana < targetMana - 100) {
+                        absorbMana(targetStorage);
+                    }
+
+                    if (sourceEnergy > targetEnergy + 100) {
+                        spreadEnergy(targetEnergyTransfer);
+
+                    } else if (sourceEnergy < targetEnergy - 100) {
+                        absorbEnergy(targetEnergyTransfer);
+                    }
                 }
             }
         }

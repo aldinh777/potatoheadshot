@@ -20,6 +20,8 @@ import javax.annotation.Nullable;
 
 public class TileEntityManaExtractor extends TileEntityMana {
 
+    private int tick = 0;
+
     // Override Method
 
     @Override
@@ -32,7 +34,12 @@ public class TileEntityManaExtractor extends TileEntityMana {
             }
 
             if (this.canCollectMana()) {
-                this.collectMana();
+                if (this.tick >= 10) {
+                    this.collectMana();
+                    this.tick = 0;
+                } else {
+                    this.tick++;
+                }
             }
 
             if (this.canTransferMana()) {
@@ -61,9 +68,9 @@ public class TileEntityManaExtractor extends TileEntityMana {
     protected void collectMana() {
         Block flower = this.world.getBlockState(this.pos.up()).getBlock();
         if (flower.equals(PotatoBlocks.MANA_FLOWER)) {
-            this.storage.collectMana(20);
+            this.storage.collectMana(8);
         } else if (flower.equals(PotatoBlocks.ULTIMATE_FLOWER)) {
-            this.storage.collectMana(480);
+            this.storage.collectMana(3200);
         }
     }
 
@@ -82,11 +89,18 @@ public class TileEntityManaExtractor extends TileEntityMana {
         }
 
         EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
-        TileEntity cauldron = this.world.getTileEntity(pos.offset(behind));
+        TileEntity storage = this.world.getTileEntity(pos.offset(behind));
 
-        if (cauldron instanceof IManaStorage) {
+        if (BotaniaCompat.isBotaniaAvailable()) {
+            if (BotaniaCompat.isInstanceOfManaPool(storage)) {
+                return true;
+            }
+        }
+
+        if (storage instanceof IManaStorage) {
             return this.storage.getManaStored() > 0;
         }
+
         return false;
     }
 
@@ -98,6 +112,14 @@ public class TileEntityManaExtractor extends TileEntityMana {
 
         EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity tileEntity = this.world.getTileEntity(pos.offset(behind));
+
+        if (BotaniaCompat.isBotaniaAvailable()) {
+            if (BotaniaCompat.isInstanceOfManaPool(tileEntity)) {
+                BotaniaCompat.spreadMana(tileEntity, this.storage, 200);
+                return;
+            }
+        }
+
         IManaStorage manaStorage = (IManaStorage)tileEntity;
 
         if (manaStorage != null) {
@@ -195,10 +217,10 @@ public class TileEntityManaExtractor extends TileEntityMana {
     // Static Methods
 
     private static int getManaValue(ItemStack stack) {
-        if (stack.getItem() == PotatoItems.MANA_DUST) return 800;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_TORCH)) return 800;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER)) return 6400;
-        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_STONE)) return 6400;
+        if (stack.getItem() == PotatoItems.MANA_DUST) return 100;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_TORCH)) return 100;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_FLOWER)) return 800;
+        if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.MANA_STONE)) return 800;
         return 0;
     }
 }

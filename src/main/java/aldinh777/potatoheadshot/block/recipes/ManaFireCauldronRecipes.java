@@ -29,7 +29,7 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
     public int getCost(ItemStack input) {
         if (input.getItem() == Items.IRON_HOE) return 32000;
         if (input.getItem() == Items.SPLASH_POTION) return 8000;
-        if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 4000;
+        if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 1000;
         return 0;
     }
 }

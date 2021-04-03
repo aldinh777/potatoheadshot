@@ -5,7 +5,7 @@ import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 public class TileEntityUltManaCauldron extends TileEntityManaCauldron {
 
     public TileEntityUltManaCauldron() {
-        this.storage = new PotatoManaStorage(32000000);
+        this.storage = new PotatoManaStorage(3200000);
     }
 
     @Override

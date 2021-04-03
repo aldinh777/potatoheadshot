@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.blocks.machines.ManaExtractor;
 import aldinh777.potatoheadshot.block.blocks.machines.PotatoMachine;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
@@ -17,6 +16,8 @@ import javax.annotation.Nullable;
 
 public class TileEntityManaCollector extends TileEntityMana {
 
+    private int tick = 0;
+
     // Override Methods
 
     @Override
@@ -25,7 +26,12 @@ public class TileEntityManaCollector extends TileEntityMana {
             boolean flag = false;
 
             if (this.canCollectMana()) {
-                this.collectMana();
+                if (this.tick >= 10) {
+                    this.collectMana();
+                    this.tick = 0;
+                } else {
+                    this.tick++;
+                }
             }
 
             if (this.canFuse()) {
@@ -67,9 +73,16 @@ public class TileEntityManaCollector extends TileEntityMana {
         EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity storage = this.world.getTileEntity(pos.offset(behind));
 
+        if (BotaniaCompat.isBotaniaAvailable()) {
+            if (BotaniaCompat.isInstanceOfManaPool(storage)) {
+                return true;
+            }
+        }
+
         if (storage instanceof IManaStorage) {
             return this.storage.getManaStored() < this.storage.getMaxManaStored();
         }
+
         return false;
     }
 
@@ -81,6 +94,14 @@ public class TileEntityManaCollector extends TileEntityMana {
 
         EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity tileEntity = this.world.getTileEntity(pos.offset(behind));
+
+        if (BotaniaCompat.isBotaniaAvailable()) {
+            if (BotaniaCompat.isInstanceOfManaPool(tileEntity)) {
+                BotaniaCompat.absorbMana(tileEntity, this.storage, 200);
+                return;
+            }
+        }
+
         IManaStorage manaStorage = (IManaStorage) tileEntity;
 
         if (manaStorage != null) {
@@ -180,7 +201,7 @@ public class TileEntityManaCollector extends TileEntityMana {
     // Static Methods
 
     private static int getManaValue(ItemStack stack) {
-        if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) return 1000;
+        if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) return 100;
         return 0;
     }
 }

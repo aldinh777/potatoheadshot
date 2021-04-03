@@ -28,7 +28,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     protected int checkMana = 0;
 
     public TileEntityManaCauldron() {
-        this.storage = new PotatoManaStorage(800000);
+        this.storage = new PotatoManaStorage(320000);
     }
 
     // Override Methods
