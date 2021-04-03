@@ -1,10 +1,13 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.blocks.machines.ManaExtractor;
+import aldinh777.potatoheadshot.block.blocks.machines.PotatoMachine;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -56,7 +59,12 @@ public class TileEntityManaCollector extends TileEntityMana {
     // Custom Methods
 
     private boolean canTakeMana() {
-        EnumFacing behind = this.world.getBlockState(pos).getValue(ManaExtractor.FACING).getOpposite();
+        IBlockState state = this.world.getBlockState(pos);
+        if (state.getBlock() != PotatoBlocks.MANA_COLLECTOR) {
+            return false;
+        }
+
+        EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity cauldron = this.world.getTileEntity(pos.offset(behind));
 
         if (cauldron instanceof TileEntityManaCauldron) {
@@ -66,7 +74,12 @@ public class TileEntityManaCollector extends TileEntityMana {
     }
 
     private void takeMana() {
-        EnumFacing behind = this.world.getBlockState(pos).getValue(ManaExtractor.FACING).getOpposite();
+        IBlockState state = this.world.getBlockState(pos);
+        if (state.getBlock() != PotatoBlocks.MANA_COLLECTOR) {
+            return;
+        }
+
+        EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity tileEntity = this.world.getTileEntity(pos.offset(behind));
         TileEntityManaCauldron cauldron = (TileEntityManaCauldron)tileEntity;
 

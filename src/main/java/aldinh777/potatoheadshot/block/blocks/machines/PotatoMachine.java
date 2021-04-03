@@ -21,20 +21,11 @@ public abstract class PotatoMachine extends PotatoBlock {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     protected final int modGuiId;
-    protected final boolean haveGui;
-
-    public PotatoMachine(String name, BlockType blockType) {
-        super(name, blockType);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.modGuiId = 0;
-        this.haveGui = false;
-    }
 
     public PotatoMachine(String name, BlockType blockType, int modGuiId) {
         super(name, blockType);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.modGuiId = modGuiId;
-        this.haveGui = true;
     }
 
     @Override
@@ -44,15 +35,11 @@ public abstract class PotatoMachine extends PotatoBlock {
 
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (this.haveGui) {
-            if (!worldIn.isRemote) {
-                playerIn.openGui(PotatoHeadshot.INSTANCE, this.modGuiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
-            }
-            return true;
-
-        } else {
-            return false;
+        if (!worldIn.isRemote) {
+            playerIn.openGui(PotatoHeadshot.INSTANCE, this.modGuiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
+
+        return true;
     }
 
     @Override

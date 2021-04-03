@@ -65,6 +65,7 @@ public class RegistryHandler {
         ResourceLocation manaCollector = new ResourceLocation("potatoheadshot:mana_collector");
         ResourceLocation manaExtractor = new ResourceLocation("potatoheadshot:mana_extractor");
         ResourceLocation manaCauldron = new ResourceLocation("potatoheadshot:mana_cauldron");
+        ResourceLocation energyTransfer = new ResourceLocation("potatoheadshot:energyTransfer");
         ResourceLocation ultManaCauldron = new ResourceLocation("potatoheadshot:ultimate_mana_cauldron");
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
 
@@ -77,6 +78,7 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
         GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);
         GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
+        GameRegistry.registerTileEntity(TileEntityEnergyTransfer.class, energyTransfer);
         GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
         GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
     }
