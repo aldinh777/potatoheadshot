@@ -32,6 +32,7 @@ public class PotatoBlocks {
     public static Block MANA_FLOWER;
     public static Block MANA_TORCH;
     public static Block MANA_STONE;
+    public static Block ENERGY_TRANSFER;
     public static Block ULTIMATE_FLOWER;
 
     public static Block POTATO_DRIER;
@@ -72,6 +73,7 @@ public class PotatoBlocks {
         SWEET_INFUSER = new SweetInfuser("sweet_infuser", BlockType.METAL);
         MANA_COLLECTOR = new ManaCollector("mana_collector", BlockType.GLASS).setLightLevel(0.5f);
         MANA_EXTRACTOR = new ManaExtractor("mana_extractor", BlockType.GLASS).setLightLevel(0.5f);
+        ENERGY_TRANSFER = new EnergyTransfer("energy_transfer", BlockType.GLASS);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
     }

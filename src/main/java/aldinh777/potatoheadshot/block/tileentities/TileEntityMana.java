@@ -38,7 +38,7 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == EnumFacing.UP)
-				return (T)this.inputHandler; 
+				return (T)this.inputHandler;
 			if (facing == EnumFacing.DOWN) {
 				return (T)this.outputHandler;
 			}

@@ -84,7 +84,7 @@ public class TileEntityManaExtractor extends TileEntityMana {
         EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity cauldron = this.world.getTileEntity(pos.offset(behind));
 
-        if (cauldron instanceof TileEntityManaCauldron) {
+        if (cauldron instanceof IManaStorage) {
             return this.storage.getManaStored() > 0;
         }
         return false;
@@ -98,10 +98,10 @@ public class TileEntityManaExtractor extends TileEntityMana {
 
         EnumFacing behind = state.getValue(PotatoMachine.FACING).getOpposite();
         TileEntity tileEntity = this.world.getTileEntity(pos.offset(behind));
-        TileEntityManaCauldron cauldron = (TileEntityManaCauldron)tileEntity;
+        IManaStorage manaStorage = (IManaStorage)tileEntity;
 
-        if (cauldron != null) {
-            PotatoManaStorage targetStorage = cauldron.getManaStorage();
+        if (manaStorage != null) {
+            PotatoManaStorage targetStorage = manaStorage.getManaStorage();
 
             if (targetStorage.getManaStored() >= targetStorage.getMaxManaStored()) {
                 return;

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I#I",
+    "#*#",
+    "I#I"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:glowing_mana_flower"
+    },
+    "I": {
+      "item": "potatoheadshot:rod_mana"
+    },
+    "*": {
+      "item": "potatoheadshot:glowing_mana_flower"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:energy_transfer",
+    "count": 4
+  }
+}

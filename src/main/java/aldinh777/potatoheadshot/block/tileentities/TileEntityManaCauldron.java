@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class TileEntityManaCauldron extends TileEntity implements ITickable {
+public class TileEntityManaCauldron extends TileEntity implements ITickable, IManaStorage {
 
     protected PotatoManaStorage storage;
     protected ManaCauldron.Element element = ManaCauldron.Element.MANA;

@@ -111,6 +111,7 @@ tile.ultimate_crystal_charger.name=Ultimate Crystal Charger
 tile.sweet_infuser.name=Sweet Infuser
 tile.mana_collector.name=Mana Collector
 tile.mana_extractor.name=Mana Extractor
+tile.energy_transfer.name=Energy Transfer
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion
