@@ -1,9 +1,9 @@
 {   "parent": "block/block",
     "ambientocclusion": false,
     "textures": {
-        "particle": "potatoheadshot:blocks/infuser_core",
-        "glass": "potatoheadshot:blocks/infuser_core",
-        "beacon": "potatoheadshot:blocks/infuser_core_inside"
+        "particle": "potatoheadshot:blocks/energy_transfer",
+        "glass": "potatoheadshot:blocks/energy_transfer",
+        "beacon": "potatoheadshot:blocks/energy_transfer_inside"
     },
     "elements": [
         {   "__comment": "Glass shell",
