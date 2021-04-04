@@ -7,7 +7,8 @@
   ],
   "key": {
     "#": {
-      "item": "potatoheadshot:glowing_mana_flower"
+      "type": "forge:ore_dict",
+      "ore": "paneGlass"
     },
     "I": {
       "item": "potatoheadshot:rod_mana"
