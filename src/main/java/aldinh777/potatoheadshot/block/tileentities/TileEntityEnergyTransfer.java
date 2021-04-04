@@ -169,17 +169,13 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
             return;
         }
 
-        int transferable = 100;
+        int targetMana = targetStorage.getManaStored();
         int manaLeftToFull = this.manaStorage.getMaxManaStored() - this.manaStorage.getManaStored();
-        if (targetStorage.getManaStored() < 100) {
-            transferable = targetStorage.getManaStored();
-        }
-        if (manaLeftToFull < 100) {
-            transferable = Math.min(manaLeftToFull, transferable);
-        }
 
-        this.manaStorage.collectMana(transferable);
-        targetStorage.useMana(transferable);
+        EnergyUtil.checkTransferableEnergy(targetMana, manaLeftToFull, 100, (transferable) -> {
+            this.manaStorage.collectMana(transferable);
+            targetStorage.useMana(transferable);
+        });
     }
 
     private void spreadMana(PotatoManaStorage targetStorage) {
@@ -187,17 +183,13 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
             return;
         }
 
-        int transferable = 100;
+        int mana = this.manaStorage.getManaStored();
         int manaLeftToFull = targetStorage.getMaxManaStored() - targetStorage.getManaStored();
-        if (this.manaStorage.getManaStored() < 100) {
-            transferable = this.manaStorage.getManaStored();
-        }
-        if (manaLeftToFull < 100) {
-            transferable = Math.min(manaLeftToFull, transferable);
-        }
 
-        this.manaStorage.useMana(transferable);
-        targetStorage.collectMana(transferable);
+        EnergyUtil.checkTransferableEnergy(mana, manaLeftToFull, 100, (transferable) -> {
+            this.manaStorage.useMana(transferable);
+            targetStorage.collectMana(transferable);
+        });
     }
 
     private void absorbEnergy(PotatoEnergyStorage targetStorage) {
@@ -205,17 +197,13 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
             return;
         }
 
-        int transferable = 100;
-        int energyLeftToFull = this.energyStorage.getMaxEnergyStored() - this.energyStorage.getEnergyStored();
-        if (targetStorage.getEnergyStored() < 100) {
-            transferable = targetStorage.getEnergyStored();
-        }
-        if (energyLeftToFull < 100) {
-            transferable = Math.min(energyLeftToFull, transferable);
-        }
+        int targetEnergy = targetStorage.getEnergyStored();
+        int energyToFillSource = this.energyStorage.getMaxEnergyStored() - this.energyStorage.getEnergyStored();
 
-        this.energyStorage.generateEnergy(transferable);
-        targetStorage.useEnergy(transferable);
+        EnergyUtil.checkTransferableEnergy(targetEnergy, energyToFillSource, 100, (transferable) -> {
+            this.energyStorage.generateEnergy(transferable);
+            targetStorage.useEnergy(transferable);
+        });
     }
 
     private void spreadEnergy(PotatoEnergyStorage targetStorage) {
@@ -223,16 +211,12 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
             return;
         }
 
-        int transferable = 100;
-        int energyLeftToFull = targetStorage.getMaxEnergyStored() - targetStorage.getEnergyStored();
-        if (this.energyStorage.getEnergyStored() < 100) {
-            transferable = this.energyStorage.getEnergyStored();
-        }
-        if (energyLeftToFull < 100) {
-            transferable = Math.min(energyLeftToFull, transferable);
-        }
+        int energy = this.energyStorage.getEnergyStored();
+        int energyToFillTarget = targetStorage.getMaxEnergyStored() - targetStorage.getEnergyStored();
 
-        this.energyStorage.useEnergy(transferable);
-        targetStorage.generateEnergy(transferable);
+        EnergyUtil.checkTransferableEnergy(energy, energyToFillTarget,100, (transferable) -> {
+            this.energyStorage.useEnergy(transferable);
+            targetStorage.generateEnergy(transferable);
+        });
     }
 }

@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
-import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
+import aldinh777.potatoheadshot.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.state.IBlockState;

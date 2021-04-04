@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.recipes.IManaRecipes;
+import aldinh777.potatoheadshot.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;

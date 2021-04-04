@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.compat.botania;
 
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.util.EnergyUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -34,75 +35,47 @@ public class BotaniaCompat {
     public static void chargeMana(ItemStack stack, PotatoManaStorage storage, int size) {
         IManaItem manaItem = (IManaItem) stack.getItem();
 
-        int transferable = size;
+        int mana = storage.getManaStored();
         int manaLeftUntilFull = manaItem.getMaxMana(stack) - manaItem.getMana(stack);
 
-        if (storage.getManaStored() < transferable) {
-            transferable = storage.getManaStored();
-        }
-        if (manaLeftUntilFull < transferable) {
-            transferable = manaLeftUntilFull;
-        }
-
-        if (transferable > 0) {
+        EnergyUtil.checkTransferableEnergy(mana, manaLeftUntilFull, size, (transferable) -> {
             manaItem.addMana(stack, transferable);
             storage.useMana(transferable);
-        }
+        });
     }
 
     public static void extractMana(ItemStack stack, PotatoManaStorage storage, int size) {
         IManaItem manaItem = (IManaItem) stack.getItem();
 
-        int transferable = size;
+        int mana = manaItem.getMana(stack);
         int storageLeftUntilFull = storage.getMaxManaStored() - storage.getManaStored();
-
-        if (manaItem.getMana(stack) < transferable) {
-            transferable = manaItem.getMana(stack);
-        }
-        if (storageLeftUntilFull < transferable) {
-            transferable = storageLeftUntilFull;
-        }
-
-        if (transferable > 0) {
+        EnergyUtil.checkTransferableEnergy(mana, storageLeftUntilFull, size, (transferable) -> {
             manaItem.addMana(stack, -transferable);
             storage.collectMana(transferable);
-        }
+        });
     }
 
     public static void spreadMana(TileEntity tileEntity, PotatoManaStorage storage, int size) {
         IManaPool pool = (IManaPool) tileEntity;
 
-        if (!pool.isFull()) {
-            int transferable = size;
+        int mana = storage.getManaStored();
+        int toFull = pool.isFull() ? 0 : size;
 
-            if (storage.getManaStored() < transferable) {
-                transferable = storage.getManaStored();
-            }
-
-            if (transferable > 0) {
-                pool.recieveMana(transferable);
-                storage.useMana(transferable);
-            }
-        }
+        EnergyUtil.checkTransferableEnergy(mana, toFull, size, (transferable) -> {
+            pool.recieveMana(transferable);
+            storage.useMana(transferable);
+        });
     }
 
     public static void absorbMana(TileEntity tileEntity, PotatoManaStorage storage, int size) {
         IManaPool pool = (IManaPool) tileEntity;
 
-        int transferable = size;
+        int mana = pool.getCurrentMana();
         int storageLeftUntilFull = storage.getMaxManaStored() - storage.getManaStored();
 
-        if (pool.getCurrentMana() < transferable) {
-            transferable = pool.getCurrentMana();
-        }
-        if (storageLeftUntilFull < transferable) {
-            transferable = storageLeftUntilFull;
-        }
-
-        if (transferable > 0) {
+        EnergyUtil.checkTransferableEnergy(mana, storageLeftUntilFull, size, (transferable) -> {
             pool.recieveMana(-transferable);
             storage.collectMana(transferable);
-        }
-
+        });
     }
 }

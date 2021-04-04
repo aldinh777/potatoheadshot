@@ -1,6 +1,5 @@
-package aldinh777.potatoheadshot.recipes;
+package aldinh777.potatoheadshot.recipes.recipe;
 
-import aldinh777.potatoheadshot.compat.jei.freezer.FreezerRecipe;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;

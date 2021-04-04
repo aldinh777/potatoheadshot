@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.recipes;
+package aldinh777.potatoheadshot.recipes.recipe;
 
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;

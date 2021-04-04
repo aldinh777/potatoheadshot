@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.compat.jei.infuser;
 
-import aldinh777.potatoheadshot.recipes.SweetInfuserRecipe;
+import aldinh777.potatoheadshot.recipes.recipe.SweetInfuserRecipe;
 import aldinh777.potatoheadshot.util.ItemHelper;
 import com.google.common.collect.Lists;
 import mezz.jei.api.ingredients.IIngredients;

@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.compat.jei.cauldron;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.recipes.CauldronRecipe;
+import aldinh777.potatoheadshot.recipes.recipe.CauldronRecipe;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

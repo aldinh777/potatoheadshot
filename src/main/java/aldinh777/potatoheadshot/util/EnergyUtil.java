@@ -5,6 +5,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public interface EnergyUtil {
 
     static void doEnergyInteract(TileEntity source, TileEntity target, EnumFacing side, int maxTransfer) {
@@ -24,6 +28,15 @@ public interface EnergyUtil {
                     }
                 }
             }
+        }
+    }
+
+    static void checkTransferableEnergy(int energyLeft, int energyNeededToFull, int transferRate, Consumer<Integer> callback) {
+        int transferable = Math.min(transferRate, energyLeft);
+        transferable = Math.min(transferable, energyNeededToFull);
+
+        if (transferable > 0) {
+            callback.accept(transferable);
         }
     }
 }

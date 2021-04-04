@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.compat.jei.drier;
 
-import aldinh777.potatoheadshot.recipes.PotatoDrierRecipe;
+import aldinh777.potatoheadshot.recipes.recipe.PotatoDrierRecipe;
 import com.google.common.collect.Lists;
 import java.util.List;
 import mezz.jei.api.ingredients.IIngredients;

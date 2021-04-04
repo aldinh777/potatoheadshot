@@ -1,6 +1,6 @@
-package aldinh777.potatoheadshot.block.recipes;
+package aldinh777.potatoheadshot.recipes.category;
 
-import aldinh777.potatoheadshot.recipes.CauldronRecipe;
+import aldinh777.potatoheadshot.recipes.recipe.CauldronRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

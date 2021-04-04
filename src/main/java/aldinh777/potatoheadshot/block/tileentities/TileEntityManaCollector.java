@@ -6,6 +6,7 @@ import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.util.EnergyUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -111,17 +112,13 @@ public class TileEntityManaCollector extends TileEntityMana {
                 return;
             }
 
-            int transferable = 200;
+            int targetMana = targetStorage.getManaStored();
             int manaLeftToFull = this.storage.getMaxManaStored() - this.storage.getManaStored();
-            if (targetStorage.getManaStored() < 200) {
-                transferable = targetStorage.getManaStored();
-            }
-            if (manaLeftToFull < 200) {
-                transferable = Math.min(manaLeftToFull, transferable);
-            }
 
-            this.storage.collectMana(transferable);
-            targetStorage.useMana(transferable);
+            EnergyUtil.checkTransferableEnergy(targetMana, manaLeftToFull, 200, (transferable) -> {
+                this.storage.collectMana(transferable);
+                targetStorage.useMana(transferable);
+            });
         }
     }
 

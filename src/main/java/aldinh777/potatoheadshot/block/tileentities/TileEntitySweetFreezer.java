@@ -2,10 +2,8 @@ package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.recipes.SweetFreezerRecipe;
-import net.minecraft.init.Blocks;
+import aldinh777.potatoheadshot.recipes.recipe.SweetFreezerRecipe;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

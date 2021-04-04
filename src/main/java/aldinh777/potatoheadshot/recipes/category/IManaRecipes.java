@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.recipes;
+package aldinh777.potatoheadshot.recipes.category;
 
 import net.minecraft.item.ItemStack;
 

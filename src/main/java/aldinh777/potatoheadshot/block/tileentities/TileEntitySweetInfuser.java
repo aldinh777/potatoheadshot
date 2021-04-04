@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
-import aldinh777.potatoheadshot.block.recipes.SweetInfuserRecipes;
+import aldinh777.potatoheadshot.recipes.category.SweetInfuserRecipes;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

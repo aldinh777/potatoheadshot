@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.compat.jei.freezer;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.recipes.SweetFreezerRecipe;
+import aldinh777.potatoheadshot.recipes.recipe.SweetFreezerRecipe;
 import com.google.common.collect.Lists;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;

@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.containers;
 
-import aldinh777.potatoheadshot.block.recipes.PotatoDrierRecipes;
+import aldinh777.potatoheadshot.recipes.category.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
 import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
