@@ -22,7 +22,7 @@ import java.util.List;
 public class TileEntityEnergyTransfer extends TileEntity implements ITickable, IManaStorage {
 
     protected PotatoManaStorage manaStorage = new PotatoManaStorage(8000);
-    protected PotatoEnergyStorage energyStorage = new PotatoEnergyStorage(80_000, 100, 100);
+    protected PotatoEnergyStorage energyStorage = new PotatoEnergyStorage(80_000, 1000, 1000);
 
     // Override Method
 
@@ -94,7 +94,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         for (EnumFacing facing : EnumFacing.VALUES) {
             TileEntity targetTile = this.world.getTileEntity(this.pos.offset(facing));
             if (targetTile != null) {
-                EnergyUtil.doEnergyInteract(this, targetTile, facing, 100);
+                EnergyUtil.doEnergyInteract(this, targetTile, facing, 1000);
             }
         }
     }
@@ -153,10 +153,10 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
                         absorbMana(targetStorage);
                     }
 
-                    if (sourceEnergy > targetEnergy + 100) {
+                    if (sourceEnergy > targetEnergy + 1000) {
                         spreadEnergy(targetEnergyTransfer);
 
-                    } else if (sourceEnergy < targetEnergy - 100) {
+                    } else if (sourceEnergy < targetEnergy - 1000) {
                         absorbEnergy(targetEnergyTransfer);
                     }
                 }
@@ -200,7 +200,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         int targetEnergy = targetStorage.getEnergyStored();
         int energyToFillSource = this.energyStorage.getMaxEnergyStored() - this.energyStorage.getEnergyStored();
 
-        EnergyUtil.checkTransferableEnergy(targetEnergy, energyToFillSource, 100, (transferable) -> {
+        EnergyUtil.checkTransferableEnergy(targetEnergy, energyToFillSource, 1000, (transferable) -> {
             this.energyStorage.generateEnergy(transferable);
             targetStorage.useEnergy(transferable);
         });
@@ -214,7 +214,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         int energy = this.energyStorage.getEnergyStored();
         int energyToFillTarget = targetStorage.getMaxEnergyStored() - targetStorage.getEnergyStored();
 
-        EnergyUtil.checkTransferableEnergy(energy, energyToFillTarget,100, (transferable) -> {
+        EnergyUtil.checkTransferableEnergy(energy, energyToFillTarget,1000, (transferable) -> {
             this.energyStorage.useEnergy(transferable);
             targetStorage.generateEnergy(transferable);
         });

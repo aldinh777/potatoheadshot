@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks.machines;
 
+import aldinh777.potatoheadshot.block.tileentities.TileEntityMana;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCollector;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
@@ -33,7 +34,7 @@ public class ManaCollector extends PotatoMachine {
     @Override
     public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         if (!worldIn.isRemote) {
-            TileEntityManaCollector tileEntity = (TileEntityManaCollector) worldIn.getTileEntity(pos);
+            TileEntityMana tileEntity = (TileEntityMana) worldIn.getTileEntity(pos);
             if (tileEntity != null) {
                 IItemHandler inputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
                 IItemHandler outputHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
