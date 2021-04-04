@@ -18,11 +18,13 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 		
 	private final ItemStackHandler inputHandler = new ItemStackHandler(1);
 	private final ItemStackHandler outputHandler = new ItemStackHandler(1);
+	private static final int DEFAULT_COST = 160_000;
+	private static final int ULTIMATE_COST = 3_200_000;
 	
-	protected PotatoEnergyStorage storage = new PotatoEnergyStorage(3200000, 400, 0);
+	protected PotatoEnergyStorage storage = new PotatoEnergyStorage(ULTIMATE_COST, 400, 0);
 	private int energy = this.storage.getEnergyStored();
 	private int currentCharged = 0;
-	private int fullCharge = 32000;
+	private int fullCharge = DEFAULT_COST;
 
 	// Override Methods
 
@@ -217,9 +219,9 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	}
 	
 	public static int getFullCharge(ItemStack stack) {
-		if (stack.getItem() == PotatoItems.CRYSTAL_SHARD) return 320000;
-		if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL) return 3200000;
+		if (stack.getItem() == PotatoItems.CRYSTAL_SHARD) return DEFAULT_COST;
+		if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL) return ULTIMATE_COST;
 		
-		return 320000;
+		return DEFAULT_COST;
 	}
 }

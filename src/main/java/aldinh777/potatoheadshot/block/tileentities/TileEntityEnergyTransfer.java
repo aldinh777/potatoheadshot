@@ -22,7 +22,7 @@ import java.util.List;
 public class TileEntityEnergyTransfer extends TileEntity implements ITickable, IManaStorage {
 
     protected PotatoManaStorage manaStorage = new PotatoManaStorage(8000);
-    protected PotatoEnergyStorage energyStorage = new PotatoEnergyStorage(8000, 100, 100);
+    protected PotatoEnergyStorage energyStorage = new PotatoEnergyStorage(80_000, 100, 100);
 
     // Override Method
 

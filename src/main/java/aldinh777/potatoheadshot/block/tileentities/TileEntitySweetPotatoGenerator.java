@@ -1,9 +1,11 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.util.EnergyUtil;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -193,14 +195,30 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
     // Static Methods
 
     public static ItemStack getResult(ItemStack stack) {
+        Item potatoPlanks = Item.getItemFromBlock(PotatoBlocks.POTATO_PLANKS);
+        Item potatoBlock = Item.getItemFromBlock(PotatoBlocks.POTATO_BLOCK);
+
         if (stack.getItem() == Items.POTATO) return new ItemStack(Items.BAKED_POTATO);
         if (stack.getItem() == PotatoItems.SWEET_POTATO) return new ItemStack(PotatoItems.BAKED_SWEET_POTATO);
+        if (stack.getItem() == PotatoItems.POTATO_STICK) return new ItemStack(PotatoItems.FRIED_FRIES);
+        if (stack.getItem() == PotatoItems.SMALL_POTATO_PLANKS) return new ItemStack(PotatoItems.BAKED_SMALL_POTATO_PLANKS);
+        if (stack.getItem() == potatoPlanks) return new ItemStack(PotatoItems.BAKED_POTATO_PLANKS);
+        if (stack.getItem() == potatoBlock) return new ItemStack(PotatoItems.BAKED_POTATO_BLOCK);
+
         return ItemStack.EMPTY;
     }
 
     public static int getFuelValue(ItemStack stack) {
+        Item potatoPlanks = Item.getItemFromBlock(PotatoBlocks.POTATO_PLANKS);
+        Item potatoBlock = Item.getItemFromBlock(PotatoBlocks.POTATO_BLOCK);
+
         if (stack.getItem() == Items.POTATO) return 200;
         if (stack.getItem() == PotatoItems.SWEET_POTATO) return 200;
+        if (stack.getItem() == PotatoItems.POTATO_STICK) return 100;
+        if (stack.getItem() == PotatoItems.SMALL_POTATO_PLANKS) return 50;
+        if (stack.getItem() == potatoPlanks) return 200;
+        if (stack.getItem() == potatoBlock) return 1800;
+
         return 0;
     }
 
