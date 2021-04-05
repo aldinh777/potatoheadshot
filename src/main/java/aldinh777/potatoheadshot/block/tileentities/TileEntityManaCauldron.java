@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -28,7 +29,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     protected int checkMana = 0;
 
     public TileEntityManaCauldron() {
-        this.storage = new PotatoManaStorage(320_000);
+        this.storage = new PotatoManaStorage(ConfigHandler.MANA_CAULDRON_CAPACITY);
     }
 
     // Override Methods
@@ -118,9 +119,11 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                     float posZ = this.pos.getZ() + 0.5f;
 
                     if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL && !this.isUltimate()) {
-                        world.createExplosion(null,
-                                (this.pos.getX() + 0.5f), (this.pos.getY() + 1.0f), (pos.getZ() + 0.5f),
-                                5.0f, true);
+                        if (ConfigHandler.CONCENTRATED_CRYSTAL_EXPLOSION) {
+                            world.createExplosion(null,
+                                    (this.pos.getX() + 0.5f), (this.pos.getY() + 1.0f), (pos.getZ() + 0.5f),
+                                    5.0f, true);
+                        }
                     }
 
                     EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());

@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -31,8 +32,15 @@ public class ManaFlower extends BlockBush {
         this.setSoundType(SoundType.PLANT);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        PotatoBlocks.LISTS.add(this);
-        PotatoItems.LISTS.add(new PotatoItemBlock(this));
+        if (name.equals("ultimate_mana_flower")) {
+            if (ConfigHandler.ULTIMATE_CRYSTALS && ConfigHandler.ULTIMATE_FLOWER) {
+                PotatoBlocks.LISTS.add(this);
+                PotatoItems.LISTS.add(new PotatoItemBlock(this));
+            }
+        } else {
+            PotatoBlocks.LISTS.add(this);
+            PotatoItems.LISTS.add(new PotatoItemBlock(this));
+        }
     }
 
     @Override

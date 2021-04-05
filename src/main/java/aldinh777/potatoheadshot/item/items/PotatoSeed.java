@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.item.items;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import net.minecraft.block.Block;
@@ -32,7 +33,25 @@ public class PotatoSeed extends ItemSeeds {
         this.setUnlocalizedName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        PotatoItems.LISTS.add(this);
+        switch (name) {
+            case "lava_potato_seed":
+                if (ConfigHandler.LAVA_POTATO_SEED) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "water_potato_seed":
+                if (ConfigHandler.WATER_POTATO_SEED) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "ice_potato_seed":
+                if (ConfigHandler.ICE_POTATO_SEED) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            default:
+                PotatoItems.LISTS.add(this);
+        }
     }
 
     @Nonnull

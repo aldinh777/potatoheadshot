@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.recipes.recipe;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
@@ -14,6 +15,9 @@ public class CauldronRecipe {
     private final Item input;
     private final ItemStack output;
     private final int cost;
+
+    private static final int SHARD_COST = ConfigHandler.CONCENTRATED_SHARD_MANA_REQUIRED;
+    private static final int ULTIMATE_COST = ConfigHandler.CONCENTRATED_CRYSTAL_MANA_REQUIRED;
 
     public CauldronRecipe(Item input, ItemStack output, int cost) {
         this.input = input;
@@ -38,9 +42,10 @@ public class CauldronRecipe {
 
         addRecipe(recipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST), 100);
         addRecipe(recipes, PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 200);
-        addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), 16_000);
-        addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), 320_000);
-
+        if (ConfigHandler.ULTIMATE_CRYSTALS) {
+            addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), SHARD_COST);
+            addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), ULTIMATE_COST);
+        }
         return recipes;
     }
 
@@ -57,9 +62,15 @@ public class CauldronRecipe {
         Item endStone = Item.getItemFromBlock(Blocks.END_STONE);
         Item ice = Item.getItemFromBlock(Blocks.ICE);
 
-        addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 12_000);
-        addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12_000);
-        addRecipe(recipes, PotatoItems.ICE_POTATO, new ItemStack(PotatoItems.ICE_POTATO_SEED), 12_000);
+        if (ConfigHandler.LAVA_POTATO_SEED) {
+            addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 12_000);
+        }
+        if (ConfigHandler.WATER_POTATO_SEED) {
+            addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12_000);
+        }
+        if (ConfigHandler.ICE_POTATO_SEED) {
+            addRecipe(recipes, PotatoItems.ICE_POTATO, new ItemStack(PotatoItems.ICE_POTATO_SEED), 12_000);
+        }
 
         addRecipe(recipes, Items.FISH, new ItemStack(Items.PRISMARINE_SHARD), 2000);
         addRecipe(recipes, Items.PRISMARINE_SHARD, new ItemStack(Items.PRISMARINE_CRYSTALS), 8000);
@@ -75,7 +86,9 @@ public class CauldronRecipe {
         addRecipe(recipes, mycelium, new ItemStack(Blocks.BROWN_MUSHROOM), 2000);
         addRecipe(recipes, endStone, new ItemStack(Blocks.CHORUS_FLOWER), 2000);
         addRecipe(recipes, ice, new ItemStack(Blocks.SNOW), 2000);
-        addRecipe(recipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 8000);
+        if (ConfigHandler.SPLASH_MANA) {
+            addRecipe(recipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 8000);
+        }
 
         return recipes;
     }

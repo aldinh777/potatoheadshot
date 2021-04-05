@@ -1,18 +1,11 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.block.tileentities.IManaStorage;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityEnergyTransfer;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

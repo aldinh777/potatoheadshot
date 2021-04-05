@@ -3,6 +3,7 @@ package aldinh777.potatoheadshot.block.tileentities;
 import aldinh777.potatoheadshot.block.blocks.machines.PotatoMachine;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -16,6 +17,8 @@ import net.minecraft.util.text.ITextComponent;
 import javax.annotation.Nullable;
 
 public class TileEntityManaCollector extends TileEntityMana {
+
+    private final int collectionRate = ConfigHandler.MANA_COLLECTOR_RATE;
 
     private int tick = 0;
 
@@ -128,7 +131,7 @@ public class TileEntityManaCollector extends TileEntityMana {
     }
 
     protected void collectMana() {
-        this.storage.collectMana(2);
+        this.storage.collectMana(collectionRate);
     }
 
     private boolean canFuse() {

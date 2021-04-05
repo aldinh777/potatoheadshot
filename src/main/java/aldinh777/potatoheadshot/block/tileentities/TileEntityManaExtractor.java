@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.block.blocks.ManaFlower;
 import aldinh777.potatoheadshot.block.blocks.machines.PotatoMachine;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -21,6 +22,8 @@ import javax.annotation.Nullable;
 
 public class TileEntityManaExtractor extends TileEntityMana {
 
+    private final int manaFlowerRate = ConfigHandler.MANA_FLOWER_RATE;
+    private final int ultFlowerRate = ConfigHandler.ULTIMATE_FLOWER_RATE;
     private int tick = 0;
 
     // Override Method
@@ -69,9 +72,9 @@ public class TileEntityManaExtractor extends TileEntityMana {
     protected void collectMana() {
         Block flower = this.world.getBlockState(this.pos.up()).getBlock();
         if (flower.equals(PotatoBlocks.MANA_FLOWER)) {
-            this.storage.collectMana(8);
+            this.storage.collectMana(manaFlowerRate);
         } else if (flower.equals(PotatoBlocks.ULTIMATE_FLOWER)) {
-            this.storage.collectMana(3200);
+            this.storage.collectMana(ultFlowerRate);
         }
     }
 

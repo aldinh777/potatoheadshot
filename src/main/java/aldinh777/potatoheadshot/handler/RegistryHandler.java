@@ -15,6 +15,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -24,7 +25,9 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = PotatoHeadshot.MODID)
 public class RegistryHandler {
 
-    public static void preInit() {
+    public static void preInit(FMLPreInitializationEvent event) {
+        ConfigHandler.init(event);
+
         PotatoItems.init();
         PotatoBlocks.init();
 
@@ -32,27 +35,45 @@ public class RegistryHandler {
     }
 
     public static void init() {
-        registerSmelting();
         OreDictionaryHandler.register();
+        registerSmelting();
     }
 
     public static void registerSmelting() {
-
-        GameRegistry.addSmelting(Items.POISONOUS_POTATO, new ItemStack(PotatoItems.HOT_POTATO), 0.075f);
-        GameRegistry.addSmelting(PotatoItems.HOT_POTATO, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), 0.075f);
-        GameRegistry.addSmelting(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), 0.075f);
-        GameRegistry.addSmelting(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
-        GameRegistry.addSmelting(PotatoItems.POTATO_STICK, new ItemStack(PotatoItems.FRIED_FRIES), 0.01f);
-        GameRegistry.addSmelting(PotatoItems.SMALL_POTATO_PLANKS, new ItemStack(PotatoItems.BAKED_SMALL_POTATO_PLANKS), 0.15f);
-        GameRegistry.addSmelting(PotatoItems.POTATO_CHIP, new ItemStack(PotatoItems.BAKED_POTATO_CHIP), 0.15f);
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.BAKED_SWEET_POTATO), 0.35f);
         GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_DUST, new ItemStack(PotatoItems.SWEET_POTATO_INGOT), 0.075f);
-        GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
-        GameRegistry.addSmelting(PotatoItems.RED_POTATO, new ItemStack(Items.REDSTONE), 0.35f);
 
-        GameRegistry.addSmelting(Blocks.DIRT, new ItemStack(PotatoItems.COOKED_DIRT), 0.15f);
-        GameRegistry.addSmelting(PotatoBlocks.POTATO_PLANKS, new ItemStack(PotatoItems.BAKED_POTATO_PLANKS), 0.45f);
-        GameRegistry.addSmelting(PotatoBlocks.POTATO_BLOCK, new ItemStack(PotatoItems.BAKED_POTATO_BLOCK), 0.45f);
+        if (ConfigHandler.HOT_POTATO) {
+            GameRegistry.addSmelting(Items.POISONOUS_POTATO, new ItemStack(PotatoItems.HOT_POTATO), 0.075f);
+            GameRegistry.addSmelting(PotatoItems.HOT_POTATO, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), 0.075f);
+            GameRegistry.addSmelting(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), 0.075f);
+            GameRegistry.addSmelting(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
+        }
+
+        if (ConfigHandler.SWEET_BUCKET) {
+            GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
+        }
+
+        if (ConfigHandler.POTATO_CHIP) {
+            GameRegistry.addSmelting(PotatoItems.POTATO_CHIP, new ItemStack(PotatoItems.BAKED_POTATO_CHIP), 0.15f);
+        }
+
+        if (ConfigHandler.RED_POTATO) {
+            GameRegistry.addSmelting(PotatoItems.RED_POTATO, new ItemStack(Items.REDSTONE), 0.35f);
+        }
+
+        if (ConfigHandler.COOKED_DIRT) {
+            GameRegistry.addSmelting(Blocks.DIRT, new ItemStack(PotatoItems.COOKED_DIRT), 0.15f);
+        }
+
+        if (ConfigHandler.COOKED_POTATO_VARIANT) {
+            if (ConfigHandler.POTATO_PLANKS) {
+                GameRegistry.addSmelting(PotatoItems.POTATO_STICK, new ItemStack(PotatoItems.FRIED_FRIES), 0.01f);
+                GameRegistry.addSmelting(PotatoItems.SMALL_POTATO_PLANKS, new ItemStack(PotatoItems.BAKED_SMALL_POTATO_PLANKS), 0.15f);
+                GameRegistry.addSmelting(PotatoBlocks.POTATO_PLANKS, new ItemStack(PotatoItems.BAKED_POTATO_PLANKS), 0.45f);
+            }
+            GameRegistry.addSmelting(PotatoBlocks.POTATO_BLOCK, new ItemStack(PotatoItems.BAKED_POTATO_BLOCK), 0.45f);
+        }
     }
 
     public static void registerTileEntity() {
@@ -69,18 +90,40 @@ public class RegistryHandler {
         ResourceLocation ultManaCauldron = new ResourceLocation("potatoheadshot:ultimate_mana_cauldron");
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
 
-        GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
-        GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
-        GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
-        GameRegistry.registerTileEntity(TileEntitySweetCrystalMaker.class, sweetCrystalMaker);
-        GameRegistry.registerTileEntity(TileEntitySweetCrystalCharger.class, sweetCrystalCharger);
-        GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, sweetInfuser);
-        GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
-        GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);
-        GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
-        GameRegistry.registerTileEntity(TileEntityEnergyTransfer.class, energyTransfer);
-        GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
-        GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
+        if (ConfigHandler.POTATO_DRIER) {
+            GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
+        }
+        if (ConfigHandler.SWEET_POTATO_GENERATOR) {
+            GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
+        }
+        if (ConfigHandler.SWEET_FREEZER) {
+            GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
+        }
+        if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
+            GameRegistry.registerTileEntity(TileEntitySweetCrystalMaker.class, sweetCrystalMaker);
+        }
+        if (ConfigHandler.SWEET_CRYSTAL_CHARGER) {
+            GameRegistry.registerTileEntity(TileEntitySweetCrystalCharger.class, sweetCrystalCharger);
+            GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
+        }
+        if (ConfigHandler.SWEET_INFUSER) {
+            GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, sweetInfuser);
+        }
+        if (ConfigHandler.MANA_COLLECTOR) {
+            GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
+        }
+        if (ConfigHandler.MANA_EXTRACTOR) {
+            GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);
+        }
+        if (ConfigHandler.MANA_CAULDRON) {
+            GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
+        }
+        if (ConfigHandler.ENERGY_TRANSFER) {
+            GameRegistry.registerTileEntity(TileEntityEnergyTransfer.class, energyTransfer);
+        }
+        if (ConfigHandler.ULTIMATE_CAULDRON) {
+            GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
+        }
     }
 
     @SubscribeEvent

@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.compat.botania;
 
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.util.EnergyUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,12 +20,15 @@ public class BotaniaCompat {
     }
 
     public static boolean isBotaniaAvailable() {
-        try {
-            Class.forName("vazkii.botania.common.Botania");
-        } catch (ClassNotFoundException exception) {
-            return false;
+        if (ConfigHandler.BOTANIA_COMPAT) {
+            try {
+                Class.forName("vazkii.botania.common.Botania");
+            } catch (ClassNotFoundException exception) {
+                return false;
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static int getManaSize(TileEntity tileEntity) {

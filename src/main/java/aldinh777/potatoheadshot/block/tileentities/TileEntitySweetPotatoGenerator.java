@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.util.EnergyUtil;
@@ -25,7 +26,8 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
     private final ItemStackHandler processHandler = new ItemStackHandler(1);
     private final ItemStackHandler outputHandler = new ItemStackHandler(1);
 
-    private final PotatoEnergyStorage storage = new PotatoEnergyStorage(80000, 0, 60);
+    private final PotatoEnergyStorage storage = new PotatoEnergyStorage(80000, 0, ConfigHandler.GENERATOR_RATE);
+    private final int generationRate = ConfigHandler.GENERATOR_RATE;
     private int energy = storage.getEnergyStored();
     private int currentCookTime = 0;
     private int totalCookTime = 100;
@@ -43,7 +45,7 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
                 if (this.storage.getEnergyStored() < this.storage.getMaxEnergyStored()) {
                     if (this.currentCookTime < this.totalCookTime) {
                         ++this.currentCookTime;
-                        this.storage.generateEnergy(10);
+                        this.storage.generateEnergy(generationRate);
                         flag = true;
                     }
                 }

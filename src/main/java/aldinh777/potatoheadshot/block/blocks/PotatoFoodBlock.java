@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.blocks;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -22,10 +22,27 @@ public class PotatoFoodBlock extends PotatoBlock {
 
     @Override
     protected void init(String name) {
-        this.setUnlocalizedName(name);
-        this.setCreativeTab(PotatoTab.POTATO_TAB);
-
-        PotatoBlocks.LISTS.add(this);
+        switch (name) {
+            case "cooked_dirt":
+                if (ConfigHandler.COOKED_DIRT) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
+            case "baked_potato_planks":
+            case "baked_potato_block":
+                if (ConfigHandler.COOKED_POTATO_VARIANT) {
+                    if (name.equals("baked_potato_planks")) {
+                        if (ConfigHandler.POTATO_PLANKS) {
+                            PotatoBlocks.LISTS.add(this);
+                        }
+                    } else {
+                        PotatoBlocks.LISTS.add(this);
+                    }
+                }
+                break;
+            default:
+                PotatoBlocks.LISTS.add(this);
+        }
     }
 
     @Nonnull

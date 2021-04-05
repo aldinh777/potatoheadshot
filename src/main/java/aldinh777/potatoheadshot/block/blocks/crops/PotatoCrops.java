@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks.crops;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
@@ -26,7 +27,36 @@ public abstract class PotatoCrops extends BlockCrops {
     public PotatoCrops(String name) {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
-        PotatoBlocks.LISTS.add(this);
+
+        switch (name) {
+            case "red_potatoes":
+                if (ConfigHandler.RED_POTATO) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
+            case "sticky_potatoes":
+                if (ConfigHandler.STICKY_POTATO) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
+            case "lava_potatoes":
+                if (ConfigHandler.LAVA_POTATO_SEED) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
+            case "water_potatoes":
+                if (ConfigHandler.WATER_POTATO_SEED) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
+            case "ice_potatoes":
+                if (ConfigHandler.ICE_POTATO_SEED) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
+            default:
+                PotatoBlocks.LISTS.add(this);
+        }
     }
 
     @Nonnull

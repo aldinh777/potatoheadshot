@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.recipes.recipe;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
@@ -36,11 +37,15 @@ public class PotatoDrierRecipe {
         addRecipe(recipes, PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.DRIED_SWEET_POTATO));
         addRecipe(recipes, PotatoItems.DRIED_SWEET_POTATO, new ItemStack(PotatoItems.SWEET_POTATO_DUST));
         addRecipe(recipes, PotatoItems.GLOWING_POTATO, new ItemStack(PotatoItems.GLOWING_POTATO_DUST));
-        addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL));
-        addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
-        addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT));
+        if (ConfigHandler.WET_POTATO) {
+            addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL));
+            addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
+            addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT));
+        }
         addRecipe(recipes, Items.WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
-        addRecipe(recipes, PotatoItems.SWEET_WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
+        if (ConfigHandler.SWEET_BUCKET) {
+            addRecipe(recipes, PotatoItems.SWEET_WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));
+        }
         addRecipe(recipes, sponge, new ItemStack(Blocks.SPONGE));
 
         return recipes;
@@ -51,14 +56,20 @@ public class PotatoDrierRecipe {
         Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
 
         addRecipe(recipes, Items.POTATO, new ItemStack(PotatoItems.WET_POTATO));
-        addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(PotatoItems.SUPER_WET_POTATO));
-        addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.WATER_POTATO));
+        if (ConfigHandler.WET_POTATO) {
+            addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(PotatoItems.SUPER_WET_POTATO));
+            addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.WATER_POTATO));
+        }
         addRecipe(recipes, Items.BUCKET, new ItemStack(Items.WATER_BUCKET));
-        addRecipe(recipes, PotatoItems.SWEET_EMPTY_BUCKET, new ItemStack(PotatoItems.SWEET_WATER_BUCKET));
+        if (ConfigHandler.SWEET_BUCKET) {
+            addRecipe(recipes, PotatoItems.SWEET_EMPTY_BUCKET, new ItemStack(PotatoItems.SWEET_WATER_BUCKET));
+        }
         addRecipe(recipes, PotatoItems.DRIED_POTATO, new ItemStack(Items.POTATO));
-        addRecipe(recipes, PotatoItems.EXTRA_HOT_POTATO, new ItemStack(Items.COAL, 1, 1));
-        addRecipe(recipes, PotatoItems.EXTREME_HOT_POTATO, new ItemStack(Items.COAL));
-        addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)));
+        if (ConfigHandler.HOT_POTATO) {
+            addRecipe(recipes, PotatoItems.EXTRA_HOT_POTATO, new ItemStack(Items.COAL, 1, 1));
+            addRecipe(recipes, PotatoItems.EXTREME_HOT_POTATO, new ItemStack(Items.COAL));
+            addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)));
+        }
         addRecipe(recipes, sponge, new ItemStack(sponge, 1, 1));
 
         return recipes;

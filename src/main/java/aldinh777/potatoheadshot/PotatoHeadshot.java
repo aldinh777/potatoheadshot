@@ -22,7 +22,7 @@ public class PotatoHeadshot {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
 
-        RegistryHandler.preInit();
+        RegistryHandler.preInit(event);
     }
 
     @EventHandler

@@ -23,34 +23,51 @@ public class GuiHandler implements IGuiHandler {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID) {
             case Constants.DRIER:
-                TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
-                return new ContainerPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+                if (ConfigHandler.POTATO_DRIER) {
+                    TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
+                    return new ContainerPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+                }
             case Constants.POTATO_GEN:
-                TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
-                return new ContainerSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
+                if (ConfigHandler.SWEET_POTATO_GENERATOR) {
+                    TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
+                    return new ContainerSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
+                }
             case Constants.FREEZER:
-                TileEntitySweetFreezer freezer = (TileEntitySweetFreezer) tileEntity;
-                return new ContainerSweetFreezer(player.inventory, Objects.requireNonNull(freezer));
+                if (ConfigHandler.SWEET_FREEZER) {
+                    TileEntitySweetFreezer freezer = (TileEntitySweetFreezer) tileEntity;
+                    return new ContainerSweetFreezer(player.inventory, Objects.requireNonNull(freezer));
+                }
             case Constants.CRYSTAL_MAKER:
-                TileEntitySweetCrystalMaker crystalMaker = (TileEntitySweetCrystalMaker) tileEntity;
-                return new ContainerSweetCrystalMaker(player.inventory, Objects.requireNonNull(crystalMaker));
+                if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
+                    TileEntitySweetCrystalMaker crystalMaker = (TileEntitySweetCrystalMaker) tileEntity;
+                    return new ContainerSweetCrystalMaker(player.inventory, Objects.requireNonNull(crystalMaker));
+                }
             case Constants.CRYSTAL_CHARGER:
-                TileEntitySweetCrystalCharger crystalCharger = (TileEntitySweetCrystalCharger) tileEntity;
-                return new ContainerSweetCrystalCharger(player.inventory, Objects.requireNonNull(crystalCharger));
+                if (ConfigHandler.SWEET_CRYSTAL_CHARGER) {
+                    TileEntitySweetCrystalCharger crystalCharger = (TileEntitySweetCrystalCharger) tileEntity;
+                    return new ContainerSweetCrystalCharger(player.inventory, Objects.requireNonNull(crystalCharger));
+                }
             case Constants.INFUSER:
-                TileEntitySweetInfuser infuser = (TileEntitySweetInfuser) tileEntity;
-                return new ContainerSweetInfuser(player.inventory, Objects.requireNonNull(infuser));
+                if (ConfigHandler.SWEET_INFUSER) {
+                    TileEntitySweetInfuser infuser = (TileEntitySweetInfuser) tileEntity;
+                    return new ContainerSweetInfuser(player.inventory, Objects.requireNonNull(infuser));
+                }
             case Constants.COLLECTOR:
-                TileEntityManaCollector collector = (TileEntityManaCollector) tileEntity;
-                return new ContainerManaCollector(player.inventory, Objects.requireNonNull(collector));
+                if (ConfigHandler.MANA_COLLECTOR) {
+                    TileEntityManaCollector collector = (TileEntityManaCollector) tileEntity;
+                    return new ContainerManaCollector(player.inventory, Objects.requireNonNull(collector));
+                }
             case Constants.EXTRACTOR:
-                TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
-                return new ContainerManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+                if (ConfigHandler.MANA_EXTRACTOR) {
+                    TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
+                    return new ContainerManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+                }
             case Constants.POCKET_CAULDRON:
-                return new ContainerPocketCauldron(player);
-            default:
-                return  null;
+                if (ConfigHandler.MANA_CAULDRON) {
+                    return new ContainerPocketCauldron(player);
+                }
         }
+        return null;
     }
 
     @Nullable
@@ -59,33 +76,50 @@ public class GuiHandler implements IGuiHandler {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID) {
             case Constants.DRIER:
-                TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
-                return new GuiPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+                if (ConfigHandler.POTATO_DRIER) {
+                    TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
+                    return new GuiPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+                }
             case Constants.POTATO_GEN:
-                TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
-                return new GuiSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
+                if (ConfigHandler.SWEET_POTATO_GENERATOR) {
+                    TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
+                    return new GuiSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
+                }
             case Constants.FREEZER:
-                TileEntitySweetFreezer freezer = (TileEntitySweetFreezer) tileEntity;
-                return new GuiSweetFreezer(player.inventory, Objects.requireNonNull(freezer));
+                if (ConfigHandler.SWEET_FREEZER) {
+                    TileEntitySweetFreezer freezer = (TileEntitySweetFreezer) tileEntity;
+                    return new GuiSweetFreezer(player.inventory, Objects.requireNonNull(freezer));
+                }
             case Constants.CRYSTAL_MAKER:
-                TileEntitySweetCrystalMaker crystalMaker = (TileEntitySweetCrystalMaker) tileEntity;
-                return new GuiSweetCrystalMaker(player.inventory, Objects.requireNonNull(crystalMaker));
+                if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
+                    TileEntitySweetCrystalMaker crystalMaker = (TileEntitySweetCrystalMaker) tileEntity;
+                    return new GuiSweetCrystalMaker(player.inventory, Objects.requireNonNull(crystalMaker));
+                }
             case Constants.CRYSTAL_CHARGER:
-                TileEntitySweetCrystalCharger crystalCharger = (TileEntitySweetCrystalCharger) tileEntity;
-                return new GuiSweetCrystalCharger(player.inventory, Objects.requireNonNull(crystalCharger));
+                if (ConfigHandler.SWEET_CRYSTAL_CHARGER) {
+                    TileEntitySweetCrystalCharger crystalCharger = (TileEntitySweetCrystalCharger) tileEntity;
+                    return new GuiSweetCrystalCharger(player.inventory, Objects.requireNonNull(crystalCharger));
+                }
             case Constants.INFUSER:
-                TileEntitySweetInfuser infuser = (TileEntitySweetInfuser) tileEntity;
-                return new GuiSweetInfuser(player.inventory, Objects.requireNonNull(infuser));
+                if (ConfigHandler.SWEET_INFUSER) {
+                    TileEntitySweetInfuser infuser = (TileEntitySweetInfuser) tileEntity;
+                    return new GuiSweetInfuser(player.inventory, Objects.requireNonNull(infuser));
+                }
             case Constants.COLLECTOR:
-                TileEntityManaCollector collector = (TileEntityManaCollector) tileEntity;
-                return new GuiManaCollector(player.inventory, Objects.requireNonNull(collector));
+                if (ConfigHandler.MANA_COLLECTOR) {
+                    TileEntityManaCollector collector = (TileEntityManaCollector) tileEntity;
+                    return new GuiManaCollector(player.inventory, Objects.requireNonNull(collector));
+                }
             case Constants.EXTRACTOR:
-                TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
-                return new GuiManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+                if (ConfigHandler.MANA_EXTRACTOR) {
+                    TileEntityManaExtractor extractor = (TileEntityManaExtractor) tileEntity;
+                    return new GuiManaExtractor(player.inventory, Objects.requireNonNull(extractor));
+                }
             case Constants.POCKET_CAULDRON:
-                return new GuiPocketCauldron(player);
-            default:
-                return  null;
+                if (ConfigHandler.MANA_CAULDRON) {
+                    return new GuiPocketCauldron(player);
+                }
         }
+        return null;
     }
 }

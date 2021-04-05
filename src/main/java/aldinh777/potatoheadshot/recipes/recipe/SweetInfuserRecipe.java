@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.recipes.recipe;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
@@ -112,18 +113,24 @@ public class SweetInfuserRecipe {
         addRecipe(recipes, new ItemStack(cobweb), string,
                 string, string, string,
                 string, string, string);
-        addRecipe(recipes, new ItemStack(ultimateCrystal), crystal,
-                chargedCrystal, chargedCrystal, chargedCrystal,
-                concentratedCrystal, concentratedCrystal, concentratedCrystal);
+        if (ConfigHandler.ULTIMATE_CRYSTALS) {
+            addRecipe(recipes, new ItemStack(ultimateCrystal), crystal,
+                    chargedCrystal, chargedCrystal, chargedCrystal,
+                    concentratedCrystal, concentratedCrystal, concentratedCrystal);
+            if (ConfigHandler.ULTIMATE_BROKEN_FUEL) {
+                addRecipe(recipes, new ItemStack(ultimateBrokenFuel), carbonatedCoal,
+                        ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
+                        ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+            }
+            if (ConfigHandler.ULTIMATE_FLOWER) {
+                addRecipe(recipes, new ItemStack(ultimateManaFlower), manaFlower,
+                        ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
+                        ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
+            }
+        }
         addRecipe(recipes, new ItemStack(carbonatedCoal), coal,
                 coalBlock, coalBlock, coalBlock,
                 coalBlock, coalBlock, coalBlock);
-        addRecipe(recipes, new ItemStack(ultimateBrokenFuel), carbonatedCoal,
-                ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
-                ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
-        addRecipe(recipes, new ItemStack(ultimateManaFlower), manaFlower,
-                ultimateCrystal, ultimateChargedCrystal, ultimateCrystal,
-                ultimateCrystal, ultimateConcentratedCrystal, ultimateCrystal);
         addRecipe(recipes, new ItemStack(icePotato), frozenPotato,
                 ice, ice, ice,
                 ice, ice, ice);
@@ -222,11 +229,13 @@ public class SweetInfuserRecipe {
         addRecipe(recipes, new ItemStack(emerald), crystal,
                 crystal, DYE_LIME, crystal,
                 DYE_LIME, crystal, DYE_LIME);
-        addRecipe(recipes, new ItemStack(chargedCrystal), crystalShard,
-                chargedCrystalShard, chargedCrystalShard, chargedCrystalShard,
-                chargedCrystalShard, chargedCrystalShard, chargedCrystalShard);
-        addRecipe(recipes, new ItemStack(concentratedCrystal), crystalShard,
-                concentratedCrystalShard, concentratedCrystalShard, concentratedCrystalShard,
-                concentratedCrystalShard, concentratedCrystalShard, concentratedCrystalShard);
+        if (ConfigHandler.ULTIMATE_CRYSTALS) {
+            addRecipe(recipes, new ItemStack(chargedCrystal), crystalShard,
+                    chargedCrystalShard, chargedCrystalShard, chargedCrystalShard,
+                    chargedCrystalShard, chargedCrystalShard, chargedCrystalShard);
+            addRecipe(recipes, new ItemStack(concentratedCrystal), crystalShard,
+                    concentratedCrystalShard, concentratedCrystalShard, concentratedCrystalShard,
+                    concentratedCrystalShard, concentratedCrystalShard, concentratedCrystalShard);
+        }
     }
 }

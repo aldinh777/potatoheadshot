@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.item.items;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
@@ -26,7 +27,9 @@ public class LavaHoe extends ItemHoe {
         this.setUnlocalizedName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        PotatoItems.LISTS.add(this);
+        if (ConfigHandler.LAVA_POTATO_SEED) {
+            PotatoItems.LISTS.add(this);
+        }
     }
 
     @Nonnull

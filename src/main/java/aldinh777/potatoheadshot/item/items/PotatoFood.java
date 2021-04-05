@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.item.items;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.FoodEffects;
@@ -8,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -27,7 +27,52 @@ public class PotatoFood extends ItemFood {
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
-        PotatoItems.LISTS.add(this);
+
+        switch (name) {
+            case "sweet_bucket_empty":
+                if (ConfigHandler.SWEET_BUCKET) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "salt_potato":
+                if (ConfigHandler.SALT_POTATO) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "baked_potato_chip":
+                if (ConfigHandler.POTATO_CHIP) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "baked_small_potato_planks":
+            case "fried_fries":
+                if (ConfigHandler.POTATO_PLANKS && ConfigHandler.COOKED_POTATO_VARIANT) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "hot_potato":
+            case "extra_hot_potato":
+            case "extreme_hot_potato":
+            case "lava_potato":
+                if (ConfigHandler.HOT_POTATO) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "wet_potato":
+            case "super_wet_potato":
+            case "water_potato":
+                if (ConfigHandler.WET_POTATO) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "frozen_potato":
+                if (ConfigHandler.FROZEN_POTATO) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            default:
+                PotatoItems.LISTS.add(this);
+        }
     }
 
     @Override

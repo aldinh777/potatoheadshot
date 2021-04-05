@@ -8,7 +8,7 @@ public class PotatoTab {
     public static CreativeTabs POTATO_TAB = new CreativeTabs("potatoheadshot") {
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(PotatoItems.HOT_POTATO);
+            return new ItemStack(PotatoBlocks.POTATO_BLOCK);
         }
     };
 

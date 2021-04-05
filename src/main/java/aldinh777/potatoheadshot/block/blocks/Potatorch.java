@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -46,8 +47,10 @@ public class Potatorch extends Block {
         this.setTickRandomly(true);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        PotatoBlocks.LISTS.add(this);
-        PotatoItems.LISTS.add(new PotatoItemBlock(this));
+        if (ConfigHandler.MANA_TORCH) {
+            PotatoBlocks.LISTS.add(this);
+            PotatoItems.LISTS.add(new PotatoItemBlock(this));
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.item.items.LavaPotatoSeed;
 import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
@@ -24,8 +25,10 @@ public class FarmlandLava extends BlockFarmland {
         this.setUnlocalizedName(name);
         this.setHardness(0.5f);
         this.setLightLevel(0.50f);
-        PotatoBlocks.LISTS.add(this);
-        PotatoItems.LISTS.add(new PotatoItemBlock(this));
+        if (ConfigHandler.LAVA_POTATO_SEED) {
+            PotatoBlocks.LISTS.add(this);
+            PotatoItems.LISTS.add(new PotatoItemBlock(this));
+        }
     }
 
     @Override

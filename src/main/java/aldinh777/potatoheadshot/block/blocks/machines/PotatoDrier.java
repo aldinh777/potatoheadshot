@@ -1,10 +1,7 @@
 package aldinh777.potatoheadshot.block.blocks.machines;
 
 import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
-import aldinh777.potatoheadshot.item.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.lists.PotatoItems;
-import aldinh777.potatoheadshot.lists.PotatoTab;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.properties.PropertyBool;
@@ -33,15 +30,6 @@ public class PotatoDrier extends PotatoMachine {
     public PotatoDrier(String name, BlockType blockType) {
         super(name, blockType, Constants.DRIER);
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(ACTIVE, false));
-        this.setCreativeTab(PotatoTab.POTATO_TAB);
-
-        PotatoItems.LISTS.add(new PotatoItemBlock(this));
-    }
-
-    @Override
-    protected void init(String name) {
-        this.setUnlocalizedName(name);
-        PotatoBlocks.LISTS.add(this);
     }
 
     @Override
