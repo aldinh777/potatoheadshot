@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.recipes.category;
 
 import aldinh777.potatoheadshot.recipes.recipe.PotatoDrierRecipe;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -10,42 +11,42 @@ import java.util.Map;
 public class PotatoDrierRecipes {
 
     public static final PotatoDrierRecipes INSTANCE = new PotatoDrierRecipes();
-    private final Map<Item, ItemStack> dryList = new HashMap<>();
-    private final Map<Item, ItemStack> wetList = new HashMap<>();
+    private final Map<Item, PotatoDrierRecipe> dryList = new HashMap<>();
+    private final Map<Item, PotatoDrierRecipe> wetList = new HashMap<>();
 
     private PotatoDrierRecipes() {
         for (PotatoDrierRecipe dryRecipe : PotatoDrierRecipe.getDryRecipes()) {
-            addDryRecipe(dryRecipe.getInput(), dryRecipe.getOutput());
+            addDryRecipe(dryRecipe.getInput(), dryRecipe);
         }
 
         for (PotatoDrierRecipe wetRecipe : PotatoDrierRecipe.getWetRecipes()) {
-            addWetRecipe(wetRecipe.getInput(), wetRecipe.getOutput());
+            addWetRecipe(wetRecipe.getInput(), wetRecipe);
         }
     }
 
-    public void addDryRecipe(Item input, ItemStack result) {
+    public void addDryRecipe(Item input, PotatoDrierRecipe result) {
         this.dryList.put(input, result);
     }
 
-    public void addWetRecipe(Item input, ItemStack result) {
+    public void addWetRecipe(Item input, PotatoDrierRecipe result) {
         this.wetList.put(input, result);
     }
 
-    public ItemStack getDryResult(Item input) {
-        ItemStack result = dryList.get(input);
-        return result == null ? ItemStack.EMPTY : result;
+    public PotatoDrierRecipe getDryResult(Item input) {
+        PotatoDrierRecipe result = dryList.get(input);
+        return result == null ? new PotatoDrierRecipe(Items.AIR, ItemStack.EMPTY, 0) : result;
     }
 
-    public ItemStack getWetResult(Item input) {
-        ItemStack result = wetList.get(input);
-        return result == null ? ItemStack.EMPTY : result;
+    public PotatoDrierRecipe getWetResult(Item input) {
+        PotatoDrierRecipe result = wetList.get(input);
+        return result == null ? new PotatoDrierRecipe(Items.AIR, ItemStack.EMPTY, 0) : result;
     }
 
     public boolean isDryRecipeExists(Item input) {
-        return !this.getDryResult(input).isEmpty();
+        return !this.getDryResult(input).getOutput().isEmpty();
     }
 
     public boolean isWetRecipeExists(Item input) {
-        return !this.getWetResult(input).isEmpty();
+        return !this.getWetResult(input).getOutput().isEmpty();
     }
 }

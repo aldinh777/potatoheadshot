@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.block.blocks.machines.PotatoDrier;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.recipes.category.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.recipe.PotatoDrierRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -230,7 +231,8 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             return false;
 
         } else {
-            ItemStack result = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+            ItemStack result = recipeResult.getOutput();
 
             if (result.isEmpty()) {
                 return false;
@@ -260,7 +262,8 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             return false;
         }
 
-        ItemStack result = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+        ItemStack result = recipeResult.getOutput();
 
         if (result.isEmpty()) {
             return false;
@@ -284,7 +287,8 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         if (this.canDry()) {
             ItemStack dryInput = this.inputHandler.getStackInSlot(0);
             ItemStack dryOutput = this.outputHandler.getStackInSlot(0);
-            ItemStack result = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+            ItemStack result = recipeResult.getOutput();
 
             if (dryOutput.isEmpty()) {
                 this.outputHandler.setStackInSlot(0, result.copy());
@@ -293,7 +297,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
                 dryOutput.grow(result.getCount());
             }
 
-            this.waterSize += getWaterValue(dryInput);
+            this.waterSize += recipeResult.getWaterValue();
             if (this.waterSize > this.getMaxWaterSize()) {
                 this.waterSize = this.getMaxWaterSize();
             }
@@ -312,7 +316,8 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         if (this.canWet()) {
             ItemStack wetInput = this.inputHandler.getStackInSlot(1);
             ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
-            ItemStack result = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+            ItemStack result = recipeResult.getOutput();
 
             if (wetOutput.isEmpty()) {
                 this.outputHandler.setStackInSlot(1, result.copy());
@@ -415,20 +420,6 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
 
     public static boolean isWatering(TileEntityPotatoDrier te) {
         return te.getField("wateringTime") > 0;
-    }
-
-    public static int getWaterValue(ItemStack stack) {
-        if (!stack.isEmpty()) {
-            Item item = stack.getItem();
-
-            if (item == Items.POTATO || item == PotatoItems.SWEET_POTATO) return 100;
-            if (item == PotatoItems.WET_POTATO) return 200;
-            if (item == PotatoItems.SUPER_WET_POTATO) return 400;
-            if (item == Item.getItemFromBlock(Blocks.SPONGE)) return 800;
-            if (item == Items.WATER_BUCKET || item == PotatoItems.WATER_POTATO) return 800;
-            if (item == PotatoItems.SWEET_WATER_BUCKET) return 800;
-        }
-        return 0;
     }
 
     public static int getItemBurnTime(ItemStack fuel) {
