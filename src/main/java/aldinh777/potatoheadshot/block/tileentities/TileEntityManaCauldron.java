@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
-import aldinh777.potatoheadshot.handler.ConfigHandler;
-import aldinh777.potatoheadshot.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.category.IManaRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -12,10 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -126,8 +129,41 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                         }
                     }
 
-                    EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
-                    this.world.spawnEntity(entityResult);
+                    boolean success = false;
+
+                    for (EnumFacing facing : EnumFacing.VALUES) {
+                        if (facing == EnumFacing.UP) {
+                            continue;
+                        }
+
+                        if (success) {
+                            break;
+                        }
+
+                        TileEntity te = this.world.getTileEntity(this.pos.offset(facing));
+                        if (te != null) {
+                            if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)) {
+                                IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+                                if (itemHandler != null) {
+                                    int maxSlot = itemHandler.getSlots();
+                                    for (int i = 0; i < maxSlot; i++) {
+                                        ItemStack insert = itemHandler.insertItem(i, result, true);
+                                        if (insert.isEmpty()) {
+                                            itemHandler.insertItem(i, result, false);
+                                            success = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (!success) {
+                        EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
+                        this.world.spawnEntity(entityResult);
+                    }
+
                     this.storage.useMana(cost);
                     stack.shrink(1);
                 }
