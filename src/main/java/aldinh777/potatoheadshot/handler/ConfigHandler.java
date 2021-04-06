@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.handler;
 
+import aldinh777.potatoheadshot.PotatoHeadshot;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 
@@ -28,6 +28,7 @@ public class ConfigHandler {
     public static boolean POTATO_CHIP;
     public static boolean SWEET_BUCKET;
     public static boolean SPLASH_MANA;
+    public static boolean POTATO_STICK_DEBUG;
 
     // Machines
     public static boolean POTATO_DRIER;
@@ -72,9 +73,10 @@ public class ConfigHandler {
     public static boolean BOTANIA_COMPAT;
 
 
-    public static void init(FMLPreInitializationEvent event) {
-        File configDirectory = new File(event.getModConfigurationDirectory() + "/potatoHeadshot");
+    public static void init() {
+        File configDirectory = PotatoHeadshot.CONFIG_DIR;
         boolean configJustCreated = configDirectory.mkdirs();
+
         File configFile = new File(configDirectory.getPath(), "config.cfg");
         config = new Configuration(configFile);
 
@@ -108,6 +110,7 @@ public class ConfigHandler {
         POTATO_CHIP = config.getBoolean("POTATO_CHIP", category, true, "");
         SWEET_BUCKET = config.getBoolean("SWEET_BUCKET", category, true, "");
         SPLASH_MANA = config.getBoolean("SPLASH_MANA", category, true, "");
+        POTATO_STICK_DEBUG = config.getBoolean("POTATO_STICK_DEBUG", category, true, "");
 
 
         category = "Machines";
@@ -130,6 +133,7 @@ public class ConfigHandler {
         MANA_EXTRACTOR = config.getBoolean("MANA_EXTRACTOR", category, true, "");
         MANA_CAULDRON = config.getBoolean("MANA_CAULDRON", category, true, "");
         MANA_TORCH = config.getBoolean("MANA_TORCH", category, true, "");
+        ENERGY_TRANSFER = config.getBoolean("ENERGY_TRANSFER", category, true, "");
 
         MANA_COLLECTOR_RATE = config.getInt("MANA_COLLECTOR_RATE", category, 2, 0, Integer.MAX_VALUE, "");
         MANA_FLOWER_RATE = config.getInt("MANA_FLOWER_RATE", category, 8, 0, Integer.MAX_VALUE, "");

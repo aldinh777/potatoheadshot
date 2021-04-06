@@ -1,5 +1,6 @@
 {
   "variants": {
-    "normal": { "model": "potatoheadshot:energy_transfer" }
+	"mode=extract": { "model": "potatoheadshot:energy_transfer_extract" },
+    "mode=absorb": { "model": "potatoheadshot:energy_transfer_absorb" }
   }
 }

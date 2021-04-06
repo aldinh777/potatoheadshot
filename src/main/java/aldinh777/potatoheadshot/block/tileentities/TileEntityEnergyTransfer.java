@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import aldinh777.potatoheadshot.block.blocks.EnergyTransfer;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class TileEntityEnergyTransfer extends TileEntity implements ITickable, IManaStorage {
 
+    protected EnergyTransfer.Mode mode = EnergyTransfer.Mode.EXTRACT;
     protected PotatoManaStorage manaStorage = new PotatoManaStorage(8000);
     protected PotatoEnergyStorage energyStorage = new PotatoEnergyStorage(80_000, 1000, 1000);
 
@@ -72,6 +74,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         super.readFromNBT(compound);
         manaStorage.readFromNBT(compound);
         energyStorage.readFromNBT(compound);
+        this.mode = EnergyTransfer.Mode.withValue(compound.getInteger("mode"));
     }
 
     @Nonnull
@@ -80,6 +83,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
         super.writeToNBT(compound);
         manaStorage.writeToNBT(compound);
         energyStorage.writeToNBT(compound);
+        compound.setInteger("mode", this.mode.getValue());
         return compound;
     }
 
@@ -89,6 +93,22 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
     }
 
     // Custom Method
+
+    public void switchMode() {
+        EnergyTransfer.Mode newMode;
+
+        if (this.mode == EnergyTransfer.Mode.EXTRACT) {
+            newMode = EnergyTransfer.Mode.ABSORB;
+        } else {
+            newMode = EnergyTransfer.Mode.EXTRACT;
+        }
+
+        this.mode = newMode;
+        IBlockState newState = this.world.getBlockState(this.pos)
+                .withProperty(EnergyTransfer.MODE, newMode);
+
+        this.world.setBlockState(this.pos, newState);
+    }
 
     public void spreadRF() {
         for (EnumFacing facing : EnumFacing.VALUES) {
@@ -129,7 +149,11 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
 
             if (BotaniaCompat.isBotaniaAvailable()) {
                 if (BotaniaCompat.isInstanceOfManaPool(tileEntity)) {
-                    BotaniaCompat.spreadMana(tileEntity, this.manaStorage, 100);
+                    if (this.mode == EnergyTransfer.Mode.EXTRACT) {
+                        BotaniaCompat.spreadMana(tileEntity, this.manaStorage, 100);
+                    } else {
+                        BotaniaCompat.absorbMana(tileEntity, this.manaStorage, 100);
+                    }
                 }
             }
 
@@ -137,7 +161,11 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
                 IManaStorage storage = (IManaStorage) tileEntity;
                 PotatoManaStorage targetStorage = storage.getManaStorage();
                 if (storage instanceof TileEntityManaCauldron) {
-                    spreadMana(targetStorage);
+                    if (this.mode == EnergyTransfer.Mode.EXTRACT) {
+                        spreadMana(targetStorage);
+                    } else {
+                        absorbMana(targetStorage);
+                    }
 
                 } else if (storage instanceof TileEntityEnergyTransfer) {
                     PotatoEnergyStorage targetEnergyTransfer = ((TileEntityEnergyTransfer) storage).energyStorage;

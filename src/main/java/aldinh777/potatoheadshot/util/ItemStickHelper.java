@@ -3,6 +3,7 @@ package aldinh777.potatoheadshot.util;
 import aldinh777.potatoheadshot.block.tileentities.IManaStorage;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,14 +23,15 @@ import net.minecraftforge.event.ForgeEventFactory;
 public interface ItemStickHelper {
 
     static void debugBlock(RayTraceResult raytraceresult, World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (!ConfigHandler.POTATO_STICK_DEBUG) {
+            return;
+        }
+
         ItemStack itemstack = playerIn.getHeldItem(handIn);
 
         if (itemstack.getItem() != PotatoItems.POTATO_STICK && itemstack.getItem() != PotatoItems.FRIED_FRIES) {
             return;
         }
-
-        ActionResult<ItemStack> ret = ForgeEventFactory.onBucketUse(playerIn, worldIn, itemstack, raytraceresult);
-        if (ret != null) return;
 
         if (raytraceresult != null) {
             if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {

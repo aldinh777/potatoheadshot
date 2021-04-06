@@ -68,7 +68,7 @@ public class PotatoItem extends Item {
                 }
                 break;
             case "ice_potato":
-                if (ConfigHandler.FROZEN_POTATO) {
+                if (ConfigHandler.ICE_POTATO_SEED) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;

@@ -53,18 +53,25 @@ public class PotatoFood extends ItemFood {
             case "hot_potato":
             case "extra_hot_potato":
             case "extreme_hot_potato":
-            case "lava_potato":
                 if (ConfigHandler.HOT_POTATO) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
+            case "lava_potato":
+                if (ConfigHandler.LAVA_POTATO_SEED) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
             case "wet_potato":
             case "super_wet_potato":
-            case "water_potato":
                 if (ConfigHandler.WET_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
+            case "water_potato":
+                if (ConfigHandler.WATER_POTATO_SEED) {
+                    PotatoItems.LISTS.add(this);
+                }
             case "frozen_potato":
                 if (ConfigHandler.FROZEN_POTATO) {
                     PotatoItems.LISTS.add(this);

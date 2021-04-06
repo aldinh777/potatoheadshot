@@ -25,8 +25,8 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = PotatoHeadshot.MODID)
 public class RegistryHandler {
 
-    public static void preInit(FMLPreInitializationEvent event) {
-        ConfigHandler.init(event);
+    public static void preInit() {
+        ConfigHandler.init();
 
         PotatoItems.init();
         PotatoBlocks.init();

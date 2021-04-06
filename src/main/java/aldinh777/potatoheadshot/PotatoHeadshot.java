@@ -7,22 +7,26 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+
 @Mod(modid = PotatoHeadshot.MODID, name = PotatoHeadshot.NAME, version = PotatoHeadshot.VERSION)
 public class PotatoHeadshot {
     public static final String MODID = "potatoheadshot";
     public static final String NAME = "Potato Headshot";
     public static final String VERSION = "1.6.0";
 
-    public static Logger logger;
+    public static File CONFIG_DIR;
+    public static Logger LOGGER;
 
     @Mod.Instance
     public static PotatoHeadshot INSTANCE;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
+        LOGGER = event.getModLog();
+        CONFIG_DIR = new File(event.getModConfigurationDirectory() + "/" + PotatoHeadshot.MODID);
 
-        RegistryHandler.preInit(event);
+        RegistryHandler.preInit();
     }
 
     @EventHandler
