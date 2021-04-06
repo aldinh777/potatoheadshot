@@ -42,11 +42,14 @@ public interface ItemStickHelper {
 
                 TileEntity tile = worldIn.getTileEntity(pos);
                 if (tile != null) {
-                    if (tile.hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
-                        IEnergyStorage energy = tile.getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
-                        if (energy != null) {
-                            int stored = energy.getEnergyStored();
-                            playerIn.sendMessage(new TextComponentString("Energy : " + stored));
+                    for (EnumFacing facing : EnumFacing.VALUES) {
+                        if (tile.hasCapability(CapabilityEnergy.ENERGY, facing)) {
+                            IEnergyStorage energy = tile.getCapability(CapabilityEnergy.ENERGY, facing);
+                            if (energy != null) {
+                                int stored = energy.getEnergyStored();
+                                playerIn.sendMessage(new TextComponentString("Energy : " + stored));
+                            }
+                            break;
                         }
                     }
 

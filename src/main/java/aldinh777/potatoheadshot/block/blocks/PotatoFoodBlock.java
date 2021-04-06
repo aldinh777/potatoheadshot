@@ -29,15 +29,13 @@ public class PotatoFoodBlock extends PotatoBlock {
                 }
                 break;
             case "baked_potato_planks":
+                if (ConfigHandler.POTATO_PLANKS && ConfigHandler.COOKED_POTATO_VARIANT) {
+                    PotatoBlocks.LISTS.add(this);
+                }
+                break;
             case "baked_potato_block":
                 if (ConfigHandler.COOKED_POTATO_VARIANT) {
-                    if (name.equals("baked_potato_planks")) {
-                        if (ConfigHandler.POTATO_PLANKS) {
-                            PotatoBlocks.LISTS.add(this);
-                        }
-                    } else {
-                        PotatoBlocks.LISTS.add(this);
-                    }
+                    PotatoBlocks.LISTS.add(this);
                 }
                 break;
             default:

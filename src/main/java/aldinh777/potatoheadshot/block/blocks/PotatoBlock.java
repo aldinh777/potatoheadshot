@@ -30,6 +30,11 @@ public class PotatoBlock extends Block {
                     init(name);
                 }
                 break;
+            case "magic_drier":
+                if (ConfigHandler.POTATO_DRIER && ConfigHandler.MAGIC_DRIER) {
+                    init(name);
+                }
+                break;
             case "sweet_potato_generator":
                 if (ConfigHandler.SWEET_POTATO_GENERATOR) {
                     init(name);
@@ -72,15 +77,13 @@ public class PotatoBlock extends Block {
                 }
                 break;
             case "mana_cauldron":
-            case "ultimate_mana_cauldron":
                 if (ConfigHandler.MANA_CAULDRON) {
-                    if (name.equals("ultimate_mana_cauldron")) {
-                        if (ConfigHandler.ULTIMATE_CRYSTALS && ConfigHandler.ULTIMATE_CAULDRON) {
-                            init(name);
-                        }
-                    } else {
-                        init(name);
-                    }
+                    init(name);
+                }
+                break;
+            case "ultimate_mana_cauldron":
+                if (ConfigHandler.MANA_CAULDRON && ConfigHandler.ULTIMATE_CRYSTALS && ConfigHandler.ULTIMATE_CAULDRON) {
+                    init(name);
                 }
                 break;
             default:

@@ -46,6 +46,7 @@ public class ConfigHandler {
     public static boolean MANA_CAULDRON;
     public static boolean MANA_TORCH;
     public static boolean ENERGY_TRANSFER;
+    public static boolean MAGIC_DRIER;
 
     public static int MANA_COLLECTOR_RATE;
     public static int MANA_FLOWER_RATE;
@@ -134,6 +135,7 @@ public class ConfigHandler {
         MANA_CAULDRON = config.getBoolean("MANA_CAULDRON", category, true, "");
         MANA_TORCH = config.getBoolean("MANA_TORCH", category, true, "");
         ENERGY_TRANSFER = config.getBoolean("ENERGY_TRANSFER", category, true, "");
+        MAGIC_DRIER = config.getBoolean("MAGIC_DRIER", category, true, "");
 
         MANA_COLLECTOR_RATE = config.getInt("MANA_COLLECTOR_RATE", category, 2, 0, Integer.MAX_VALUE, "");
         MANA_FLOWER_RATE = config.getInt("MANA_FLOWER_RATE", category, 8, 0, Integer.MAX_VALUE, "");

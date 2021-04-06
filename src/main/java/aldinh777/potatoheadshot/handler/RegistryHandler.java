@@ -49,23 +49,18 @@ public class RegistryHandler {
             GameRegistry.addSmelting(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), 0.075f);
             GameRegistry.addSmelting(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
         }
-
         if (ConfigHandler.SWEET_BUCKET) {
             GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
         }
-
         if (ConfigHandler.POTATO_CHIP) {
             GameRegistry.addSmelting(PotatoItems.POTATO_CHIP, new ItemStack(PotatoItems.BAKED_POTATO_CHIP), 0.15f);
         }
-
         if (ConfigHandler.RED_POTATO) {
             GameRegistry.addSmelting(PotatoItems.RED_POTATO, new ItemStack(Items.REDSTONE), 0.35f);
         }
-
         if (ConfigHandler.COOKED_DIRT) {
             GameRegistry.addSmelting(Blocks.DIRT, new ItemStack(PotatoItems.COOKED_DIRT), 0.15f);
         }
-
         if (ConfigHandler.COOKED_POTATO_VARIANT) {
             if (ConfigHandler.POTATO_PLANKS) {
                 GameRegistry.addSmelting(PotatoItems.POTATO_STICK, new ItemStack(PotatoItems.FRIED_FRIES), 0.01f);
@@ -89,9 +84,11 @@ public class RegistryHandler {
         ResourceLocation energyTransfer = new ResourceLocation("potatoheadshot:energyTransfer");
         ResourceLocation ultManaCauldron = new ResourceLocation("potatoheadshot:ultimate_mana_cauldron");
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
+        ResourceLocation magicDrier = new ResourceLocation("potatoheadshot:magic_drier");
 
         if (ConfigHandler.POTATO_DRIER) {
             GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
+            GameRegistry.registerTileEntity(TileEntityMagicDrier.class, magicDrier);
         }
         if (ConfigHandler.SWEET_POTATO_GENERATOR) {
             GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);

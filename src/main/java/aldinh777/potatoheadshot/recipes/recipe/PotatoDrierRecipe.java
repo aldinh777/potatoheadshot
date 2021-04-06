@@ -39,7 +39,9 @@ public class PotatoDrierRecipe {
         addRecipe(recipes, PotatoItems.GLOWING_POTATO, new ItemStack(PotatoItems.GLOWING_POTATO_DUST));
         if (ConfigHandler.WET_POTATO) {
             addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL));
-            addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
+            if (ConfigHandler.SALT_POTATO) {
+                addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO));
+            }
             addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT));
         }
         addRecipe(recipes, Items.WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT));

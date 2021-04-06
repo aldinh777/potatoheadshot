@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
 import aldinh777.potatoheadshot.block.blocks.machines.PotatoDrier;
+import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.recipes.category.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -66,6 +67,8 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             ItemStack dryInput = this.inputHandler.getStackInSlot(0);
             ItemStack wetInput = this.inputHandler.getStackInSlot(1);
 
+            this.checkBurn();
+
             if (tryDrying(fuel, dryInput)) {
                 flagBurning = true;
             }
@@ -76,7 +79,6 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
 
             if (flagBurning != this.isBurning()) {
                 dryingFlag = true;
-                setState(this.isBurning(), this.world, this.pos);
             }
         }
 
@@ -220,7 +222,6 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
     }
 
     private boolean canDry() {
-
         ItemStack fuel = this.fuelHandler.getStackInSlot(0);
         ItemStack dryInput = this.inputHandler.getStackInSlot(0);
         ItemStack dryOutput = this.outputHandler.getStackInSlot(0);
@@ -252,33 +253,30 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
     }
 
     private boolean canWet() {
-
         ItemStack wetInput = this.inputHandler.getStackInSlot(1);
         ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
 
-        if (this.waterSize < 1000 && wetInput.isEmpty()) {
+        if (this.waterSize < 1000 || wetInput.isEmpty()) {
+            return false;
+        }
+
+        ItemStack result = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+
+        if (result.isEmpty()) {
             return false;
 
+        }
+
+        if (wetOutput.isEmpty()) {
+            return true;
+
+        }
+
+        if (wetOutput.isItemEqual(result)) {
+            int res = wetOutput.getCount() + result.getCount();
+            return res <= wetOutput.getMaxStackSize();
         } else {
-            ItemStack result = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
-
-            if (result.isEmpty()) {
-                return false;
-
-            } else {
-                if (wetOutput.isEmpty()) {
-                    return true;
-
-                } else {
-                    if (wetOutput.isItemEqual(result)) {
-                        int res = wetOutput.getCount() + result.getCount();
-                        return res <= wetOutput.getMaxStackSize();
-
-                    } else {
-                        return false;
-                    }
-                }
-            }
+            return false;
         }
     }
 
@@ -419,7 +417,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         return te.getField("wateringTime") > 0;
     }
 
-    private static int getWaterValue(ItemStack stack) {
+    public static int getWaterValue(ItemStack stack) {
         if (!stack.isEmpty()) {
             Item item = stack.getItem();
 
@@ -433,7 +431,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         return 0;
     }
 
-    private static int getItemBurnTime(ItemStack fuel) {
+    public static int getItemBurnTime(ItemStack fuel) {
         if (fuel.isEmpty()) {
             return 0;
         } else {
@@ -460,15 +458,27 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         }
     }
 
-    private void setState(boolean active, World worldIn, BlockPos pos) {
-        PotatoDrier.keepInventory = true;
+    private void checkBurn() {
+        IBlockState state = this.world.getBlockState(this.pos);
 
+        if (state.getBlock() != PotatoBlocks.POTATO_DRIER) {
+            return;
+        }
+
+        boolean active = state.getValue(PotatoDrier.ACTIVE);
+
+        if (active && !this.isBurning()) {
+            setState(false, this.world, this.pos);
+        } else if (!active && isBurning()) {
+            setState(true, this.world, this.pos);
+        }
+    }
+
+    private void setState(boolean active, World worldIn, BlockPos pos) {
         IBlockState newState = this.world.getBlockState(this.pos)
                 .withProperty(PotatoDrier.ACTIVE, active);
 
         worldIn.setBlockState(pos, newState, 3);
-
-        PotatoDrier.keepInventory = false;
     }
 
     public static boolean isItemFuel(ItemStack fuel) {

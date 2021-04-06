@@ -187,6 +187,8 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
                     } else if (sourceEnergy < targetEnergy - 1000) {
                         absorbEnergy(targetEnergyTransfer);
                     }
+                } else {
+                    spreadMana(targetStorage);
                 }
             }
         }

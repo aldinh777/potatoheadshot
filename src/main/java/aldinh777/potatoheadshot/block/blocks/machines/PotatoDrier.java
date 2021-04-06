@@ -27,9 +27,13 @@ public class PotatoDrier extends PotatoMachine {
     public static PropertyBool ACTIVE = PropertyBool.create("active");
     public static boolean keepInventory;
 
-    public PotatoDrier(String name, BlockType blockType) {
-        super(name, blockType, Constants.DRIER);
+    public PotatoDrier(String name, BlockType blockType, int modGui) {
+        super(name, blockType, modGui);
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(ACTIVE, false));
+    }
+
+    public PotatoDrier(String name, BlockType blockType) {
+        this(name, blockType, Constants.DRIER);
     }
 
     @Override

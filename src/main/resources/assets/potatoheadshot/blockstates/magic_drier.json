@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "active=false,facing=north": { "model": "potatoheadshot:magic_drier" },
+    "active=false,facing=south": { "model": "potatoheadshot:magic_drier", "y": 180 },
+    "active=false,facing=west":  { "model": "potatoheadshot:magic_drier", "y": 270 },
+    "active=false,facing=east":  { "model": "potatoheadshot:magic_drier", "y": 90 },
+    "active=true,facing=north": { "model": "potatoheadshot:magic_drier_lit" },
+    "active=true,facing=south": { "model": "potatoheadshot:magic_drier_lit", "y": 180 },
+    "active=true,facing=west":  { "model": "potatoheadshot:magic_drier_lit", "y": 270 },
+    "active=true,facing=east":  { "model": "potatoheadshot:magic_drier_lit", "y": 90 }
+  }
+}

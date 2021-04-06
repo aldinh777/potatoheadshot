@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.containers.ContainerPotatoDrier;
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
+import aldinh777.potatoheadshot.block.containers.ContainerMagicDrier;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityMagicDrier;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,14 +10,14 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Objects;
 
-public class GuiPotatoDrier extends GuiContainer {
+public class GuiMagicDrier extends GuiContainer {
 
-    private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/container/potato_drier.png";
+    private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/container/magic_drier.png";
     private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
-    private final TileEntityPotatoDrier tileEntity;
+    private final TileEntityMagicDrier tileEntity;
 
-    public GuiPotatoDrier(InventoryPlayer player, TileEntityPotatoDrier tileEntity) {
-        super(new ContainerPotatoDrier(player, tileEntity));
+    public GuiMagicDrier(InventoryPlayer player, TileEntityMagicDrier tileEntity) {
+        super(new ContainerMagicDrier(player, tileEntity));
         this.tileEntity = tileEntity;
     }
 
@@ -40,15 +40,25 @@ public class GuiPotatoDrier extends GuiContainer {
         this.mc.getTextureManager().bindTexture(TEXTURES);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
-        if (TileEntityPotatoDrier.isBurning(tileEntity)) {
-            drawBurnLeft();
-        }
-        if (TileEntityPotatoDrier.isWatering(tileEntity)) {
-            drawWateringLeft();
-        }
+        drawBurnLeft();
+        drawWateringLeft();
+
+        drawManaVolume();
         drawWaterVolume();
         drawDryProgress();
         drawWetProgress();
+    }
+
+    private void drawManaVolume() {
+        int manaSize = this.tileEntity.getField("mana");
+        int maxManaSize = this.tileEntity.getMaxManaStored();
+        int i = manaSize == 0 ? 0 : manaSize * 69 / maxManaSize;
+
+        this.drawTexturedModalRect(
+                this.guiLeft + 13, this.guiTop + 8 + 68 - i,
+                176, 102 + 68 - i,
+                18, i + 1
+        );
     }
 
     private void drawWaterVolume() {
@@ -64,26 +74,26 @@ public class GuiPotatoDrier extends GuiContainer {
     }
 
     private void drawBurnLeft() {
-        int currentBurnTime = this.tileEntity.getField("currentBurnTime");
-        int burnTime = this.tileEntity.getField("burnTime");
-        int i = currentBurnTime == 0 ? 0 : burnTime * 13 / currentBurnTime;
+        int totalDryTime = this.tileEntity.getField("totalDryTime");
+        int dryTime = this.tileEntity.getField("dryTime");
+        int i = dryTime == 0 ? 12 : dryTime * 13 / totalDryTime;
 
         this.drawTexturedModalRect(
-                this.guiLeft + 68, this.guiTop + 27 + 12 - i,
-                176, 12 - i,
-                14, i + 1
+                this.guiLeft + 68, this.guiTop + 27 + i,
+                176, i,
+                14, 12 - i
         );
     }
 
     private void drawWateringLeft() {
-        int currentWateringTime = this.tileEntity.getField("currentWateringTime");
-        int wateringTime = this.tileEntity.getField("wateringTime");
-        int i = currentWateringTime == 0 ? 0 : wateringTime * 13 / currentWateringTime;
+        int totalWetTime = this.tileEntity.getField("totalWetTime");
+        int wetTime = this.tileEntity.getField("wetTime");
+        int i = wetTime == 0 ? 12 : wetTime * 13 / totalWetTime;
 
         this.drawTexturedModalRect(
-                this.guiLeft + 67, this.guiTop + 60 + 12 - i,
-                176, 33 + 12 - i,
-                15, i + 1
+                this.guiLeft + 67, this.guiTop + 60 + i,
+                176, 33 + i,
+                15, 12 - i
         );
     }
 
