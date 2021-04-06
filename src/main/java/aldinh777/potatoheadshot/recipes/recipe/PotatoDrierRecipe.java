@@ -2,6 +2,8 @@ package aldinh777.potatoheadshot.recipes.recipe;
 
 import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
+import aldinh777.potatoheadshot.recipes.custom.CustomDryRecipe;
+import aldinh777.potatoheadshot.recipes.custom.CustomWetRecipe;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -9,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PotatoDrierRecipe {
 
@@ -34,7 +37,30 @@ public class PotatoDrierRecipe {
         return this.water;
     }
 
-    public static List<PotatoDrierRecipe> getDryRecipes() {
+    public CustomDryRecipe toCustomDryRecipe() {
+        String inputId = Objects.requireNonNull(this.input.getRegistryName()).toString();
+        String outputId = Objects.requireNonNull(this.output.getItem().getRegistryName()).toString();
+        int meta = this.output.getMetadata();
+        int water = this.water;
+
+        CustomDryRecipe.InputRecipe input = new CustomDryRecipe.InputRecipe(inputId, 0);
+        CustomDryRecipe.OutputRecipe output = new CustomDryRecipe.OutputRecipe(outputId, meta, water);
+
+        return new CustomDryRecipe(input, output);
+    }
+
+    public CustomWetRecipe toCustomWetRecipe() {
+        String inputId = Objects.requireNonNull(this.input.getRegistryName()).toString();
+        String outputId = Objects.requireNonNull(this.output.getItem().getRegistryName()).toString();
+        int meta = this.output.getMetadata();
+
+        CustomWetRecipe.ItemRecipe input = new CustomWetRecipe.ItemRecipe(inputId, 0);
+        CustomWetRecipe.ItemRecipe output = new CustomWetRecipe.ItemRecipe(outputId, meta);
+
+        return new CustomWetRecipe(input, output);
+    }
+
+    public static List<PotatoDrierRecipe> getDefaultDryRecipes() {
         List<PotatoDrierRecipe> recipes = Lists.newArrayList();
         Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
 
@@ -59,7 +85,7 @@ public class PotatoDrierRecipe {
         return recipes;
     }
 
-    public static List<PotatoDrierRecipe> getWetRecipes() {
+    public static List<PotatoDrierRecipe> getDefaultWetRecipes() {
         List<PotatoDrierRecipe> recipes = Lists.newArrayList();
         Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
 

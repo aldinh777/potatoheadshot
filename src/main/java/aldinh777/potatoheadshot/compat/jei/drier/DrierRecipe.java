@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.compat.jei.drier;
 
+import aldinh777.potatoheadshot.handler.CustomRecipeHandler;
 import aldinh777.potatoheadshot.recipes.recipe.PotatoDrierRecipe;
 import com.google.common.collect.Lists;
 import java.util.List;
@@ -22,11 +23,11 @@ public class DrierRecipe implements IRecipeWrapper {
 	public static List<DrierRecipe> getRecipes() {
 		List<DrierRecipe> jeiRecipes = Lists.newArrayList();
 
-		for (PotatoDrierRecipe dryRecipe : PotatoDrierRecipe.getDryRecipes()) {
+		for (PotatoDrierRecipe dryRecipe : CustomRecipeHandler.DRY_RECIPES) {
 			addDryRecipe(jeiRecipes, dryRecipe.getInput(), dryRecipe.getOutput());
 		}
 
-		for (PotatoDrierRecipe wetRecipe : PotatoDrierRecipe.getWetRecipes()) {
+		for (PotatoDrierRecipe wetRecipe : CustomRecipeHandler.WET_RECIPES) {
 			addWetRecipe(jeiRecipes, wetRecipe.getInput(), wetRecipe.getOutput());
 		}
 

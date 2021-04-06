@@ -14,16 +14,6 @@ public class PotatoDrierRecipes {
     private final Map<Item, PotatoDrierRecipe> dryList = new HashMap<>();
     private final Map<Item, PotatoDrierRecipe> wetList = new HashMap<>();
 
-    private PotatoDrierRecipes() {
-        for (PotatoDrierRecipe dryRecipe : PotatoDrierRecipe.getDryRecipes()) {
-            addDryRecipe(dryRecipe.getInput(), dryRecipe);
-        }
-
-        for (PotatoDrierRecipe wetRecipe : PotatoDrierRecipe.getWetRecipes()) {
-            addWetRecipe(wetRecipe.getInput(), wetRecipe);
-        }
-    }
-
     public void addDryRecipe(Item input, PotatoDrierRecipe result) {
         this.dryList.put(input, result);
     }

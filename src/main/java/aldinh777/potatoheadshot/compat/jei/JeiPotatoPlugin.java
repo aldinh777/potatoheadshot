@@ -87,6 +87,9 @@ public class JeiPotatoPlugin implements IModPlugin {
 			registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 28, 20, 22, DRIER.toString());
 			registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 60, 20, 22, DRIER.toString());
 			recipeTransfer.addRecipeTransferHandler(ContainerPotatoDrier.class, DRIER.toString(), 1, 4, 5, 36);
+			registry.addRecipeClickArea(GuiMagicDrier.class, 109, 28, 20, 22, DRIER.toString());
+			registry.addRecipeClickArea(GuiMagicDrier.class, 109, 60, 20, 22, DRIER.toString());
+			recipeTransfer.addRecipeTransferHandler(ContainerMagicDrier.class, DRIER.toString(), 0, 4, 4, 36);
 		}
 		if (ConfigHandler.SWEET_INFUSER) {
 			registry.addRecipes(InfuserRecipe.getRecipes(), INFUSER.toString());

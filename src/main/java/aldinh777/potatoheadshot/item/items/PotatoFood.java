@@ -72,6 +72,7 @@ public class PotatoFood extends ItemFood {
                 if (ConfigHandler.WATER_POTATO_SEED) {
                     PotatoItems.LISTS.add(this);
                 }
+                break;
             case "frozen_potato":
                 if (ConfigHandler.FROZEN_POTATO) {
                     PotatoItems.LISTS.add(this);
