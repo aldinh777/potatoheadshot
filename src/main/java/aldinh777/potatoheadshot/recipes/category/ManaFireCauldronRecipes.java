@@ -14,7 +14,7 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
     @Override
     public ItemStack getResult(ItemStack input) {
         if (input.getItem() == Items.IRON_HOE) {
-            if (ConfigHandler.LAVA_POTATO_SEED) {
+            if (ConfigHandler.LAVA_POTATO) {
                 return new ItemStack(PotatoItems.LAVA_HOE);
             }
         }
@@ -33,7 +33,7 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
 
     @Override
     public int getCost(ItemStack input) {
-        if (ConfigHandler.LAVA_POTATO_SEED) {
+        if (ConfigHandler.LAVA_POTATO) {
             if (input.getItem() == Items.IRON_HOE) return 32000;
         }
         if (ConfigHandler.SPLASH_MANA) {

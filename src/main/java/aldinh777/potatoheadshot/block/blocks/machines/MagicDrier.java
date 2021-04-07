@@ -24,6 +24,7 @@ public class MagicDrier extends PotatoDrier {
 
     public MagicDrier(String name, BlockType blockType) {
         super(name, blockType, Constants.MAGIC_DRIER);
+        this.setResistance(6000);
     }
 
     @Nullable

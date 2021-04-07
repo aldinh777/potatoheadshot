@@ -25,7 +25,7 @@ public class FarmlandLava extends BlockFarmland {
         this.setUnlocalizedName(name);
         this.setHardness(0.5f);
         this.setLightLevel(0.50f);
-        if (ConfigHandler.LAVA_POTATO_SEED) {
+        if (ConfigHandler.LAVA_POTATO) {
             PotatoBlocks.LISTS.add(this);
             PotatoItems.LISTS.add(new PotatoItemBlock(this));
         }

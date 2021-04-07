@@ -17,7 +17,7 @@ public class CauldronRecipe {
     private final int cost;
 
     private static final int SHARD_COST = ConfigHandler.CONCENTRATED_SHARD_MANA_REQUIRED;
-    private static final int ULTIMATE_COST = ConfigHandler.CONCENTRATED_CRYSTAL_MANA_REQUIRED;
+    private static final int ULTIMATE_COST = ConfigHandler.ULT_CONCENTRATED_CRYSTAL_MANA_REQUIRED;
 
     public CauldronRecipe(Item input, ItemStack output, int cost) {
         this.input = input;
@@ -42,10 +42,8 @@ public class CauldronRecipe {
 
         addRecipe(recipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST), 100);
         addRecipe(recipes, PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 200);
-        if (ConfigHandler.ULTIMATE_CRYSTALS) {
-            addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), SHARD_COST);
-            addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), ULTIMATE_COST);
-        }
+        addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), SHARD_COST);
+        addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), ULTIMATE_COST);
         return recipes;
     }
 
@@ -62,13 +60,13 @@ public class CauldronRecipe {
         Item endStone = Item.getItemFromBlock(Blocks.END_STONE);
         Item ice = Item.getItemFromBlock(Blocks.ICE);
 
-        if (ConfigHandler.LAVA_POTATO_SEED) {
+        if (ConfigHandler.LAVA_POTATO) {
             addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 12_000);
         }
-        if (ConfigHandler.WATER_POTATO_SEED) {
+        if (ConfigHandler.WATER_POTATO) {
             addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12_000);
         }
-        if (ConfigHandler.ICE_POTATO_SEED) {
+        if (ConfigHandler.ICE_POTATO) {
             addRecipe(recipes, PotatoItems.ICE_POTATO, new ItemStack(PotatoItems.ICE_POTATO_SEED), 12_000);
         }
 

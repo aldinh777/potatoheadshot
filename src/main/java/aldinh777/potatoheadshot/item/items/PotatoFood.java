@@ -58,7 +58,7 @@ public class PotatoFood extends ItemFood {
                 }
                 break;
             case "lava_potato":
-                if (ConfigHandler.LAVA_POTATO_SEED) {
+                if (ConfigHandler.LAVA_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
@@ -69,7 +69,7 @@ public class PotatoFood extends ItemFood {
                 }
                 break;
             case "water_potato":
-                if (ConfigHandler.WATER_POTATO_SEED) {
+                if (ConfigHandler.WATER_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;

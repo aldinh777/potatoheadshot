@@ -50,15 +50,7 @@ public class PocketCauldron extends Item {
         this.setRegistryName(name);
         this.setMaxStackSize(1);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
-        if (ConfigHandler.MANA_CAULDRON) {
-            if (name.equals("ultimate_mana_cauldron")) {
-                if (ConfigHandler.ULTIMATE_CAULDRON) {
-                    PotatoItems.LISTS.add(this);
-                }
-            } else {
-                PotatoItems.LISTS.add(this);
-            }
-        }
+        PotatoItems.LISTS.add(this);
     }
 
     @Override

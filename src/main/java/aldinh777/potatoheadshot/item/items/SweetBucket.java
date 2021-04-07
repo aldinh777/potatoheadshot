@@ -244,5 +244,11 @@ public class SweetBucket extends Item {
 
             return Fluid.BUCKET_VOLUME;
         }
+
+        @Override
+        public boolean canFillFluidType(FluidStack fluidStack) {
+            Fluid fluid = fluidStack.getFluid();
+            return fluid == FluidRegistry.WATER || fluid == FluidRegistry.LAVA || fluid.getName().equals("milk");
+        }
     }
 }

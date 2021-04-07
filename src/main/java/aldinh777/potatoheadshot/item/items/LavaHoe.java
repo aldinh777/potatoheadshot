@@ -27,7 +27,7 @@ public class LavaHoe extends ItemHoe {
         this.setUnlocalizedName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        if (ConfigHandler.LAVA_POTATO_SEED) {
+        if (ConfigHandler.LAVA_POTATO) {
             PotatoItems.LISTS.add(this);
         }
     }

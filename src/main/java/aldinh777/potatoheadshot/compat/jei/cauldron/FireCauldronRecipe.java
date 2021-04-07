@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.compat.jei.cauldron;
 
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import java.util.List;
@@ -15,9 +16,13 @@ public class FireCauldronRecipe extends AbstractCauldronRecipe {
 	
 	public static List<FireCauldronRecipe> getRecipes() {
 		List<FireCauldronRecipe> jeiRecipes = Lists.newArrayList();
-		
-		addRecipe(jeiRecipes, Items.IRON_HOE, new ItemStack(PotatoItems.LAVA_HOE));
-		addRecipe(jeiRecipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_FIRE));
+
+		if (ConfigHandler.LAVA_POTATO) {
+			addRecipe(jeiRecipes, Items.IRON_HOE, new ItemStack(PotatoItems.LAVA_HOE));
+		}
+		if (ConfigHandler.SPLASH_MANA) {
+			addRecipe(jeiRecipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_FIRE));
+		}
 
 		return jeiRecipes;
 	}

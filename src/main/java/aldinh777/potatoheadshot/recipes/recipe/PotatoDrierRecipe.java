@@ -77,6 +77,8 @@ public class PotatoDrierRecipe {
             if (ConfigHandler.SALT_POTATO) {
                 addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.SALT_POTATO), 400);
             }
+        }
+        if (ConfigHandler.WATER_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.WATER_POTATO), new ItemStack(PotatoItems.RAW_SALT), 1000);
         }
         addRecipe(recipes, new ItemStack(Items.WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 1000);
@@ -95,7 +97,9 @@ public class PotatoDrierRecipe {
         addRecipe(recipes, new ItemStack(Items.POTATO), new ItemStack(PotatoItems.WET_POTATO), 0);
         if (ConfigHandler.WET_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(PotatoItems.SUPER_WET_POTATO), 0);
-            addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.WATER_POTATO), 0);
+            if (ConfigHandler.WATER_POTATO) {
+                addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.WATER_POTATO), 0);
+            }
         }
         addRecipe(recipes, new ItemStack(Items.BUCKET), new ItemStack(Items.WATER_BUCKET), 0);
         if (ConfigHandler.SWEET_BUCKET) {
@@ -105,7 +109,9 @@ public class PotatoDrierRecipe {
         if (ConfigHandler.HOT_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), new ItemStack(Items.COAL, 1, 1), 0);
             addRecipe(recipes, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), new ItemStack(Items.COAL), 0);
-            addRecipe(recipes, new ItemStack(PotatoItems.LAVA_POTATO), new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)), 0);
+            if (ConfigHandler.LAVA_POTATO) {
+                addRecipe(recipes, new ItemStack(PotatoItems.LAVA_POTATO), new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)), 0);
+            }
         }
         addRecipe(recipes, new ItemStack(sponge), new ItemStack(sponge, 1, 1), 0);
 

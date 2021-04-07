@@ -29,24 +29,8 @@ public class PotatoItem extends Item {
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
         switch (name) {
-            case "charged_crystal_shard":
-            case "concentrated_crystal_shard":
-            case "charged_crystal":
-            case "concentrated_crystal":
-            case "ultimate_crystal":
-            case "ultimate_charged_crystal":
-            case "ultimate_concentrated_crystal":
-                if (ConfigHandler.ULTIMATE_CRYSTALS) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
             case "sweet_potato_bucket":
                 if (ConfigHandler.SWEET_BUCKET) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "ultimate_broken_fuel":
-                if (ConfigHandler.ULTIMATE_BROKEN_FUEL) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
@@ -68,7 +52,7 @@ public class PotatoItem extends Item {
                 }
                 break;
             case "ice_potato":
-                if (ConfigHandler.ICE_POTATO_SEED) {
+                if (ConfigHandler.ICE_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;

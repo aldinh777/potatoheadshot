@@ -49,84 +49,59 @@ public class JeiPotatoPlugin implements IModPlugin {
 		IJeiHelpers helpers = registry.getJeiHelpers();
 		IGuiHelper gui = helpers.getGuiHelper();
 
-		if (ConfigHandler.POTATO_DRIER) {
-			registry.addRecipeCategories(new DrierRecipeCategory(gui));
-		}
-		if (ConfigHandler.SWEET_INFUSER) {
-			registry.addRecipeCategories(new InfuserRecipeCategory(gui));
-		}
-		if (ConfigHandler.SWEET_FREEZER) {
-			registry.addRecipeCategories(new FreezerRecipeCategory(gui));
-		}
-		if (ConfigHandler.SWEET_CRYSTAL_CHARGER) {
-			registry.addRecipeCategories(new CrystalChargerRecipeCategory(gui));
-		}
-		if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
-			registry.addRecipeCategories(new CrystalMakerRecipeCategory(gui));
-		}
-		if (ConfigHandler.MANA_COLLECTOR) {
-			registry.addRecipeCategories(new CollectorRecipeCategory(gui));
-		}
-		if (ConfigHandler.MANA_EXTRACTOR) {
-			registry.addRecipeCategories(new ExtractorRecipeCategory(gui));
-		}
-		if (ConfigHandler.MANA_CAULDRON) {
-			registry.addRecipeCategories(new ManaCauldronRecipeCategory(gui));
-			registry.addRecipeCategories(new FireCauldronRecipeCategory(gui));
-			registry.addRecipeCategories(new LifeCauldronRecipeCategory(gui));
-			registry.addRecipeCategories(new NatureCauldronRecipeCategory(gui));
-		}
+		registry.addRecipeCategories(new DrierRecipeCategory(gui));
+		registry.addRecipeCategories(new InfuserRecipeCategory(gui));
+		registry.addRecipeCategories(new FreezerRecipeCategory(gui));
+		registry.addRecipeCategories(new CrystalChargerRecipeCategory(gui));
+		registry.addRecipeCategories(new CrystalMakerRecipeCategory(gui));
+		registry.addRecipeCategories(new CollectorRecipeCategory(gui));
+		registry.addRecipeCategories(new ExtractorRecipeCategory(gui));
+		registry.addRecipeCategories(new ManaCauldronRecipeCategory(gui));
+		registry.addRecipeCategories(new FireCauldronRecipeCategory(gui));
+		registry.addRecipeCategories(new LifeCauldronRecipeCategory(gui));
+		registry.addRecipeCategories(new NatureCauldronRecipeCategory(gui));
 	}
 	
 	@Override
 	public void register(IModRegistry registry) {
 		IRecipeTransferRegistry recipeTransfer = registry.getRecipeTransferRegistry();
 
-		if (ConfigHandler.POTATO_DRIER) {
-			registry.addRecipes(DrierRecipe.getRecipes(), DRIER.toString());
-			registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 28, 20, 22, DRIER.toString());
-			registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 60, 20, 22, DRIER.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerPotatoDrier.class, DRIER.toString(), 1, 4, 5, 36);
-			registry.addRecipeClickArea(GuiMagicDrier.class, 109, 28, 20, 22, DRIER.toString());
-			registry.addRecipeClickArea(GuiMagicDrier.class, 109, 60, 20, 22, DRIER.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerMagicDrier.class, DRIER.toString(), 0, 4, 4, 36);
-		}
-		if (ConfigHandler.SWEET_INFUSER) {
-			registry.addRecipes(InfuserRecipe.getRecipes(), INFUSER.toString());
-			registry.addRecipeClickArea(GuiSweetInfuser.class, 151, 17, 16, 45, INFUSER.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerSweetInfuser.class, INFUSER.toString(), 0, 7, 7, 36);
-		}
-		if (ConfigHandler.SWEET_FREEZER) {
-			registry.addRecipes(FreezerRecipe.getRecipes(), FREEZER.toString());
-			registry.addRecipeClickArea(GuiSweetFreezer.class, 91, 36, 20, 22, FREEZER.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerSweetFreezer.class, FREEZER.toString(), 0, 3, 3, 36);
-		}
-		if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
-			registry.addRecipes(CrystalMakerRecipe.getRecipes(), CRYSTAL_MAKER.toString());
-			registry.addRecipeClickArea(GuiSweetCrystalMaker.class, 62, 29, 24, 19, CRYSTAL_MAKER.toString());
-			registry.addRecipeClickArea(GuiSweetCrystalMaker.class, 112, 28, 19, 20, CRYSTAL_MAKER.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerSweetCrystalMaker.class, CRYSTAL_MAKER.toString(), 0, 3, 3, 36);
-		}
-		if (ConfigHandler.SWEET_CRYSTAL_CHARGER) {
-			registry.addRecipes(CrystalChargerRecipe.getRecipes(), CRYSTAL_CHARGER.toString());
-			registry.addRecipeClickArea(GuiSweetCrystalCharger.class, 89, 23, 15, 20, CRYSTAL_CHARGER.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerSweetCrystalCharger.class, CRYSTAL_CHARGER.toString(), 0, 2, 2, 36);
-		}
-		if (ConfigHandler.MANA_COLLECTOR) {
-			registry.addRecipes(CollectorRecipe.getRecipes(), COLLECTOR.toString());
-			registry.addRecipeClickArea(GuiManaCollector.class, 76, 49, 20, 22, COLLECTOR.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerManaCollector.class, COLLECTOR.toString(), 0, 2, 2, 36);
-		}
-		if (ConfigHandler.MANA_EXTRACTOR) {
-			registry.addRecipes(ExtractorRecipe.getRecipes(), EXTRACTOR.toString());
-			registry.addRecipeClickArea(GuiManaExtractor.class, 76, 49, 20, 22, EXTRACTOR.toString());
-			recipeTransfer.addRecipeTransferHandler(ContainerManaExtractor.class, EXTRACTOR.toString(), 0, 2, 2, 36);
-		}
-		if (ConfigHandler.MANA_CAULDRON) {
-			registry.addRecipes(ManaCauldronRecipe.getRecipes(), CAULDRON_MANA.toString());
-			registry.addRecipes(FireCauldronRecipe.getRecipes(), CAULDRON_FIRE.toString());
-			registry.addRecipes(LifeCauldronRecipe.getRecipes(), CAULDRON_LIFE.toString());
-			registry.addRecipes(NatureCauldronRecipe.getRecipes(), CAULDRON_NATURE.toString());
-		}
+		registry.addRecipes(DrierRecipe.getRecipes(), DRIER.toString());
+		registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 28, 20, 22, DRIER.toString());
+		registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 60, 20, 22, DRIER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerPotatoDrier.class, DRIER.toString(), 1, 4, 5, 36);
+		registry.addRecipeClickArea(GuiMagicDrier.class, 109, 28, 20, 22, DRIER.toString());
+		registry.addRecipeClickArea(GuiMagicDrier.class, 109, 60, 20, 22, DRIER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerMagicDrier.class, DRIER.toString(), 0, 4, 4, 36);
+
+		registry.addRecipes(InfuserRecipe.getRecipes(), INFUSER.toString());
+		registry.addRecipeClickArea(GuiSweetInfuser.class, 151, 17, 16, 45, INFUSER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerSweetInfuser.class, INFUSER.toString(), 0, 7, 7, 36);
+
+		registry.addRecipes(FreezerRecipe.getRecipes(), FREEZER.toString());
+		registry.addRecipeClickArea(GuiSweetFreezer.class, 91, 36, 20, 22, FREEZER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerSweetFreezer.class, FREEZER.toString(), 0, 3, 3, 36);
+
+		registry.addRecipes(CrystalMakerRecipe.getRecipes(), CRYSTAL_MAKER.toString());
+		registry.addRecipeClickArea(GuiSweetCrystalMaker.class, 62, 29, 24, 19, CRYSTAL_MAKER.toString());
+		registry.addRecipeClickArea(GuiSweetCrystalMaker.class, 112, 28, 19, 20, CRYSTAL_MAKER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerSweetCrystalMaker.class, CRYSTAL_MAKER.toString(), 0, 3, 3, 36);
+
+		registry.addRecipes(CrystalChargerRecipe.getRecipes(), CRYSTAL_CHARGER.toString());
+		registry.addRecipeClickArea(GuiSweetCrystalCharger.class, 89, 23, 15, 20, CRYSTAL_CHARGER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerSweetCrystalCharger.class, CRYSTAL_CHARGER.toString(), 0, 2, 2, 36);
+
+		registry.addRecipes(CollectorRecipe.getRecipes(), COLLECTOR.toString());
+		registry.addRecipeClickArea(GuiManaCollector.class, 76, 49, 20, 22, COLLECTOR.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerManaCollector.class, COLLECTOR.toString(), 0, 2, 2, 36);
+
+		registry.addRecipes(ExtractorRecipe.getRecipes(), EXTRACTOR.toString());
+		registry.addRecipeClickArea(GuiManaExtractor.class, 76, 49, 20, 22, EXTRACTOR.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerManaExtractor.class, EXTRACTOR.toString(), 0, 2, 2, 36);
+
+		registry.addRecipes(ManaCauldronRecipe.getRecipes(), CAULDRON_MANA.toString());
+		registry.addRecipes(FireCauldronRecipe.getRecipes(), CAULDRON_FIRE.toString());
+		registry.addRecipes(LifeCauldronRecipe.getRecipes(), CAULDRON_LIFE.toString());
+		registry.addRecipes(NatureCauldronRecipe.getRecipes(), CAULDRON_NATURE.toString());
 	}
 }

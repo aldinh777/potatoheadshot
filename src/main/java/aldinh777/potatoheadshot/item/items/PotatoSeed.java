@@ -35,17 +35,17 @@ public class PotatoSeed extends ItemSeeds {
 
         switch (name) {
             case "lava_potato_seed":
-                if (ConfigHandler.LAVA_POTATO_SEED) {
+                if (ConfigHandler.LAVA_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
             case "water_potato_seed":
-                if (ConfigHandler.WATER_POTATO_SEED) {
+                if (ConfigHandler.WATER_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
             case "ice_potato_seed":
-                if (ConfigHandler.ICE_POTATO_SEED) {
+                if (ConfigHandler.ICE_POTATO) {
                     PotatoItems.LISTS.add(this);
                 }
                 break;

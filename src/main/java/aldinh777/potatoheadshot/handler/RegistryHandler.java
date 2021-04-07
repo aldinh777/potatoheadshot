@@ -49,7 +49,9 @@ public class RegistryHandler {
             GameRegistry.addSmelting(Items.POISONOUS_POTATO, new ItemStack(PotatoItems.HOT_POTATO), 0.075f);
             GameRegistry.addSmelting(PotatoItems.HOT_POTATO, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), 0.075f);
             GameRegistry.addSmelting(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), 0.075f);
-            GameRegistry.addSmelting(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
+            if (ConfigHandler.LAVA_POTATO) {
+                GameRegistry.addSmelting(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
+            }
         }
         if (ConfigHandler.SWEET_BUCKET) {
             GameRegistry.addSmelting(PotatoItems.SWEET_POTATO_BUCKET, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), 0.35f);
@@ -88,41 +90,19 @@ public class RegistryHandler {
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
         ResourceLocation magicDrier = new ResourceLocation("potatoheadshot:magic_drier");
 
-        if (ConfigHandler.POTATO_DRIER) {
-            GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
-            GameRegistry.registerTileEntity(TileEntityMagicDrier.class, magicDrier);
-        }
-        if (ConfigHandler.SWEET_POTATO_GENERATOR) {
-            GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
-        }
-        if (ConfigHandler.SWEET_FREEZER) {
-            GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
-        }
-        if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
-            GameRegistry.registerTileEntity(TileEntitySweetCrystalMaker.class, sweetCrystalMaker);
-        }
-        if (ConfigHandler.SWEET_CRYSTAL_CHARGER) {
-            GameRegistry.registerTileEntity(TileEntitySweetCrystalCharger.class, sweetCrystalCharger);
-            GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
-        }
-        if (ConfigHandler.SWEET_INFUSER) {
-            GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, sweetInfuser);
-        }
-        if (ConfigHandler.MANA_COLLECTOR) {
-            GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
-        }
-        if (ConfigHandler.MANA_EXTRACTOR) {
-            GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);
-        }
-        if (ConfigHandler.MANA_CAULDRON) {
-            GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
-        }
-        if (ConfigHandler.ENERGY_TRANSFER) {
-            GameRegistry.registerTileEntity(TileEntityEnergyTransfer.class, energyTransfer);
-        }
-        if (ConfigHandler.ULTIMATE_CAULDRON) {
-            GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
-        }
+        GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
+        GameRegistry.registerTileEntity(TileEntityMagicDrier.class, magicDrier);
+        GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
+        GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
+        GameRegistry.registerTileEntity(TileEntitySweetCrystalMaker.class, sweetCrystalMaker);
+        GameRegistry.registerTileEntity(TileEntitySweetCrystalCharger.class, sweetCrystalCharger);
+        GameRegistry.registerTileEntity(TileEntityUltCrystalCharger.class, ultCrystalCharger);
+        GameRegistry.registerTileEntity(TileEntitySweetInfuser.class, sweetInfuser);
+        GameRegistry.registerTileEntity(TileEntityManaCollector.class, manaCollector);
+        GameRegistry.registerTileEntity(TileEntityManaExtractor.class, manaExtractor);
+        GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
+        GameRegistry.registerTileEntity(TileEntityEnergyTransfer.class, energyTransfer);
+        GameRegistry.registerTileEntity(TileEntityUltManaCauldron.class, ultManaCauldron);
     }
 
     @SubscribeEvent

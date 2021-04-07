@@ -128,27 +128,23 @@ public class SweetInfuserRecipe {
         addRecipe(recipes, new ItemStack(cobweb), new ItemStack(string),
                 new ItemStack(string), new ItemStack(string), new ItemStack(string),
                 new ItemStack(string), new ItemStack(string), new ItemStack(string));
-        if (ConfigHandler.ULTIMATE_CRYSTALS) {
-            addRecipe(recipes, new ItemStack(ultimateCrystal), new ItemStack(crystal),
-                    new ItemStack(chargedCrystal), new ItemStack(chargedCrystal), new ItemStack(chargedCrystal),
-                    new ItemStack(concentratedCrystal), new ItemStack(concentratedCrystal), new ItemStack(concentratedCrystal));
-            if (ConfigHandler.ULTIMATE_BROKEN_FUEL) {
-                addRecipe(recipes, new ItemStack(ultimateBrokenFuel), new ItemStack(carbonatedCoal),
-                        new ItemStack(ultimateCrystal), new ItemStack(ultimateChargedCrystal), new ItemStack(ultimateCrystal),
-                        new ItemStack(ultimateCrystal), new ItemStack(ultimateConcentratedCrystal), new ItemStack(ultimateCrystal));
-            }
-            if (ConfigHandler.ULTIMATE_FLOWER) {
-                addRecipe(recipes, new ItemStack(ultimateManaFlower), new ItemStack(manaFlower),
-                        new ItemStack(ultimateCrystal), new ItemStack(ultimateChargedCrystal), new ItemStack(ultimateCrystal),
-                        new ItemStack(ultimateCrystal), new ItemStack(ultimateConcentratedCrystal), new ItemStack(ultimateCrystal));
-            }
-        }
+        addRecipe(recipes, new ItemStack(ultimateCrystal), new ItemStack(crystal),
+                new ItemStack(chargedCrystal), new ItemStack(chargedCrystal), new ItemStack(chargedCrystal),
+                new ItemStack(concentratedCrystal), new ItemStack(concentratedCrystal), new ItemStack(concentratedCrystal));
+        addRecipe(recipes, new ItemStack(ultimateBrokenFuel), new ItemStack(carbonatedCoal),
+                new ItemStack(ultimateCrystal), new ItemStack(ultimateChargedCrystal), new ItemStack(ultimateCrystal),
+                new ItemStack(ultimateCrystal), new ItemStack(ultimateConcentratedCrystal), new ItemStack(ultimateCrystal));
+        addRecipe(recipes, new ItemStack(ultimateManaFlower), new ItemStack(manaFlower),
+                new ItemStack(ultimateCrystal), new ItemStack(ultimateChargedCrystal), new ItemStack(ultimateCrystal),
+                new ItemStack(ultimateCrystal), new ItemStack(ultimateConcentratedCrystal), new ItemStack(ultimateCrystal));
         addRecipe(recipes, new ItemStack(carbonatedCoal), new ItemStack(coal),
                 new ItemStack(coalBlock), new ItemStack(coalBlock), new ItemStack(coalBlock),
                 new ItemStack(coalBlock), new ItemStack(coalBlock), new ItemStack(coalBlock));
-        addRecipe(recipes, new ItemStack(icePotato), new ItemStack(frozenPotato),
-                new ItemStack(ice), new ItemStack(ice), new ItemStack(ice),
-                new ItemStack(ice), new ItemStack(ice), new ItemStack(ice));
+        if (ConfigHandler.ICE_POTATO && ConfigHandler.FROZEN_POTATO) {
+            addRecipe(recipes, new ItemStack(icePotato), new ItemStack(frozenPotato),
+                    new ItemStack(ice), new ItemStack(ice), new ItemStack(ice),
+                    new ItemStack(ice), new ItemStack(ice), new ItemStack(ice));
+        }
 
         return recipes;
     }
@@ -256,14 +252,12 @@ public class SweetInfuserRecipe {
         addRecipe(recipes, new ItemStack(emerald), new ItemStack(crystal),
                 new ItemStack(crystal), ItemHelper.getDyeFromItem(DYE_LIME), new ItemStack(crystal),
                 ItemHelper.getDyeFromItem(DYE_LIME), new ItemStack(crystal), ItemHelper.getDyeFromItem(DYE_LIME));
-        if (ConfigHandler.ULTIMATE_CRYSTALS) {
-            addRecipe(recipes, new ItemStack(chargedCrystal), new ItemStack(crystalShard),
-                    new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard),
-                    new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard));
-            addRecipe(recipes, new ItemStack(concentratedCrystal), new ItemStack(crystalShard),
-                    new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard),
-                    new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard));
-        }
+        addRecipe(recipes, new ItemStack(chargedCrystal), new ItemStack(crystalShard),
+                new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard),
+                new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard), new ItemStack(chargedCrystalShard));
+        addRecipe(recipes, new ItemStack(concentratedCrystal), new ItemStack(crystalShard),
+                new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard),
+                new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard), new ItemStack(concentratedCrystalShard));
 
         return recipes;
     }

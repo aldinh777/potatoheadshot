@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.block.blocks.EnergyTransfer;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.util.EnergyUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
@@ -15,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,7 +33,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
     @Override
     public void update() {
         if (!this.world.isRemote) {
-            List<TileEntity> targets = this.getStorageAround(8);
+            List<TileEntity> targets = this.getStorageAround(ConfigHandler.ENERGY_TRANSFER_RANGE);
             this.shareEnergy(targets);
             this.spreadRF();
 

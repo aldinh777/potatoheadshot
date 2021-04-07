@@ -19,75 +19,12 @@ public class PotatoBlock extends Block {
         this.setUnlocalizedName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        switch (name) {
-            case "potato_planks":
-                if (ConfigHandler.POTATO_PLANKS) {
-                    init(name);
-                }
-                break;
-            case "potato_drier":
-                if (ConfigHandler.POTATO_DRIER) {
-                    init(name);
-                }
-                break;
-            case "magic_drier":
-                if (ConfigHandler.POTATO_DRIER && ConfigHandler.MAGIC_DRIER) {
-                    init(name);
-                }
-                break;
-            case "sweet_potato_generator":
-                if (ConfigHandler.SWEET_POTATO_GENERATOR) {
-                    init(name);
-                }
-                break;
-            case "sweet_freezer":
-                if (ConfigHandler.SWEET_FREEZER) {
-                    init(name);
-                }
-                break;
-            case "sweet_crystal_maker":
-                if (ConfigHandler.SWEET_CRYSTAL_MAKER) {
-                    init(name);
-                }
-                break;
-            case "sweet_crystal_charger":
-            case "ultimate_crystal_charger":
-                if (ConfigHandler.ULTIMATE_CRYSTALS && ConfigHandler.SWEET_CRYSTAL_CHARGER) {
-                    init(name);
-                }
-                break;
-            case "sweet_infuser":
-                if (ConfigHandler.SWEET_INFUSER) {
-                    init(name);
-                }
-                break;
-            case "mana_collector":
-                if (ConfigHandler.MANA_COLLECTOR) {
-                    init(name);
-                }
-                break;
-            case "mana_extractor":
-                if (ConfigHandler.MANA_EXTRACTOR) {
-                    init(name);
-                }
-                break;
-            case "energy_transfer":
-                if (ConfigHandler.ENERGY_TRANSFER) {
-                    init(name);
-                }
-                break;
-            case "mana_cauldron":
-                if (ConfigHandler.MANA_CAULDRON) {
-                    init(name);
-                }
-                break;
-            case "ultimate_mana_cauldron":
-                if (ConfigHandler.MANA_CAULDRON && ConfigHandler.ULTIMATE_CRYSTALS && ConfigHandler.ULTIMATE_CAULDRON) {
-                    init(name);
-                }
-                break;
-            default:
+        if ("potato_planks".equals(name)) {
+            if (ConfigHandler.POTATO_PLANKS) {
                 init(name);
+            }
+        } else {
+            init(name);
         }
     }
 

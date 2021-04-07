@@ -56,7 +56,7 @@ public class PotatoBlocks {
         SWEET_POTATO_BLOCK = new PotatoBlock("sweet_potato_block", BlockType.METAL);
         SWEET_MACHINE_FRAME = new SweetMachineFrame("sweet_machine_frame", BlockType.METAL);
         GLOWING_POTATO_BLOCK = new BlockCustomDrop("glowing_potato_block", PotatoItems.GLOWING_POTATO_DUST);
-        MANA_BLOCK = new BlockCustomDrop("glowing_mana_block", PotatoItems.MANA_DUST);
+        MANA_BLOCK = new BlockCustomDrop("glowing_mana_block", PotatoItems.MANA_DUST).setResistance(6000);
         MANA_STONE = new PotatoBlock("glowing_mana_stone", BlockType.STONE).setLightLevel(0.7f).setResistance(6000);
 
         // Place able Item
@@ -77,6 +77,6 @@ public class PotatoBlocks {
         ENERGY_TRANSFER = new EnergyTransfer("energy_transfer", BlockType.GLASS);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
-        MAGIC_DRIER = new MagicDrier("magic_drier", BlockType.STONE).setResistance(6000);
+        MAGIC_DRIER = new MagicDrier("magic_drier", BlockType.STONE);
     }
 }

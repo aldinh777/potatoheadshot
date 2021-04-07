@@ -47,6 +47,10 @@ public class PotatoFoodItemBlock extends ItemFood {
                 }
                 break;
             case "tile.baked_potato_planks":
+                if (ConfigHandler.COOKED_POTATO_VARIANT && ConfigHandler.POTATO_PLANKS) {
+                    PotatoItems.LISTS.add(this);
+                }
+                break;
             case "tile.baked_potato_block":
                 if (ConfigHandler.COOKED_POTATO_VARIANT) {
                     PotatoItems.LISTS.add(this);
@@ -120,19 +124,6 @@ public class PotatoFoodItemBlock extends ItemFood {
             }
 
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player) {
-        Block block = worldIn.getBlockState(pos).getBlock();
-
-        if (block == Blocks.SNOW_LAYER && block.isReplaceable(worldIn, pos)) {
-            side = EnumFacing.UP;
-        } else if (!block.isReplaceable(worldIn, pos)) {
-            pos = pos.offset(side);
-        }
-
-        return worldIn.mayPlace(this.block, pos, false, side, player);
     }
 
     @Nonnull

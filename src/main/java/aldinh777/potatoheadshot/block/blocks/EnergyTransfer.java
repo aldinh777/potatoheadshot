@@ -24,6 +24,7 @@ public class EnergyTransfer extends PotatoBlock {
     public EnergyTransfer(String name, BlockType blockType) {
         super(name, blockType);
         this.setLightLevel(8);
+        this.setResistance(6000);
     }
 
     @Override
@@ -73,6 +74,7 @@ public class EnergyTransfer extends PotatoBlock {
         return false;
     }
 
+    @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(MODE, Mode.withValue(meta));

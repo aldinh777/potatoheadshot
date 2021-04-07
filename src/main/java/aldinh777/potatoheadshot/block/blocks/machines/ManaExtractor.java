@@ -14,6 +14,7 @@ public class ManaExtractor extends ManaCollector {
 
     public ManaExtractor(String name, BlockType blockType) {
         super(name, blockType, Constants.EXTRACTOR);
+        this.setResistance(6000);
     }
 
     @Nullable

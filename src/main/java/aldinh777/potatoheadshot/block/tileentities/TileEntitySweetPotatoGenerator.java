@@ -26,8 +26,8 @@ public class TileEntitySweetPotatoGenerator extends TileEntityPotatoMachine {
     private final ItemStackHandler processHandler = new ItemStackHandler(1);
     private final ItemStackHandler outputHandler = new ItemStackHandler(1);
 
-    private final PotatoEnergyStorage storage = new PotatoEnergyStorage(80000, 0, ConfigHandler.GENERATOR_RATE);
-    private final int generationRate = ConfigHandler.GENERATOR_RATE;
+    private final PotatoEnergyStorage storage = new PotatoEnergyStorage(80000, 0, ConfigHandler.POTATO_GENERATOR_RATE);
+    private final int generationRate = ConfigHandler.POTATO_GENERATOR_RATE;
     private int energy = storage.getEnergyStored();
     private int currentCookTime = 0;
     private int totalCookTime = 100;

@@ -40,17 +40,17 @@ public abstract class PotatoCrops extends BlockCrops {
                 }
                 break;
             case "lava_potatoes":
-                if (ConfigHandler.LAVA_POTATO_SEED) {
+                if (ConfigHandler.LAVA_POTATO) {
                     PotatoBlocks.LISTS.add(this);
                 }
                 break;
             case "water_potatoes":
-                if (ConfigHandler.WATER_POTATO_SEED) {
+                if (ConfigHandler.WATER_POTATO) {
                     PotatoBlocks.LISTS.add(this);
                 }
                 break;
             case "ice_potatoes":
-                if (ConfigHandler.ICE_POTATO_SEED) {
+                if (ConfigHandler.ICE_POTATO) {
                     PotatoBlocks.LISTS.add(this);
                 }
                 break;

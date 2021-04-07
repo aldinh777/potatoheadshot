@@ -31,9 +31,13 @@ public class SweetFreezerRecipe {
     public static List<SweetFreezerRecipe> getRecipes() {
         List<SweetFreezerRecipe> recipes = Lists.newArrayList();
 
-        addRecipe(recipes, Items.POTATO, new ItemStack(PotatoItems.FROZEN_POTATO));
+        if (ConfigHandler.FROZEN_POTATO) {
+            addRecipe(recipes, Items.POTATO, new ItemStack(PotatoItems.FROZEN_POTATO));
+        }
         addRecipe(recipes, Items.WATER_BUCKET, new ItemStack(Blocks.ICE));
-        addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(Blocks.ICE));
+        if (ConfigHandler.WATER_POTATO) {
+            addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(Blocks.ICE));
+        }
         if (ConfigHandler.SWEET_BUCKET) {
             addRecipe(recipes, PotatoItems.SWEET_WATER_BUCKET, new ItemStack(Blocks.ICE));
         }

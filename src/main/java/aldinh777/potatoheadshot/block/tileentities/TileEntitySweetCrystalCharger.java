@@ -20,7 +20,7 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	private final ItemStackHandler inputHandler = new ItemStackHandler(1);
 	private final ItemStackHandler outputHandler = new ItemStackHandler(1);
 	private static final int SHARD_COST = ConfigHandler.CHARGED_SHARD_ENERGY_REQUIRED;
-	private static final int ULTIMATE_COST = ConfigHandler.CHARGED_CRYSTAL_ENERGY_REQUIRED;
+	private static final int ULTIMATE_COST = ConfigHandler.ULT_CHARGED_CRYSTAL_ENERGY_REQUIRED;
 	
 	protected PotatoEnergyStorage storage = new PotatoEnergyStorage(ULTIMATE_COST, 400, 0);
 	private int energy = this.storage.getEnergyStored();
@@ -213,21 +213,16 @@ public class TileEntitySweetCrystalCharger extends TileEntityPotatoMachine {
 	// Static Methods
 
 	public static ItemStack getResult(ItemStack stack) {
-		if (ConfigHandler.ULTIMATE_CRYSTALS) {
-			if (stack.getItem() == PotatoItems.CRYSTAL_SHARD)
-				return new ItemStack(PotatoItems.CHARGED_CRYSTAL_SHARD);
-			if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL)
-				return new ItemStack(PotatoItems.ULTIMATE_CHARGED_CRYSTAL);
-		}
+		if (stack.getItem() == PotatoItems.CRYSTAL_SHARD)
+			return new ItemStack(PotatoItems.CHARGED_CRYSTAL_SHARD);
+		if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL)
+			return new ItemStack(PotatoItems.ULTIMATE_CHARGED_CRYSTAL);
 		return ItemStack.EMPTY;
 	}
 	
 	public static int getFullCharge(ItemStack stack) {
-		if (ConfigHandler.ULTIMATE_CRYSTALS) {
-			if (stack.getItem() == PotatoItems.CRYSTAL_SHARD) return SHARD_COST;
-			if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL) return ULTIMATE_COST;
-		}
-
+		if (stack.getItem() == PotatoItems.CRYSTAL_SHARD) return SHARD_COST;
+		if (stack.getItem() == PotatoItems.ULTIMATE_CRYSTAL) return ULTIMATE_COST;
 		return SHARD_COST;
 	}
 }
