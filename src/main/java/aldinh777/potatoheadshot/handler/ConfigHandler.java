@@ -27,6 +27,7 @@ public class ConfigHandler {
     public static boolean POTATO_CHIP;
     public static boolean SWEET_BUCKET;
     public static boolean SPLASH_MANA;
+    public static boolean SPLASH_FIRE_COOK_GRASS;
     public static boolean POTATO_STICK_DEBUG;
 
     // Machines
@@ -87,6 +88,7 @@ public class ConfigHandler {
         POTATO_CHIP = config.getBoolean("POTATO_CHIP", category, true, "");
         SWEET_BUCKET = config.getBoolean("SWEET_BUCKET", category, true, "");
         SPLASH_MANA = config.getBoolean("SPLASH_MANA", category, true, "");
+        SPLASH_FIRE_COOK_GRASS = config.getBoolean("SPLASH_FIRE_COOK_GRASS", category, true, "");
         POTATO_STICK_DEBUG = config.getBoolean("POTATO_STICK_DEBUG", category, true, "");
 
 

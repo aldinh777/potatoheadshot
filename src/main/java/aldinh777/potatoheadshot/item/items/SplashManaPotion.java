@@ -1,6 +1,10 @@
 package aldinh777.potatoheadshot.item.items;
 
 import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
+import aldinh777.potatoheadshot.handler.ConfigHandler;
+import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSponge;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,7 +13,9 @@ import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
@@ -98,7 +104,31 @@ public class SplashManaPotion extends PotatoItem {
                     for (int y = -1; y <= 1; y++) {
                         for (int z = -1; z <= 1; z++) {
                             BlockPos pos = blockPos.add(x, y, z);
+                            IBlockState state = world.getBlockState(pos);
                             IBlockState upBlock = world.getBlockState(pos.up());
+
+                            if (state.getBlock() == Blocks.GRASS) {
+                                if (ConfigHandler.SPLASH_FIRE_COOK_GRASS) {
+                                    PotatoFoodItemBlock cookedDirt = (PotatoFoodItemBlock) PotatoItems.COOKED_DIRT;
+                                    world.setBlockState(pos, cookedDirt.getBlock().getDefaultState());
+                                }
+
+                            } else if (state.getBlock() == Blocks.SPONGE) {
+                                world.setBlockState(pos, Blocks.SPONGE.getDefaultState().withProperty(BlockSponge.WET, false));
+
+                            } else {
+                                ItemStack res = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(state.getBlock()));
+                                if (res.getItem() instanceof PotatoFoodItemBlock) {
+                                    PotatoFoodItemBlock item = (PotatoFoodItemBlock) res.getItem();
+                                    Block blockResult = item.getBlock();
+                                    world.setBlockState(pos, blockResult.getDefaultState());
+                                }
+                                if (res.getItem() instanceof ItemBlock) {
+                                    ItemBlock item = (ItemBlock) res.getItem();
+                                    Block blockResult = item.getBlock();
+                                    world.setBlockState(pos, blockResult.getDefaultState());
+                                }
+                            }
 
                             if (upBlock.getBlock() == Blocks.AIR) {
                                 world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
@@ -132,6 +162,11 @@ public class SplashManaPotion extends PotatoItem {
                         for (int z = -1; z <= 1; z++) {
                             BlockPos pos = blockPos.add(x, y, z);
                             IBlockState state = world.getBlockState(pos);
+                            IBlockState upBlock = world.getBlockState(pos.up());
+
+                            if (upBlock.getBlock() == Blocks.AIR && state.getBlock() == Blocks.DIRT) {
+                                world.setBlockState(pos, Blocks.GRASS.getDefaultState());
+                            }
 
                             if (state.getBlock() instanceof IGrowable) {
                                 IGrowable plant = (IGrowable) state.getBlock();
