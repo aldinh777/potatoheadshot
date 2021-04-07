@@ -89,6 +89,14 @@ Put it behind "Mana Collector" to push mana to the collector
 Drop item to the cauldron, and it will consume some mana to transform the item dropped
 based on the elements in the cauldron
 
+#### Energy Transfer
+Can Transfer Mana and RF wirelessly with range of 8 block
+
+Sneak Right Click to switch mode between extract mana or absorb mana
+
+#### Magical Drier
+Simply Potato Drier but uses mana instead coal
+
 #### Pocket Cauldron
 A portable version of Mana Cauldron
 
