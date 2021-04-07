@@ -192,7 +192,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
             fusionItems[i] = fusionItem;
         }
 
-        ItemStack result = SweetInfuserRecipes.INSTANCE.getResult(inputSlot.getItem(), fusionItems);
+        ItemStack result = SweetInfuserRecipes.INSTANCE.getResult(inputSlot, fusionItems);
 
         if (result.isEmpty()) {
             return false;
@@ -214,7 +214,7 @@ public class TileEntitySweetInfuser extends TileEntityPotatoMachine {
             fusionItems[i] = this.fusionHandler.getStackInSlot(i);
         }
 
-        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(inputSlot.getItem(), fusionItems);
+        ItemStack infuseResult = SweetInfuserRecipes.INSTANCE.getResult(inputSlot, fusionItems);
         ItemStack result = infuseResult.copy();
 
         if (!outputSlot.isEmpty()) {

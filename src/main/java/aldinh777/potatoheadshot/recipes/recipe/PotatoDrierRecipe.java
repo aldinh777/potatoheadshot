@@ -4,6 +4,8 @@ import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import aldinh777.potatoheadshot.recipes.custom.CustomDryRecipe;
 import aldinh777.potatoheadshot.recipes.custom.CustomWetRecipe;
+import aldinh777.potatoheadshot.recipes.custom.item.ItemRecipe;
+import aldinh777.potatoheadshot.recipes.custom.item.ItemWaterRecipe;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -44,8 +46,8 @@ public class PotatoDrierRecipe {
         int outputMeta = this.output.getMetadata();
         int water = this.water;
 
-        CustomDryRecipe.InputRecipe input = new CustomDryRecipe.InputRecipe(inputId, inputMeta);
-        CustomDryRecipe.OutputRecipe output = new CustomDryRecipe.OutputRecipe(outputId, outputMeta, water);
+        ItemRecipe input = new ItemRecipe(inputId, inputMeta);
+        ItemWaterRecipe output = new ItemWaterRecipe(outputId, outputMeta, water);
 
         return new CustomDryRecipe(input, output);
     }
@@ -56,8 +58,8 @@ public class PotatoDrierRecipe {
         int inputMeta = this.input.getMetadata();
         int outputMeta = this.output.getMetadata();
 
-        CustomWetRecipe.ItemRecipe input = new CustomWetRecipe.ItemRecipe(inputId, inputMeta);
-        CustomWetRecipe.ItemRecipe output = new CustomWetRecipe.ItemRecipe(outputId, outputMeta);
+        ItemRecipe input = new ItemRecipe(inputId, inputMeta);
+        ItemRecipe output = new ItemRecipe(outputId, outputMeta);
 
         return new CustomWetRecipe(input, output);
     }

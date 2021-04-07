@@ -36,6 +36,7 @@ public class RegistryHandler {
     public static void init() {
         OreDictionaryHandler.register();
         CustomRecipeHandler.registerDrier();
+        CustomRecipeHandler.registerInfuser();
 
         registerSmelting();
     }

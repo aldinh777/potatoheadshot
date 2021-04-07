@@ -1,42 +1,11 @@
 package aldinh777.potatoheadshot.util;
 
-import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface ItemHelper {
-
-    static Item getDyeFromMeta(ItemStack stack) {
-        switch (stack.getMetadata()) {
-            case 1:
-                return DummyItem.DYE_RED;
-            case 4:
-                return DummyItem.LAPIS;
-            case 10:
-                return DummyItem.DYE_LIME;
-            case 12:
-                return DummyItem.DYE_LIGHT_BLUE;
-            case 15:
-                return DummyItem.DYE_WHITE;
-            default:
-                return stack.getItem();
-        }
-    }
-
-    static Item getLiquid(ItemStack stack) {
-        Item item = stack.getItem();
-
-        if (item == PotatoItems.LAVA_POTATO || item == PotatoItems.SWEET_LAVA_BUCKET) {
-            return Items.LAVA_BUCKET;
-        }
-        if (item == PotatoItems.WATER_POTATO || item == PotatoItems.SWEET_WATER_BUCKET) {
-            return Items.WATER_BUCKET;
-        }
-
-        return item;
-    }
 
     static ItemStack getDyeFromItem(Item item) {
         if (item == DummyItem.LAPIS) {
