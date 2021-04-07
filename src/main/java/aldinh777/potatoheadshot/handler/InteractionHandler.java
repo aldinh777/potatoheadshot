@@ -20,15 +20,15 @@ public class InteractionHandler {
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         if (!event.getWorld().isRemote) {
             EntityPlayer player = event.getEntityPlayer();
-            ItemStack currentItem = player.inventory.getCurrentItem();
+            ItemStack currentItem = player.getHeldItem(event.getHand());
 
             if (!currentItem.isEmpty() && currentItem.getItem() == PotatoItems.SWEET_EMPTY_BUCKET) {
                 if (event.getTarget() instanceof EntityCow) {
                     currentItem.shrink(1);
                     player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-                    if (currentItem.getCount() <= 1) {
-                        player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(PotatoItems.SWEET_MILK_BUCKET));
-                    } else if (player.inventory.addItemStackToInventory(new ItemStack(PotatoItems.SWEET_MILK_BUCKET))) {
+                    if (currentItem.getCount() < 1) {
+                        player.setHeldItem(event.getHand(), new ItemStack(PotatoItems.SWEET_MILK_BUCKET));
+                    } else if (!player.inventory.addItemStackToInventory(new ItemStack(PotatoItems.SWEET_MILK_BUCKET))) {
                         player.dropItem(new ItemStack(PotatoItems.SWEET_MILK_BUCKET), true, false);
                     }
                 }
