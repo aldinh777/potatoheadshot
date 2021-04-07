@@ -231,7 +231,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             return false;
 
         } else {
-            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput);
             ItemStack result = recipeResult.getOutput();
 
             if (result.isEmpty()) {
@@ -262,7 +262,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
             return false;
         }
 
-        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput);
         ItemStack result = recipeResult.getOutput();
 
         if (result.isEmpty()) {
@@ -287,7 +287,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         if (this.canDry()) {
             ItemStack dryInput = this.inputHandler.getStackInSlot(0);
             ItemStack dryOutput = this.outputHandler.getStackInSlot(0);
-            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput);
             ItemStack result = recipeResult.getOutput();
 
             if (dryOutput.isEmpty()) {
@@ -316,7 +316,7 @@ public class TileEntityPotatoDrier extends TileEntityPotatoMachine {
         if (this.canWet()) {
             ItemStack wetInput = this.inputHandler.getStackInSlot(1);
             ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
-            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+            PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput);
             ItemStack result = recipeResult.getOutput();
 
             if (wetOutput.isEmpty()) {

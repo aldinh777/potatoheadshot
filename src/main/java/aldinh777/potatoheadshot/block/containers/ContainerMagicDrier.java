@@ -90,11 +90,11 @@ public class ContainerMagicDrier extends Container {
                     return ItemStack.EMPTY;
                 }
             } else if (index != 1 && index != 0) {
-                if (PotatoDrierRecipes.INSTANCE.isDryRecipeExists(stack.getItem())) {
+                if (PotatoDrierRecipes.INSTANCE.isDryRecipeExists(stack)) {
                     if (!this.mergeItemStack(stack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (PotatoDrierRecipes.INSTANCE.isWetRecipeExists(stack.getItem())) {
+                } else if (PotatoDrierRecipes.INSTANCE.isWetRecipeExists(stack)) {
                     if (!this.mergeItemStack(stack, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }

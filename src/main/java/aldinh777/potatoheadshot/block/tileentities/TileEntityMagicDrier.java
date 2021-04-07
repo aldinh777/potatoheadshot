@@ -181,7 +181,7 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
             return false;
         }
 
-        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput);
         ItemStack result = recipeResult.getOutput();
 
         if (result.isEmpty()) {
@@ -212,7 +212,7 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
             return false;
         }
 
-        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput);
         ItemStack result = recipeResult.getOutput();
 
         if (result.isEmpty()) {
@@ -234,7 +234,7 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
     private void dryItem() {
         ItemStack dryInput = this.inputHandler.getStackInSlot(0);
         ItemStack dryOutput = this.outputHandler.getStackInSlot(0);
-        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput.getItem());
+        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput);
         ItemStack result = recipeResult.getOutput();
 
         if (dryOutput.isEmpty()) {
@@ -260,7 +260,7 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
     private void wetItem() {
         ItemStack wetInput = this.inputHandler.getStackInSlot(1);
         ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
-        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput.getItem());
+        PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getWetResult(wetInput);
         ItemStack result = recipeResult.getOutput();
 
         if (wetOutput.isEmpty()) {

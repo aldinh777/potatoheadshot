@@ -15,17 +15,17 @@ import java.util.Objects;
 
 public class PotatoDrierRecipe {
 
-    private final Item input;
+    private final ItemStack input;
     private final ItemStack output;
     private final int water;
 
-    public PotatoDrierRecipe(Item input, ItemStack output, int waterValue) {
+    public PotatoDrierRecipe(ItemStack input, ItemStack output, int waterValue) {
         this.input = input;
         this.output = output;
         this.water = waterValue;
     }
 
-    public Item getInput() {
+    public ItemStack getInput() {
         return this.input;
     }
 
@@ -38,49 +38,50 @@ public class PotatoDrierRecipe {
     }
 
     public CustomDryRecipe toCustomDryRecipe() {
-        String inputId = Objects.requireNonNull(this.input.getRegistryName()).toString();
+        String inputId = Objects.requireNonNull(this.input.getItem().getRegistryName()).toString();
         String outputId = Objects.requireNonNull(this.output.getItem().getRegistryName()).toString();
-        int meta = this.output.getMetadata();
+        int inputMeta = this.input.getMetadata();
+        int outputMeta = this.output.getMetadata();
         int water = this.water;
 
-        CustomDryRecipe.InputRecipe input = new CustomDryRecipe.InputRecipe(inputId, 0);
-        CustomDryRecipe.OutputRecipe output = new CustomDryRecipe.OutputRecipe(outputId, meta, water);
+        CustomDryRecipe.InputRecipe input = new CustomDryRecipe.InputRecipe(inputId, inputMeta);
+        CustomDryRecipe.OutputRecipe output = new CustomDryRecipe.OutputRecipe(outputId, outputMeta, water);
 
         return new CustomDryRecipe(input, output);
     }
 
     public CustomWetRecipe toCustomWetRecipe() {
-        String inputId = Objects.requireNonNull(this.input.getRegistryName()).toString();
+        String inputId = Objects.requireNonNull(this.input.getItem().getRegistryName()).toString();
         String outputId = Objects.requireNonNull(this.output.getItem().getRegistryName()).toString();
-        int meta = this.output.getMetadata();
+        int inputMeta = this.input.getMetadata();
+        int outputMeta = this.output.getMetadata();
 
-        CustomWetRecipe.ItemRecipe input = new CustomWetRecipe.ItemRecipe(inputId, 0);
-        CustomWetRecipe.ItemRecipe output = new CustomWetRecipe.ItemRecipe(outputId, meta);
+        CustomWetRecipe.ItemRecipe input = new CustomWetRecipe.ItemRecipe(inputId, inputMeta);
+        CustomWetRecipe.ItemRecipe output = new CustomWetRecipe.ItemRecipe(outputId, outputMeta);
 
         return new CustomWetRecipe(input, output);
     }
 
     public static List<PotatoDrierRecipe> getDefaultDryRecipes() {
         List<PotatoDrierRecipe> recipes = Lists.newArrayList();
-        Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
 
-        addRecipe(recipes, Items.POTATO, new ItemStack(PotatoItems.DRIED_POTATO), 100);
-        addRecipe(recipes, PotatoItems.DRIED_POTATO, new ItemStack(PotatoItems.POTATO_STARCH), 0);
-        addRecipe(recipes, PotatoItems.SWEET_POTATO, new ItemStack(PotatoItems.DRIED_SWEET_POTATO), 100);
-        addRecipe(recipes, PotatoItems.DRIED_SWEET_POTATO, new ItemStack(PotatoItems.SWEET_POTATO_DUST), 0);
-        addRecipe(recipes, PotatoItems.GLOWING_POTATO, new ItemStack(PotatoItems.GLOWING_POTATO_DUST), 0);
+        addRecipe(recipes, new ItemStack(Items.POTATO), new ItemStack(PotatoItems.DRIED_POTATO), 100);
+        addRecipe(recipes, new ItemStack(PotatoItems.DRIED_POTATO), new ItemStack(PotatoItems.POTATO_STARCH), 0);
+        addRecipe(recipes, new ItemStack(PotatoItems.SWEET_POTATO), new ItemStack(PotatoItems.DRIED_SWEET_POTATO), 100);
+        addRecipe(recipes, new ItemStack(PotatoItems.DRIED_SWEET_POTATO), new ItemStack(PotatoItems.SWEET_POTATO_DUST), 0);
+        addRecipe(recipes, new ItemStack(PotatoItems.GLOWING_POTATO), new ItemStack(PotatoItems.GLOWING_POTATO_DUST), 0);
         if (ConfigHandler.WET_POTATO) {
-            addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(Items.CLAY_BALL), 200);
+            addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(Items.CLAY_BALL), 200);
             if (ConfigHandler.SALT_POTATO) {
-                addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.SALT_POTATO), 400);
+                addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.SALT_POTATO), 400);
             }
-            addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.RAW_SALT), 1000);
+            addRecipe(recipes, new ItemStack(PotatoItems.WATER_POTATO), new ItemStack(PotatoItems.RAW_SALT), 1000);
         }
-        addRecipe(recipes, Items.WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT), 1000);
+        addRecipe(recipes, new ItemStack(Items.WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 1000);
         if (ConfigHandler.SWEET_BUCKET) {
-            addRecipe(recipes, PotatoItems.SWEET_WATER_BUCKET, new ItemStack(PotatoItems.RAW_SALT), 1000);
+            addRecipe(recipes, new ItemStack(PotatoItems.SWEET_WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 1000);
         }
-        addRecipe(recipes, sponge, new ItemStack(Blocks.SPONGE), 1000);
+        addRecipe(recipes, new ItemStack(Blocks.SPONGE, 1, 1), new ItemStack(Blocks.SPONGE), 1000);
 
         return recipes;
     }
@@ -89,27 +90,27 @@ public class PotatoDrierRecipe {
         List<PotatoDrierRecipe> recipes = Lists.newArrayList();
         Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
 
-        addRecipe(recipes, Items.POTATO, new ItemStack(PotatoItems.WET_POTATO), 0);
+        addRecipe(recipes, new ItemStack(Items.POTATO), new ItemStack(PotatoItems.WET_POTATO), 0);
         if (ConfigHandler.WET_POTATO) {
-            addRecipe(recipes, PotatoItems.WET_POTATO, new ItemStack(PotatoItems.SUPER_WET_POTATO), 0);
-            addRecipe(recipes, PotatoItems.SUPER_WET_POTATO, new ItemStack(PotatoItems.WATER_POTATO), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(PotatoItems.SUPER_WET_POTATO), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.WATER_POTATO), 0);
         }
-        addRecipe(recipes, Items.BUCKET, new ItemStack(Items.WATER_BUCKET), 0);
+        addRecipe(recipes, new ItemStack(Items.BUCKET), new ItemStack(Items.WATER_BUCKET), 0);
         if (ConfigHandler.SWEET_BUCKET) {
-            addRecipe(recipes, PotatoItems.SWEET_EMPTY_BUCKET, new ItemStack(PotatoItems.SWEET_WATER_BUCKET), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), new ItemStack(PotatoItems.SWEET_WATER_BUCKET), 0);
         }
-        addRecipe(recipes, PotatoItems.DRIED_POTATO, new ItemStack(Items.POTATO), 0);
+        addRecipe(recipes, new ItemStack(PotatoItems.DRIED_POTATO), new ItemStack(Items.POTATO), 0);
         if (ConfigHandler.HOT_POTATO) {
-            addRecipe(recipes, PotatoItems.EXTRA_HOT_POTATO, new ItemStack(Items.COAL, 1, 1), 0);
-            addRecipe(recipes, PotatoItems.EXTREME_HOT_POTATO, new ItemStack(Items.COAL), 0);
-            addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), new ItemStack(Items.COAL, 1, 1), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), new ItemStack(Items.COAL), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.LAVA_POTATO), new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)), 0);
         }
-        addRecipe(recipes, sponge, new ItemStack(sponge, 1, 1), 0);
+        addRecipe(recipes, new ItemStack(sponge), new ItemStack(sponge, 1, 1), 0);
 
         return recipes;
     }
 
-    public static void addRecipe(List<PotatoDrierRecipe> recipes, Item input, ItemStack output, int water) {
+    public static void addRecipe(List<PotatoDrierRecipe> recipes, ItemStack input, ItemStack output, int water) {
         recipes.add(new PotatoDrierRecipe(input, output, water));
     }
 }
