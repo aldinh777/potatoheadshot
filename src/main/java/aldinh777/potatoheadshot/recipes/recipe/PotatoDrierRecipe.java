@@ -79,13 +79,13 @@ public class PotatoDrierRecipe {
             }
         }
         if (ConfigHandler.WATER_POTATO) {
-            addRecipe(recipes, new ItemStack(PotatoItems.WATER_POTATO), new ItemStack(PotatoItems.RAW_SALT), 1000);
+            addRecipe(recipes, new ItemStack(PotatoItems.WATER_POTATO), new ItemStack(PotatoItems.RAW_SALT), 800);
         }
-        addRecipe(recipes, new ItemStack(Items.WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 1000);
+        addRecipe(recipes, new ItemStack(Items.WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 800);
         if (ConfigHandler.SWEET_BUCKET) {
-            addRecipe(recipes, new ItemStack(PotatoItems.SWEET_WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 1000);
+            addRecipe(recipes, new ItemStack(PotatoItems.SWEET_WATER_BUCKET), new ItemStack(PotatoItems.RAW_SALT), 800);
         }
-        addRecipe(recipes, new ItemStack(Blocks.SPONGE, 1, 1), new ItemStack(Blocks.SPONGE), 1000);
+        addRecipe(recipes, new ItemStack(Blocks.SPONGE, 1, 1), new ItemStack(Blocks.SPONGE), 800);
 
         return recipes;
     }

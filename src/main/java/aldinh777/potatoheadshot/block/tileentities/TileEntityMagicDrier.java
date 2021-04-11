@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 
 public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IManaStorage {
 
-    private final PotatoManaStorage storage = new PotatoManaStorage(80_000);
+    private final PotatoManaStorage storage = new PotatoManaStorage(20_000);
 
     private final ItemStackHandler inputHandler = new ItemStackHandler(2);
     private final ItemStackHandler outputHandler = new ItemStackHandler(2);
@@ -181,6 +181,10 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
             return false;
         }
 
+        if (this.dryTime == 0 && this.storage.getManaStored() < 200) {
+            return false;
+        }
+
         PotatoDrierRecipe recipeResult = PotatoDrierRecipes.INSTANCE.getDryResult(dryInput);
         ItemStack result = recipeResult.getOutput();
 
@@ -204,11 +208,11 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
         ItemStack wetInput = this.inputHandler.getStackInSlot(1);
         ItemStack wetOutput = this.outputHandler.getStackInSlot(1);
 
-        if (this.waterSize < 1000) {
+        if (wetInput.isEmpty() || this.waterSize <= 0) {
             return false;
         }
 
-        if (wetInput.isEmpty()) {
+        if (this.wetTime == 0 && this.waterSize < 1000) {
             return false;
         }
 
@@ -276,7 +280,7 @@ public class TileEntityMagicDrier extends TileEntityPotatoMachine implements IMa
         boolean dryingFlag = false;
 
         if (this.canDry()) {
-            this.storage.useMana(10);
+            this.storage.useMana(2);
             ++this.dryTime;
 
             if (this.dryTime == this.totalDryTime) {

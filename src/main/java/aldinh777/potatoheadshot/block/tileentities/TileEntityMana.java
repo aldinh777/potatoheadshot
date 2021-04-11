@@ -16,7 +16,7 @@ public abstract class TileEntityMana extends TileEntityPotatoMachine {
 	protected final ItemStackHandler inputHandler = new ItemStackHandler(1);
 	protected final ItemStackHandler outputHandler = new ItemStackHandler(1);
 	
-	protected final PotatoManaStorage storage = new PotatoManaStorage(64000);
+	protected final PotatoManaStorage storage = new PotatoManaStorage(12_800);
 	protected int manaSize = 0;
 
 	public abstract ItemStack getResult(ItemStack paramItemStack);
