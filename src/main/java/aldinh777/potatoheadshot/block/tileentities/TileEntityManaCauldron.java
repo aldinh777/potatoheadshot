@@ -113,7 +113,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                 return true;
 
             } else {
-                ItemStack result = recipes.getResult(stack);
+                ItemStack result = recipes.getResult(stack).copy();
                 int cost = recipes.getCost(stack);
 
                 if (!result.isEmpty() && this.storage.getManaStored() >= cost) {
@@ -141,6 +141,10 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                         }
 
                         TileEntity te = this.world.getTileEntity(this.pos.offset(facing));
+                        if (te instanceof TileEntityMana) {
+                            break;
+                        }
+
                         if (te != null) {
                             if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)) {
                                 IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
@@ -160,12 +164,14 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                     }
 
                     if (!success) {
-                        EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result.copy());
+                        EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result);
                         this.world.spawnEntity(entityResult);
                     }
 
                     this.storage.useMana(cost);
                     stack.shrink(1);
+
+                    return true;
                 }
                 return false;
             }
