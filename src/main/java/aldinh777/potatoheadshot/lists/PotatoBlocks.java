@@ -1,8 +1,9 @@
 package aldinh777.potatoheadshot.lists;
 
+import aldinh777.potatoheadshot.block.backup.blocks.machines.*;
 import aldinh777.potatoheadshot.block.blocks.*;
 import aldinh777.potatoheadshot.block.blocks.crops.*;
-import aldinh777.potatoheadshot.block.blocks.machines.*;
+import aldinh777.potatoheadshot.block.blocks.machines.BlockDrier;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.Block;
 
@@ -65,7 +66,7 @@ public class PotatoBlocks {
         ULTIMATE_FLOWER = new ManaFlower("ultimate_mana_flower").setLightLevel(1.0f);
 
         // Utility Block
-        POTATO_DRIER = new PotatoDrier("potato_drier", BlockType.STONE);
+        POTATO_DRIER = new BlockDrier("potato_drier", BlockType.STONE);
         SWEET_POTATO_GENERATOR = new SweetPotatoGenerator("sweet_potato_generator", BlockType.METAL);
         SWEET_FREEZER = new SweetFreezer("sweet_freezer", BlockType.METAL);
         SWEET_CRYSTAL_MAKER = new SweetCrystalMaker("sweet_crystal_maker", BlockType.METAL);

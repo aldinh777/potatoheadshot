@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntityManaCauldron;
+import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.properties.PropertyEnum;

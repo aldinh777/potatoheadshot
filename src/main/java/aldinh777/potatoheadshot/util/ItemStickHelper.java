@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.util;
 
-import aldinh777.potatoheadshot.block.tileentities.IManaStorage;
+import aldinh777.potatoheadshot.block.backup.tileentities.IManaStorage;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.handler.ConfigHandler;
@@ -9,7 +9,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +17,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.event.ForgeEventFactory;
 
 public interface ItemStickHelper {
 

@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.slots;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntityPotatoDrier;
+import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityPotatoDrier;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;

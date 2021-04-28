@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.tileentities.*;
+import aldinh777.potatoheadshot.block.backup.tileentities.*;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;

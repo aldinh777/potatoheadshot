@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.handler;
 
-import aldinh777.potatoheadshot.block.containers.*;
-import aldinh777.potatoheadshot.block.guis.*;
-import aldinh777.potatoheadshot.block.tileentities.*;
+import aldinh777.potatoheadshot.block.backup.tileentities.*;
+import aldinh777.potatoheadshot.block.backup.containers.*;
+import aldinh777.potatoheadshot.block.backup.guis.*;
 import aldinh777.potatoheadshot.item.container.ContainerPocketCauldron;
 import aldinh777.potatoheadshot.item.guis.GuiPocketCauldron;
 import aldinh777.potatoheadshot.util.Constants;

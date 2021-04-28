@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks;
 
-import aldinh777.potatoheadshot.block.tileentities.TileEntityEnergyTransfer;
+import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityEnergyTransfer;
 import aldinh777.potatoheadshot.util.BlockType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;

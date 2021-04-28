@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.compat.jei;
 
-import aldinh777.potatoheadshot.block.containers.*;
-import aldinh777.potatoheadshot.block.guis.*;
+import aldinh777.potatoheadshot.block.backup.containers.*;
+import aldinh777.potatoheadshot.block.backup.guis.*;
 import aldinh777.potatoheadshot.compat.jei.cauldron.*;
 import aldinh777.potatoheadshot.compat.jei.crystalcharger.CrystalChargerRecipe;
 import aldinh777.potatoheadshot.compat.jei.crystalcharger.CrystalChargerRecipeCategory;
@@ -17,7 +17,6 @@ import aldinh777.potatoheadshot.compat.jei.mana.CollectorRecipe;
 import aldinh777.potatoheadshot.compat.jei.mana.CollectorRecipeCategory;
 import aldinh777.potatoheadshot.compat.jei.mana.ExtractorRecipe;
 import aldinh777.potatoheadshot.compat.jei.mana.ExtractorRecipeCategory;
-import aldinh777.potatoheadshot.handler.ConfigHandler;
 import mezz.jei.api.*;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
