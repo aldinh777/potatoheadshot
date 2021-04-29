@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.backup.tileentities;
 
-import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
+import aldinh777.potatoheadshot.block.backup.blocks.machines.ManaCauldron;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.handler.ConfigHandler;
 import aldinh777.potatoheadshot.lists.PotatoItems;

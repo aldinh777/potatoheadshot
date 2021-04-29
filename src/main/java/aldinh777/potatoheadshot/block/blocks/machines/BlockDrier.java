@@ -3,13 +3,13 @@ package aldinh777.potatoheadshot.block.blocks.machines;
 import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityPotatoDrier;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.util.BlockType;
+import aldinh777.potatoheadshot.util.Constants;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -43,6 +43,7 @@ public class BlockDrier extends BlockMachine {
 
     public BlockDrier(String name, BlockType blockType) {
         super(name, blockType);
+        this.setGuiId(Constants.DRIER);
         setDefaultState(blockState.getBaseState()
                 .withProperty(ACTIVE, false)
                 .withProperty(WATER, false)
@@ -53,22 +54,6 @@ public class BlockDrier extends BlockMachine {
     @Override
     public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TileEntityPotatoDrier();
-    }
-
-    @Nonnull
-    @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public boolean isOpaqueCube(@Nonnull IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean isFullCube(@Nonnull IBlockState state) {
-        return false;
     }
 
     @Nonnull

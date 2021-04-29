@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.backup.tileentities;
 
-import aldinh777.potatoheadshot.block.blocks.EnergyTransfer;
+import aldinh777.potatoheadshot.block.backup.blocks.machines.EnergyTransfer;
 import aldinh777.potatoheadshot.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.energy.PotatoEnergyStorage;
 import aldinh777.potatoheadshot.energy.PotatoManaStorage;

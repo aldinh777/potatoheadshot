@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.block.backup.blocks.machines;
 
-import aldinh777.potatoheadshot.block.blocks.ManaCauldron;
 import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityUltManaCauldron;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import net.minecraft.block.state.IBlockState;

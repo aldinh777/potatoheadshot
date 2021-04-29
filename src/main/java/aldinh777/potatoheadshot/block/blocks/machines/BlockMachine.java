@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -28,19 +29,40 @@ public abstract class BlockMachine extends PotatoBlock {
                 .withProperty(FACING, EnumFacing.NORTH));
     }
 
+    public void setGuiId(int guiId) {
+        this.guiId = guiId;
+    }
+
+    @Nonnull
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(@Nonnull IBlockState state) {
+        return false;
+    }
+
     @Override
     public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            if (guiId != -1) {
+    public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (guiId != -1) {
+            if (!worldIn.isRemote) {
                 playerIn.openGui(PotatoHeadshot.INSTANCE, guiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

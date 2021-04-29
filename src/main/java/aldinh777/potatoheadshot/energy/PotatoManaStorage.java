@@ -2,7 +2,7 @@ package aldinh777.potatoheadshot.energy;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class PotatoManaStorage {
+public class PotatoManaStorage implements IManaStorage {
     
     int capacity;
     int mana = 0;

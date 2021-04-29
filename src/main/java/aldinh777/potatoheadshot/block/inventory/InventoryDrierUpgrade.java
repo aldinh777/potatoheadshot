@@ -1,9 +1,7 @@
 package aldinh777.potatoheadshot.block.inventory;
 
-import net.minecraft.item.ItemStack;
+import aldinh777.potatoheadshot.block.blocks.machines.BlockDrier;
 import net.minecraftforge.items.ItemStackHandler;
-
-import javax.annotation.Nonnull;
 
 public class InventoryDrierUpgrade extends ItemStackHandler {
 
@@ -19,7 +17,23 @@ public class InventoryDrierUpgrade extends ItemStackHandler {
     }
 
     @Override
-    protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+    public int getSlotLimit(int slot) {
         return 1;
+    }
+
+    public boolean hasWaterBox() {
+        return false;
+    }
+
+    public BlockDrier.Mode getMode() {
+        return BlockDrier.Mode.BASIC;
+    }
+
+    public int getMultiplierLevel() {
+        return 0;
+    }
+
+    public int getBoosterLevel() {
+        return 0;
     }
 }
