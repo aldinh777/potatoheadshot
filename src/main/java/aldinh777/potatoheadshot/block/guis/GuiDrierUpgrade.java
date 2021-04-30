@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.guis;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.block.containers.ContainerDrier;
+import aldinh777.potatoheadshot.block.containers.ContainerDrierUpgrade;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,14 +10,14 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Objects;
 
-public class GuiDrier extends GuiContainer {
+public class GuiDrierUpgrade extends GuiContainer {
 
-    private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/container/potato_drier_basic.png";
+    private static final String TEXTURE = PotatoHeadshot.MODID + ":textures/gui/upgrade/potato_drier.png";
     private static final ResourceLocation TEXTURES = new ResourceLocation(TEXTURE);
     private final TileEntityDrier tileEntity;
 
-    public GuiDrier(InventoryPlayer inventoryPlayer, TileEntityDrier tileEntity) {
-        super(new ContainerDrier(inventoryPlayer, tileEntity));
+    public GuiDrierUpgrade(InventoryPlayer inventoryPlayer, TileEntityDrier tileEntity) {
+        super(new ContainerDrierUpgrade(inventoryPlayer, tileEntity));
         this.tileEntity = tileEntity;
     }
 

@@ -3,6 +3,11 @@ package aldinh777.potatoheadshot.handler;
 import aldinh777.potatoheadshot.block.backup.tileentities.*;
 import aldinh777.potatoheadshot.block.backup.containers.*;
 import aldinh777.potatoheadshot.block.backup.guis.*;
+import aldinh777.potatoheadshot.block.containers.ContainerDrier;
+import aldinh777.potatoheadshot.block.containers.ContainerDrierUpgrade;
+import aldinh777.potatoheadshot.block.guis.GuiDrier;
+import aldinh777.potatoheadshot.block.guis.GuiDrierUpgrade;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.item.container.ContainerPocketCauldron;
 import aldinh777.potatoheadshot.item.guis.GuiPocketCauldron;
 import aldinh777.potatoheadshot.util.Constants;
@@ -23,8 +28,11 @@ public class GuiHandler implements IGuiHandler {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID) {
             case Constants.DRIER:
-                TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
-                return new ContainerPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+                TileEntityDrier drier = (TileEntityDrier) tileEntity;
+                return new ContainerDrier(player.inventory, Objects.requireNonNull(drier));
+            case Constants.DRIER_UPGRADE:
+                TileEntityDrier drierUpgrade = (TileEntityDrier) tileEntity;
+                return new ContainerDrierUpgrade(player.inventory, Objects.requireNonNull(drierUpgrade));
             case Constants.MAGIC_DRIER:
                 TileEntityMagicDrier magicDrier = (TileEntityMagicDrier) tileEntity;
                 return new ContainerMagicDrier(player.inventory, Objects.requireNonNull(magicDrier));
@@ -61,8 +69,11 @@ public class GuiHandler implements IGuiHandler {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID) {
             case Constants.DRIER:
-                TileEntityPotatoDrier drier = (TileEntityPotatoDrier) tileEntity;
-                return new GuiPotatoDrier(player.inventory, Objects.requireNonNull(drier));
+                TileEntityDrier drier = (TileEntityDrier) tileEntity;
+                return new GuiDrier(player.inventory, Objects.requireNonNull(drier));
+            case Constants.DRIER_UPGRADE:
+                TileEntityDrier drierUpgrade = (TileEntityDrier) tileEntity;
+                return new GuiDrierUpgrade(player.inventory, Objects.requireNonNull(drierUpgrade));
             case Constants.MAGIC_DRIER:
                 TileEntityMagicDrier magicDrier = (TileEntityMagicDrier) tileEntity;
                 return new GuiMagicDrier(player.inventory, Objects.requireNonNull(magicDrier));

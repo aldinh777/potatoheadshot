@@ -18,6 +18,10 @@ public class TileEntityDrier extends AbstractMachine {
     private final ItemStackHandler inventoryDrier = new InventoryDrier();
     private final InventoryDrierUpgrade inventoryUpgradeDrier = new InventoryDrierUpgrade();
 
+    public InventoryDrierUpgrade getUpgrade() {
+        return inventoryUpgradeDrier;
+    }
+
     @Nullable
     @Override
     public ITextComponent getDisplayName() {

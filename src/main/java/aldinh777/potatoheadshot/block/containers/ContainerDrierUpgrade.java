@@ -1,8 +1,7 @@
 package aldinh777.potatoheadshot.block.containers;
 
-import aldinh777.potatoheadshot.block.inventory.InventoryDrier;
-import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
-import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
+import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
+import aldinh777.potatoheadshot.block.slots.SlotUpgradeHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.util.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,28 +9,27 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerDrier extends Container {
+public class ContainerDrierUpgrade extends Container {
 
     private final TileEntityDrier tileEntity;
 
-    public ContainerDrier(InventoryPlayer inventoryPlayer, TileEntityDrier tileEntity) {
+    public ContainerDrierUpgrade(InventoryPlayer inventoryPlayer, TileEntityDrier tileEntity) {
         this.tileEntity = tileEntity;
-        IItemHandler inventoryDrier = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+        InventoryDrierUpgrade upgrade = tileEntity.getUpgrade();
 
-        addSlotToContainer(new SlotFuelHandler(inventoryDrier, InventoryDrier.FUEL_SLOT, 14, 34));
-        addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.DRIER_INPUT_SLOT, 87, 26));
-        addSlotToContainer(new SlotOutputHandler(inventoryDrier, InventoryDrier.DRIER_OUTPUT_SLOT, 141, 22));
+        addSlotToContainer(new SlotUpgradeHandler(upgrade, InventoryDrierUpgrade.WATER_UPGRADE_SLOT, 12, 18));
+        addSlotToContainer(new SlotUpgradeHandler(upgrade, InventoryDrierUpgrade.MODE_UPGRADE_SLOT, 12, 56));
+        addSlotToContainer(new SlotUpgradeHandler(upgrade, InventoryDrierUpgrade.MULTIPLIER_UPGRADE_SLOT_1, 124, 30));
+        addSlotToContainer(new SlotUpgradeHandler(upgrade, InventoryDrierUpgrade.MULTIPLIER_UPGRADE_SLOT_2, 146, 30));
+        addSlotToContainer(new SlotUpgradeHandler(upgrade, InventoryDrierUpgrade.BOOSTER_UPGRADE_SLOT_1, 124, 56));
+        addSlotToContainer(new SlotUpgradeHandler(upgrade, InventoryDrierUpgrade.BOOSTER_UPGRADE_SLOT_2, 146, 56));
 
         InventoryHelper.addSlotPlayer(this::addSlotToContainer, inventoryPlayer);
     }

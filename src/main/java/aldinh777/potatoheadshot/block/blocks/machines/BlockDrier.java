@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.block.blocks.machines;
 
-import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityPotatoDrier;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockDrier extends BlockMachine {
+public class BlockDrier extends BlockMachine implements IBlockUpgradable {
 
     public static PropertyBool ACTIVE = PropertyBool.create("active");
     public static PropertyBool WATER = PropertyBool.create("water");
@@ -43,17 +43,26 @@ public class BlockDrier extends BlockMachine {
 
     public BlockDrier(String name, BlockType blockType) {
         super(name, blockType);
-        this.setGuiId(Constants.DRIER);
         setDefaultState(blockState.getBaseState()
                 .withProperty(ACTIVE, false)
                 .withProperty(WATER, false)
                 .withProperty(MODE, Mode.BASIC));
     }
 
+    @Override
+    public int getGuiId() {
+        return Constants.DRIER;
+    }
+
+    @Override
+    public int getUpgradeGuiId() {
+        return Constants.DRIER_UPGRADE;
+    }
+
     @Nullable
     @Override
     public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
-        return new TileEntityPotatoDrier();
+        return new TileEntityDrier();
     }
 
     @Nonnull

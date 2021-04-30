@@ -5,12 +5,12 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class InventoryDrierUpgrade extends ItemStackHandler {
 
-    public final int WATER_UPGRADE_SLOT = 0;
-    public final int MODE_UPGRADE_SLOT = 1;
-    public final int MULTIPLIER_UPGRADE_SLOT_1 = 2;
-    public final int MULTIPLIER_UPGRADE_SLOT_2 = 3;
-    public final int BOOSTER_UPGRADE_SLOT_1 = 4;
-    public final int BOOSTER_UPGRADE_SLOT_2 = 5;
+    public static final int WATER_UPGRADE_SLOT = 0;
+    public static final int MODE_UPGRADE_SLOT = 1;
+    public static final int MULTIPLIER_UPGRADE_SLOT_1 = 2;
+    public static final int MULTIPLIER_UPGRADE_SLOT_2 = 3;
+    public static final int BOOSTER_UPGRADE_SLOT_1 = 4;
+    public static final int BOOSTER_UPGRADE_SLOT_2 = 5;
 
     public InventoryDrierUpgrade() {
         super(6);

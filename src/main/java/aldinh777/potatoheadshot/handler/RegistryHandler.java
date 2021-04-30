@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.backup.tileentities.*;
+import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.energy.CapabilityPotato;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
@@ -92,7 +93,7 @@ public class RegistryHandler {
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
         ResourceLocation magicDrier = new ResourceLocation("potatoheadshot:magic_drier");
 
-        GameRegistry.registerTileEntity(TileEntityPotatoDrier.class, potatoDrier);
+        GameRegistry.registerTileEntity(TileEntityDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntityMagicDrier.class, magicDrier);
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
         GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);

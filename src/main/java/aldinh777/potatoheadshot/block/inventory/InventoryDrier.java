@@ -8,11 +8,11 @@ import javax.annotation.Nonnull;
 
 public class InventoryDrier extends ItemStackHandler {
 
-    public final int FUEL_SLOT = 0;
-    public final int DRIER_INPUT_SLOT = 1;
-    public final int DRIER_OUTPUT_SLOT = 2;
-    public final int WATER_INPUT_SLOT = 3;
-    public final int WATER_OUTPUT_SLOT = 4;
+    public static final int FUEL_SLOT = 0;
+    public static final int DRIER_INPUT_SLOT = 1;
+    public static final int DRIER_OUTPUT_SLOT = 2;
+    public static final int WATER_INPUT_SLOT = 3;
+    public static final int WATER_OUTPUT_SLOT = 4;
 
     public InventoryDrier() {
         super(5);

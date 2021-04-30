@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 public abstract class BlockMachine extends PotatoBlock {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    protected int guiId = -1;
 
     public BlockMachine(String name, BlockType blockType) {
         super(name, blockType);
@@ -29,8 +28,8 @@ public abstract class BlockMachine extends PotatoBlock {
                 .withProperty(FACING, EnumFacing.NORTH));
     }
 
-    public void setGuiId(int guiId) {
-        this.guiId = guiId;
+    public int getGuiId() {
+        return -1;
     }
 
     @Nonnull
@@ -56,11 +55,22 @@ public abstract class BlockMachine extends PotatoBlock {
 
     @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (guiId != -1) {
-            if (!worldIn.isRemote) {
-                playerIn.openGui(PotatoHeadshot.INSTANCE, guiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        if (playerIn.isSneaking()) {
+            if (this instanceof IBlockUpgradable) {
+                int upgradeGuiId = ((IBlockUpgradable) this).getUpgradeGuiId();
+                if (!worldIn.isRemote) {
+                    playerIn.openGui(PotatoHeadshot.INSTANCE, upgradeGuiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                }
+                return true;
             }
-            return true;
+        } else {
+            int guiId = getGuiId();
+            if (guiId != -1) {
+                if (!worldIn.isRemote) {
+                    playerIn.openGui(PotatoHeadshot.INSTANCE, guiId, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                }
+                return true;
+            }
         }
         return false;
     }

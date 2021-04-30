@@ -1,8 +1,9 @@
 package aldinh777.potatoheadshot.util;
 
 public interface Constants {
-    int DRIER = 1;
-    int MAGIC_DRIER = 11;
+    int DRIER_UPGRADE = 10;
+    int DRIER = 11;
+    int MAGIC_DRIER = 12;
     int POTATO_GEN = 2;
     int FREEZER = 3;
     int CRYSTAL_MAKER = 4;
@@ -12,5 +13,5 @@ public interface Constants {
     int EXTRACTOR = 8;
 
     int POCKET_CAULDRON = 9;
-    int MAGIC_TRANSFORMER = 10;
+//    int MAGIC_TRANSFORMER = 10;
 }
