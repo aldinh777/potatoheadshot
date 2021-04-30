@@ -1,7 +1,9 @@
 package aldinh777.potatoheadshot.block.tileentities;
 
+import aldinh777.potatoheadshot.block.blocks.machines.BlockDrier;
 import aldinh777.potatoheadshot.block.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
@@ -66,7 +68,17 @@ public class TileEntityDrier extends AbstractMachine {
         boolean dryFlag = false;
 
         if (!world.isRemote) {
-
+            IBlockState state = world.getBlockState(pos);
+            if (state.getBlock() instanceof BlockDrier) {
+                boolean water = state.getValue(BlockDrier.WATER);
+                BlockDrier.Mode mode = state.getValue(BlockDrier.MODE);
+                if (water != inventoryUpgradeDrier.hasWaterCapacity()) {
+                    world.setBlockState(pos, state.withProperty(BlockDrier.WATER, inventoryUpgradeDrier.hasWaterCapacity()));
+                }
+                if (mode != inventoryUpgradeDrier.getMode()) {
+                    world.setBlockState(pos, state.withProperty(BlockDrier.MODE, inventoryUpgradeDrier.getMode()));
+                }
+            }
         }
 
         if (dryFlag) {

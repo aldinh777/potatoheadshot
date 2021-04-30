@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.block.inventory;
 
+import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityPotatoDrier;
 import aldinh777.potatoheadshot.util.FuelHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
@@ -18,6 +19,14 @@ public class InventoryDrier extends ItemStackHandler {
         super(5);
     }
 
+    @Override
+    public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+        if (slot == FUEL_SLOT) {
+            return super.isItemValid(slot, stack) && TileEntityPotatoDrier.isItemFuel(stack);
+        }
+        return super.isItemValid(slot, stack);
+    }
+
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
@@ -29,18 +38,6 @@ public class InventoryDrier extends ItemStackHandler {
                 return super.insertItem(slot, stack, simulate);
             default:
                 return stack;
-        }
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        switch (slot) {
-            case DRIER_OUTPUT_SLOT:
-            case WATER_OUTPUT_SLOT:
-                return super.extractItem(slot, amount, simulate);
-            default:
-                return ItemStack.EMPTY;
         }
     }
 }

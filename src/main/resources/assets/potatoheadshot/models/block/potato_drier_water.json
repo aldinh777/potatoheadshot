@@ -17,10 +17,10 @@
             "from": [ 3, 1, 0 ], 
             "to": [ 4, 14, 16 ], 
             "faces": {
-                "north": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 1, 14 ] },
-                "east": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 16, 14 ] },
-                "south": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 1, 14 ] },
-                "west": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 16, 14 ] }
+                "north": { "texture": "#potato_drier_side", "uv": [ 0, 1, 1, 14 ] },
+                "east": { "texture": "#potato_drier_side", "uv": [ 0, 1, 16, 14 ] },
+                "south": { "texture": "#potato_drier_side", "uv": [ 0, 1, 1, 14 ] },
+                "west": { "texture": "#potato_drier_side", "uv": [ 0, 1, 16, 14 ] }
             }
         },
         {
@@ -28,10 +28,10 @@
             "from": [ 15, 1, 0 ], 
             "to": [ 16, 14, 16 ], 
             "faces": {
-                "north": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 1, 14 ] },
-                "east": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 16, 14 ] },
-                "south": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 1, 14 ] },
-                "west": { "texture": "#potato_drier_side_basic", "uv": [ 0, 1, 16, 14 ] }
+                "north": { "texture": "#potato_drier_side", "uv": [ 0, 1, 1, 14 ] },
+                "east": { "texture": "#potato_drier_side", "uv": [ 0, 1, 16, 14 ] },
+                "south": { "texture": "#potato_drier_side", "uv": [ 0, 1, 1, 14 ] },
+                "west": { "texture": "#potato_drier_side", "uv": [ 0, 1, 16, 14 ] }
             }
         },
         {
@@ -39,8 +39,8 @@
             "from": [ 4, 1, 15 ], 
             "to": [ 15, 14, 16 ], 
             "faces": {
-                "north": { "texture": "#potato_drier_side_basic", "uv": [ 1, 1, 12, 14 ] },
-                "south": { "texture": "#potato_drier_side_basic", "uv": [ 1, 1, 12, 14 ] }
+                "north": { "texture": "#potato_drier_side", "uv": [ 1, 1, 12, 14 ] },
+                "south": { "texture": "#potato_drier_side", "uv": [ 1, 1, 12, 14 ] }
             }
         },
         {
@@ -265,9 +265,9 @@
             "from": [ 0, 2, 7 ], 
             "to": [ 3, 6, 8 ], 
             "faces": {
-                "north": { "texture": "#potato_drier_side_basic", "uv": [ 1, 10, 4, 14 ] },
-                "south": { "texture": "#potato_drier_side_basic", "uv": [ 1, 10, 4, 14 ] },
-                "west": { "texture": "#potato_drier_side_basic", "uv": [ 1, 10, 2, 14 ] }
+                "north": { "texture": "#potato_drier_side", "uv": [ 1, 10, 4, 14 ] },
+                "south": { "texture": "#potato_drier_side", "uv": [ 1, 10, 4, 14 ] },
+                "west": { "texture": "#potato_drier_side", "uv": [ 1, 10, 2, 14 ] }
             }
         },
         {

@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.block.containers;
 
 import aldinh777.potatoheadshot.block.inventory.InventoryDrier;
+import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
 import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
 import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
@@ -27,11 +28,20 @@ public class ContainerDrier extends Container {
 
     public ContainerDrier(InventoryPlayer inventoryPlayer, TileEntityDrier tileEntity) {
         this.tileEntity = tileEntity;
+        InventoryDrierUpgrade upgrade = tileEntity.getUpgrade();
         IItemHandler inventoryDrier = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 
-        addSlotToContainer(new SlotFuelHandler(inventoryDrier, InventoryDrier.FUEL_SLOT, 14, 34));
+        if (!upgrade.hasEnergyCapacity()) {
+            addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.FUEL_SLOT, 14, 34));
+        }
+
         addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.DRIER_INPUT_SLOT, 87, 26));
-        addSlotToContainer(new SlotOutputHandler(inventoryDrier, InventoryDrier.DRIER_OUTPUT_SLOT, 141, 22));
+        addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.DRIER_OUTPUT_SLOT, 141, 22));
+
+        if (upgrade.hasWaterCapacity()) {
+            this.addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.WATER_INPUT_SLOT, 87, 58));
+            this.addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.WATER_OUTPUT_SLOT, 141, 54));
+        }
 
         InventoryHelper.addSlotPlayer(this::addSlotToContainer, inventoryPlayer);
     }

@@ -1,6 +1,9 @@
 package aldinh777.potatoheadshot.block.inventory;
 
 import aldinh777.potatoheadshot.block.blocks.machines.BlockDrier;
+import aldinh777.potatoheadshot.lists.PotatoItems;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class InventoryDrierUpgrade extends ItemStackHandler {
@@ -21,12 +24,33 @@ public class InventoryDrierUpgrade extends ItemStackHandler {
         return 1;
     }
 
-    public boolean hasWaterBox() {
-        return false;
+    public boolean hasWaterCapacity() {
+        ItemStack upgrade = getStackInSlot(WATER_UPGRADE_SLOT);
+        return !upgrade.isEmpty();
     }
 
     public BlockDrier.Mode getMode() {
-        return BlockDrier.Mode.BASIC;
+        if (hasFluxCapacity()) {
+            return BlockDrier.Mode.FLUX;
+        } else if (hasManaCapacity()) {
+            return BlockDrier.Mode.MANA;
+        } else {
+            return BlockDrier.Mode.BASIC;
+        }
+    }
+
+    public boolean hasFluxCapacity() {
+        ItemStack upgrade = getStackInSlot(MODE_UPGRADE_SLOT);
+        return upgrade.getItem() == Items.REDSTONE;
+    }
+
+    public boolean hasManaCapacity() {
+        ItemStack upgrade = getStackInSlot(MODE_UPGRADE_SLOT);
+        return upgrade.getItem() == PotatoItems.MANA_DUST;
+    }
+
+    public boolean hasEnergyCapacity() {
+        return hasFluxCapacity() || hasManaCapacity();
     }
 
     public int getMultiplierLevel() {
