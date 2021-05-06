@@ -3,7 +3,7 @@ package aldinh777.potatoheadshot.handler;
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.backup.tileentities.*;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
-import aldinh777.potatoheadshot.energy.CapabilityPotato;
+import aldinh777.potatoheadshot.energy.CapabilityMana;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -33,7 +33,7 @@ public class RegistryHandler {
         PotatoBlocks.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(PotatoHeadshot.INSTANCE, new GuiHandler());
-        CapabilityPotato.register();
+        CapabilityMana.register();
     }
 
     public static void init() {

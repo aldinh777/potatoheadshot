@@ -91,6 +91,12 @@ public class PotatoItems {
     public static Item BAKED_POTATO_PLANKS;
     public static Item BAKED_POTATO_BLOCK;
 
+    public static Item UPGRADE_BOOSTER;
+    public static Item UPGRADE_MULTIPLIER;
+    public static Item UPGRADE_MODE_FLUX;
+    public static Item UPGRADE_MODE_MANA;
+    public static Item UPGRADE_DRIER_WATER;
+
     public static void addFoodEffects(Item item, FoodEffects... effects) {
         if (item instanceof PotatoFood) {
             PotatoFood food = (PotatoFood) item;
@@ -187,6 +193,13 @@ public class PotatoItems {
         // Potato Potions
         SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", ManaCauldron.Element.FIRE);
         SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", ManaCauldron.Element.LIFE);
+
+        // Upgrades
+        UPGRADE_BOOSTER = new PotatoItem("upgrade_booster");
+        UPGRADE_MULTIPLIER = new PotatoItem("upgrade_multiplier");
+        UPGRADE_MODE_FLUX = new UpgradeModeFlux("upgrade_mode_flux");
+        UPGRADE_MODE_MANA = new UpgradeModeMana("upgrade_mode_mana");
+        UPGRADE_DRIER_WATER = new UpgradeDrierWater("upgrade_drier_water");
 
         // This is kinda complicated, but i have to put the food block here to access the item
         // since they are extend ItemFood not ItemBlock so i can't get like Item#getItemFromBlock

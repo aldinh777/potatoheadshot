@@ -79,6 +79,13 @@ item.lava_hoe.name=Lava Hoe
 item.splash_mana_fire.name=Splash Potion of Fire Mana
 item.splash_mana_life.name=Splash Potion of Life Mana
 
+# Upgrades
+item.upgrade_drier_water.name=Upgrade Drier (Water)
+item.upgrade_mode_flux.name=Upgrade Mode (Flux)
+item.upgrade_mode_mana.name=Upgrade Mode (Mana)
+item.upgrade_booster.name=Upgrade Booster
+item.upgrade_multiplier.name=Upgrade Multiplier
+
 # Placeable Item
 tile.glowing_mana_torch.name=Mana Torch
 tile.glowing_mana_flower.name=Mana Flower

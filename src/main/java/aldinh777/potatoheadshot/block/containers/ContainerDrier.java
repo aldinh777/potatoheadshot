@@ -32,7 +32,7 @@ public class ContainerDrier extends Container {
         InventoryDrierUpgrade upgrade = tileEntity.getUpgrade();
         IItemHandler inventoryDrier = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 
-        if (!upgrade.hasEnergyCapacity()) {
+        if (!upgrade.hasEnergyUpgrade()) {
             addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.FUEL_SLOT, 14, 34));
             machineSlot++;
         }
@@ -40,7 +40,7 @@ public class ContainerDrier extends Container {
         addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.DRIER_INPUT_SLOT, 87, 26));
         addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.DRIER_OUTPUT_SLOT, 141, 22));
 
-        if (upgrade.hasWaterCapacity()) {
+        if (upgrade.hasWaterUpgrade()) {
             this.addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.WATER_INPUT_SLOT, 87, 58));
             this.addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.WATER_OUTPUT_SLOT, 141, 54));
             machineSlot+=2;
@@ -60,6 +60,10 @@ public class ContainerDrier extends Container {
             listener.sendWindowProperty(this, 1, tileEntity.burnTime);
             listener.sendWindowProperty(this, 2, tileEntity.dryProgress);
             listener.sendWindowProperty(this, 3, tileEntity.maxDryProgress);
+
+            listener.sendWindowProperty(this, 4, tileEntity.waterVolume);
+            listener.sendWindowProperty(this, 5, tileEntity.fluxStored);
+            listener.sendWindowProperty(this, 6, tileEntity.manaStored);
         }
     }
 
@@ -78,6 +82,15 @@ public class ContainerDrier extends Container {
                 break;
             case 3:
                 tileEntity.maxDryProgress = data;
+                break;
+            case 4:
+                tileEntity.waterVolume = data;
+                break;
+            case 5:
+                tileEntity.fluxStored = data;
+                break;
+            case 6:
+                tileEntity.manaStored = data;
                 break;
         }
     }

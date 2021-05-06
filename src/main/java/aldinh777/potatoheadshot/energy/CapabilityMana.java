@@ -8,10 +8,10 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class CapabilityPotato {
+public class CapabilityMana {
 
     @CapabilityInject(IManaStorage.class)
-    public static Capability<IEnergyStorage> MANA = null;
+    public static Capability<IManaStorage> MANA = null;
 
     public static void register() {
         CapabilityManager.INSTANCE.register(IManaStorage.class, new Capability.IStorage<IManaStorage>() {
@@ -27,6 +27,6 @@ public class CapabilityPotato {
                 }
                 ((PotatoManaStorage) instance).mana = ((NBTTagInt) nbt).getInt();
             }
-        }, () -> new PotatoManaStorage(10000));
+        }, () -> new PotatoManaStorage(6400));
     }
 }

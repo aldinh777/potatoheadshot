@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -35,21 +36,6 @@ public class ContainerDrierUpgrade extends Container {
     }
 
     @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
-
-        for (IContainerListener listener : listeners) {
-
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void updateProgressBar(int id, int data) {
-        super.updateProgressBar(id, data);
-    }
-
-    @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
         World world = tileEntity.getWorld();
         BlockPos pos = tileEntity.getPos();
@@ -66,6 +52,37 @@ public class ContainerDrierUpgrade extends Container {
     @Nonnull
     @Override
     public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index) {
-        return super.transferStackInSlot(playerIn, index);
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = inventorySlots.get(index);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            itemStack = stack.copy();
+
+            int maxSlot = 6;
+            if (index < maxSlot) {
+                if (!mergeItemStack(stack, maxSlot, maxSlot + 36, true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else {
+                if (!mergeItemStack(stack, 0, maxSlot, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+
+            if (stack.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (stack.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, stack);
+        }
+
+        return itemStack;
     }
 }

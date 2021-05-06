@@ -9,13 +9,17 @@ import java.util.function.Consumer;
 
 public interface InventoryHelper {
 
+    static boolean isOutputOverflow(ItemStack output, ItemStack result) {
+        return output.getCount() + result.getCount() > output.getMaxStackSize();
+    }
+
     static boolean setOutputSlot(ItemStackHandler itemHandler, int outputSlot, ItemStack result) {
         ItemStack output = itemHandler.getStackInSlot(outputSlot);
 
         if (output.isEmpty()) {
             itemHandler.setStackInSlot(outputSlot, result.copy());
             return true;
-        } else if (output.isItemEqual(result) && output.getCount() < output.getMaxStackSize()) {
+        } else if (output.isItemEqual(result) && !isOutputOverflow(output, result)) {
             output.grow(result.getCount());
             return true;
         }

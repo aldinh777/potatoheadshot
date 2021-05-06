@@ -4,10 +4,19 @@ import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.block.containers.ContainerDrier;
 import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
+import aldinh777.potatoheadshot.energy.CapabilityMana;
+import aldinh777.potatoheadshot.energy.IManaStorage;
+import aldinh777.potatoheadshot.item.items.UpgradeDrierWater;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.Objects;
 
@@ -26,14 +35,14 @@ public class GuiDrier extends GuiContainer {
         this.tileEntity = tileEntity;
         InventoryDrierUpgrade upgrade = tileEntity.getUpgrade();
         String texture;
-        if (upgrade.hasEnergyCapacity()) {
-            if (upgrade.hasWaterCapacity()) {
+        if (upgrade.hasEnergyUpgrade()) {
+            if (upgrade.hasWaterUpgrade()) {
                 texture = TEXTURE_WATER_ENERGIZED;
             } else {
                 texture = TEXTURE_BASIC_ENERGIZED;
             }
         } else {
-            if (upgrade.hasWaterCapacity()) {
+            if (upgrade.hasWaterUpgrade()) {
                 texture = TEXTURE_WATER;
             } else {
                 texture = TEXTURE_BASIC;
@@ -61,23 +70,25 @@ public class GuiDrier extends GuiContainer {
         mc.getTextureManager().bindTexture(TEXTURES);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        if (tileEntity.isBurning()) {
-            drawBurnLeft();
-        }
-
+        drawBurnLeft();
+        drawWaterVolume();
         drawDryProgress();
+        drawFluxStored();
+        drawManaStored();
     }
 
     private void drawBurnLeft() {
-        int currentBurnTime = tileEntity.burnProgress;
-        int burnTime = tileEntity.burnTime;
-        int i = currentBurnTime == 0 ? 0 : burnTime * 13 / currentBurnTime;
+        if (tileEntity.isBurning()) {
+            int currentBurnTime = tileEntity.burnProgress;
+            int burnTime = tileEntity.burnTime;
+            int i = currentBurnTime == 0 ? 0 : burnTime * 13 / currentBurnTime;
 
-        drawTexturedModalRect(
-                guiLeft + 68, guiTop + 27 + 12 - i,
-                176, 12 - i,
-                14, i + 1
-        );
+            drawTexturedModalRect(
+                    guiLeft + 68, guiTop + 27 + 12 - i,
+                    176, 12 - i,
+                    14, i + 1
+            );
+        }
     }
 
     private void drawDryProgress() {
@@ -90,5 +101,62 @@ public class GuiDrier extends GuiContainer {
                 176, 14,
                 i + 1, 16
         );
+    }
+
+    private void drawWaterVolume() {
+        if (tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP)) {
+            IFluidHandler fluidHandler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
+            if (fluidHandler != null) {
+                if (fluidHandler instanceof UpgradeDrierWater.WaterCapability) {
+                    UpgradeDrierWater.WaterCapability waterHandler = (UpgradeDrierWater.WaterCapability) fluidHandler;
+                    FluidStack fluidStack = waterHandler.getFluid();
+                    if (fluidStack != null) {
+                        int waterSize = tileEntity.waterVolume;
+                        int maxWaterSize = waterHandler.getMaxVolume();
+                        int i = waterSize == 0 ? 0 : waterSize * 53 / maxWaterSize;
+
+                        this.drawTexturedModalRect(
+                                this.guiLeft + 44, this.guiTop + 21 + 52 - i,
+                                176, 48 + 52 - i,
+                                11, i + 1
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    private void drawFluxStored() {
+        if (tileEntity.hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
+            IEnergyStorage energyStorage = tileEntity.getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
+            if (energyStorage != null) {
+                int energy = tileEntity.fluxStored;
+                int maxEnergy = energyStorage.getMaxEnergyStored();
+                int i = (energy == 0 || maxEnergy == 0) ? 0 : energy * 68 / maxEnergy;
+
+                this.drawTexturedModalRect(
+                        this.guiLeft + 14, this.guiTop + 9 + 68 - i,
+                        195, 103 + 68 - i,
+                        16, i + 1
+                );
+            }
+        }
+    }
+
+    private void drawManaStored() {
+        if (tileEntity.hasCapability(CapabilityMana.MANA, EnumFacing.UP)) {
+            IManaStorage manaStorage = tileEntity.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+            if (manaStorage != null) {
+                int energy = tileEntity.manaStored;
+                int maxEnergy = manaStorage.getMaxManaStored();
+                int i = (energy == 0 || maxEnergy == 0) ? 0 : energy * 68 / maxEnergy;
+
+                this.drawTexturedModalRect(
+                        this.guiLeft + 14, this.guiTop + 9 + 68 - i,
+                        177, 103 + 68 - i,
+                        16, i + 1
+                );
+            }
+        }
     }
 }
