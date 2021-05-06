@@ -2,14 +2,13 @@ package aldinh777.potatoheadshot.block.containers;
 
 import aldinh777.potatoheadshot.block.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
-import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
-import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.util.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -25,14 +24,17 @@ import javax.annotation.Nonnull;
 public class ContainerDrier extends Container {
 
     private final TileEntityDrier tileEntity;
+    private final int machineSlot;
 
     public ContainerDrier(InventoryPlayer inventoryPlayer, TileEntityDrier tileEntity) {
         this.tileEntity = tileEntity;
+        int machineSlot = 2;
         InventoryDrierUpgrade upgrade = tileEntity.getUpgrade();
         IItemHandler inventoryDrier = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 
         if (!upgrade.hasEnergyCapacity()) {
             addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.FUEL_SLOT, 14, 34));
+            machineSlot++;
         }
 
         addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.DRIER_INPUT_SLOT, 87, 26));
@@ -41,7 +43,10 @@ public class ContainerDrier extends Container {
         if (upgrade.hasWaterCapacity()) {
             this.addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.WATER_INPUT_SLOT, 87, 58));
             this.addSlotToContainer(new SlotItemHandler(inventoryDrier, InventoryDrier.WATER_OUTPUT_SLOT, 141, 54));
+            machineSlot+=2;
         }
+
+        this.machineSlot = machineSlot;
 
         InventoryHelper.addSlotPlayer(this::addSlotToContainer, inventoryPlayer);
     }
@@ -51,14 +56,30 @@ public class ContainerDrier extends Container {
         super.detectAndSendChanges();
 
         for (IContainerListener listener : listeners) {
-
+            listener.sendWindowProperty(this, 0, tileEntity.burnProgress);
+            listener.sendWindowProperty(this, 1, tileEntity.burnTime);
+            listener.sendWindowProperty(this, 2, tileEntity.dryProgress);
+            listener.sendWindowProperty(this, 3, tileEntity.maxDryProgress);
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void updateProgressBar(int id, int data) {
-        super.updateProgressBar(id, data);
+        switch (id) {
+            case 0:
+                tileEntity.burnProgress = data;
+                break;
+            case 1:
+                tileEntity.burnTime = data;
+                break;
+            case 2:
+                tileEntity.dryProgress = data;
+                break;
+            case 3:
+                tileEntity.maxDryProgress = data;
+                break;
+        }
     }
 
     @Override
@@ -78,6 +99,36 @@ public class ContainerDrier extends Container {
     @Nonnull
     @Override
     public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index) {
-        return super.transferStackInSlot(playerIn, index);
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = inventorySlots.get(index);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            itemStack = stack.copy();
+
+            if (index < machineSlot) {
+                if (!mergeItemStack(stack, machineSlot, machineSlot + 36, true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else {
+                if (!mergeItemStack(stack, 0, machineSlot, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+
+            if (stack.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (stack.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, stack);
+        }
+
+        return itemStack;
     }
 }
