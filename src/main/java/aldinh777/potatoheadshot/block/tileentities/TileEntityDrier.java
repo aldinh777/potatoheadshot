@@ -36,6 +36,8 @@ public class TileEntityDrier extends AbstractMachine {
     private final ItemStackHandler inventoryDrier = new InventoryDrier();
     private final InventoryDrierUpgrade inventoryUpgradeDrier = new InventoryDrierUpgrade();
 
+    public int activeStateLimit = 0;
+
     public int burnProgress = 0;
     public int burnTime = 0;
     public int dryProgress = 0;
@@ -44,6 +46,10 @@ public class TileEntityDrier extends AbstractMachine {
     public int waterVolume = 0;
     public int fluxStored = 0;
     public int manaStored = 0;
+
+    public int maxWaterVolume = 8000;
+    public int maxFluxStored = 60000;
+    public int maxManaStored = 6000;
 
     public InventoryDrierUpgrade getUpgrade() {
         return inventoryUpgradeDrier;
@@ -89,6 +95,8 @@ public class TileEntityDrier extends AbstractMachine {
         super.readFromNBT(compound);
         inventoryDrier.deserializeNBT(compound.getCompoundTag("Inventory"));
         inventoryUpgradeDrier.deserializeNBT(compound.getCompoundTag("Upgrade"));
+        burnProgress = compound.getInteger("BurnProgress");
+        burnTime = compound.getInteger("BurnTime");
     }
 
     @Nonnull
@@ -97,6 +105,8 @@ public class TileEntityDrier extends AbstractMachine {
         super.writeToNBT(compound);
         compound.setTag("Inventory", inventoryDrier.serializeNBT());
         compound.setTag("Upgrade", inventoryUpgradeDrier.serializeNBT());
+        compound.setInteger("BurnProgress", burnProgress);
+        compound.setInteger("BurnTime", burnTime);
         return compound;
     }
 
@@ -145,15 +155,18 @@ public class TileEntityDrier extends AbstractMachine {
     private void updateGuiVariable() {
         if (hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP)) {
             IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
-            if (fluidHandler != null) {
-                if (fluidHandler instanceof UpgradeDrierWater.WaterCapability) {
-                    UpgradeDrierWater.WaterCapability waterHandler = (UpgradeDrierWater.WaterCapability) fluidHandler;
-                    FluidStack fluidStack = waterHandler.getFluid();
-                    if (fluidStack != null) {
-                        if (waterVolume != fluidStack.amount) {
-                            waterVolume = fluidStack.amount;
-                        }
+            if (fluidHandler instanceof UpgradeDrierWater.WaterCapability) {
+                UpgradeDrierWater.WaterCapability waterHandler = (UpgradeDrierWater.WaterCapability) fluidHandler;
+                FluidStack fluidStack = waterHandler.getFluid();
+                if (fluidStack != null) {
+                    if (waterVolume != fluidStack.amount) {
+                        waterVolume = fluidStack.amount;
                     }
+                    if (maxWaterVolume != waterHandler.getMaxVolume()) {
+                        maxWaterVolume = waterHandler.getMaxVolume();
+                    }
+                } else if (waterVolume != 0) {
+                    waterVolume = 0;
                 }
             }
         }
@@ -163,6 +176,9 @@ public class TileEntityDrier extends AbstractMachine {
                 if (fluxStored != energyStorage.getEnergyStored()) {
                     fluxStored = energyStorage.getEnergyStored();
                 }
+                if (maxFluxStored != energyStorage.getMaxEnergyStored()) {
+                    maxFluxStored = energyStorage.getMaxEnergyStored();
+                }
             }
         }
         if (hasCapability(CapabilityMana.MANA, EnumFacing.UP)) {
@@ -170,6 +186,9 @@ public class TileEntityDrier extends AbstractMachine {
             if (manaStorage != null) {
                 if (manaStored != manaStorage.getManaStored()) {
                     manaStored = manaStorage.getManaStored();
+                }
+                if (manaStored != manaStorage.getMaxManaStored()) {
+                    manaStored = manaStorage.getMaxManaStored();
                 }
             }
         }
@@ -182,8 +201,10 @@ public class TileEntityDrier extends AbstractMachine {
             boolean water = state.getValue(BlockDrier.WATER);
             BlockDrier.Mode mode = state.getValue(BlockDrier.MODE);
 
-            if (active != isBurning()) {
-                world.setBlockState(pos, state.withProperty(BlockDrier.ACTIVE, isBurning()));
+            boolean isActive = isBurning() || --activeStateLimit > 0;
+
+            if (active != isActive) {
+                world.setBlockState(pos, state.withProperty(BlockDrier.ACTIVE, isActive));
             }
             if (water != inventoryUpgradeDrier.hasWaterUpgrade()) {
                 world.setBlockState(pos, state.withProperty(BlockDrier.WATER, inventoryUpgradeDrier.hasWaterUpgrade()));
@@ -229,8 +250,9 @@ public class TileEntityDrier extends AbstractMachine {
             }
         } else if (output.isEmpty() || (output.isItemEqual(result) && !InventoryHelper.isOutputOverflow(output, result))) {
             dryProgress++;
+            activeStateLimit = 20;
         }
-        burnTime--;
+        burnTime -= Math.pow(2, inventoryUpgradeDrier.getBoosterLevel());
     }
 
     private void progressDryByEnergy() {
@@ -251,15 +273,17 @@ public class TileEntityDrier extends AbstractMachine {
                 if (energyStorage == null) {
                     return;
                 }
-                energyStorage.useEnergy(10);
+                energyStorage.useEnergy((int) (10 * Math.pow(2, inventoryUpgradeDrier.getBoosterLevel())));
                 dryProgress++;
+                activeStateLimit = 20;
             } else if (hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
                 PotatoManaStorage manaStorage = (PotatoManaStorage) getCapability(CapabilityMana.MANA, EnumFacing.UP);
                 if (manaStorage == null) {
                     return;
                 }
-                manaStorage.useMana(1);
+                manaStorage.useMana((int) Math.pow(2, inventoryUpgradeDrier.getBoosterLevel()));
                 dryProgress++;
+                activeStateLimit = 20;
             }
         }
     }

@@ -64,6 +64,10 @@ public class ContainerDrier extends Container {
             listener.sendWindowProperty(this, 4, tileEntity.waterVolume);
             listener.sendWindowProperty(this, 5, tileEntity.fluxStored);
             listener.sendWindowProperty(this, 6, tileEntity.manaStored);
+
+            listener.sendWindowProperty(this, 7, tileEntity.maxWaterVolume);
+            listener.sendWindowProperty(this, 8, tileEntity.maxFluxStored);
+            listener.sendWindowProperty(this, 9, tileEntity.maxManaStored);
         }
     }
 
@@ -91,6 +95,15 @@ public class ContainerDrier extends Container {
                 break;
             case 6:
                 tileEntity.manaStored = data;
+                break;
+            case 7:
+                tileEntity.maxWaterVolume = data;
+                break;
+            case 8:
+                tileEntity.maxFluxStored = data;
+                break;
+            case 9:
+                tileEntity.maxManaStored = data;
                 break;
         }
     }
