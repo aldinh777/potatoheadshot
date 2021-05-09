@@ -13,6 +13,15 @@ public interface InventoryHelper {
         return output.getCount() + result.getCount() > output.getMaxStackSize();
     }
 
+    static void shrinkIntoContainer(ItemStackHandler itemHandler, int slot, ItemStack input) {
+        ItemStack container = input.getItem().getContainerItem(input);
+        input.shrink(1);
+
+        if (input.isEmpty() && !container.isEmpty()) {
+            itemHandler.setStackInSlot(slot, container);
+        }
+    }
+
     static boolean setOutputSlot(ItemStackHandler itemHandler, int outputSlot, ItemStack result) {
         ItemStack output = itemHandler.getStackInSlot(outputSlot);
 

@@ -105,7 +105,6 @@ public class PotatoDrierRecipe {
         if (ConfigHandler.SWEET_BUCKET) {
             addRecipe(recipes, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), new ItemStack(PotatoItems.SWEET_WATER_BUCKET), 0);
         }
-        addRecipe(recipes, new ItemStack(PotatoItems.DRIED_POTATO), new ItemStack(Items.POTATO), 0);
         if (ConfigHandler.HOT_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), new ItemStack(Items.COAL, 1, 1), 0);
             addRecipe(recipes, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), new ItemStack(Items.COAL), 0);

@@ -55,6 +55,14 @@ public class SweetBucket extends Item {
     }
 
     @Override
+    public int getItemBurnTime(@Nonnull ItemStack itemStack) {
+        if (itemStack.getItem() == PotatoItems.SWEET_LAVA_BUCKET) {
+            return 20000;
+        }
+        return super.getItemBurnTime(itemStack);
+    }
+
+    @Override
     public int getMaxItemUseDuration(@Nonnull ItemStack stack) {
         return 32;
     }
