@@ -47,7 +47,6 @@ public class PotatoBlocks {
     public static Block MANA_CAULDRON;
     public static Block ULTIMATE_CRYSTAL_CHARGER;
     public static Block ULTIMATE_CAULDRON;
-    public static Block MAGIC_DRIER;
 
     public static void init() {
 
@@ -78,6 +77,5 @@ public class PotatoBlocks {
         ENERGY_TRANSFER = new EnergyTransfer("energy_transfer", BlockType.GLASS);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
         ULTIMATE_CAULDRON = new UltManaCauldron("ultimate_mana_cauldron");
-        MAGIC_DRIER = new MagicDrier("magic_drier", BlockType.STONE);
     }
 }

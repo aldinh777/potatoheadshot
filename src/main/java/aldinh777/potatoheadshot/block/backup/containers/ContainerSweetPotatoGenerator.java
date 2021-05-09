@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.backup.containers;
 
-import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
-import aldinh777.potatoheadshot.block.slots.SlotProcessHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotOutputHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotProcessHandler;
 import aldinh777.potatoheadshot.block.backup.tileentities.TileEntitySweetPotatoGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

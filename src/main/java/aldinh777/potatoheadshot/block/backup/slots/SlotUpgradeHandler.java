@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.slots;
+package aldinh777.potatoheadshot.block.backup.slots;
 
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;

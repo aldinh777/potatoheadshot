@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.slots;
+package aldinh777.potatoheadshot.block.backup.slots;
 
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.item.ItemStack;

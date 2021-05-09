@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.block.backup.containers;
 
 import aldinh777.potatoheadshot.recipes.category.PotatoDrierRecipes;
-import aldinh777.potatoheadshot.block.slots.SlotFuelHandler;
-import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotFuelHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.block.backup.tileentities.TileEntityPotatoDrier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

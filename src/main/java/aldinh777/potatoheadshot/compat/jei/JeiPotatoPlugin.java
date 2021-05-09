@@ -2,6 +2,8 @@ package aldinh777.potatoheadshot.compat.jei;
 
 import aldinh777.potatoheadshot.block.backup.containers.*;
 import aldinh777.potatoheadshot.block.backup.guis.*;
+import aldinh777.potatoheadshot.block.containers.ContainerDrier;
+import aldinh777.potatoheadshot.block.guis.GuiDrier;
 import aldinh777.potatoheadshot.compat.jei.cauldron.*;
 import aldinh777.potatoheadshot.compat.jei.crystalcharger.CrystalChargerRecipe;
 import aldinh777.potatoheadshot.compat.jei.crystalcharger.CrystalChargerRecipeCategory;
@@ -66,12 +68,9 @@ public class JeiPotatoPlugin implements IModPlugin {
 		IRecipeTransferRegistry recipeTransfer = registry.getRecipeTransferRegistry();
 
 		registry.addRecipes(DrierRecipe.getRecipes(), DRIER.toString());
-		registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 28, 20, 22, DRIER.toString());
-		registry.addRecipeClickArea(GuiPotatoDrier.class, 109, 60, 20, 22, DRIER.toString());
-		recipeTransfer.addRecipeTransferHandler(ContainerPotatoDrier.class, DRIER.toString(), 1, 4, 5, 36);
-		registry.addRecipeClickArea(GuiMagicDrier.class, 109, 28, 20, 22, DRIER.toString());
-		registry.addRecipeClickArea(GuiMagicDrier.class, 109, 60, 20, 22, DRIER.toString());
-		recipeTransfer.addRecipeTransferHandler(ContainerMagicDrier.class, DRIER.toString(), 0, 4, 4, 36);
+		registry.addRecipeClickArea(GuiDrier.class, 109, 28, 20, 22, DRIER.toString());
+		registry.addRecipeClickArea(GuiDrier.class, 109, 60, 20, 22, DRIER.toString());
+		recipeTransfer.addRecipeTransferHandler(ContainerDrier.class, DRIER.toString(), 1, 4, 5, 36);
 
 		registry.addRecipes(InfuserRecipe.getRecipes(), INFUSER.toString());
 		registry.addRecipeClickArea(GuiSweetInfuser.class, 151, 17, 16, 45, INFUSER.toString());

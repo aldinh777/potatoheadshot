@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.item.container;
 
-import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.item.items.PocketCauldron;
 import aldinh777.potatoheadshot.item.slots.RestrictedSlot;
 import net.minecraft.entity.player.EntityPlayer;

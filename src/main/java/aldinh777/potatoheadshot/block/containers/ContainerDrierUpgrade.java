@@ -1,19 +1,16 @@
 package aldinh777.potatoheadshot.block.containers;
 
 import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
-import aldinh777.potatoheadshot.block.slots.SlotUpgradeHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotUpgradeHandler;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.util.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 

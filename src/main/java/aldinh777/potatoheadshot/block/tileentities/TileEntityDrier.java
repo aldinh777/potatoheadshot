@@ -29,14 +29,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityDrier extends AbstractMachine {
 
-    private final ItemStackHandler inventoryDrier = new InventoryDrier();
+    private final InventoryDrier inventoryDrier = new InventoryDrier();
     private final InventoryDrierUpgrade inventoryUpgradeDrier = new InventoryDrierUpgrade();
 
     public int activeStateLimit = 0;
@@ -85,7 +84,15 @@ public class TileEntityDrier extends AbstractMachine {
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return (T) inventoryDrier;
+            if (facing == null) {
+                return (T) inventoryDrier;
+            } else if (facing == EnumFacing.UP) {
+                return (T) inventoryDrier.getInputHandler(inventoryUpgradeDrier.hasWaterUpgrade());
+            } else if (facing == EnumFacing.DOWN) {
+                return (T) inventoryDrier.getOutputHandler(inventoryUpgradeDrier.hasWaterUpgrade());
+            } else {
+                return (T) inventoryDrier.getFuelHandler(inventoryUpgradeDrier.hasEnergyUpgrade());
+            }
         } else if (capability == CapabilityEnergy.ENERGY || capability == CapabilityMana.MANA) {
             ItemStack upgradeMode = inventoryUpgradeDrier.getStackInSlot(InventoryDrierUpgrade.MODE_UPGRADE_SLOT);
             return upgradeMode.getCapability(capability, facing);

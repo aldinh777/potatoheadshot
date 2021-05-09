@@ -33,9 +33,6 @@ public class GuiHandler implements IGuiHandler {
             case Constants.DRIER_UPGRADE:
                 TileEntityDrier drierUpgrade = (TileEntityDrier) tileEntity;
                 return new ContainerDrierUpgrade(player.inventory, Objects.requireNonNull(drierUpgrade));
-            case Constants.MAGIC_DRIER:
-                TileEntityMagicDrier magicDrier = (TileEntityMagicDrier) tileEntity;
-                return new ContainerMagicDrier(player.inventory, Objects.requireNonNull(magicDrier));
             case Constants.POTATO_GEN:
                 TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
                 return new ContainerSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));
@@ -74,9 +71,6 @@ public class GuiHandler implements IGuiHandler {
             case Constants.DRIER_UPGRADE:
                 TileEntityDrier drierUpgrade = (TileEntityDrier) tileEntity;
                 return new GuiDrierUpgrade(player.inventory, Objects.requireNonNull(drierUpgrade));
-            case Constants.MAGIC_DRIER:
-                TileEntityMagicDrier magicDrier = (TileEntityMagicDrier) tileEntity;
-                return new GuiMagicDrier(player.inventory, Objects.requireNonNull(magicDrier));
             case Constants.POTATO_GEN:
                 TileEntitySweetPotatoGenerator gen = (TileEntitySweetPotatoGenerator) tileEntity;
                 return new GuiSweetPotatoGenerator(player.inventory, Objects.requireNonNull(gen));

@@ -91,10 +91,8 @@ public class RegistryHandler {
         ResourceLocation energyTransfer = new ResourceLocation("potatoheadshot:energyTransfer");
         ResourceLocation ultManaCauldron = new ResourceLocation("potatoheadshot:ultimate_mana_cauldron");
         ResourceLocation ultCrystalCharger = new ResourceLocation("potatoheadshot:ultimate_crystal_charger");
-        ResourceLocation magicDrier = new ResourceLocation("potatoheadshot:magic_drier");
 
         GameRegistry.registerTileEntity(TileEntityDrier.class, potatoDrier);
-        GameRegistry.registerTileEntity(TileEntityMagicDrier.class, magicDrier);
         GameRegistry.registerTileEntity(TileEntitySweetPotatoGenerator.class, sweetPotatoGenerator);
         GameRegistry.registerTileEntity(TileEntitySweetFreezer.class, sweetFreezer);
         GameRegistry.registerTileEntity(TileEntitySweetCrystalMaker.class, sweetCrystalMaker);

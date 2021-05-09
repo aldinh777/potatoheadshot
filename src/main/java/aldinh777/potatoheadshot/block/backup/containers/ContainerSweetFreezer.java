@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.block.backup.containers;
 
-import aldinh777.potatoheadshot.block.slots.SlotOutputHandler;
-import aldinh777.potatoheadshot.block.slots.SlotSaltHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotOutputHandler;
+import aldinh777.potatoheadshot.block.backup.slots.SlotSaltHandler;
 import aldinh777.potatoheadshot.block.backup.tileentities.TileEntitySweetFreezer;
 import aldinh777.potatoheadshot.lists.PotatoItems;
 import net.minecraft.entity.player.EntityPlayer;

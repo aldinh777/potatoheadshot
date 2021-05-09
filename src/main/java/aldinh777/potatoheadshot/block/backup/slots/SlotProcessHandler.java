@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.block.slots;
+package aldinh777.potatoheadshot.block.backup.slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,9 +7,9 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class SlotOutputHandler extends SlotItemHandler {
+public class SlotProcessHandler extends SlotItemHandler {
 
-    public SlotOutputHandler(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+    public SlotProcessHandler(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
     }
 
@@ -18,11 +18,8 @@ public class SlotOutputHandler extends SlotItemHandler {
         return false;
     }
 
-    @Nonnull
     @Override
-    public ItemStack onTake(@Nonnull EntityPlayer thePlayer, @Nonnull ItemStack stack) {
-        this.onCrafting(stack);
-        super.onTake(thePlayer, stack);
-        return stack;
+    public boolean canTakeStack(EntityPlayer playerIn) {
+        return false;
     }
 }

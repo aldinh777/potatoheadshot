@@ -1,13 +1,27 @@
 package aldinh777.potatoheadshot.util;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.function.Consumer;
 
 public interface InventoryHelper {
+
+    static void spawnAllSlotAsEntity(IItemHandler handler, World world, BlockPos pos) {
+        for (int i = 0; i < handler.getSlots(); ++i) {
+            ItemStack itemStack = handler.getStackInSlot(i);
+
+            if (!itemStack.isEmpty()) {
+                Block.spawnAsEntity(world, pos, itemStack);
+            }
+        }
+    }
 
     static boolean isOutputOverflow(ItemStack output, ItemStack result) {
         return output.getCount() + result.getCount() > output.getMaxStackSize();
