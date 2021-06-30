@@ -62,11 +62,8 @@ public class UpgradeDrierWater extends PotatoItem {
 
     public static class WaterCapability extends FluidHandlerItemStack {
 
-        private final int maxVolume;
-
         public WaterCapability(ItemStack container) {
             super(container, 8000);
-            this.maxVolume = 8000;
         }
 
         @Override
@@ -75,7 +72,7 @@ public class UpgradeDrierWater extends PotatoItem {
         }
 
         public int getMaxVolume() {
-            return maxVolume;
+            return 8000;
         }
     }
 }

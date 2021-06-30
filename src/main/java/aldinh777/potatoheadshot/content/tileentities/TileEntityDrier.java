@@ -1,12 +1,9 @@
 package aldinh777.potatoheadshot.content.tileentities;
 
 import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
+import aldinh777.potatoheadshot.content.capability.DrierWaterCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrierUpgrade;
-import aldinh777.potatoheadshot.content.energy.CapabilityMana;
-import aldinh777.potatoheadshot.content.energy.IManaStorage;
-import aldinh777.potatoheadshot.content.energy.PotatoEnergyStorage;
-import aldinh777.potatoheadshot.content.energy.PotatoManaStorage;
 import aldinh777.potatoheadshot.content.items.UpgradeDrierWater;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.recipes.category.PotatoDrierRecipes;
@@ -22,8 +19,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -37,6 +32,7 @@ public class TileEntityDrier extends AbstractMachine {
 
     private final InventoryDrier inventoryDrier = new InventoryDrier();
     private final InventoryDrierUpgrade inventoryUpgradeDrier = new InventoryDrierUpgrade();
+    private final DrierWaterCapability waterCapability = new DrierWaterCapability();
 
     public int activeStateLimit = 0;
 
@@ -46,12 +42,7 @@ public class TileEntityDrier extends AbstractMachine {
     public int maxDryProgress = 200;
 
     public int waterVolume = 0;
-    public int fluxStored = 0;
-    public int manaStored = 0;
-
     public int maxWaterVolume = 8000;
-    public int maxFluxStored = 60000;
-    public int maxManaStored = 6000;
 
     public int waterProgress = 0;
     public int maxWaterProgress = 1000;
@@ -70,12 +61,8 @@ public class TileEntityDrier extends AbstractMachine {
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return true;
-        } else if (capability == CapabilityEnergy.ENERGY || capability == CapabilityMana.MANA) {
-            ItemStack upgradeMode = inventoryUpgradeDrier.getStackInSlot(InventoryDrierUpgrade.MODE_UPGRADE_SLOT);
-            return upgradeMode.hasCapability(capability, facing);
         } else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            ItemStack upgradeWater = inventoryUpgradeDrier.getStackInSlot(InventoryDrierUpgrade.WATER_UPGRADE_SLOT);
-            return upgradeWater.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, facing);
+            return true;
         }
         return super.hasCapability(capability, facing);
     }
@@ -86,13 +73,15 @@ public class TileEntityDrier extends AbstractMachine {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == null) {
                 return (T) inventoryDrier;
+            } else if (facing == EnumFacing.UP) {
+                return (T) inventoryDrier.getInputHandler();
+            } else if (facing == EnumFacing.DOWN) {
+                return (T) inventoryDrier.getOutputHandler();
+            } else {
+                return (T) inventoryDrier.getFuelHandler();
             }
-        } else if (capability == CapabilityEnergy.ENERGY || capability == CapabilityMana.MANA) {
-            ItemStack upgradeMode = inventoryUpgradeDrier.getStackInSlot(InventoryDrierUpgrade.MODE_UPGRADE_SLOT);
-            return upgradeMode.getCapability(capability, facing);
         } else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            ItemStack upgradeWater = inventoryUpgradeDrier.getStackInSlot(InventoryDrierUpgrade.WATER_UPGRADE_SLOT);
-            return (T) upgradeWater.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, facing);
+            return (T) waterCapability;
         }
         return super.getCapability(capability, facing);
     }
@@ -127,8 +116,6 @@ public class TileEntityDrier extends AbstractMachine {
 
             if (isBurning()) {
                 progressDryByCoal();
-            } else if (isEnergyEnough()) {
-                progressDryByEnergy();
             } else {
                 burnFuel();
             }
@@ -195,28 +182,6 @@ public class TileEntityDrier extends AbstractMachine {
                 }
             }
         }
-        if (hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
-            IEnergyStorage energyStorage = getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
-            if (energyStorage != null) {
-                if (fluxStored != energyStorage.getEnergyStored()) {
-                    fluxStored = energyStorage.getEnergyStored();
-                }
-                if (maxFluxStored != energyStorage.getMaxEnergyStored()) {
-                    maxFluxStored = energyStorage.getMaxEnergyStored();
-                }
-            }
-        }
-        if (hasCapability(CapabilityMana.MANA, EnumFacing.UP)) {
-            IManaStorage manaStorage = getCapability(CapabilityMana.MANA, EnumFacing.UP);
-            if (manaStorage != null) {
-                if (manaStored != manaStorage.getManaStored()) {
-                    manaStored = manaStorage.getManaStored();
-                }
-                if (maxManaStored != manaStorage.getMaxManaStored()) {
-                    maxManaStored = manaStorage.getMaxManaStored();
-                }
-            }
-        }
     }
 
     private void updateState() {
@@ -232,31 +197,7 @@ public class TileEntityDrier extends AbstractMachine {
         }
     }
 
-    private boolean isEnergyEnough() {
-        if (!inventoryUpgradeDrier.hasEnergyUpgrade()) {
-            return false;
-        }
-        int energy = 0;
-        if (hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
-            PotatoEnergyStorage energyStorage = (PotatoEnergyStorage) getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
-            if (energyStorage == null) {
-                return false;
-            }
-            energy = energyStorage.getEnergyStored();
-        } else if (hasCapability(CapabilityMana.MANA, EnumFacing.UP)) {
-            PotatoManaStorage manaStorage = (PotatoManaStorage) getCapability(CapabilityMana.MANA, EnumFacing.UP);
-            if (manaStorage == null) {
-                return false;
-            }
-            energy = manaStorage.getManaStored() * 10;
-        }
-        return energy / Math.pow(2, inventoryUpgradeDrier.getBoosterLevel()) >= maxDryProgress - dryProgress;
-    }
-
     private boolean isWaterEnough() {
-        if (!inventoryUpgradeDrier.hasWaterUpgrade()) {
-            return false;
-        }
         if (hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP)) {
             IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
             if (fluidHandler instanceof UpgradeDrierWater.WaterCapability) {
@@ -286,38 +227,6 @@ public class TileEntityDrier extends AbstractMachine {
             activeStateLimit = 20;
         }
         burnTime -= Math.pow(2, inventoryUpgradeDrier.getBoosterLevel());
-    }
-
-    private void progressDryByEnergy() {
-        ItemStack input = inventoryDrier.getStackInSlot(InventoryDrier.DRIER_INPUT_SLOT);
-        ItemStack output = inventoryDrier.getStackInSlot(InventoryDrier.DRIER_OUTPUT_SLOT);
-        ItemStack result = PotatoDrierRecipes.INSTANCE.getDryResult(input).getOutput().copy();
-        if (!result.isEmpty()) {
-            result.grow(inventoryUpgradeDrier.getMultiplierLevel());
-        }
-        if (input.isEmpty() || result.isEmpty()) {
-            if (dryProgress > 0) {
-                dryProgress--;
-            }
-        } else if (output.isEmpty() || (output.isItemEqual(result) && !InventoryHelper.isOutputOverflow(output, result))) {
-            if (hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
-                PotatoEnergyStorage energyStorage = (PotatoEnergyStorage) getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
-                if (energyStorage == null) {
-                    return;
-                }
-                energyStorage.useEnergy((int) (10 * Math.pow(2, inventoryUpgradeDrier.getBoosterLevel())));
-                dryProgress++;
-                activeStateLimit = 20;
-            } else if (hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
-                PotatoManaStorage manaStorage = (PotatoManaStorage) getCapability(CapabilityMana.MANA, EnumFacing.UP);
-                if (manaStorage == null) {
-                    return;
-                }
-                manaStorage.useMana((int) Math.pow(2, inventoryUpgradeDrier.getBoosterLevel()));
-                dryProgress++;
-                activeStateLimit = 20;
-            }
-        }
     }
 
     private void progressWater() {
@@ -373,13 +282,11 @@ public class TileEntityDrier extends AbstractMachine {
                 if (InventoryHelper.setOutputSlot(inventoryDrier, InventoryDrier.DRIER_OUTPUT_SLOT, result)) {
                     InventoryHelper.shrinkIntoContainer(inventoryDrier, InventoryDrier.DRIER_INPUT_SLOT, input);
                     dryProgress = 0;
-                    if (inventoryUpgradeDrier.hasWaterUpgrade()) {
-                        IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
-                        if (fluidHandler != null) {
-                            int waterVolume = recipe.getWaterValue();
-                            FluidStack fluidStack = new FluidStack(FluidRegistry.WATER, waterVolume);
-                            fluidHandler.fill(fluidStack, true);
-                        }
+                    IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
+                    if (fluidHandler != null) {
+                        int waterVolume = recipe.getWaterValue();
+                        FluidStack fluidStack = new FluidStack(FluidRegistry.WATER, waterVolume);
+                        fluidHandler.fill(fluidStack, true);
                     }
                 }
             }

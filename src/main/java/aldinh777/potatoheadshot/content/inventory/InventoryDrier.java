@@ -42,30 +42,28 @@ public class InventoryDrier extends ItemStackHandler {
         }
     }
 
-    public ItemStackHandler getFuelHandler(boolean disabled) {
-        return new FuelHandler(this, disabled);
+    public ItemStackHandler getFuelHandler() {
+        return new FuelHandler(this);
     }
 
-    public ItemStackHandler getInputHandler(boolean includeWater) {
-        return new InputHandler(this, includeWater);
+    public ItemStackHandler getInputHandler() {
+        return new InputHandler(this);
     }
 
-    public ItemStackHandler getOutputHandler(boolean includeWater) {
-        return new OutputHandler(this, includeWater);
+    public ItemStackHandler getOutputHandler() {
+        return new OutputHandler(this);
     }
+
 
     static class FuelHandler extends ItemStackHandler {
-        private final boolean disabled;
-
-        FuelHandler(InventoryDrier drier, boolean disabled) {
+        FuelHandler(InventoryDrier drier) {
             super(drier.stacks);
-            this.disabled = disabled;
         }
 
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             if (slot == FUEL_SLOT) {
-                return !disabled && super.isItemValid(slot, stack) && FuelHelper.isItemFuel(stack);
+                return super.isItemValid(slot, stack) && FuelHelper.isItemFuel(stack);
             }
             return super.isItemValid(slot, stack);
         }
@@ -73,7 +71,7 @@ public class InventoryDrier extends ItemStackHandler {
         @Nonnull
         @Override
         public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-            if (slot == FUEL_SLOT && !disabled) {
+            if (slot == FUEL_SLOT) {
                 return FuelHelper.isItemFuel(stack) ? super.insertItem(slot, stack, simulate) : stack;
             }
             return stack;
@@ -90,17 +88,14 @@ public class InventoryDrier extends ItemStackHandler {
     }
 
     static class InputHandler extends ItemStackHandler {
-        private final boolean includeWater;
-
-        InputHandler(InventoryDrier drier, boolean includeWater) {
+        InputHandler(InventoryDrier drier) {
             super(drier.stacks);
-            this.includeWater = includeWater;
         }
 
         @Nonnull
         @Override
         public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-            if (slot == DRIER_INPUT_SLOT || (slot == WATER_INPUT_SLOT && includeWater)) {
+            if (slot == DRIER_INPUT_SLOT || slot == WATER_INPUT_SLOT) {
                 return super.insertItem(slot, stack, simulate);
             }
             return stack;
@@ -109,7 +104,7 @@ public class InventoryDrier extends ItemStackHandler {
         @Nonnull
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
-            if (slot == DRIER_INPUT_SLOT || (slot == WATER_INPUT_SLOT && includeWater)) {
+            if (slot == DRIER_INPUT_SLOT || slot == WATER_INPUT_SLOT) {
                 return super.extractItem(slot, amount, simulate);
             }
             return ItemStack.EMPTY;
@@ -117,11 +112,8 @@ public class InventoryDrier extends ItemStackHandler {
     }
 
     static class OutputHandler extends ItemStackHandler {
-        private final boolean includeWater;
-
-        OutputHandler(InventoryDrier drier, boolean includeWater) {
+        OutputHandler(InventoryDrier drier) {
             super(drier.stacks);
-            this.includeWater = includeWater;
         }
 
         @Nonnull
@@ -140,7 +132,7 @@ public class InventoryDrier extends ItemStackHandler {
                 } else {
                     return ItemStack.EMPTY;
                 }
-            } else if (slot == DRIER_OUTPUT_SLOT || (slot == WATER_OUTPUT_SLOT && includeWater)) {
+            } else if (slot == DRIER_OUTPUT_SLOT || slot == WATER_OUTPUT_SLOT) {
                 return super.extractItem(slot, amount, simulate);
             }
             return ItemStack.EMPTY;

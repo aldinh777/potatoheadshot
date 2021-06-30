@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.other.util;
 
 public interface Constants {
-    int DRIER_UPGRADE = 10;
-    int DRIER = 11;
+    int DRIER_UPGRADE = 0;
+    int DRIER = 1;
     int POTATO_GEN = 2;
     int FREEZER = 3;
     int CRYSTAL_MAKER = 4;

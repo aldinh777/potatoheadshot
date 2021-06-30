@@ -1,23 +1,20 @@
 package aldinh777.potatoheadshot.content.inventory;
 
-import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class InventoryDrierUpgrade extends ItemStackHandler {
 
-    public static final int WATER_UPGRADE_SLOT = 0;
-    public static final int MODE_UPGRADE_SLOT = 1;
-    public static final int MULTIPLIER_UPGRADE_SLOT_1 = 2;
-    public static final int MULTIPLIER_UPGRADE_SLOT_2 = 3;
-    public static final int BOOSTER_UPGRADE_SLOT_1 = 4;
-    public static final int BOOSTER_UPGRADE_SLOT_2 = 5;
+    public static final int[] MULTIPLIER_UPGRADE_SLOT = { 0, 1, 2, 3, 4, 5, 6 };
+    public static final int[] BOOSTER_UPGRADE_SLOT = { 7, 8, 9, 10, 11, 12, 13 };
 
     public InventoryDrierUpgrade() {
-        super(6);
+        super(14);
     }
 
     @Override
@@ -27,79 +24,23 @@ public class InventoryDrierUpgrade extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        switch (slot) {
-            case WATER_UPGRADE_SLOT:
-                return stack.getItem() == PotatoItems.UPGRADE_DRIER_WATER;
-            case MODE_UPGRADE_SLOT:
-                return stack.getItem() == PotatoItems.UPGRADE_MODE_FLUX ||
-                        stack.getItem() == PotatoItems.UPGRADE_MODE_MANA;
-            case BOOSTER_UPGRADE_SLOT_1:
-            case BOOSTER_UPGRADE_SLOT_2:
-                return stack.getItem() == PotatoItems.UPGRADE_BOOSTER;
-            case MULTIPLIER_UPGRADE_SLOT_1:
-            case MULTIPLIER_UPGRADE_SLOT_2:
-                return stack.getItem() == PotatoItems.UPGRADE_MULTIPLIER;
-            default:
-                return false;
+        if (Arrays.stream(MULTIPLIER_UPGRADE_SLOT).anyMatch(i -> i == slot)) {
+            return stack.getItem() == PotatoItems.UPGRADE_MULTIPLIER;
+
+        } else if (Arrays.stream(BOOSTER_UPGRADE_SLOT).anyMatch(i -> i == slot)) {
+            return stack.getItem() == PotatoItems.UPGRADE_BOOSTER;
         }
-    }
 
-    public BlockDrier.Mode getMode() {
-        if (hasFluxUpgrade()) {
-            return BlockDrier.Mode.FLUX;
-        } else if (hasManaUpgrade()) {
-            return BlockDrier.Mode.MANA;
-        } else {
-            return BlockDrier.Mode.BASIC;
-        }
-    }
-
-    public boolean hasWaterUpgrade() {
-        ItemStack upgrade = getStackInSlot(WATER_UPGRADE_SLOT);
-        return upgrade.getItem() == PotatoItems.UPGRADE_DRIER_WATER;
-    }
-
-    public boolean hasFluxUpgrade() {
-        ItemStack upgrade = getStackInSlot(MODE_UPGRADE_SLOT);
-        return upgrade.getItem() == PotatoItems.UPGRADE_MODE_FLUX;
-    }
-
-    public boolean hasManaUpgrade() {
-        ItemStack upgrade = getStackInSlot(MODE_UPGRADE_SLOT);
-        return upgrade.getItem() == PotatoItems.UPGRADE_MODE_MANA;
-    }
-
-    public boolean hasEnergyUpgrade() {
-        return hasFluxUpgrade() || hasManaUpgrade();
+        return false;
     }
 
     public int getMultiplierLevel() {
-        ItemStack upgrade1 = getStackInSlot(MULTIPLIER_UPGRADE_SLOT_1);
-        ItemStack upgrade2 = getStackInSlot(MULTIPLIER_UPGRADE_SLOT_2);
-        int multiplierLevel = 0;
-
-        if (!upgrade1.isEmpty()) {
-            multiplierLevel++;
-        }
-        if (!upgrade2.isEmpty()) {
-            multiplierLevel++;
-        }
-
-        return multiplierLevel;
+        Stream<ItemStack> upgrades = Arrays.stream(MULTIPLIER_UPGRADE_SLOT).mapToObj(this::getStackInSlot);
+        return (int) upgrades.filter(stack -> !stack.isEmpty()).count();
     }
 
     public int getBoosterLevel() {
-        ItemStack upgrade1 = getStackInSlot(BOOSTER_UPGRADE_SLOT_1);
-        ItemStack upgrade2 = getStackInSlot(BOOSTER_UPGRADE_SLOT_2);
-        int boosterLevel = 0;
-
-        if (!upgrade1.isEmpty()) {
-            boosterLevel++;
-        }
-        if (!upgrade2.isEmpty()) {
-            boosterLevel++;
-        }
-
-        return boosterLevel;
+        Stream<ItemStack> upgrades = Arrays.stream(BOOSTER_UPGRADE_SLOT).mapToObj(this::getStackInSlot);
+        return (int) upgrades.filter(stack -> !stack.isEmpty()).count();
     }
 }
