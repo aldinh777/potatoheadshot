@@ -1,7 +1,0 @@
-{
-    "parent": "potatoheadshot:block/potato_drier_water_lit",
-    "textures": {
-        "top": "potatoheadshot:blocks/potato_drier_top_flux",
-        "side": "potatoheadshot:blocks/potato_drier_side_flux"
-    }
-}

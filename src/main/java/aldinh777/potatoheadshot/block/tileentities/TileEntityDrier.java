@@ -86,12 +86,6 @@ public class TileEntityDrier extends AbstractMachine {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == null) {
                 return (T) inventoryDrier;
-            } else if (facing == EnumFacing.UP) {
-                return (T) inventoryDrier.getInputHandler(inventoryUpgradeDrier.hasWaterUpgrade());
-            } else if (facing == EnumFacing.DOWN) {
-                return (T) inventoryDrier.getOutputHandler(inventoryUpgradeDrier.hasWaterUpgrade());
-            } else {
-                return (T) inventoryDrier.getFuelHandler(inventoryUpgradeDrier.hasEnergyUpgrade());
             }
         } else if (capability == CapabilityEnergy.ENERGY || capability == CapabilityMana.MANA) {
             ItemStack upgradeMode = inventoryUpgradeDrier.getStackInSlot(InventoryDrierUpgrade.MODE_UPGRADE_SLOT);
@@ -229,19 +223,11 @@ public class TileEntityDrier extends AbstractMachine {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof BlockDrier) {
             boolean active = state.getValue(BlockDrier.ACTIVE);
-            boolean water = state.getValue(BlockDrier.WATER);
-            BlockDrier.Mode mode = state.getValue(BlockDrier.MODE);
 
             boolean isActive = isBurning() || --activeStateLimit > 0;
 
             if (active != isActive) {
                 world.setBlockState(pos, state.withProperty(BlockDrier.ACTIVE, isActive));
-            }
-            if (water != inventoryUpgradeDrier.hasWaterUpgrade()) {
-                world.setBlockState(pos, state.withProperty(BlockDrier.WATER, inventoryUpgradeDrier.hasWaterUpgrade()));
-            }
-            if (mode != inventoryUpgradeDrier.getMode()) {
-                world.setBlockState(pos, state.withProperty(BlockDrier.MODE, inventoryUpgradeDrier.getMode()));
             }
         }
     }

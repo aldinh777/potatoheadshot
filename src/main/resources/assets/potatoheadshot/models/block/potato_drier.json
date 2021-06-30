@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "potatoheadshot:blocks/potato_drier_top",
+    "front": "potatoheadshot:blocks/potato_drier_front_off",
+    "side": "potatoheadshot:blocks/potato_drier_side"
+  }
+}

@@ -1,14 +1,12 @@
 package aldinh777.potatoheadshot.block.blocks.machines;
 
 import aldinh777.potatoheadshot.block.inventory.InventoryDrier;
-import aldinh777.potatoheadshot.block.inventory.InventoryDrierUpgrade;
 import aldinh777.potatoheadshot.block.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.util.BlockType;
 import aldinh777.potatoheadshot.util.Constants;
 import aldinh777.potatoheadshot.util.InventoryHelper;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -26,15 +24,12 @@ import java.util.Random;
 public class BlockDrier extends BlockMachine implements IBlockUpgradable {
 
     public static PropertyBool ACTIVE = PropertyBool.create("active");
-    public static PropertyBool WATER = PropertyBool.create("water");
-    public static PropertyEnum<Mode> MODE = PropertyEnum.create("mode", Mode.class);
 
     public BlockDrier(String name, BlockType blockType) {
         super(name, blockType);
         setDefaultState(blockState.getBaseState()
                 .withProperty(ACTIVE, false)
-                .withProperty(WATER, false)
-                .withProperty(MODE, Mode.BASIC));
+        );
     }
 
     @Override
@@ -56,7 +51,7 @@ public class BlockDrier extends BlockMachine implements IBlockUpgradable {
     @Nonnull
     @Override
     public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING, MODE, WATER, ACTIVE);
+        return new BlockStateContainer(this, FACING, ACTIVE);
     }
 
     @Nonnull
@@ -69,18 +64,6 @@ public class BlockDrier extends BlockMachine implements IBlockUpgradable {
     public int getLightValue(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         boolean active = state.getValue(ACTIVE);
         return active ? 12 : 0;
-    }
-
-    @Nonnull
-    @Override
-    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, @Nonnull BlockPos pos) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity instanceof TileEntityDrier) {
-            TileEntityDrier drier = (TileEntityDrier) tileEntity;
-            InventoryDrierUpgrade upgrade = drier.getUpgrade();
-            return state.withProperty(MODE, upgrade.getMode()).withProperty(WATER, upgrade.hasWaterUpgrade());
-        }
-        return state;
     }
 
     @Override
