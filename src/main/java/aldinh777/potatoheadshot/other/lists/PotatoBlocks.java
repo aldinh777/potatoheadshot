@@ -40,7 +40,7 @@ public class PotatoBlocks {
         POTATO_PLANKS = new PotatoBlock("potato_planks", BlockType.WOOD);
         POTATO_BLOCK = new PotatoBlock("potato_block", BlockType.POTATO);
         SWEET_POTATO_BLOCK = new PotatoBlock("sweet_potato_block", BlockType.METAL);
-        GLOWING_POTATO_BLOCK = new BlockCustomDrop("glowing_potato_block", PotatoItems.GLOWING_POTATO_DUST);
+        GLOWING_POTATO_BLOCK = new MagicBlock("glowing_potato_block", BlockType.MAGIC);
 
         // Utility Block
         POTATO_DRIER = new BlockDrier("potato_drier", BlockType.STONE);
