@@ -3,14 +3,8 @@ package aldinh777.potatoheadshot.content.items;
 import aldinh777.potatoheadshot.other.handler.ConfigHandler;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.lists.PotatoTab;
-import aldinh777.potatoheadshot.other.util.ItemStickHelper;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
@@ -51,11 +45,6 @@ public class PotatoItem extends Item {
                     PotatoItems.LISTS.add(this);
                 }
                 break;
-            case "ice_potato":
-                if (ConfigHandler.ICE_POTATO) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
             default:
                 PotatoItems.LISTS.add(this);
         }
@@ -64,16 +53,5 @@ public class PotatoItem extends Item {
     @Override
     public int getItemBurnTime(@Nonnull ItemStack itemStack) {
         return this.burn_time;
-    }
-
-    @Nonnull
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn) {
-        RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, false);
-        if (!worldIn.isRemote) {
-            ItemStickHelper.debugBlock(raytraceresult, worldIn, playerIn, handIn);
-        }
-
-        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

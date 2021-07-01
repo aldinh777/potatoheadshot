@@ -1,8 +1,7 @@
 package aldinh777.potatoheadshot.content.containers;
 
-import aldinh777.potatoheadshot.backup.slots.SlotOutputHandler;
 import aldinh777.potatoheadshot.content.items.PocketCauldron;
-import aldinh777.potatoheadshot.content.slots.RestrictedSlot;
+import aldinh777.potatoheadshot.content.containers.slots.RestrictedSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -30,7 +29,7 @@ public class ContainerPocketCauldron extends Container {
 
         this.addSlotToContainer(new SlotItemHandler(input, 0, 24, 48));
         this.addSlotToContainer(new SlotItemHandler(input, 1, 47, 48));
-        this.addSlotToContainer(new SlotOutputHandler(output, 0, 117, 47));
+        this.addSlotToContainer(new SlotItemHandler(output, 0, 117, 47));
 
         for (int y = 0; y < 3; y++) {
             for (int i = 0; i < 9; i++) {

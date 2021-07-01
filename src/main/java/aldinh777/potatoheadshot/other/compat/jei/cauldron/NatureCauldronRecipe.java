@@ -13,7 +13,7 @@ import java.util.List;
 public class NatureCauldronRecipe extends AbstractCauldronRecipe {
 	
 	public NatureCauldronRecipe(ItemStack input, ItemStack output) {
-		super(input, output, new ItemStack(PotatoItems.ROD_NATURE));
+		super(input, output, new ItemStack(PotatoItems.ESSENCE_NATURE));
 	}
 	
 	public static List<NatureCauldronRecipe> getRecipes() {

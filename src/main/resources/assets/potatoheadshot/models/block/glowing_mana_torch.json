@@ -1,6 +1,0 @@
-{
-    "parent": "block/torch",
-    "textures": {
-        "torch": "potatoheadshot:blocks/glowing_mana_torch"
-    }
-}

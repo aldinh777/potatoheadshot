@@ -16,9 +16,6 @@ public class CauldronRecipe {
     private final ItemStack output;
     private final int cost;
 
-    private static final int SHARD_COST = ConfigHandler.CONCENTRATED_SHARD_MANA_REQUIRED;
-    private static final int ULTIMATE_COST = ConfigHandler.ULT_CONCENTRATED_CRYSTAL_MANA_REQUIRED;
-
     public CauldronRecipe(Item input, ItemStack output, int cost) {
         this.input = input;
         this.output = output;
@@ -40,10 +37,7 @@ public class CauldronRecipe {
     public static List<CauldronRecipe> getManaRecipes() {
         List<CauldronRecipe> recipes = Lists.newArrayList();
 
-        addRecipe(recipes, PotatoItems.GLOWING_POTATO_DUST, new ItemStack(PotatoItems.MANA_DUST), 100);
         addRecipe(recipes, PotatoItems.POTATO_KNIFE, new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 200);
-        addRecipe(recipes, PotatoItems.CRYSTAL_SHARD, new ItemStack(PotatoItems.CONCENTRATED_CRYSTAL_SHARD), SHARD_COST);
-        addRecipe(recipes, PotatoItems.ULTIMATE_CRYSTAL, new ItemStack(PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL), ULTIMATE_COST);
         return recipes;
     }
 
@@ -65,9 +59,6 @@ public class CauldronRecipe {
         }
         if (ConfigHandler.WATER_POTATO) {
             addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12_000);
-        }
-        if (ConfigHandler.ICE_POTATO) {
-            addRecipe(recipes, PotatoItems.ICE_POTATO, new ItemStack(PotatoItems.ICE_POTATO_SEED), 12_000);
         }
 
         addRecipe(recipes, Items.FISH, new ItemStack(Items.PRISMARINE_SHARD), 2000);
@@ -97,7 +88,6 @@ public class CauldronRecipe {
         Item redMushroom = Item.getItemFromBlock(Blocks.RED_MUSHROOM);
         Item brownMushroom = Item.getItemFromBlock(Blocks.BROWN_MUSHROOM);
         Item cactus = Item.getItemFromBlock(Blocks.CACTUS);
-        Item leaves = Item.getItemFromBlock(Blocks.LEAVES);
 
         addRecipe(recipes, Items.WHEAT_SEEDS, new ItemStack(Items.MELON_SEEDS), 100);
         addRecipe(recipes, Items.MELON_SEEDS, new ItemStack(Items.PUMPKIN_SEEDS), 100);
@@ -108,7 +98,6 @@ public class CauldronRecipe {
         addRecipe(recipes, brownMushroom, new ItemStack(Items.NETHER_WART), 100);
         addRecipe(recipes, cactus, new ItemStack(Items.REEDS), 100);
         addRecipe(recipes, Items.REEDS, new ItemStack(cactus), 100);
-        addRecipe(recipes, PotatoItems.POTATO_LEAVES, new ItemStack(leaves), 100);
 
         return recipes;
     }

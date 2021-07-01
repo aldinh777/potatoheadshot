@@ -1,9 +1,0 @@
-{
-  "parent": "potatoheadshot:block/orientable_with_back",
-  "textures": {
-    "top": "potatoheadshot:blocks/mana_extractor_top",
-    "front": "potatoheadshot:blocks/mana_extractor_front",
-    "side": "potatoheadshot:blocks/mana_extractor_side",
-    "back": "potatoheadshot:blocks/mana_extractor_back"
-  }
-}

@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.other.lists;
 
-import aldinh777.potatoheadshot.backup.blocks.machines.ManaCauldron;
+import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
 import aldinh777.potatoheadshot.content.blocks.PotatoFoodBlock;
 import aldinh777.potatoheadshot.content.items.*;
 import aldinh777.potatoheadshot.other.util.BlockType;
@@ -32,44 +32,26 @@ public class PotatoItems {
     public static Item SWEET_POTATO;
     public static Item BAKED_SWEET_POTATO;
     public static Item GLOWING_POTATO;
+
     public static Item STICKY_POTATO;
     public static Item RED_POTATO;
-    public static Item FROZEN_POTATO;
-    public static Item ICE_POTATO;
-
     public static Item LAVA_POTATO_SEED;
     public static Item WATER_POTATO_SEED;
     public static Item ICE_POTATO_SEED;
 
     public static Item SMALL_POTATO_PLANKS;
     public static Item POTATO_STICK;
-    public static Item POTATO_LEAVES;
-    public static Item DRIED_POTATO;
     public static Item POTATO_CHIP;
     public static Item POTATO_STARCH;
     public static Item RAW_SALT;
-    public static Item DRIED_SWEET_POTATO;
     public static Item SWEET_POTATO_DUST;
     public static Item SWEET_POTATO_INGOT;
     public static Item GLOWING_POTATO_DUST;
-    public static Item MANA_DUST;
+    public static Item ESSENCE_MANA;
     public static Item ESSENCE_LIFE;
     public static Item ESSENCE_NATURE;
     public static Item ESSENCE_FIRE;
-    public static Item ROD_MANA;
-    public static Item ROD_LIFE;
-    public static Item ROD_NATURE;
-    public static Item ROD_FIRE;
 
-    public static Item CRYSTAL_SHARD;
-    public static Item CRYSTAL;
-    public static Item CHARGED_CRYSTAL_SHARD;
-    public static Item CHARGED_CRYSTAL;
-    public static Item CONCENTRATED_CRYSTAL_SHARD;
-    public static Item CONCENTRATED_CRYSTAL;
-    public static Item ULTIMATE_CRYSTAL;
-    public static Item ULTIMATE_CHARGED_CRYSTAL;
-    public static Item ULTIMATE_CONCENTRATED_CRYSTAL;
     public static Item POCKET_CAULDRON;
     public static Item ULTIMATE_POCKET_CAULDRON;
 
@@ -93,9 +75,6 @@ public class PotatoItems {
 
     public static Item UPGRADE_BOOSTER;
     public static Item UPGRADE_MULTIPLIER;
-    public static Item UPGRADE_MODE_FLUX;
-    public static Item UPGRADE_MODE_MANA;
-    public static Item UPGRADE_DRIER_WATER;
 
     public static void addFoodEffects(Item item, FoodEffects... effects) {
         if (item instanceof PotatoFood) {
@@ -134,41 +113,20 @@ public class PotatoItems {
         WET_POTATO = new PotatoFood("wet_potato", 2, 0.3f);
         SUPER_WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
         WATER_POTATO = new PotatoFoodBucket("water_potato", Blocks.FLOWING_WATER, 2, 0.3f);
-        FROZEN_POTATO = new PotatoFood("frozen_potato", 1, 0.3f);
 
         // Potato Items
-        ICE_POTATO = new PotatoItem("ice_potato");
-        POTATO_LEAVES = new PotatoItem("potato_leaves");
         SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");
-        DRIED_POTATO = new PotatoItem("dried_potato");
-        DRIED_SWEET_POTATO = new PotatoItem("dried_sweet_potato");
         POTATO_CHIP = new PotatoItem("potato_chip");
         POTATO_STICK = new PotatoItem("potato_stick", 100);
         POTATO_STARCH = new PotatoItem("potato_starch");
         RAW_SALT = new PotatoItem("raw_salt");
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
         GLOWING_POTATO_DUST = new PotatoItem("glowing_potato_dust");
-        MANA_DUST = new PotatoItem("glowing_mana_dust");
+        ESSENCE_MANA = new PotatoItem("essence_mana");
         ESSENCE_LIFE = new PotatoItem("essence_life");
         ESSENCE_NATURE = new PotatoItem("essence_nature");
         ESSENCE_FIRE = new PotatoItem("essence_fire");
-        ROD_MANA = new PotatoItem("rod_mana");
-        ROD_LIFE = new PotatoItem("rod_life");
-        ROD_NATURE = new PotatoItem("rod_nature");
-        ROD_FIRE = new PotatoItem("rod_fire");
         POCKET_CAULDRON = new PocketCauldron("pocket_cauldron");
-        ULTIMATE_POCKET_CAULDRON = new PocketCauldron("ultimate_pocket_cauldron").setUltimate();
-
-        // Crystal
-        CRYSTAL_SHARD = new PotatoItem("crystal_shard");
-        CHARGED_CRYSTAL_SHARD = new PotatoItem("charged_crystal_shard");
-        CONCENTRATED_CRYSTAL_SHARD = new PotatoItem("concentrated_crystal_shard");
-        CRYSTAL = new PotatoItem("crystal");
-        CHARGED_CRYSTAL = new PotatoItem("charged_crystal");
-        CONCENTRATED_CRYSTAL = new PotatoItem("concentrated_crystal");
-        ULTIMATE_CRYSTAL = new PotatoItem("ultimate_crystal");
-        ULTIMATE_CHARGED_CRYSTAL = new PotatoItem("ultimate_charged_crystal");
-        ULTIMATE_CONCENTRATED_CRYSTAL = new PotatoItem("ultimate_concentrated_crystal");
 
         // Bucket
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
@@ -197,9 +155,6 @@ public class PotatoItems {
         // Upgrades
         UPGRADE_BOOSTER = new PotatoItem("upgrade_booster");
         UPGRADE_MULTIPLIER = new PotatoItem("upgrade_multiplier");
-        UPGRADE_MODE_FLUX = new UpgradeModeFlux("upgrade_mode_flux");
-        UPGRADE_MODE_MANA = new UpgradeModeMana("upgrade_mode_mana");
-        UPGRADE_DRIER_WATER = new UpgradeDrierWater("upgrade_drier_water");
 
         // This is kinda complicated, but i have to put the food block here to access the item
         // since they are extend ItemFood not ItemBlock so i can't get like Item#getItemFromBlock

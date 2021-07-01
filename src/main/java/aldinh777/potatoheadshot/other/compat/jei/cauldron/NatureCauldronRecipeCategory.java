@@ -14,7 +14,7 @@ public class NatureCauldronRecipeCategory extends AbstractCauldronRecipeCategory
 	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 
 	public NatureCauldronRecipeCategory(IGuiHelper gui) {
-		super(gui, TEXTURE, new ItemStack(PotatoItems.ROD_NATURE));
+		super(gui, TEXTURE, new ItemStack(PotatoItems.ESSENCE_NATURE));
 	}
 
 	@Nonnull

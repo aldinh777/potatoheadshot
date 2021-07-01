@@ -1,30 +1,10 @@
 package aldinh777.potatoheadshot.other.util;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface ItemHelper {
-
-    static ItemStack getDyeFromItem(Item item) {
-        if (item == DummyItem.LAPIS) {
-            return new ItemStack(Items.DYE, 1, 4);
-        }
-        if (item == DummyItem.DYE_LIGHT_BLUE) {
-            return new ItemStack(Items.DYE, 1, 12);
-        }
-        if (item == DummyItem.DYE_RED) {
-            return new ItemStack(Items.DYE, 1, 1);
-        }
-        if (item == DummyItem.DYE_LIME) {
-            return new ItemStack(Items.DYE, 1, 10);
-        }
-        if (item == DummyItem.DYE_WHITE) {
-            return new ItemStack(Items.DYE, 1, 15);
-        }
-        return new ItemStack(item);
-    }
 
     static ItemStack rotatePlant(ItemStack input) {
         Item redFlower = Item.getItemFromBlock(Blocks.RED_FLOWER);
@@ -58,13 +38,5 @@ public interface ItemHelper {
         } else {
             return ItemStack.EMPTY;
         }
-    }
-
-    class DummyItem {
-        public static final Item LAPIS = new Item();
-        public static final Item DYE_LIGHT_BLUE = new Item();
-        public static final Item DYE_RED = new Item();
-        public static final Item DYE_LIME = new Item();
-        public static final Item DYE_WHITE = new Item();
     }
 }

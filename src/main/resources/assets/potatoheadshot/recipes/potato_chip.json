@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "potatoheadshot:dried_potato"
+      "item": "minecraft:potato"
     },
     {
       "item": "potatoheadshot:potato_knife"

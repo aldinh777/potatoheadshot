@@ -1,9 +1,9 @@
 package aldinh777.potatoheadshot.content.containers;
 
-import aldinh777.potatoheadshot.backup.slots.SlotUpgradeHandler;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrierUpgrade;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerDrierUpgrade extends ContainerMachine {
 
@@ -18,12 +18,12 @@ public class ContainerDrierUpgrade extends ContainerMachine {
             InventoryDrierUpgrade upgrade = tileEntity.getUpgrade();
 
             for (int i = 0; i < InventoryDrierUpgrade.MULTIPLIER_UPGRADE_SLOT.length; i++) {
-                addSlotToContainer(new SlotUpgradeHandler(upgrade, i, 14 + (i * 22), 30));
+                addSlotToContainer(new SlotItemHandler(upgrade, i, 14 + (i * 22), 30));
             }
 
             for (int i = 0; i < InventoryDrierUpgrade.BOOSTER_UPGRADE_SLOT.length; i++) {
                 int slot = i + 7;
-                addSlotToContainer(new SlotUpgradeHandler(upgrade, slot, 14 + (i * 22), 56));
+                addSlotToContainer(new SlotItemHandler(upgrade, slot, 14 + (i * 22), 56));
             }
         }
     }

@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.backup.blocks.machines.ManaCauldron;
+import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
 import aldinh777.potatoheadshot.other.handler.ConfigHandler;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.block.Block;

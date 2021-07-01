@@ -67,10 +67,8 @@ public class PotatoDrierRecipe {
     public static List<PotatoDrierRecipe> getDefaultDryRecipes() {
         List<PotatoDrierRecipe> recipes = Lists.newArrayList();
 
-        addRecipe(recipes, new ItemStack(Items.POTATO), new ItemStack(PotatoItems.DRIED_POTATO), 100);
-        addRecipe(recipes, new ItemStack(PotatoItems.DRIED_POTATO), new ItemStack(PotatoItems.POTATO_STARCH), 0);
-        addRecipe(recipes, new ItemStack(PotatoItems.SWEET_POTATO), new ItemStack(PotatoItems.DRIED_SWEET_POTATO), 100);
-        addRecipe(recipes, new ItemStack(PotatoItems.DRIED_SWEET_POTATO), new ItemStack(PotatoItems.SWEET_POTATO_DUST), 0);
+        addRecipe(recipes, new ItemStack(Items.POTATO), new ItemStack(PotatoItems.POTATO_STARCH), 0);
+        addRecipe(recipes, new ItemStack(PotatoItems.SWEET_POTATO), new ItemStack(PotatoItems.SWEET_POTATO_DUST), 0);
         addRecipe(recipes, new ItemStack(PotatoItems.GLOWING_POTATO), new ItemStack(PotatoItems.GLOWING_POTATO_DUST), 0);
         if (ConfigHandler.WET_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(Items.CLAY_BALL), 200);

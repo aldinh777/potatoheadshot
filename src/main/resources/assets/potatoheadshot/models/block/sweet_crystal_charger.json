@@ -1,9 +1,0 @@
-{
-  "parent": "potatoheadshot:block/orientable_with_bottom",
-  "textures": {
-    "top": "potatoheadshot:blocks/sweet_crystal_charger_top",
-    "front": "potatoheadshot:blocks/sweet_crystal_charger_side",
-    "side": "potatoheadshot:blocks/sweet_crystal_charger_side",
-    "bottom": "potatoheadshot:blocks/sweet_crystal_charger_bottom"
-  }
-}

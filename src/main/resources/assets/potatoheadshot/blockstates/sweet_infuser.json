@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "potatoheadshot:sweet_infuser" },
-    "facing=south": { "model": "potatoheadshot:sweet_infuser", "y": 180 },
-    "facing=west":  { "model": "potatoheadshot:sweet_infuser", "y": 270 },
-    "facing=east":  { "model": "potatoheadshot:sweet_infuser", "y": 90 }
-  }
-}

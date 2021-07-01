@@ -19,8 +19,6 @@ item.baked_sweet_potato.name=Baked Very Sweet Potato
 item.glowing_potato.name=Glowing Potato
 item.sticky_potato.name=Sticky Potato
 item.red_potato.name=Red Potato
-item.frozen_potato.name=Frozen Potato
-item.ice_potato.name=Ice Potato
 
 # Seeds
 item.lava_potato_seed.name=Lava Potato Seed
@@ -30,38 +28,19 @@ item.ice_potato_seed.name=Ice Potato Seed
 # Items
 item.small_potato_planks.name=Small Potato Planks
 item.potato_stick.name=Potato Stick
-item.dried_potato.name=Dried Potato
 item.potato_chip.name=Potato Chip
-item.potato_leaves.name=Potato Leaves
 item.potato_starch.name=Potato Starch
 item.raw_salt.name=Raw Salt
 item.glowing_potato_dust.name=Glowing Potato Dust
-item.glowing_mana_dust.name=Mana Dust
+item.essence_mana.name=Pure Essence
 item.essence_life.name=Life Essence
 item.essence_nature.name=Nature Essence
 item.essence_fire.name=Fire Essence
-item.rod_mana.name=Mana Rod
-item.rod_life.name=Life Rod
-item.rod_nature.name=Nature Rod
-item.rod_fire.name=Fire Rod
 item.pocket_cauldron.name=Pocket Cauldron
-item.ultimate_pocket_cauldron.name=Ultimate Pocket Cauldron
 item.carbonated_coal.name=Carbonated Coal
 item.ultimate_broken_fuel.name=Ultimate Broken Fuel
 
-# Crystals
-item.crystal_shard.name=Crystal Shard
-item.crystal.name=Crystal
-item.charged_crystal_shard.name=Charged Crystal Shard
-item.charged_crystal.name=Charged Crystal
-item.concentrated_crystal_shard.name=Concentrated Crystal Shard
-item.concentrated_crystal.name=Concentrated Crystal
-item.ultimate_crystal.name=Ultimate Crystal
-item.ultimate_charged_crystal.name=Ultimate Charged Crystal
-item.ultimate_concentrated_crystal.name=Ultimate Concentrated Crystal
-
 # Sweet Items
-item.dried_sweet_potato.name=Dried Sweet Potato
 item.sweet_potato_dust.name=Sweet Potato Dust
 item.sweet_potato_ingot.name=Sweet Potato Ingot
 item.sweet_potato_bucket.name=Sweet Potato Bucket
@@ -72,26 +51,19 @@ item.sweet_bucket_milk.name=Sweet Milk Bucket
 
 # Tools
 item.potato_knife.name=Potato Knife
-item.potato_mana_knife.name=Mana Knife
+item.potato_mana_knife.name=Magical Knife
 item.lava_hoe.name=Lava Hoe
 
 # Splash Mana
-item.splash_mana_fire.name=Splash Potion of Fire Mana
-item.splash_mana_life.name=Splash Potion of Life Mana
+item.splash_mana_fire.name=Splash Potion of Fire Magic
+item.splash_mana_life.name=Splash Potion of Life Magic
 
 # Upgrades
-item.upgrade_drier_water.name=Upgrade Drier (Water)
-item.upgrade_mode_flux.name=Upgrade Mode (Flux)
-item.upgrade_mode_mana.name=Upgrade Mode (Mana)
 item.upgrade_booster.name=Upgrade Booster
 item.upgrade_multiplier.name=Upgrade Multiplier
 
 # Placeable Item
-tile.glowing_mana_torch.name=Mana Torch
-tile.glowing_mana_flower.name=Mana Flower
-tile.ultimate_mana_flower.name=Ultimate Flower
-tile.mana_cauldron.name=Mana Cauldron
-tile.ultimate_mana_cauldron.name=Ultimate Cauldron
+tile.mana_cauldron.name=Magical Cauldron
 
 # Food Blocks
 tile.cooked_dirt.name=Cooked Dirt
@@ -102,24 +74,12 @@ tile.baked_potato_block.name=Baked Potato Block
 # Blocks
 tile.potato_block.name=Potato Block
 tile.sweet_potato_block.name=Sweet Potato Block
-tile.sweet_machine_frame.name=Sweet Machine Frame
 tile.glowing_potato_block.name=Glowing Potato Block
-tile.glowing_mana_block.name=Mana Block
-tile.glowing_mana_stone.name=Mana Stone
 tile.lava_farmland.name=Lava Farmland
 
 # Machines
 tile.potato_drier.name=Potato Drier
-tile.sweet_potato_generator.name=Sweet Potato Generator
-tile.sweet_freezer.name=Sweet Freezer
-tile.sweet_crystal_maker.name=Sweet Crystal Maker
-tile.sweet_crystal_charger.name=Sweet Crystal Charger
-tile.ultimate_crystal_charger.name=Ultimate Crystal Charger
-tile.sweet_infuser.name=Sweet Infuser
-tile.mana_collector.name=Mana Collector
-tile.mana_extractor.name=Mana Extractor
 tile.energy_transfer.name=Energy Transfer
-tile.magic_drier.name=Magic Drier
 
 # Death Messages
 death.attack.potato_explosion=%1$s Died by potato explosion

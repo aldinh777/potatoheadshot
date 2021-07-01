@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class FireCauldronRecipe extends AbstractCauldronRecipe {
 	
 	public FireCauldronRecipe(ItemStack input, ItemStack output) {
-		super(input, output, new ItemStack(PotatoItems.ROD_FIRE));
+		super(input, output, new ItemStack(PotatoItems.ESSENCE_FIRE));
 	}
 	
 	public static List<FireCauldronRecipe> getRecipes() {

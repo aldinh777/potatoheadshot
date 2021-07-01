@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
+import aldinh777.potatoheadshot.content.capability.FoodBucketCapability;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -7,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -16,10 +16,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -158,31 +154,6 @@ public class PotatoFoodBucket extends PotatoFood {
             }
 
             return true;
-        }
-    }
-
-    public static class FoodBucketCapability extends FluidBucketWrapper {
-        public FoodBucketCapability(@Nonnull ItemStack container) {
-            super(container);
-        }
-
-        @Nullable
-        @Override
-        public FluidStack getFluid() {
-            Item item = container.getItem();
-            if (item == PotatoItems.WATER_POTATO) {
-                return new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME);
-            }
-            else if (item == PotatoItems.LAVA_POTATO) {
-                return new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME);
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void setFluid(@Nullable FluidStack fluidStack) {
-            container = ItemStack.EMPTY;
         }
     }
 }

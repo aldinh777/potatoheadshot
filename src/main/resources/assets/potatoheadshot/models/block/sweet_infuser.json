@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "potatoheadshot:blocks/sweet_infuser_top",
-    "front": "potatoheadshot:blocks/sweet_infuser_front",
-    "side": "potatoheadshot:blocks/sweet_infuser_side"
-  }
-}

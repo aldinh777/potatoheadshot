@@ -2,9 +2,9 @@ package aldinh777.potatoheadshot.content.items;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.other.recipes.category.IManaRecipes;
-import aldinh777.potatoheadshot.backup.tileentities.TileEntityManaCauldron;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.other.compat.botania.BotaniaCompat;
-import aldinh777.potatoheadshot.content.energy.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.lists.PotatoTab;
 import aldinh777.potatoheadshot.other.util.Constants;
@@ -42,7 +42,6 @@ public class PocketCauldron extends Item {
 
     public static final int maxManaSize = 320000;
     public static final int ultimateMaxManaSize = 32000000;
-    private boolean ultimate = false;
 
     public PocketCauldron(String name) {
         this.setUnlocalizedName(name);
@@ -90,16 +89,15 @@ public class PocketCauldron extends Item {
                             int manaStored = BotaniaCompat.getManaSize(te);
 
                             int pocketMana = getManaSize(stack);
-                            int maxMana = this.ultimate ? ultimateMaxManaSize : maxManaSize;
 
-                            int transferRate = maxMana - pocketMana;
+                            int transferRate = maxManaSize - pocketMana;
                             if (transferRate > manaStored) {
                                 transferRate = manaStored;
                             }
 
                             int result = pocketMana + transferRate;
                             setManaSize(stack, result);
-                            BotaniaCompat.absorbMana(te, new PotatoManaStorage(maxMana), transferRate);
+                            BotaniaCompat.absorbMana(te, new PotatoManaStorage(maxManaSize), transferRate);
 
                             return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
                         }
@@ -109,9 +107,8 @@ public class PocketCauldron extends Item {
                         TileEntityManaCauldron manaCauldron = (TileEntityManaCauldron) te;
                         PotatoManaStorage cauldronStorage = manaCauldron.getManaStorage();
                         int pocketMana = getManaSize(stack);
-                        int maxMana = this.ultimate ? ultimateMaxManaSize : maxManaSize;
 
-                        int transferRate = maxMana - pocketMana;
+                        int transferRate = maxManaSize - pocketMana;
                         if (transferRate > cauldronStorage.getManaStored()) {
                             transferRate = cauldronStorage.getManaStored();
                         }
@@ -158,24 +155,18 @@ public class PocketCauldron extends Item {
 
             IManaRecipes recipes = IManaRecipes.getRecipeById(0);
 
-            if (rodSlot.getItem() == PotatoItems.ROD_MANA) {
+            if (rodSlot.getItem().equals(PotatoItems.ESSENCE_MANA)) {
                 recipes = IManaRecipes.getRecipeById(0);
-            } else if (rodSlot.getItem() == PotatoItems.ROD_LIFE) {
+            } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
                 recipes = IManaRecipes.getRecipeById(1);
-            } else if (rodSlot.getItem() == PotatoItems.ROD_NATURE) {
+            } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
                 recipes = IManaRecipes.getRecipeById(2);
-            } else if (rodSlot.getItem() == PotatoItems.ROD_FIRE) {
+            } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
                 recipes = IManaRecipes.getRecipeById(3);
             }
 
             ItemStack result = recipes.getResult(inputSlot);
             int cost = recipes.getCost(inputSlot);
-
-            if (result.getItem() == PotatoItems.ULTIMATE_CONCENTRATED_CRYSTAL) {
-                if (!this.ultimate) {
-                    return;
-                }
-            }
 
             if (result.isEmpty() || cost > manaSize) {
                 return;
@@ -299,47 +290,6 @@ public class PocketCauldron extends Item {
             return ultimateMaxManaSize;
         }
         return 0;
-    }
-
-    public static void chargeCauldronMana(ItemStack stack, PotatoManaStorage storage, int size) {
-        int transferable = size;
-        int manaSize = getManaSize(stack);
-        int manaLeftUntilFull = getMaxManaSize(stack) - manaSize;
-
-        if (storage.getManaStored() < transferable) {
-            transferable = storage.getManaStored();
-        }
-        if (manaLeftUntilFull < transferable) {
-            transferable = manaLeftUntilFull;
-        }
-
-        if (transferable > 0) {
-            setManaSize(stack, manaSize + transferable);
-            storage.useMana(transferable);
-        }
-    }
-
-    public static void extractCauldronMana(ItemStack stack, PotatoManaStorage storage, int size) {
-        int transferable = size;
-        int manaSize = getManaSize(stack);
-        int storageLeftUntilFull = storage.getMaxManaStored() - storage.getManaStored();
-
-        if (manaSize < transferable) {
-            transferable = manaSize;
-        }
-        if (storageLeftUntilFull < transferable) {
-            transferable = storageLeftUntilFull;
-        }
-
-        if (transferable > 0) {
-            setManaSize(stack, manaSize - transferable);
-            storage.collectMana(transferable);
-        }
-    }
-
-    public PocketCauldron setUltimate() {
-        this.ultimate = true;
-        return this;
     }
 
     static class PocketCapability implements ICapabilitySerializable<NBTBase> {

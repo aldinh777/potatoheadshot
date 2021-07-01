@@ -14,7 +14,7 @@ public class FireCauldronRecipeCategory extends AbstractCauldronRecipeCategory<F
 	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 	
 	public FireCauldronRecipeCategory(IGuiHelper gui) {
-		super(gui, TEXTURE, new ItemStack(PotatoItems.ROD_FIRE));
+		super(gui, TEXTURE, new ItemStack(PotatoItems.ESSENCE_FIRE));
 	}
 
 	@Nonnull

@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "potatoheadshot:blocks/glowing_mana_block"
-  }
-}

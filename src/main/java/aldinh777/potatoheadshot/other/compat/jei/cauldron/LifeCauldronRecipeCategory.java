@@ -14,7 +14,7 @@ public class LifeCauldronRecipeCategory extends AbstractCauldronRecipeCategory<L
 	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 	
 	public LifeCauldronRecipeCategory(IGuiHelper gui) {
-		super(gui, TEXTURE, new ItemStack(PotatoItems.ROD_LIFE));
+		super(gui, TEXTURE, new ItemStack(PotatoItems.ESSENCE_LIFE));
 	}
 
 	@Nonnull

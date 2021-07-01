@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
+import aldinh777.potatoheadshot.content.capability.BucketCapability;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -32,7 +33,7 @@ public class SweetFoodBucket extends PotatoFood {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new SweetBucket.BucketCapability(stack);
+        return new BucketCapability(stack);
     }
 
     @Nonnull

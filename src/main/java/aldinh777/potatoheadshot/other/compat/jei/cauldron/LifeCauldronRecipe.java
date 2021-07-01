@@ -11,7 +11,7 @@ import java.util.List;
 public class LifeCauldronRecipe extends AbstractCauldronRecipe {
 	
 	public LifeCauldronRecipe(ItemStack input, ItemStack output) {
-		super(input, output, new ItemStack(PotatoItems.ROD_LIFE));
+		super(input, output, new ItemStack(PotatoItems.ESSENCE_LIFE));
 	}
 	
 	public static List<LifeCauldronRecipe> getRecipes() {

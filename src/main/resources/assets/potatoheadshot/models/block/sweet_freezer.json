@@ -1,9 +1,0 @@
-{
-  "parent": "potatoheadshot:block/orientable_with_bottom",
-  "textures": {
-    "top": "potatoheadshot:blocks/sweet_freezer_top",
-    "front": "potatoheadshot:blocks/sweet_freezer_front",
-    "side": "potatoheadshot:blocks/sweet_freezer_side",
-    "bottom": "potatoheadshot:blocks/sweet_freezer_bottom"
-  }
-}
