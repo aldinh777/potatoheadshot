@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.content.capability;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.FluidTankProperties;
@@ -10,8 +11,8 @@ import javax.annotation.Nullable;
 
 public class DrierWaterCapability implements IFluidHandler {
 
-    protected int water = 0;
-    protected int capacity = 8000;
+    public int water = 0;
+    public int capacity = 8000;
 
     public FluidStack getFluid() {
         return new FluidStack(FluidRegistry.WATER, water);
@@ -99,5 +100,13 @@ public class DrierWaterCapability implements IFluidHandler {
         }
 
         return drained;
+    }
+
+    public void readFromNBT(NBTTagCompound compound) {
+        water = compound.getInteger("Water");
+    }
+
+    public void writeToNBT(NBTTagCompound compound) {
+        compound.setInteger("Water", water);
     }
 }

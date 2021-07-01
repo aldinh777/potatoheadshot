@@ -19,7 +19,17 @@ function copyBuildFile () {
     if (err) {
       throw err;
     }
-    console.log(output + ' copied successfully');
+    const random = Math.floor(Math.random() * 100) % 3;
+    switch (random) {
+      case 0:
+        console.log(output + ' copied successfully');
+        break;
+      case 1:
+        console.log(output + ' copied gracefully with style');
+        break;
+      case 2:
+        console.log('the file ' + output + ' has been done now try it');
+    }
   });
 }
 

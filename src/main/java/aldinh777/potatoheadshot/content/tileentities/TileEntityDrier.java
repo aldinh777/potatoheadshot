@@ -4,7 +4,6 @@ import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
 import aldinh777.potatoheadshot.content.capability.DrierWaterCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrierUpgrade;
-import aldinh777.potatoheadshot.content.items.UpgradeDrierWater;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.recipes.category.PotatoDrierRecipes;
 import aldinh777.potatoheadshot.other.recipes.recipe.PotatoDrierRecipe;
@@ -89,20 +88,28 @@ public class TileEntityDrier extends AbstractMachine {
     @Override
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
+        waterCapability.readFromNBT(compound);
         inventoryDrier.deserializeNBT(compound.getCompoundTag("Inventory"));
         inventoryUpgradeDrier.deserializeNBT(compound.getCompoundTag("Upgrade"));
         burnProgress = compound.getInteger("BurnProgress");
         burnTime = compound.getInteger("BurnTime");
+        dryProgress = compound.getInteger("DryProgress");
+        waterVolume = compound.getInteger("WaterVolume");
+        waterProgress = compound.getInteger("WaterProgress");
     }
 
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
+        waterCapability.writeToNBT(compound);
         compound.setTag("Inventory", inventoryDrier.serializeNBT());
         compound.setTag("Upgrade", inventoryUpgradeDrier.serializeNBT());
         compound.setInteger("BurnProgress", burnProgress);
         compound.setInteger("BurnTime", burnTime);
+        compound.setInteger("DryProgress", dryProgress);
+        compound.setInteger("WaterVolume", waterVolume);
+        compound.setInteger("WaterProgress", waterProgress);
         return compound;
     }
 
@@ -111,7 +118,6 @@ public class TileEntityDrier extends AbstractMachine {
         if (!world.isRemote) {
             updateState();
 
-            applyBooster();
             updateGuiVariable();
 
             if (isBurning()) {
@@ -129,6 +135,7 @@ public class TileEntityDrier extends AbstractMachine {
             if (dryProgress >= maxDryProgress) {
                 dryItem();
             }
+
             if (waterProgress >= maxWaterProgress) {
                 waterItem();
             }
@@ -141,44 +148,16 @@ public class TileEntityDrier extends AbstractMachine {
         return burnTime > 0;
     }
 
-    private void applyBooster() {
-        int maxDryProgress;
-        int maxWaterProgress;
-        switch (inventoryUpgradeDrier.getBoosterLevel()) {
-            case 1:
-                maxDryProgress = 100;
-                maxWaterProgress = 500;
-                break;
-            case 2:
-                maxDryProgress = 50;
-                maxWaterProgress = 250;
-                break;
-            default:
-                maxDryProgress = 200;
-                maxWaterProgress = 1000;
-                break;
-        }
-        if (this.maxDryProgress != maxDryProgress || this.maxWaterProgress != maxWaterProgress) {
-            this.maxDryProgress = maxDryProgress;
-            this.maxWaterProgress = maxWaterProgress;
-        }
-    }
-
     private void updateGuiVariable() {
         if (hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP)) {
             IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
-            if (fluidHandler instanceof UpgradeDrierWater.WaterCapability) {
-                UpgradeDrierWater.WaterCapability waterHandler = (UpgradeDrierWater.WaterCapability) fluidHandler;
-                FluidStack fluidStack = waterHandler.getFluid();
-                if (fluidStack != null) {
-                    if (waterVolume != fluidStack.amount) {
-                        waterVolume = fluidStack.amount;
-                    }
-                    if (maxWaterVolume != waterHandler.getMaxVolume()) {
-                        maxWaterVolume = waterHandler.getMaxVolume();
-                    }
-                } else if (waterVolume != 0) {
-                    waterVolume = 0;
+            if (fluidHandler instanceof DrierWaterCapability) {
+                DrierWaterCapability waterHandler = (DrierWaterCapability) fluidHandler;
+                if (waterVolume != waterHandler.water) {
+                    waterVolume = waterHandler.water;
+                }
+                if (maxWaterVolume != waterHandler.capacity) {
+                    maxWaterVolume = waterHandler.capacity;
                 }
             }
         }
@@ -200,11 +179,11 @@ public class TileEntityDrier extends AbstractMachine {
     private boolean isWaterEnough() {
         if (hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP)) {
             IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
-            if (fluidHandler instanceof UpgradeDrierWater.WaterCapability) {
-                UpgradeDrierWater.WaterCapability water = (UpgradeDrierWater.WaterCapability) fluidHandler;
+            if (fluidHandler instanceof DrierWaterCapability) {
+                DrierWaterCapability water = (DrierWaterCapability) fluidHandler;
                 FluidStack fluidStack = water.getFluid();
                 if (fluidStack != null) {
-                    return fluidStack.amount / Math.pow(2, inventoryUpgradeDrier.getBoosterLevel()) >= maxWaterProgress - waterProgress;
+                    return fluidStack.amount >= maxWaterProgress - waterProgress;
                 }
             }
         }
@@ -223,7 +202,7 @@ public class TileEntityDrier extends AbstractMachine {
                 dryProgress--;
             }
         } else if (output.isEmpty() || (output.isItemEqual(result) && !InventoryHelper.isOutputOverflow(output, result))) {
-            dryProgress++;
+            dryProgress += Math.pow(2, inventoryUpgradeDrier.getBoosterLevel());
             activeStateLimit = 20;
         }
         burnTime -= Math.pow(2, inventoryUpgradeDrier.getBoosterLevel());
@@ -243,9 +222,9 @@ public class TileEntityDrier extends AbstractMachine {
         } else if (output.isEmpty() || (output.isItemEqual(result) && !InventoryHelper.isOutputOverflow(output, result))) {
             if (hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP)) {
                 IFluidHandler fluidHandler = getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
-                if (fluidHandler != null) {
+                if (fluidHandler instanceof DrierWaterCapability) {
                     fluidHandler.drain((int) Math.pow(2, inventoryUpgradeDrier.getBoosterLevel()), true);
-                    waterProgress++;
+                    waterProgress += Math.pow(2, inventoryUpgradeDrier.getBoosterLevel());
                 }
             }
         }
@@ -259,7 +238,7 @@ public class TileEntityDrier extends AbstractMachine {
         if (!result.isEmpty()) {
             result.grow(inventoryUpgradeDrier.getMultiplierLevel());
         }
-        if (fuel.isEmpty() || input.isEmpty() || result.isEmpty()) {
+        if (fuel.isEmpty() || input.isEmpty() || result.isEmpty() || !FuelHelper.isItemFuel(fuel)) {
             if (dryProgress > 0) {
                 dryProgress--;
             }
