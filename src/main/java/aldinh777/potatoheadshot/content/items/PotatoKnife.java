@@ -16,14 +16,4 @@ public class PotatoKnife extends ItemSword {
         this.setContainerItem(this);
         PotatoItems.LISTS.add(this);
     }
-
-    @Override
-    public boolean isRepairable() {
-        return false;
-    }
-
-    @Override
-    public boolean canHarvestBlock(IBlockState blockIn) {
-        return blockIn.getBlock() == Blocks.POTATOES || blockIn.getBlock() == Blocks.WEB;
-    }
 }

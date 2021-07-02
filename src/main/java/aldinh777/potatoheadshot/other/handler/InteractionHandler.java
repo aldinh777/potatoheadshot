@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.other.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
+import aldinh777.potatoheadshot.content.blocks.MagicBlock;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -44,10 +45,11 @@ public class InteractionHandler {
                     if (!world.isRemote) {
                         ItemStack lifeStack = new ItemStack(PotatoItems.ESSENCE_LIFE);
                         EntityItem lifeEssence = new EntityItem(world, x, y, z, lifeStack);
+                        MagicBlock.floatEntity(lifeEssence, 4_000);
                         world.spawnEntity(lifeEssence);
                         world.removeEntity(target);
                         if (!player.capabilities.isCreativeMode) {
-                            currentItem.shrink(1);
+                            currentItem.damageItem(1, player);
                         }
                     }
                 }

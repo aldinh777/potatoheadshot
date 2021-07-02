@@ -1,10 +1,11 @@
 package aldinh777.potatoheadshot.content.items;
 
+import aldinh777.potatoheadshot.content.blocks.MagicBlock;
+import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,13 +24,6 @@ public class PotatoManaKnife extends PotatoKnife {
 
     public PotatoManaKnife(String name) {
         super(name);
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
-        this.setDamage(stack, this.getDamage(stack) - 50);
-        return stack;
     }
 
     @Nonnull
@@ -65,27 +59,46 @@ public class PotatoManaKnife extends PotatoKnife {
 
                     if (iblockstate.getBlock() == Blocks.GRASS) {
                         if (!playerIn.capabilities.isCreativeMode) {
-                            itemstack.shrink(1);
+                            itemstack.damageItem(1, playerIn);
                         }
 
                         if (!worldIn.isRemote) {
                             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                             ItemStack natureStack = new ItemStack(PotatoItems.ESSENCE_NATURE);
                             EntityItem natureEssence = new EntityItem(worldIn, x, y, z, natureStack);
+                            MagicBlock.floatEntity(natureEssence, 4_000);
                             worldIn.spawnEntity(natureEssence);
+                            itemstack.damageItem(1, playerIn);
+                        }
+
+                        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+
+                    } else if (iblockstate.getBlock() == PotatoBlocks.GLOWING_POTATO_BLOCK) {
+                        if (!playerIn.capabilities.isCreativeMode) {
+                            itemstack.damageItem(1, playerIn);
+                        }
+
+                        if (!worldIn.isRemote) {
+                            worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
+                            ItemStack manaStack = new ItemStack(PotatoItems.ESSENCE_MANA);
+                            EntityItem pureEssence = new EntityItem(worldIn, x, y, z, manaStack);
+                            MagicBlock.floatEntity(pureEssence, 4_000);
+                            worldIn.spawnEntity(pureEssence);
+                            itemstack.damageItem(1, playerIn);
                         }
 
                         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 
                     } else if (material == Material.LAVA && iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
                         if (!playerIn.capabilities.isCreativeMode) {
-                            itemstack.shrink(1);
+                            itemstack.damageItem(1, playerIn);
                         }
 
                         if (!worldIn.isRemote) {
                             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                             ItemStack fireStack = new ItemStack(PotatoItems.ESSENCE_FIRE);
                             EntityItem fireEssence = new EntityItem(worldIn, x, y, z, fireStack);
+                            MagicBlock.floatEntity(fireEssence, 4_000);
                             worldIn.spawnEntity(fireEssence);
                         }
 

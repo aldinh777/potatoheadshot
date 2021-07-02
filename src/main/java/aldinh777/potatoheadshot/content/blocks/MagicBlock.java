@@ -3,6 +3,7 @@ package aldinh777.potatoheadshot.content.blocks;
 import aldinh777.potatoheadshot.other.util.BlockType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -28,16 +29,14 @@ public class MagicBlock extends PotatoBlock {
 
     @Override
     public void onEntityCollidedWithBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Entity entityIn) {
-        if (!entityIn.hasNoGravity()) {
-            entityIn.setNoGravity(true);
-            Timer timer = new Timer(0, (e -> {
-                if (entityIn.hasNoGravity()) {
-                    entityIn.setNoGravity(false);
+        if (!worldIn.isRemote) {
+            if (entityIn.hasNoGravity()) {
+                if (entityIn instanceof EntityLivingBase) {
+                    floatEntity(entityIn, 4_000);
                 }
-            }));
-            timer.setInitialDelay(3_000);
-            timer.setRepeats(false);
-            timer.restart();
+            } else {
+                floatEntity(entityIn, 4_000);
+            }
         }
     }
 
@@ -104,16 +103,20 @@ public class MagicBlock extends PotatoBlock {
             double d2 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
             EntityItem entityitem = new EntityItem(worldIn, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, stack);
             entityitem.setDefaultPickupDelay();
-            entityitem.setNoGravity(true);
-            Timer timer = new Timer(0, (e -> {
-                if (entityitem.hasNoGravity()) {
-                    entityitem.setNoGravity(false);
-                }
-            }));
-            timer.setInitialDelay(9_000);
-            timer.setRepeats(false);
-            timer.restart();
+            floatEntity(entityitem, 8_000);
             worldIn.spawnEntity(entityitem);
         }
+    }
+
+    public static void floatEntity(Entity entityIn, int milliseconds) {
+        entityIn.setNoGravity(true);
+        Timer timer = new Timer(0, (e -> {
+            if (entityIn.hasNoGravity()) {
+                entityIn.setNoGravity(false);
+            }
+        }));
+        timer.setInitialDelay(milliseconds);
+        timer.setRepeats(false);
+        timer.restart();
     }
 }
