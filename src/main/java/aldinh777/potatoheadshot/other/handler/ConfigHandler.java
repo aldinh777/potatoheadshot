@@ -74,7 +74,7 @@ public class ConfigHandler {
 
         category = "Mana";
         config.addCustomCategoryComment(category, "Magical Machines Configuration");
-        MANA_CAULDRON_CAPACITY = config.getInt("MANA_CAULDRON_CAPACITY", category, 320_000, 0, Integer.MAX_VALUE, "");
+        MANA_CAULDRON_CAPACITY = config.getInt("MANA_CAULDRON_CAPACITY", category, 64_000, 0, Integer.MAX_VALUE, "");
         ENERGY_TRANSFER_RANGE = config.getInt("ENERGY_TRANSFER_RANGE", category, 8, 0, Integer.MAX_VALUE, "");
 
 

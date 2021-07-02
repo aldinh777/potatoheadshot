@@ -45,7 +45,7 @@ public class ManaNatureCauldronRecipes implements IManaRecipes {
 
     @Override
     public int getCost(ItemStack input) {
-        return 100;
+        return 5;
     }
 
 }

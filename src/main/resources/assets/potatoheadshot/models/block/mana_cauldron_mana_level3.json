@@ -1,6 +1,6 @@
 {
 	"parent": "potatoheadshot:block/mana_cauldron_base_level3",
     "textures": {
-        "mana": "potatoheadshot:blocks/mana_life_still"
+        "mana": "potatoheadshot:blocks/mana_still"
     }
 }

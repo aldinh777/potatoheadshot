@@ -55,28 +55,28 @@ public class CauldronRecipe {
         Item ice = Item.getItemFromBlock(Blocks.ICE);
 
         if (ConfigHandler.LAVA_POTATO) {
-            addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 12_000);
+            addRecipe(recipes, PotatoItems.LAVA_POTATO, new ItemStack(PotatoItems.LAVA_POTATO_SEED), 800);
         }
         if (ConfigHandler.WATER_POTATO) {
-            addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 12_000);
+            addRecipe(recipes, PotatoItems.WATER_POTATO, new ItemStack(PotatoItems.WATER_POTATO_SEED), 800);
         }
 
-        addRecipe(recipes, Items.FISH, new ItemStack(Items.PRISMARINE_SHARD), 2000);
-        addRecipe(recipes, Items.PRISMARINE_SHARD, new ItemStack(Items.PRISMARINE_CRYSTALS), 8000);
-        addRecipe(recipes, Items.CLAY_BALL, new ItemStack(Items.SLIME_BALL), 8000);
-        addRecipe(recipes, Items.STRING, new ItemStack(Blocks.VINE), 2000);
-        addRecipe(recipes, Items.SUGAR, new ItemStack(Items.REEDS), 2000);
-        addRecipe(recipes, netherRack, new ItemStack(Items.NETHER_WART), 2000);
-        addRecipe(recipes, grass, new ItemStack(Items.WHEAT_SEEDS), 2000);
-        addRecipe(recipes, dirt, new ItemStack(Blocks.GRASS), 2000);
-        addRecipe(recipes, sand, new ItemStack(Blocks.CACTUS), 2000);
-        addRecipe(recipes, log1, new ItemStack(Blocks.SAPLING), 2000);
-        addRecipe(recipes, log2, new ItemStack(Blocks.SAPLING), 2000);
-        addRecipe(recipes, mycelium, new ItemStack(Blocks.BROWN_MUSHROOM), 2000);
-        addRecipe(recipes, endStone, new ItemStack(Blocks.CHORUS_FLOWER), 2000);
-        addRecipe(recipes, ice, new ItemStack(Blocks.SNOW), 2000);
+        addRecipe(recipes, Items.FISH, new ItemStack(Items.PRISMARINE_SHARD), 20);
+        addRecipe(recipes, Items.PRISMARINE_SHARD, new ItemStack(Items.PRISMARINE_CRYSTALS), 80);
+        addRecipe(recipes, Items.CLAY_BALL, new ItemStack(Items.SLIME_BALL), 80);
+        addRecipe(recipes, Items.STRING, new ItemStack(Blocks.VINE), 20);
+        addRecipe(recipes, Items.SUGAR, new ItemStack(Items.REEDS), 20);
+        addRecipe(recipes, netherRack, new ItemStack(Items.NETHER_WART), 20);
+        addRecipe(recipes, grass, new ItemStack(Items.WHEAT_SEEDS), 20);
+        addRecipe(recipes, dirt, new ItemStack(Blocks.GRASS), 20);
+        addRecipe(recipes, sand, new ItemStack(Blocks.CACTUS), 20);
+        addRecipe(recipes, log1, new ItemStack(Blocks.SAPLING), 20);
+        addRecipe(recipes, log2, new ItemStack(Blocks.SAPLING), 20);
+        addRecipe(recipes, mycelium, new ItemStack(Blocks.BROWN_MUSHROOM), 20);
+        addRecipe(recipes, endStone, new ItemStack(Blocks.CHORUS_FLOWER), 20);
+        addRecipe(recipes, ice, new ItemStack(Blocks.SNOW), 20);
         if (ConfigHandler.SPLASH_MANA) {
-            addRecipe(recipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 8000);
+            addRecipe(recipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 800);
         }
 
         return recipes;
@@ -89,15 +89,15 @@ public class CauldronRecipe {
         Item brownMushroom = Item.getItemFromBlock(Blocks.BROWN_MUSHROOM);
         Item cactus = Item.getItemFromBlock(Blocks.CACTUS);
 
-        addRecipe(recipes, Items.WHEAT_SEEDS, new ItemStack(Items.MELON_SEEDS), 100);
-        addRecipe(recipes, Items.MELON_SEEDS, new ItemStack(Items.PUMPKIN_SEEDS), 100);
-        addRecipe(recipes, Items.PUMPKIN_SEEDS, new ItemStack(Items.BEETROOT_SEEDS), 100);
-        addRecipe(recipes, Items.BEETROOT_SEEDS, new ItemStack(Items.DYE, 1, 3), 100);
-        addRecipe(recipes, Items.NETHER_WART, new ItemStack(redMushroom), 100);
-        addRecipe(recipes, redMushroom, new ItemStack(brownMushroom), 100);
-        addRecipe(recipes, brownMushroom, new ItemStack(Items.NETHER_WART), 100);
-        addRecipe(recipes, cactus, new ItemStack(Items.REEDS), 100);
-        addRecipe(recipes, Items.REEDS, new ItemStack(cactus), 100);
+        addRecipe(recipes, Items.WHEAT_SEEDS, new ItemStack(Items.MELON_SEEDS), 5);
+        addRecipe(recipes, Items.MELON_SEEDS, new ItemStack(Items.PUMPKIN_SEEDS), 5);
+        addRecipe(recipes, Items.PUMPKIN_SEEDS, new ItemStack(Items.BEETROOT_SEEDS), 5);
+        addRecipe(recipes, Items.BEETROOT_SEEDS, new ItemStack(Items.DYE, 1, 3), 5);
+        addRecipe(recipes, Items.NETHER_WART, new ItemStack(redMushroom), 5);
+        addRecipe(recipes, redMushroom, new ItemStack(brownMushroom), 5);
+        addRecipe(recipes, brownMushroom, new ItemStack(Items.NETHER_WART), 5);
+        addRecipe(recipes, cactus, new ItemStack(Items.REEDS), 5);
+        addRecipe(recipes, Items.REEDS, new ItemStack(cactus), 5);
 
         return recipes;
     }

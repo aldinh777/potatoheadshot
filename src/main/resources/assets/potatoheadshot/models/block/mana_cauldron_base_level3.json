@@ -4,6 +4,7 @@
     "textures": {
         "particle": "potatoheadshot:blocks/mana_cauldron_side",
         "mana_cauldron_bottom": "potatoheadshot:blocks/mana_cauldron_bottom",
+        "mana_still": "potatoheadshot:blocks/mana_still",
         "mana_cauldron_inner": "potatoheadshot:blocks/mana_cauldron_inner",
         "mana_cauldron_side": "potatoheadshot:blocks/mana_cauldron_side"
     },
@@ -239,6 +240,14 @@
                 "west": { "texture": "#mana_cauldron_bottom", "uv": [ 0, 13, 1, 16 ] },
                 "up": { "texture": "#mana_cauldron_bottom", "uv": [ 0, 13, 1, 14 ] },
                 "down": { "texture": "#mana_cauldron_bottom", "uv": [ 0, 15, 1, 16 ] }
+            }
+        },
+        {
+            "name": "Mana",
+            "from": [ 1, 15, 1 ], 
+            "to": [ 15, 15, 15 ], 
+            "faces": {
+                "up": { "texture": "#mana_still", "uv": [ 1, 1, 15, 15 ] }
             }
         }
     ]

@@ -9,7 +9,7 @@ public enum BlockType {
     STONE(Material.ROCK, SoundType.STONE, 3.5f, 1.0f),
     METAL(Material.IRON, SoundType.METAL, 5.0f, 10.0f),
     GLASS(Material.GLASS, SoundType.GLASS, 0.3f, 1.0f),
-    MAGIC(Material.GLASS, SoundType.SNOW, 0.0f, 100.0f),
+    MAGIC(Material.CRAFTED_SNOW, SoundType.SNOW, 0.0f, 100.0f),
     POTATO(Material.WOOD, SoundType.WOOD, 1.0f, 1.0f);
 
     private final Material material;

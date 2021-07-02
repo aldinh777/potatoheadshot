@@ -31,29 +31,31 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     protected int level = 0;
     protected int checkMana = 0;
 
+    private static final int MANA_COLLECT_DEFAULT = 200;
+
     public TileEntityManaCauldron() {
-        this.storage = new PotatoManaStorage(ConfigHandler.MANA_CAULDRON_CAPACITY);
+        storage = new PotatoManaStorage(ConfigHandler.MANA_CAULDRON_CAPACITY);
     }
 
     // Override Methods
 
     @Override
     public void update() {
-        if (!this.world.isRemote) {
+        if (!world.isRemote) {
 
             boolean flag = false;
-            boolean flagItem = this.transformItemsInside();
-            boolean flagEntity = this.affectEntityInside();
+            boolean flagItem = transformItemsInside();
+            boolean flagEntity = affectEntityInside();
 
-            this.detectLevelChange();
+            detectLevelChange();
 
-            if (this.checkMana != this.storage.getManaStored()) {
-                this.checkMana = this.storage.getManaStored();
+            if (checkMana != storage.getManaStored()) {
+                checkMana = storage.getManaStored();
                 flag = true;
             }
 
             if (flag && flagItem && flagEntity) {
-                this.markDirty();
+                markDirty();
             }
         }
     }
@@ -61,8 +63,8 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     @Override
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
-        this.element = ManaCauldron.Element.withValue(compound.getInteger("Element"));
-        this.recipes = IManaRecipes.getRecipeById(this.element.getValue());
+        element = ManaCauldron.Element.withValue(compound.getInteger("Element"));
+        recipes = IManaRecipes.getRecipeById(element.getValue());
         storage.readFromNBT(compound);
     }
 
@@ -70,7 +72,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("Element", this.element.getValue());
+        compound.setInteger("Element", element.getValue());
         storage.writeToNBT(compound);
         return compound;
     }
@@ -83,43 +85,50 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     // Custom Methods
 
     public PotatoManaStorage getManaStorage() {
-        return this.storage;
+        return storage;
     }
 
     public boolean transformItemsInside() {
         AxisAlignedBB bb = new AxisAlignedBB(pos);
-        List<EntityItem> entities = this.world.getEntitiesWithinAABB(EntityItem.class, bb);
+        List<EntityItem> entities = world.getEntitiesWithinAABB(EntityItem.class, bb);
         for (EntityItem entity : entities) {
             ItemStack stack = entity.getItem();
 
             if (stack.getItem().equals(PotatoItems.ESSENCE_MANA)) {
-                this.setElement(ManaCauldron.Element.MANA);
+                setElement(ManaCauldron.Element.MANA);
                 stack.shrink(1);
                 return true;
 
             } else if (stack.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
-                this.setElement(ManaCauldron.Element.LIFE);
+                setElement(ManaCauldron.Element.LIFE);
                 stack.shrink(1);
                 return true;
 
             } else if (stack.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
-                this.setElement(ManaCauldron.Element.NATURE);
+                setElement(ManaCauldron.Element.NATURE);
                 stack.shrink(1);
                 return true;
 
             } else if (stack.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
-                this.setElement(ManaCauldron.Element.FIRE);
+                setElement(ManaCauldron.Element.FIRE);
                 stack.shrink(1);
+                return true;
+
+            } else if (stack.getItem().equals(PotatoItems.GLOWING_POTATO_DUST)) {
+                if (storage.getManaStored() < storage.getMaxManaStored()) {
+                    storage.collectMana(MANA_COLLECT_DEFAULT);
+                    stack.shrink(1);
+                }
                 return true;
 
             } else {
                 ItemStack result = recipes.getResult(stack).copy();
                 int cost = recipes.getCost(stack);
 
-                if (!result.isEmpty() && this.storage.getManaStored() >= cost) {
-                    float posX = this.pos.getX() + 0.5f;
-                    float posY = this.pos.getY() + 0.5f;
-                    float posZ = this.pos.getZ() + 0.5f;
+                if (!result.isEmpty() && storage.getManaStored() >= cost) {
+                    float posX = pos.getX() + 0.5f;
+                    float posY = pos.getY() + 0.5f;
+                    float posZ = pos.getZ() + 0.5f;
 
                     boolean success = false;
 
@@ -132,7 +141,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                             break;
                         }
 
-                        TileEntity te = this.world.getTileEntity(this.pos.offset(facing));
+                        TileEntity te = world.getTileEntity(pos.offset(facing));
 
                         if (te != null) {
                             if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)) {
@@ -153,11 +162,11 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
                     }
 
                     if (!success) {
-                        EntityItem entityResult = new EntityItem(this.world, posX, posY, posZ, result);
-                        this.world.spawnEntity(entityResult);
+                        EntityItem entityResult = new EntityItem(world, posX, posY, posZ, result);
+                        world.spawnEntity(entityResult);
                     }
 
-                    this.storage.useMana(cost);
+                    storage.useMana(cost);
                     stack.shrink(1);
 
                     return true;
@@ -170,24 +179,24 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
 
     public boolean affectEntityInside() {
         AxisAlignedBB bb = new AxisAlignedBB(pos);
-        List<EntityLivingBase> entities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
+        List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
         for (EntityLivingBase entity : entities) {
-            int cost = 200;
-            if (this.storage.getManaStored() > cost) {
-                if (this.element == ManaCauldron.Element.FIRE) {
+            int cost = 2;
+            if (storage.getManaStored() > cost) {
+                if (element == ManaCauldron.Element.FIRE) {
                     if (!entity.isBurning()) {
                         entity.setFire(4);
-                        this.storage.useMana(cost);
+                        storage.useMana(cost);
                         return true;
                     }
-                } else if (this.element == ManaCauldron.Element.LIFE) {
+                } else if (element == ManaCauldron.Element.LIFE) {
                     if (entity.isEntityUndead()) {
                         entity.attackEntityFrom(DamageSource.MAGIC,2f);
-                        this.storage.useMana(cost);
+                        storage.useMana(cost);
                         return true;
                     } else if (entity.getHealth() < entity.getMaxHealth()) {
                         entity.heal(0.2f);
-                        this.storage.useMana(cost);
+                        storage.useMana(cost);
                         return true;
                     }
                 }
@@ -197,39 +206,39 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     }
 
     public void setManaLevel(int level) {
-        IBlockState newState = this.world.getBlockState(this.pos)
+        IBlockState newState = world.getBlockState(pos)
                 .withProperty(ManaCauldron.LEVEL, level);
 
-        this.world.setBlockState(pos, newState);
+        world.setBlockState(pos, newState);
     }
 
     public void setElement(ManaCauldron.Element element) {
         this.element = element;
-        this.recipes = IManaRecipes.getRecipeById(element.getValue());
+        recipes = IManaRecipes.getRecipeById(element.getValue());
 
-        IBlockState newState = this.world.getBlockState(this.pos)
+        IBlockState newState = world.getBlockState(pos)
                 .withProperty(ManaCauldron.ELEMENT, element);
 
-        this.world.setBlockState(pos, newState);
+        world.setBlockState(pos, newState);
     }
 
     public void detectLevelChange() {
-        int manaStored = this.storage.getManaStored();
+        int manaStored = storage.getManaStored();
         int currentLevel;
 
         if (manaStored <= 0) {
             currentLevel = 0;
-        } else if (manaStored < this.storage.getMaxManaStored() / 2) {
+        } else if (manaStored < storage.getMaxManaStored() / 2) {
             currentLevel = 1;
-        } else if (manaStored < this.storage.getMaxManaStored()) {
+        } else if (manaStored < storage.getMaxManaStored()) {
             currentLevel = 2;
         } else {
             currentLevel = 3;
         }
 
-        if (this.level != currentLevel) {
-            this.level = currentLevel;
-            this.setManaLevel(currentLevel);
+        if (level != currentLevel) {
+            level = currentLevel;
+            setManaLevel(currentLevel);
         }
     }
 }

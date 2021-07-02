@@ -34,12 +34,12 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
     @Override
     public int getCost(ItemStack input) {
         if (ConfigHandler.LAVA_POTATO) {
-            if (input.getItem() == Items.IRON_HOE) return 32000;
+            if (input.getItem() == Items.IRON_HOE) return 800;
         }
         if (ConfigHandler.SPLASH_MANA) {
-            if (input.getItem() == Items.SPLASH_POTION) return 8000;
+            if (input.getItem() == Items.SPLASH_POTION) return 200;
         }
-        if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 1000;
+        if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 25;
         return 0;
     }
 }
