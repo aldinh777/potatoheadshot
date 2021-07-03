@@ -11,7 +11,7 @@ import java.util.List;
 public class ManaCauldronRecipe extends AbstractCauldronRecipe {
 
 	public ManaCauldronRecipe(ItemStack input, ItemStack output) {
-		super(input, output, new ItemStack(PotatoItems.GLOWING_POTATO_DUST));
+		super(input, output, new ItemStack(PotatoItems.ESSENCE_MANA));
 	}
 	
 	public static List<ManaCauldronRecipe> getRecipes() {

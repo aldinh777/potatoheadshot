@@ -61,11 +61,4 @@ public class PotatoDrierRecipes {
         return getResult(input, wetList);
     }
 
-    public boolean isDryRecipeExists(ItemStack input) {
-        return !this.getDryResult(input).getOutput().isEmpty();
-    }
-
-    public boolean isWetRecipeExists(ItemStack input) {
-        return !this.getWetResult(input).getOutput().isEmpty();
-    }
 }

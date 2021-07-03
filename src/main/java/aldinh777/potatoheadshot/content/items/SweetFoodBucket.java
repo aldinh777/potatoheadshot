@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.content.capability.BucketCapability;
+import aldinh777.potatoheadshot.other.capability.BucketCapability;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

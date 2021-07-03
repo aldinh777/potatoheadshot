@@ -2,7 +2,6 @@ package aldinh777.potatoheadshot.other.recipes.category;
 
 import aldinh777.potatoheadshot.other.recipes.recipe.CauldronRecipe;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
@@ -28,13 +27,6 @@ public class ManaLifeCauldronRecipes implements IManaRecipes {
     @Override
     public ItemStack getResult(ItemStack input) {
         ItemStack result = this.recipes.get(input.getItem());
-
-        if (input.getItem() instanceof ItemSplashPotion) {
-            ItemSplashPotion splash = (ItemSplashPotion) input.getItem();
-            if (!splash.getItemStackDisplayName(input).equals("Awkward Splash Potion")) {
-                return ItemStack.EMPTY;
-            }
-        }
 
         if (result != null) {
             return result;

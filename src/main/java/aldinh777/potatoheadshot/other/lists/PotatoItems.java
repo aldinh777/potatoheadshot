@@ -1,9 +1,9 @@
 package aldinh777.potatoheadshot.other.lists;
 
-import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
 import aldinh777.potatoheadshot.content.blocks.PotatoFoodBlock;
 import aldinh777.potatoheadshot.content.items.*;
 import aldinh777.potatoheadshot.other.util.BlockType;
+import aldinh777.potatoheadshot.other.util.Element;
 import aldinh777.potatoheadshot.other.util.FoodEffects;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -149,8 +149,8 @@ public class PotatoItems {
         };
 
         // Potato Potions
-        SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", ManaCauldron.Element.FIRE);
-        SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", ManaCauldron.Element.LIFE);
+        SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", Element.FIRE);
+        SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", Element.LIFE);
 
         // Upgrades
         UPGRADE_BOOSTER = new PotatoItem("upgrade_booster");

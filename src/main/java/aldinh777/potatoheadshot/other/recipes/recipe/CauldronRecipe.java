@@ -76,7 +76,7 @@ public class CauldronRecipe {
         addRecipe(recipes, endStone, new ItemStack(Blocks.CHORUS_FLOWER), 20);
         addRecipe(recipes, ice, new ItemStack(Blocks.SNOW), 20);
         if (ConfigHandler.SPLASH_MANA) {
-            addRecipe(recipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 800);
+            addRecipe(recipes, Items.GLASS_BOTTLE, new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 800);
         }
 
         return recipes;

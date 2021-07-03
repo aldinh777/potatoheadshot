@@ -3,7 +3,6 @@ package aldinh777.potatoheadshot.other.recipes.category;
 import aldinh777.potatoheadshot.other.handler.ConfigHandler;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
@@ -13,19 +12,12 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
 
     @Override
     public ItemStack getResult(ItemStack input) {
-        if (input.getItem() == Items.IRON_HOE) {
-            if (ConfigHandler.LAVA_POTATO) {
-                return new ItemStack(PotatoItems.LAVA_HOE);
-            }
+        if (ConfigHandler.LAVA_POTATO && input.getItem() == Items.IRON_HOE) {
+            return new ItemStack(PotatoItems.LAVA_HOE);
         }
 
-        if (input.getItem() instanceof ItemSplashPotion) {
-            if (ConfigHandler.SPLASH_MANA) {
-                ItemSplashPotion splash = (ItemSplashPotion) input.getItem();
-                if (splash.getItemStackDisplayName(input).equals("Awkward Splash Potion")) {
-                    return new ItemStack(PotatoItems.SPLASH_MANA_FIRE);
-                }
-            }
+        if (ConfigHandler.SPLASH_MANA && input.getItem() == Items.GLASS_BOTTLE) {
+            return new ItemStack(PotatoItems.SPLASH_MANA_FIRE);
         }
 
         return FurnaceRecipes.instance().getSmeltingResult(input);
@@ -37,7 +29,7 @@ public class ManaFireCauldronRecipes implements IManaRecipes {
             if (input.getItem() == Items.IRON_HOE) return 800;
         }
         if (ConfigHandler.SPLASH_MANA) {
-            if (input.getItem() == Items.SPLASH_POTION) return 200;
+            if (input.getItem() == Items.GLASS_BOTTLE) return 200;
         }
         if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 25;
         return 0;

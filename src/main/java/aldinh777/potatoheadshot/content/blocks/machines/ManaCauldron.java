@@ -1,9 +1,10 @@
 package aldinh777.potatoheadshot.content.blocks.machines;
 
-import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.content.blocks.PotatoBlock;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.other.util.BlockType;
+import aldinh777.potatoheadshot.other.util.Element;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
@@ -13,15 +14,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,9 +40,15 @@ public class ManaCauldron extends PotatoBlock {
         super(name, BlockType.STONE);
         this.setHardness(3.0f);
         this.setResistance(6000.0f);
+        this.setLightLevel(0.9f);
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(LEVEL, 0)
                 .withProperty(ELEMENT, Element.MANA));
+    }
+
+    @Override
+    protected void init(String name) {
+        PotatoBlocks.LISTS.add(this);
     }
 
     @Override
@@ -133,40 +136,6 @@ public class ManaCauldron extends PotatoBlock {
             return BlockFaceShape.BOWL;
         } else {
             return face == EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
-        }
-    }
-
-    public enum Element implements IStringSerializable {
-        MANA("mana", 0),
-        LIFE("life", 1),
-        NATURE("nature", 2),
-        FIRE("fire", 3);
-
-        private final String name;
-        private final int value;
-
-        Element(String name, int value) {
-            this.name = name;
-            this.value = value;
-        }
-
-        @Nonnull
-        @Override
-        public String getName() {
-            return this.name;
-        }
-
-        public int getValue() {
-            return this.value;
-        }
-
-        public static Element withValue(int value) {
-            switch (value) {
-                case 1: return LIFE;
-                case 2: return NATURE;
-                case 3: return FIRE;
-                default: return MANA;
-            }
         }
     }
 }

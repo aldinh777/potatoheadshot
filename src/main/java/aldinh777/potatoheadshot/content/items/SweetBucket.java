@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.content.capability.BucketCapability;
+import aldinh777.potatoheadshot.other.capability.BucketCapability;
 import aldinh777.potatoheadshot.other.handler.ConfigHandler;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.lists.PotatoTab;

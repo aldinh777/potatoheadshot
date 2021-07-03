@@ -2,28 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:slime_ball"
-    },
-    {
-      "item": "minecraft:slime_ball"
-    },
-    {
-      "item": "minecraft:slime_ball"
-    },
-    {
-      "item": "minecraft:slime_ball"
-    },
-    {
       "item": "minecraft:potato"
-    },
-    {
-      "item": "minecraft:slime_ball"
-    },
-    {
-      "item": "minecraft:slime_ball"
-    },
-    {
-      "item": "minecraft:slime_ball"
     },
     {
       "item": "minecraft:slime_ball"

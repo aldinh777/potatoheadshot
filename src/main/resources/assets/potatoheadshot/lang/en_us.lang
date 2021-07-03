@@ -14,8 +14,8 @@ item.baked_small_potato_planks.name=Baked Small Potato Planks
 item.baked_potato_chip.name=Baked Potato Chip
 item.fried_fries.name=Fried Fries
 item.salt_potato.name=Salt Potato
-item.sweet_potato.name=Very Sweet Potato
-item.baked_sweet_potato.name=Baked Very Sweet Potato
+item.sweet_potato.name=Sweet Potato
+item.baked_sweet_potato.name=Baked Sweet Potato
 item.glowing_potato.name=Glowing Potato
 item.sticky_potato.name=Sticky Potato
 item.red_potato.name=Red Potato
@@ -76,6 +76,7 @@ tile.potato_block.name=Potato Block
 tile.sweet_potato_block.name=Sweet Potato Block
 tile.glowing_potato_block.name=Glowing Potato Block
 tile.lava_farmland.name=Lava Farmland
+tile.magic_sapling.name=Magic Sapling
 
 # Machines
 tile.potato_drier.name=Potato Drier

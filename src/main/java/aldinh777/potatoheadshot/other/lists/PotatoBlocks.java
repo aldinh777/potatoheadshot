@@ -29,6 +29,7 @@ public class PotatoBlocks {
     public static Block POTATO_BLOCK;
     public static Block SWEET_POTATO_BLOCK;
     public static Block GLOWING_POTATO_BLOCK;
+    public static Block MAGIC_SAPLING;
     public static Block ENERGY_TRANSFER;
 
     public static Block POTATO_DRIER;
@@ -43,8 +44,9 @@ public class PotatoBlocks {
         GLOWING_POTATO_BLOCK = new MagicBlock("glowing_potato_block", BlockType.MAGIC);
 
         // Utility Block
+        MAGIC_SAPLING = new MagicSapling("magic_sapling");
         POTATO_DRIER = new BlockDrier("potato_drier", BlockType.STONE);
         ENERGY_TRANSFER = new EnergyTransfer("energy_transfer", BlockType.GLASS);
-        MANA_CAULDRON = new ManaCauldron("mana_cauldron").setLightLevel(0.9f);
+        MANA_CAULDRON = new ManaCauldron("mana_cauldron");
     }
 }

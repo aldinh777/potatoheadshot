@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.other.compat.jei.cauldron;
 
 import aldinh777.potatoheadshot.other.compat.jei.JeiPotatoPlugin;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import mezz.jei.api.IGuiHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +14,7 @@ public class ManaCauldronRecipeCategory extends AbstractCauldronRecipeCategory<M
 	private static final ResourceLocation TEXTURE = new ResourceLocation(path);
 
 	public ManaCauldronRecipeCategory(IGuiHelper gui) {
-		super(gui, TEXTURE, new ItemStack(PotatoBlocks.MANA_CAULDRON));
+		super(gui, TEXTURE, new ItemStack(PotatoItems.ESSENCE_MANA));
 	}
 
 	@Nonnull

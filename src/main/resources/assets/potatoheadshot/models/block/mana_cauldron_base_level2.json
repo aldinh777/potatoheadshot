@@ -4,7 +4,7 @@
     "textures": {
         "particle": "potatoheadshot:blocks/mana_cauldron_side",
         "mana_cauldron_bottom": "potatoheadshot:blocks/mana_cauldron_bottom",
-        "mana_still": "potatoheadshot:blocks/mana_still",
+        "mana_still": "#mana",
         "mana_cauldron_inner": "potatoheadshot:blocks/mana_cauldron_inner",
         "mana_cauldron_side": "potatoheadshot:blocks/mana_cauldron_side"
     },

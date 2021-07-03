@@ -1,10 +1,13 @@
 package aldinh777.potatoheadshot.content.tileentities;
 
+import aldinh777.potatoheadshot.content.blocks.crops.PotatoCrops;
 import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
-import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.other.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.other.handler.ConfigHandler;
+import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.recipes.category.IManaRecipes;
+import aldinh777.potatoheadshot.other.util.Element;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -26,12 +29,13 @@ import java.util.List;
 public class TileEntityManaCauldron extends TileEntity implements ITickable, IManaStorage {
 
     protected PotatoManaStorage storage;
-    protected ManaCauldron.Element element = ManaCauldron.Element.MANA;
+    protected Element element = Element.MANA;
     protected IManaRecipes recipes = IManaRecipes.getRecipeById(0);
     protected int level = 0;
     protected int checkMana = 0;
 
     private static final int MANA_COLLECT_DEFAULT = 200;
+    private int tick = 0;
 
     public TileEntityManaCauldron() {
         storage = new PotatoManaStorage(ConfigHandler.MANA_CAULDRON_CAPACITY);
@@ -43,6 +47,26 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     public void update() {
         if (!world.isRemote) {
 
+            tick++;
+            if (tick >= 20) {
+                tick = 0;
+                for (int x = -3; x <= 3; x++) {
+                    for (int z = -3; z <= 3; z++) {
+                        BlockPos statePos = pos.add(x, 0, z);
+                        IBlockState state = world.getBlockState(statePos);
+
+                        if (state.getBlock() == PotatoBlocks.GLOWING_POTATOES) {
+                            if (state.getValue(PotatoCrops.AGE) == 7) {
+                                IBlockState glowPotato = PotatoBlocks.GLOWING_POTATOES.getDefaultState()
+                                        .withProperty(PotatoCrops.AGE, 0);
+                                world.setBlockState(statePos, glowPotato);
+                                storage.collectMana(MANA_COLLECT_DEFAULT);
+                            }
+                        }
+                    }
+                }
+            }
+            
             boolean flag = false;
             boolean flagItem = transformItemsInside();
             boolean flagEntity = affectEntityInside();
@@ -63,7 +87,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     @Override
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
-        element = ManaCauldron.Element.withValue(compound.getInteger("Element"));
+        element = Element.withValue(compound.getInteger("Element"));
         recipes = IManaRecipes.getRecipeById(element.getValue());
         storage.readFromNBT(compound);
     }
@@ -95,22 +119,22 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
             ItemStack stack = entity.getItem();
 
             if (stack.getItem().equals(PotatoItems.ESSENCE_MANA)) {
-                setElement(ManaCauldron.Element.MANA);
+                setElement(Element.MANA);
                 stack.shrink(1);
                 return true;
 
             } else if (stack.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
-                setElement(ManaCauldron.Element.LIFE);
+                setElement(Element.LIFE);
                 stack.shrink(1);
                 return true;
 
             } else if (stack.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
-                setElement(ManaCauldron.Element.NATURE);
+                setElement(Element.NATURE);
                 stack.shrink(1);
                 return true;
 
             } else if (stack.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
-                setElement(ManaCauldron.Element.FIRE);
+                setElement(Element.FIRE);
                 stack.shrink(1);
                 return true;
 
@@ -183,13 +207,13 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
         for (EntityLivingBase entity : entities) {
             int cost = 2;
             if (storage.getManaStored() > cost) {
-                if (element == ManaCauldron.Element.FIRE) {
+                if (element == Element.FIRE) {
                     if (!entity.isBurning()) {
                         entity.setFire(4);
                         storage.useMana(cost);
                         return true;
                     }
-                } else if (element == ManaCauldron.Element.LIFE) {
+                } else if (element == Element.LIFE) {
                     if (entity.isEntityUndead()) {
                         entity.attackEntityFrom(DamageSource.MAGIC,2f);
                         storage.useMana(cost);
@@ -212,7 +236,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
         world.setBlockState(pos, newState);
     }
 
-    public void setElement(ManaCauldron.Element element) {
+    public void setElement(Element element) {
         this.element = element;
         recipes = IManaRecipes.getRecipeById(element.getValue());
 

@@ -4,7 +4,7 @@ import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.other.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.other.compat.botania.BotaniaCompat;
-import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.other.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.lists.PotatoTab;
 import aldinh777.potatoheadshot.other.util.Constants;

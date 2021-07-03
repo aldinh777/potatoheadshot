@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
 import aldinh777.potatoheadshot.other.handler.ConfigHandler;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
+import aldinh777.potatoheadshot.other.util.Element;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSponge;
 import net.minecraft.block.IGrowable;
@@ -31,9 +31,9 @@ import java.util.Random;
 
 public class SplashManaPotion extends PotatoItem {
 
-    private final ManaCauldron.Element element;
+    private final Element element;
 
-    public SplashManaPotion(String name, ManaCauldron.Element element) {
+    public SplashManaPotion(String name, Element element) {
         super(name);
         this.element = element;
         this.setMaxStackSize(1);
@@ -70,14 +70,14 @@ public class SplashManaPotion extends PotatoItem {
         private static final int fireColor = 15473700;
         private static final int lifeColor = 16777215;
 
-        private final ManaCauldron.Element element;
+        private final Element element;
 
         public EntityManaPotion(World worldIn) {
             super(worldIn);
-            this.element = ManaCauldron.Element.MANA;
+            this.element = Element.MANA;
         }
 
-        public EntityManaPotion(World worldIn, EntityLivingBase throwerIn, ManaCauldron.Element element) {
+        public EntityManaPotion(World worldIn, EntityLivingBase throwerIn, Element element) {
             super(worldIn, throwerIn, createFakePotion(element));
             this.element = element;
         }
@@ -85,10 +85,10 @@ public class SplashManaPotion extends PotatoItem {
         @Override
         protected void onImpact(@Nonnull RayTraceResult result) {
             if (!this.world.isRemote) {
-                if (this.element == ManaCauldron.Element.FIRE) {
+                if (this.element == Element.FIRE) {
                     applyFireSplash(result);
                     this.world.playEvent(2007, new BlockPos(this), fireColor);
-                } else if (this.element == ManaCauldron.Element.LIFE) {
+                } else if (this.element == Element.LIFE) {
                     applyLifeSplash(result);
                     this.world.playEvent(2007, new BlockPos(this), lifeColor);
                 }
@@ -199,13 +199,13 @@ public class SplashManaPotion extends PotatoItem {
             }
         }
 
-        private static ItemStack createFakePotion(ManaCauldron.Element element) {
+        private static ItemStack createFakePotion(Element element) {
             ItemStack potion = new ItemStack(Items.SPLASH_POTION);
             NBTTagCompound compound = new NBTTagCompound();
 
-            if (element == ManaCauldron.Element.FIRE) {
+            if (element == Element.FIRE) {
                 compound.setInteger("CustomPotionColor", fireColor);
-            } else if (element == ManaCauldron.Element.LIFE) {
+            } else if (element == Element.LIFE) {
                 compound.setInteger("CustomPotionColor", lifeColor);
             }
 

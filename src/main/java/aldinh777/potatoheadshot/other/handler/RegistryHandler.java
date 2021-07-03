@@ -2,9 +2,10 @@ package aldinh777.potatoheadshot.other.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
-import aldinh777.potatoheadshot.content.capability.CapabilityMana;
+import aldinh777.potatoheadshot.other.capability.CapabilityMana;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
+import aldinh777.potatoheadshot.other.compat.OreDictionaryCompat;
 import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import net.minecraft.block.Block;
@@ -38,7 +39,7 @@ public class RegistryHandler {
     }
 
     public static void init() {
-        OreDictionaryHandler.register();
+        OreDictionaryCompat.register();
         CustomRecipeHandler.registerDrier();
 
         registerSmelting();
@@ -61,9 +62,6 @@ public class RegistryHandler {
         }
         if (ConfigHandler.POTATO_CHIP) {
             GameRegistry.addSmelting(PotatoItems.POTATO_CHIP, new ItemStack(PotatoItems.BAKED_POTATO_CHIP), 0.15f);
-        }
-        if (ConfigHandler.RED_POTATO) {
-            GameRegistry.addSmelting(PotatoItems.RED_POTATO, new ItemStack(Items.REDSTONE), 0.35f);
         }
         if (ConfigHandler.COOKED_DIRT) {
             GameRegistry.addSmelting(Blocks.DIRT, new ItemStack(PotatoItems.COOKED_DIRT), 0.15f);
