@@ -1,10 +1,11 @@
 package aldinh777.potatoheadshot.content.containers;
 
+import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import aldinh777.potatoheadshot.content.items.PocketCauldron;
-import aldinh777.potatoheadshot.content.containers.slots.RestrictedSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -20,16 +21,32 @@ public class ContainerPocketCauldron extends Container {
     public final EntityPlayer player;
     public int manaSize;
 
+    private static class RestrictedSlot extends Slot {
+
+        public RestrictedSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+            super(inventoryIn, index, xPosition, yPosition);
+        }
+
+        @Override
+        public boolean isItemValid(@Nonnull ItemStack stack) {
+            return false;
+        }
+
+        @Override
+        public boolean canTakeStack(@Nonnull EntityPlayer playerIn) {
+            return false;
+        }
+    }
+
     public ContainerPocketCauldron(EntityPlayer player) {
         this.player = player;
         this.stack = PocketCauldron.findPocketCauldron(player);
 
-        IItemHandler input = this.stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-        IItemHandler output = this.stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+        IItemHandler inventory = this.stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 
-        this.addSlotToContainer(new SlotItemHandler(input, 0, 24, 48));
-        this.addSlotToContainer(new SlotItemHandler(input, 1, 47, 48));
-        this.addSlotToContainer(new SlotItemHandler(output, 0, 117, 47));
+        this.addSlotToContainer(new SlotItemHandler(inventory, InventoryPocketCauldron.ESSENCE_SLOT, 24, 48));
+        this.addSlotToContainer(new SlotItemHandler(inventory, InventoryPocketCauldron.INPUT_SLOT, 47, 48));
+        this.addSlotToContainer(new SlotItemHandler(inventory, InventoryPocketCauldron.OUTPUT_SLOT, 117, 47));
 
         for (int y = 0; y < 3; y++) {
             for (int i = 0; i < 9; i++) {

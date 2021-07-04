@@ -50,7 +50,6 @@ public class PotatoItems {
     public static Item ESSENCE_FIRE;
 
     public static Item POCKET_CAULDRON;
-    public static Item ULTIMATE_POCKET_CAULDRON;
 
     public static Item POTATO_KNIFE;
     public static Item POTATO_MANA_KNIFE;

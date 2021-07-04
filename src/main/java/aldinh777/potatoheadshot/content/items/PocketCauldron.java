@@ -1,12 +1,15 @@
 package aldinh777.potatoheadshot.content.items;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.other.recipes.category.IManaRecipes;
+import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
-import aldinh777.potatoheadshot.other.compat.botania.BotaniaCompat;
+import aldinh777.potatoheadshot.other.capability.CapabilityMana;
 import aldinh777.potatoheadshot.other.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.other.compat.botania.BotaniaCompat;
+import aldinh777.potatoheadshot.other.handler.ConfigHandler;
 import aldinh777.potatoheadshot.other.lists.PotatoItems;
 import aldinh777.potatoheadshot.other.lists.PotatoTab;
+import aldinh777.potatoheadshot.other.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.other.util.Constants;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -26,7 +29,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -40,8 +42,7 @@ import java.util.Objects;
 
 public class PocketCauldron extends Item {
 
-    public static final int maxManaSize = 320000;
-    public static final int ultimateMaxManaSize = 32000000;
+    public static final int maxManaSize = ConfigHandler.POCKET_CAULDRON_CAPACITY;
 
     public PocketCauldron(String name) {
         this.setUnlocalizedName(name);
@@ -137,16 +138,15 @@ public class PocketCauldron extends Item {
     @Override
     public void onUpdate(@Nonnull ItemStack stack, World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if (!worldIn.isRemote) {
-            ItemStackHandler inputHandler = (ItemStackHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-            ItemStackHandler outputHandler = (ItemStackHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+            ItemStackHandler inventory = (ItemStackHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 
-            if (inputHandler == null || outputHandler == null) {
+            if (inventory == null) {
                 throw new NullPointerException("Item Stack don't have Item capabilities");
             }
 
-            ItemStack rodSlot = inputHandler.getStackInSlot(0);
-            ItemStack inputSlot = inputHandler.getStackInSlot(1);
-            ItemStack outputSlot = outputHandler.getStackInSlot(0);
+            ItemStack rodSlot = inventory.getStackInSlot(InventoryPocketCauldron.ESSENCE_SLOT);
+            ItemStack inputSlot = inventory.getStackInSlot(InventoryPocketCauldron.INPUT_SLOT);
+            ItemStack outputSlot = inventory.getStackInSlot(InventoryPocketCauldron.OUTPUT_SLOT);
             int manaSize = getManaSize(stack);
 
             if (rodSlot.isEmpty() || inputSlot.isEmpty()) {
@@ -181,7 +181,7 @@ public class PocketCauldron extends Item {
                 }
 
             } else {
-                outputHandler.setStackInSlot(0, result.copy());
+                inventory.setStackInSlot(InventoryPocketCauldron.OUTPUT_SLOT, result.copy());
 
                 inputSlot.shrink(1);
                 setManaSize(stack, manaSize - cost);
@@ -199,20 +199,15 @@ public class PocketCauldron extends Item {
     @Override
     public NBTTagCompound getNBTShareTag(@Nonnull ItemStack stack) {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            IItemHandler inputHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-            IItemHandler outputHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+            IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
             NBTTagCompound compound = stack.getTagCompound();
 
             if (compound == null) {
                 compound = new NBTTagCompound();
             }
 
-            if (inputHandler instanceof ItemStackHandler) {
-                compound.setTag("InventoryInput", ((ItemStackHandler) inputHandler).serializeNBT());
-            }
-
-            if (outputHandler instanceof ItemStackHandler) {
-                compound.setTag("InventoryOutput", ((ItemStackHandler) outputHandler).serializeNBT());
+            if (inventory instanceof ItemStackHandler) {
+                compound.setTag("InventoryInput", ((ItemStackHandler) inventory).serializeNBT());
             }
 
             return compound;
@@ -225,19 +220,11 @@ public class PocketCauldron extends Item {
     public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound compound) {
         stack.setTagCompound(compound);
         if (compound != null) {
-            if (compound.hasKey("InventoryInput")) {
-                IItemHandler inputHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+            if (compound.hasKey("Inventory")) {
+                IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 
-                if (inputHandler instanceof ItemStackHandler) {
-                    ((ItemStackHandler) inputHandler).deserializeNBT(compound.getCompoundTag("InventoryInput"));
-                }
-            }
-
-            if (compound.hasKey("InventoryOutput")) {
-                IItemHandler outputHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
-
-                if (outputHandler instanceof ItemStackHandler) {
-                    ((ItemStackHandler) outputHandler).deserializeNBT(compound.getCompoundTag("InventoryOutput"));
+                if (inventory instanceof ItemStackHandler) {
+                    ((ItemStackHandler) inventory).deserializeNBT(compound.getCompoundTag("Inventory"));
                 }
             }
         }
@@ -286,8 +273,6 @@ public class PocketCauldron extends Item {
     public static int getMaxManaSize(ItemStack stack) {
         if (stack.getItem() == PotatoItems.POCKET_CAULDRON) {
             return maxManaSize;
-        } else if (stack.getItem() == PotatoItems.ULTIMATE_POCKET_CAULDRON) {
-            return ultimateMaxManaSize;
         }
         return 0;
     }
@@ -295,8 +280,7 @@ public class PocketCauldron extends Item {
     static class PocketCapability implements ICapabilitySerializable<NBTBase> {
 
         public final ItemStack stack;
-        public IItemHandler inputHandler = new ItemStackHandler(2);
-        public IItemHandler outputHandler = new ItemStackHandler(1);
+        public InventoryPocketCauldron inventory = new InventoryPocketCauldron();
 
         public PocketCapability(ItemStack stack) {
             this.stack = stack;
@@ -304,23 +288,15 @@ public class PocketCauldron extends Item {
 
         @Override
         public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-            if (capability == CapabilityEnergy.ENERGY) {
-                return true;
-            } else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                return facing == EnumFacing.UP || facing == EnumFacing.DOWN;
-            }
-            return false;
+            return capability == CapabilityMana.MANA
+                    || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
         }
 
         @Nullable
         @Override
         public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
             if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                if (facing == EnumFacing.UP) {
-                    return (T) this.inputHandler;
-                } else if (facing == EnumFacing.DOWN) {
-                    return (T) this.outputHandler;
-                }
+                return (T) this.inventory;
             }
             return null;
         }
@@ -331,24 +307,20 @@ public class PocketCauldron extends Item {
             if (stackNBT == null) {
                 stackNBT = new NBTTagCompound();
             }
-            stackNBT.setTag("InventoryInput", ((ItemStackHandler) this.inputHandler).serializeNBT());
-            stackNBT.setTag("InventoryOutput", ((ItemStackHandler) this.outputHandler).serializeNBT());
+            stackNBT.setTag("Inventory", inventory.serializeNBT());
             stack.setTagCompound(stackNBT);
 
             NBTTagCompound nbt = new NBTTagCompound();
-            NBTBase inputValue = Objects.requireNonNull(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(this.inputHandler, EnumFacing.UP));
-            NBTBase outputValue = Objects.requireNonNull(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(this.outputHandler, EnumFacing.DOWN));
+            NBTBase inventoryValue = Objects.requireNonNull(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(inventory, EnumFacing.UP));
 
-            nbt.setTag("InputInventory", inputValue);
-            nbt.setTag("OutputInventory", outputValue);
+            nbt.setTag("Inventory", inventoryValue);
 
             return nbt;
         }
 
         @Override
         public void deserializeNBT(NBTBase nbt) {
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(inputHandler, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("InputInventory"));
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(outputHandler, EnumFacing.DOWN, ((NBTTagCompound) nbt).getTag("OutputInventory"));
+            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(inventory, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("Inventory"));
         }
     }
 }

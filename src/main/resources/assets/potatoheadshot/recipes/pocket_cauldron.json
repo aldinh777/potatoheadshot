@@ -1,21 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "# #",
-    "LXL",
-    "LLL"
-  ],
-  "key": {
-    "L": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
       "item": "minecraft:leather"
     },
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "X": {
-      "item": "potatoheadshot:mana_cauldron"
+    {
+      "item": "potatoheadshot:magic_sapling"
     }
-  },
+  ],
   "result": {
     "item": "potatoheadshot:pocket_cauldron"
   }

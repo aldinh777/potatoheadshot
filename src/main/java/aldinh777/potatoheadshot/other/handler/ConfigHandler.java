@@ -30,6 +30,7 @@ public class ConfigHandler {
 
     // Mana
     public static int MANA_CAULDRON_CAPACITY;
+    public static int POCKET_CAULDRON_CAPACITY;
     public static int ENERGY_TRANSFER_RANGE;
 
     // Compat
@@ -75,6 +76,7 @@ public class ConfigHandler {
         category = "Mana";
         config.addCustomCategoryComment(category, "Magical Machines Configuration");
         MANA_CAULDRON_CAPACITY = config.getInt("MANA_CAULDRON_CAPACITY", category, 64_000, 0, Integer.MAX_VALUE, "");
+        POCKET_CAULDRON_CAPACITY = config.getInt("POCKET_CAULDRON_CAPACITY", category, 16_000, 0, Integer.MAX_VALUE, "");
         ENERGY_TRANSFER_RANGE = config.getInt("ENERGY_TRANSFER_RANGE", category, 8, 0, Integer.MAX_VALUE, "");
 
 

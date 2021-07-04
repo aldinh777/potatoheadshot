@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "potatoheadshot:potato_knife"
+    },
+    {
+      "item": "potatoheadshot:glowing_potato_dust"
+    }
+  ],
+  "result": {
+    "item": "potatoheadshot:potato_mana_knife"
+  }
+}
