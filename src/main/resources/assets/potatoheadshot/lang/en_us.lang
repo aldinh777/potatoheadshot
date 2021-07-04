@@ -1,12 +1,9 @@
 itemGroup.potatoheadshot=Potato Headshot
 
 # Dangerous Foods
-item.hot_potato.name=Hot Potato
-item.extra_hot_potato.name=Extra Hot Potato
-item.extreme_hot_potato.name=Extreme Hot Potato
+item.extra_hot_potato.name=Hot Potato
 item.lava_potato.name=Lava Potato
-item.wet_potato.name=Wet Potato
-item.super_wet_potato.name=Super Wet Potato
+item.super_wet_potato.name=Wet Potato
 item.water_potato.name=Water Potato
 
 # Normal Foods

@@ -19,11 +19,8 @@ public class PotatoItems {
     public static List<Item> LISTS = new ArrayList<>();
 
     public static Item HOT_POTATO;
-    public static Item EXTRA_HOT_POTATO;
-    public static Item EXTREME_HOT_POTATO;
     public static Item LAVA_POTATO;
     public static Item WET_POTATO;
-    public static Item SUPER_WET_POTATO;
     public static Item WATER_POTATO;
     public static Item BAKED_SMALL_POTATO_PLANKS;
     public static Item FRIED_FRIES;
@@ -106,12 +103,9 @@ public class PotatoItems {
         FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
         BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
         SALT_POTATO = new PotatoFood("salt_potato", 2, 0.3f);
-        HOT_POTATO = new PotatoFood("hot_potato", 2, 0.3f);
-        EXTRA_HOT_POTATO = new PotatoFoodBucket("extra_hot_potato", Blocks.FIRE, 2, 0.3f);
-        EXTREME_HOT_POTATO = new PotatoFoodBucket("extreme_hot_potato", Blocks.AIR, 2, 0.3f);
+        HOT_POTATO = new PotatoFoodBucket("extra_hot_potato", Blocks.FIRE, 2, 0.3f);
         LAVA_POTATO = new PotatoFoodBucket("lava_potato", Blocks.FLOWING_LAVA, 2, 0.3f);
-        WET_POTATO = new PotatoFood("wet_potato", 2, 0.3f);
-        SUPER_WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
+        WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
         WATER_POTATO = new PotatoFoodBucket("water_potato", Blocks.FLOWING_WATER, 2, 0.3f);
 
         // Potato Items
@@ -171,8 +165,7 @@ public class PotatoItems {
         bakedPotatoBlock.setDroppedItem(BAKED_POTATO_BLOCK);
 
         // Configuration Definition
-        PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) EXTRA_HOT_POTATO;
-        PotatoFoodBucket extremeHotPotato = (PotatoFoodBucket) EXTREME_HOT_POTATO;
+        PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) HOT_POTATO;
         PotatoFoodBucket lavaPotato = (PotatoFoodBucket) LAVA_POTATO;
         PotatoFoodBucket waterPotato = (PotatoFoodBucket) WATER_POTATO;
 
@@ -188,16 +181,13 @@ public class PotatoItems {
 
         // Configuration
         extraHotPotato.setSoundEvent(SoundEvents.ENTITY_BLAZE_SHOOT).setBurnTime(1600);
-        extremeHotPotato.setSoundEvent(SoundEvents.ENTITY_GENERIC_EXPLODE).setBurnTime(3200).setExplodeOnPlaced();
         lavaPotato.setSoundEvent(SoundEvents.ITEM_BUCKET_EMPTY_LAVA).setBurnTime(6400).setMaxStackSize(16);
         waterPotato.setSoundEvent(SoundEvents.ITEM_BUCKET_EMPTY).setMaxStackSize(16);
 
         addFoodEffects(HOT_POTATO, hotPotatoEffects);
-        addFoodEffects(EXTRA_HOT_POTATO, extraHotPotatoEffects);
-        addFoodEffects(EXTREME_HOT_POTATO, extremeHotPotatoEffects);
+        addFoodEffects(HOT_POTATO, extraHotPotatoEffects);
         addFoodEffects(LAVA_POTATO, lavaPotatoEffects);
-        addFoodEffects(WET_POTATO, wetPotatoEffects);
-        addFoodEffects(SUPER_WET_POTATO, superWetPotatoEffects);
+        addFoodEffects(WET_POTATO, superWetPotatoEffects);
         addFoodEffects(WATER_POTATO, waterPotatoEffects);
         addFoodEffects(GLOWING_POTATO, glowingPotatoEffects);
 

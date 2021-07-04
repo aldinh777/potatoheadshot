@@ -72,9 +72,6 @@ public class PotatoDrierRecipe {
         addRecipe(recipes, new ItemStack(PotatoItems.GLOWING_POTATO), new ItemStack(PotatoItems.GLOWING_POTATO_DUST), 0);
         if (ConfigHandler.WET_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(Items.CLAY_BALL), 200);
-            if (ConfigHandler.SALT_POTATO) {
-                addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.SALT_POTATO), 400);
-            }
         }
         if (ConfigHandler.WATER_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.WATER_POTATO), new ItemStack(PotatoItems.RAW_SALT), 800);
@@ -96,19 +93,15 @@ public class PotatoDrierRecipe {
         Item sponge = Item.getItemFromBlock(Blocks.SPONGE);
 
         addRecipe(recipes, new ItemStack(Items.POTATO), new ItemStack(PotatoItems.WET_POTATO), 0);
-        if (ConfigHandler.WET_POTATO) {
-            addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(PotatoItems.SUPER_WET_POTATO), 0);
-            if (ConfigHandler.WATER_POTATO) {
-                addRecipe(recipes, new ItemStack(PotatoItems.SUPER_WET_POTATO), new ItemStack(PotatoItems.WATER_POTATO), 0);
-            }
+        if (ConfigHandler.WET_POTATO && ConfigHandler.WATER_POTATO) {
+            addRecipe(recipes, new ItemStack(PotatoItems.WET_POTATO), new ItemStack(PotatoItems.WATER_POTATO), 0);
         }
         addRecipe(recipes, new ItemStack(Items.BUCKET), new ItemStack(Items.WATER_BUCKET), 0);
         if (ConfigHandler.SWEET_BUCKET) {
             addRecipe(recipes, new ItemStack(PotatoItems.SWEET_EMPTY_BUCKET), new ItemStack(PotatoItems.SWEET_WATER_BUCKET), 0);
         }
         if (ConfigHandler.HOT_POTATO) {
-            addRecipe(recipes, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), new ItemStack(Items.COAL, 1, 1), 0);
-            addRecipe(recipes, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), new ItemStack(Items.COAL), 0);
+            addRecipe(recipes, new ItemStack(PotatoItems.HOT_POTATO), new ItemStack(Items.COAL), 0);
             if (ConfigHandler.LAVA_POTATO) {
                 addRecipe(recipes, new ItemStack(PotatoItems.LAVA_POTATO), new ItemStack(Item.getItemFromBlock(Blocks.OBSIDIAN)), 0);
             }

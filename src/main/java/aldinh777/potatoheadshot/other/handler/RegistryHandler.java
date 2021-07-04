@@ -51,10 +51,8 @@ public class RegistryHandler {
 
         if (ConfigHandler.HOT_POTATO) {
             GameRegistry.addSmelting(Items.POISONOUS_POTATO, new ItemStack(PotatoItems.HOT_POTATO), 0.075f);
-            GameRegistry.addSmelting(PotatoItems.HOT_POTATO, new ItemStack(PotatoItems.EXTRA_HOT_POTATO), 0.075f);
-            GameRegistry.addSmelting(PotatoItems.EXTRA_HOT_POTATO, new ItemStack(PotatoItems.EXTREME_HOT_POTATO), 0.075f);
             if (ConfigHandler.LAVA_POTATO) {
-                GameRegistry.addSmelting(PotatoItems.EXTREME_HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
+                GameRegistry.addSmelting(PotatoItems.HOT_POTATO, new ItemStack(PotatoItems.LAVA_POTATO), 0.075f);
             }
         }
         if (ConfigHandler.SWEET_BUCKET) {

@@ -50,21 +50,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
             tick++;
             if (tick >= 20) {
                 tick = 0;
-                for (int x = -3; x <= 3; x++) {
-                    for (int z = -3; z <= 3; z++) {
-                        BlockPos statePos = pos.add(x, 0, z);
-                        IBlockState state = world.getBlockState(statePos);
-
-                        if (state.getBlock() == PotatoBlocks.GLOWING_POTATOES) {
-                            if (state.getValue(PotatoCrops.AGE) == 7) {
-                                IBlockState glowPotato = PotatoBlocks.GLOWING_POTATOES.getDefaultState()
-                                        .withProperty(PotatoCrops.AGE, 0);
-                                world.setBlockState(statePos, glowPotato);
-                                storage.collectMana(MANA_COLLECT_DEFAULT);
-                            }
-                        }
-                    }
-                }
+                absorbSurroundingMana();
             }
             
             boolean flag = false;
@@ -110,6 +96,30 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
 
     public PotatoManaStorage getManaStorage() {
         return storage;
+    }
+
+    public void absorbSurroundingMana() {
+        if (storage.getManaStored() < storage.getMaxManaStored()) {
+            for (int x = -3; x <= 3; x++) {
+                for (int z = -3; z <= 3; z++) {
+                    BlockPos statePos = pos.add(x, 0, z);
+                    IBlockState state = world.getBlockState(statePos);
+
+                    if (state.getBlock() == PotatoBlocks.GLOWING_POTATOES) {
+                        if (state.getValue(PotatoCrops.AGE) == 7) {
+                            IBlockState glowPotato = PotatoBlocks.GLOWING_POTATOES.getDefaultState()
+                                    .withProperty(PotatoCrops.AGE, 0);
+                            world.setBlockState(statePos, glowPotato);
+                            storage.collectMana(MANA_COLLECT_DEFAULT);
+                        }
+                    }
+
+                    if (storage.getManaStored() >= storage.getMaxManaStored()) {
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     public boolean transformItemsInside() {

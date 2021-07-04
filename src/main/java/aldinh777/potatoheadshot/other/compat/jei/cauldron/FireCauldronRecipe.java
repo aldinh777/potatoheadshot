@@ -21,7 +21,7 @@ public class FireCauldronRecipe extends AbstractCauldronRecipe {
 			addRecipe(jeiRecipes, Items.IRON_HOE, new ItemStack(PotatoItems.LAVA_HOE));
 		}
 		if (ConfigHandler.SPLASH_MANA) {
-			addRecipe(jeiRecipes, Items.SPLASH_POTION, new ItemStack(PotatoItems.SPLASH_MANA_FIRE));
+			addRecipe(jeiRecipes, Items.GLASS_BOTTLE, new ItemStack(PotatoItems.SPLASH_MANA_FIRE));
 		}
 
 		return jeiRecipes;
