@@ -1,9 +1,7 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.lists.PotatoTab;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import net.minecraft.item.ItemSword;
 
 public class PotatoKnife extends ItemSword {

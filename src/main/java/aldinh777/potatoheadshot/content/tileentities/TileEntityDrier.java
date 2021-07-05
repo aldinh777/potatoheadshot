@@ -1,14 +1,14 @@
 package aldinh777.potatoheadshot.content.tileentities;
 
 import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
-import aldinh777.potatoheadshot.other.capability.DrierWaterCapability;
+import aldinh777.potatoheadshot.common.capability.DrierWaterCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrierUpgrade;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.recipes.category.PotatoDrierRecipes;
-import aldinh777.potatoheadshot.other.recipes.recipe.PotatoDrierRecipe;
-import aldinh777.potatoheadshot.other.util.FuelHelper;
-import aldinh777.potatoheadshot.other.util.InventoryHelper;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.recipes.category.PotatoDrierRecipes;
+import aldinh777.potatoheadshot.common.recipes.recipe.PotatoDrierRecipe;
+import aldinh777.potatoheadshot.common.util.FuelHelper;
+import aldinh777.potatoheadshot.common.util.InventoryHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

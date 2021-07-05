@@ -2,9 +2,9 @@ package aldinh777.potatoheadshot.content.blocks.machines;
 
 import aldinh777.potatoheadshot.content.blocks.PotatoBlock;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.util.BlockType;
-import aldinh777.potatoheadshot.other.util.Element;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.util.BlockType;
+import aldinh777.potatoheadshot.common.util.Element;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;

@@ -1,11 +1,11 @@
 package aldinh777.potatoheadshot.content.blocks;
 
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.content.items.PotatoItemBlock;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.lists.PotatoTab;
-import aldinh777.potatoheadshot.other.util.BlockType;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoTab;
+import aldinh777.potatoheadshot.common.util.BlockType;
 import net.minecraft.block.Block;
 
 public class PotatoBlock extends Block {

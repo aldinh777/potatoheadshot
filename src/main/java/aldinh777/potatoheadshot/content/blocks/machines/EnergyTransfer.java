@@ -2,7 +2,7 @@ package aldinh777.potatoheadshot.content.blocks.machines;
 
 import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
 import aldinh777.potatoheadshot.content.blocks.PotatoBlock;
-import aldinh777.potatoheadshot.other.util.BlockType;
+import aldinh777.potatoheadshot.common.util.BlockType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;

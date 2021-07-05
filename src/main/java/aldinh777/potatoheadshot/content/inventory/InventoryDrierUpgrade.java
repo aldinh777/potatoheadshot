@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.inventory;
 
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 

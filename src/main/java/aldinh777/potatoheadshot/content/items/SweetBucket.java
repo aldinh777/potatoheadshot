@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.other.capability.BucketCapability;
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.lists.PotatoTab;
-import aldinh777.potatoheadshot.other.util.FoodEffects;
+import aldinh777.potatoheadshot.common.capability.BucketCapability;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoTab;
+import aldinh777.potatoheadshot.common.util.FoodEffects;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

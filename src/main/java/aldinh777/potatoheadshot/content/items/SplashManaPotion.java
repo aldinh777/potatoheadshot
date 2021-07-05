@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.util.Element;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.util.Element;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSponge;
 import net.minecraft.block.IGrowable;

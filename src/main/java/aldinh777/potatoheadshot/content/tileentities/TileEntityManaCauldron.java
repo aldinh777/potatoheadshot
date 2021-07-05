@@ -2,12 +2,12 @@ package aldinh777.potatoheadshot.content.tileentities;
 
 import aldinh777.potatoheadshot.content.blocks.crops.PotatoCrops;
 import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
-import aldinh777.potatoheadshot.other.capability.PotatoManaStorage;
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.recipes.category.IManaRecipes;
-import aldinh777.potatoheadshot.other.util.Element;
+import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.recipes.category.IManaRecipes;
+import aldinh777.potatoheadshot.common.util.Element;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

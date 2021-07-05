@@ -2,10 +2,10 @@ package aldinh777.potatoheadshot.content.blocks.machines;
 
 import aldinh777.potatoheadshot.content.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.util.BlockType;
-import aldinh777.potatoheadshot.other.util.Constants;
-import aldinh777.potatoheadshot.other.util.InventoryHelper;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.util.BlockType;
+import aldinh777.potatoheadshot.common.util.Constants;
+import aldinh777.potatoheadshot.common.util.InventoryHelper;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;

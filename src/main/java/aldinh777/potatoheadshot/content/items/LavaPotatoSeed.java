@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 
 public class LavaPotatoSeed extends PotatoSeed {
 

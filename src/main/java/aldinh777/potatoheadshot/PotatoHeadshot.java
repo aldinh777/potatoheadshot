@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot;
 
-import aldinh777.potatoheadshot.other.handler.RegistryHandler;
+import aldinh777.potatoheadshot.common.handler.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

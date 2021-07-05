@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.content.blocks.crops;
 
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;

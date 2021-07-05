@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
-import aldinh777.potatoheadshot.other.lists.PotatoTab;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

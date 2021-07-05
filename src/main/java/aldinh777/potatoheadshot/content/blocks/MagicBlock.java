@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.blocks;
 
-import aldinh777.potatoheadshot.other.util.BlockType;
+import aldinh777.potatoheadshot.common.util.BlockType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

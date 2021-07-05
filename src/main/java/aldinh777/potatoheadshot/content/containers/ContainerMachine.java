@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.containers;
 
-import aldinh777.potatoheadshot.other.util.InventoryHelper;
+import aldinh777.potatoheadshot.common.util.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

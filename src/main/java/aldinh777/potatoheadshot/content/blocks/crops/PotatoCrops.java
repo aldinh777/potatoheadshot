@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.content.blocks.crops;
 
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;

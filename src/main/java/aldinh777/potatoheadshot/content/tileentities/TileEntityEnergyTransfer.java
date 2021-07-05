@@ -1,11 +1,11 @@
 package aldinh777.potatoheadshot.content.tileentities;
 
 import aldinh777.potatoheadshot.content.blocks.machines.EnergyTransfer;
-import aldinh777.potatoheadshot.other.compat.botania.BotaniaCompat;
-import aldinh777.potatoheadshot.other.capability.PotatoEnergyStorage;
-import aldinh777.potatoheadshot.other.capability.PotatoManaStorage;
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
-import aldinh777.potatoheadshot.other.util.EnergyUtil;
+import aldinh777.potatoheadshot.common.compat.botania.BotaniaCompat;
+import aldinh777.potatoheadshot.common.capability.PotatoEnergyStorage;
+import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.util.EnergyUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

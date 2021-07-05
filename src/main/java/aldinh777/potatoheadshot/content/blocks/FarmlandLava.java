@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.content.blocks;
 
-import aldinh777.potatoheadshot.other.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.content.items.LavaPotatoSeed;
 import aldinh777.potatoheadshot.content.items.PotatoItemBlock;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;

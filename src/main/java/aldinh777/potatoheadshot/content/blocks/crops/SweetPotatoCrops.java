@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.blocks.crops;
 
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;

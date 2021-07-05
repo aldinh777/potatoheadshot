@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.content.items;
 
 import aldinh777.potatoheadshot.content.blocks.MagicBlock;
-import aldinh777.potatoheadshot.other.lists.PotatoBlocks;
-import aldinh777.potatoheadshot.other.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
+import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
