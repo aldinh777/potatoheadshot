@@ -1,9 +1,9 @@
 package aldinh777.potatoheadshot.content.items;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
-import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.common.capability.CapabilityMana;
+import aldinh777.potatoheadshot.common.capability.IManaStorage;
+import aldinh777.potatoheadshot.common.capability.PocketCapability;
 import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.common.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
@@ -11,12 +11,13 @@ import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import aldinh777.potatoheadshot.common.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.common.util.Constants;
+import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
@@ -26,9 +27,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -38,7 +37,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Objects;
 
 public class PocketCauldron extends Item {
 
@@ -56,10 +54,13 @@ public class PocketCauldron extends Item {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        int mana = getManaSize(stack);
-        int maxMana = getMaxManaSize(stack);
+        IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+        if (manaStorage instanceof PotatoManaStorage) {
+            int mana = manaStorage.getManaStored();
+            int maxMana = manaStorage.getMaxManaStored();
 
-        tooltip.add("Mana : " + mana + "/" + maxMana);
+            tooltip.add("Mana : " + mana + "/" + maxMana);
+        }
     }
 
     @Override
@@ -69,7 +70,11 @@ public class PocketCauldron extends Item {
 
     @Override
     public double getDurabilityForDisplay(@Nonnull ItemStack stack) {
-        return 1.0 - (double) getManaSize(stack) / (double) getMaxManaSize(stack);
+        IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+        if (manaStorage instanceof PotatoManaStorage) {
+            return 1.0 - (double) manaStorage.getManaStored() / (double) manaStorage.getMaxManaStored();
+        }
+        return 0;
     }
 
     @Nonnull
@@ -87,38 +92,44 @@ public class PocketCauldron extends Item {
 
                     if (BotaniaCompat.isBotaniaAvailable()) {
                         if (BotaniaCompat.isInstanceOfManaPool(te)) {
-                            int manaStored = BotaniaCompat.getManaSize(te);
+                            IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+                            if (manaStorage instanceof PotatoManaStorage) {
+                                int manaStored = BotaniaCompat.getManaSize(te);
 
-                            int pocketMana = getManaSize(stack);
+                                int pocketMana = manaStorage.getManaStored();
 
-                            int transferRate = maxManaSize - pocketMana;
-                            if (transferRate > manaStored) {
-                                transferRate = manaStored;
+                                int transferRate = maxManaSize - pocketMana;
+                                if (transferRate > manaStored) {
+                                    transferRate = manaStored;
+                                }
+
+                                int result = pocketMana + transferRate;
+                                manaStorage.setMana(result);
+                                BotaniaCompat.absorbMana(te, new PotatoManaStorage(maxManaSize), transferRate);
+
+                                return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
                             }
-
-                            int result = pocketMana + transferRate;
-                            setManaSize(stack, result);
-                            BotaniaCompat.absorbMana(te, new PotatoManaStorage(maxManaSize), transferRate);
-
-                            return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
                         }
                     }
 
                     if (te instanceof TileEntityManaCauldron) {
                         TileEntityManaCauldron manaCauldron = (TileEntityManaCauldron) te;
                         PotatoManaStorage cauldronStorage = manaCauldron.getManaStorage();
-                        int pocketMana = getManaSize(stack);
+                        IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+                        if (manaStorage instanceof PotatoManaStorage) {
+                            int pocketMana = manaStorage.getManaStored();
 
-                        int transferRate = maxManaSize - pocketMana;
-                        if (transferRate > cauldronStorage.getManaStored()) {
-                            transferRate = cauldronStorage.getManaStored();
+                            int transferRate = maxManaSize - pocketMana;
+                            if (transferRate > cauldronStorage.getManaStored()) {
+                                transferRate = cauldronStorage.getManaStored();
+                            }
+
+                            int result = pocketMana + transferRate;
+                            manaStorage.setMana(result);
+                            cauldronStorage.useMana(transferRate);
+
+                            return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
                         }
-
-                        int result = pocketMana + transferRate;
-                        setManaSize(stack, result);
-                        cauldronStorage.useMana(transferRate);
-
-                        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
                     }
                 }
             }
@@ -147,44 +158,49 @@ public class PocketCauldron extends Item {
             ItemStack rodSlot = inventory.getStackInSlot(InventoryPocketCauldron.ESSENCE_SLOT);
             ItemStack inputSlot = inventory.getStackInSlot(InventoryPocketCauldron.INPUT_SLOT);
             ItemStack outputSlot = inventory.getStackInSlot(InventoryPocketCauldron.OUTPUT_SLOT);
-            int manaSize = getManaSize(stack);
 
-            if (rodSlot.isEmpty() || inputSlot.isEmpty()) {
-                return;
-            }
+            IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+            if (manaStorage instanceof PotatoManaStorage) {
 
-            IManaRecipes recipes = IManaRecipes.getRecipeById(0);
+                int manaSize = manaStorage.getManaStored();
 
-            if (rodSlot.getItem().equals(PotatoItems.ESSENCE_MANA)) {
-                recipes = IManaRecipes.getRecipeById(0);
-            } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
-                recipes = IManaRecipes.getRecipeById(1);
-            } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
-                recipes = IManaRecipes.getRecipeById(2);
-            } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
-                recipes = IManaRecipes.getRecipeById(3);
-            }
-
-            ItemStack result = recipes.getResult(inputSlot);
-            int cost = recipes.getCost(inputSlot);
-
-            if (result.isEmpty() || cost > manaSize) {
-                return;
-            }
-
-            if (result.isItemEqual(outputSlot)) {
-                if (outputSlot.getCount() + result.getCount() <= outputSlot.getMaxStackSize()) {
-                    outputSlot.grow(result.getCount());
-
-                    inputSlot.shrink(1);
-                    setManaSize(stack, manaSize - cost);
+                if (rodSlot.isEmpty() || inputSlot.isEmpty()) {
+                    return;
                 }
 
-            } else {
-                inventory.setStackInSlot(InventoryPocketCauldron.OUTPUT_SLOT, result.copy());
+                IManaRecipes recipes = IManaRecipes.getRecipeById(0);
 
-                inputSlot.shrink(1);
-                setManaSize(stack, manaSize - cost);
+                if (rodSlot.getItem().equals(PotatoItems.ESSENCE_MANA)) {
+                    recipes = IManaRecipes.getRecipeById(0);
+                } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
+                    recipes = IManaRecipes.getRecipeById(1);
+                } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
+                    recipes = IManaRecipes.getRecipeById(2);
+                } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
+                    recipes = IManaRecipes.getRecipeById(3);
+                }
+
+                ItemStack result = recipes.getResult(inputSlot);
+                int cost = recipes.getCost(inputSlot);
+
+                if (result.isEmpty() || cost > manaSize) {
+                    return;
+                }
+
+                if (result.isItemEqual(outputSlot)) {
+                    if (outputSlot.getCount() + result.getCount() <= outputSlot.getMaxStackSize()) {
+                        outputSlot.grow(result.getCount());
+
+                        inputSlot.shrink(1);
+                        manaStorage.setMana(manaSize - cost);
+                    }
+
+                } else {
+                    inventory.setStackInSlot(InventoryPocketCauldron.OUTPUT_SLOT, result.copy());
+
+                    inputSlot.shrink(1);
+                    manaStorage.setMana(manaSize - cost);
+                }
             }
         }
     }
@@ -200,14 +216,21 @@ public class PocketCauldron extends Item {
     public NBTTagCompound getNBTShareTag(@Nonnull ItemStack stack) {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
             IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+            IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
             NBTTagCompound compound = stack.getTagCompound();
+            NBTTagCompound manaCompound = new NBTTagCompound();
 
             if (compound == null) {
                 compound = new NBTTagCompound();
             }
 
             if (inventory instanceof ItemStackHandler) {
-                compound.setTag("InventoryInput", ((ItemStackHandler) inventory).serializeNBT());
+                compound.setTag("Inventory", ((ItemStackHandler) inventory).serializeNBT());
+            }
+
+            if (manaStorage instanceof PotatoManaStorage) {
+                ((PotatoManaStorage) manaStorage).writeToNBT(manaCompound);
+                compound.setTag("Mana", manaCompound);
             }
 
             return compound;
@@ -227,6 +250,14 @@ public class PocketCauldron extends Item {
                     ((ItemStackHandler) inventory).deserializeNBT(compound.getCompoundTag("Inventory"));
                 }
             }
+
+            if (compound.hasKey("Mana")) {
+                IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+
+                if (manaStorage instanceof PotatoManaStorage) {
+                    ((PotatoManaStorage) manaStorage).readFromNBT(compound.getCompoundTag("Mana"));
+                }
+            }
         }
     }
 
@@ -242,85 +273,5 @@ public class PocketCauldron extends Item {
         }
 
         throw new NullPointerException("No Pocket Cauldron Found in Hand");
-    }
-
-    public static int getManaSize(ItemStack stack) {
-        NBTTagCompound compound = stack.getTagCompound();
-
-        if (compound == null) {
-            compound = new NBTTagCompound();
-            stack.setTagCompound(compound);
-        }
-
-        if (!compound.hasKey("Mana")) {
-            compound.setInteger("Mana", 0);
-        }
-
-        return compound.getInteger("Mana");
-    }
-
-    public static void setManaSize(ItemStack stack, int value) {
-        NBTTagCompound compound = stack.getTagCompound();
-
-        if (compound == null) {
-            compound = new NBTTagCompound();
-            stack.setTagCompound(compound);
-        }
-
-        compound.setInteger("Mana", value);
-    }
-
-    public static int getMaxManaSize(ItemStack stack) {
-        if (stack.getItem() == PotatoItems.POCKET_CAULDRON) {
-            return maxManaSize;
-        }
-        return 0;
-    }
-
-    static class PocketCapability implements ICapabilitySerializable<NBTBase> {
-
-        public final ItemStack stack;
-        public InventoryPocketCauldron inventory = new InventoryPocketCauldron();
-
-        public PocketCapability(ItemStack stack) {
-            this.stack = stack;
-        }
-
-        @Override
-        public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-            return capability == CapabilityMana.MANA
-                    || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
-        }
-
-        @Nullable
-        @Override
-        public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-            if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                return (T) this.inventory;
-            }
-            return null;
-        }
-
-        @Override
-        public NBTBase serializeNBT() {
-            NBTTagCompound stackNBT = this.stack.getTagCompound();
-            if (stackNBT == null) {
-                stackNBT = new NBTTagCompound();
-            }
-            stackNBT.setTag("Inventory", inventory.serializeNBT());
-            stack.setTagCompound(stackNBT);
-
-            NBTTagCompound nbt = new NBTTagCompound();
-            NBTBase inventoryValue = Objects.requireNonNull(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(inventory, EnumFacing.UP));
-
-            nbt.setTag("Inventory", inventoryValue);
-
-            return nbt;
-        }
-
-        @Override
-        public void deserializeNBT(NBTBase nbt) {
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(inventory, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("Inventory"));
-        }
     }
 }

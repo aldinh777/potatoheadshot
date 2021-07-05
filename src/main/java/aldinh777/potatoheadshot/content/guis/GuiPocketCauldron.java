@@ -1,11 +1,15 @@
 package aldinh777.potatoheadshot.content.guis;
 
+import aldinh777.potatoheadshot.common.capability.CapabilityMana;
+import aldinh777.potatoheadshot.common.capability.IManaStorage;
+import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.content.items.PocketCauldron;
 import aldinh777.potatoheadshot.content.containers.ContainerPocketCauldron;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiPocketCauldron extends GuiContainer {
@@ -33,7 +37,11 @@ public class GuiPocketCauldron extends GuiContainer {
         String tileName = "Pocket Cauldron";
         this.fontRenderer.drawString(tileName, this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2 + 10, 6, 4210752);
         this.fontRenderer.drawString(this.player.getDisplayName().getFormattedText(), 7, this.ySize - 96 + 2, 4210752);
-        this.fontRenderer.drawString("Mana : " + PocketCauldron.getManaSize(stack), 85, this.ySize - 96 + 2, 4210752);
+
+        IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+        if (manaStorage instanceof PotatoManaStorage) {
+            this.fontRenderer.drawString("Mana : " + manaStorage.getManaStored(), 85, this.ySize - 96 + 2, 4210752);
+        }
     }
 
     @Override
@@ -46,14 +54,17 @@ public class GuiPocketCauldron extends GuiContainer {
     }
 
     private void drawManaStored() {
-        double manaSize = PocketCauldron.getManaSize(stack);
-        double manaMaxSize = PocketCauldron.getMaxManaSize(stack);
-        double i = (manaSize == 0 || manaMaxSize == 0) ? 0 : (manaSize * 146 / manaMaxSize);
+        IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+        if (manaStorage instanceof PotatoManaStorage) {
+            double manaSize = manaStorage.getManaStored();
+            double manaMaxSize = manaStorage.getMaxManaStored();
+            double i = (manaSize == 0 || manaMaxSize == 0) ? 0 : (manaSize * 146 / manaMaxSize);
 
-        this.drawTexturedModalRect(
-                this.guiLeft + 15, this.guiTop + 16,
-                0, 166,
-                (int)i - 1, 18
-        );
+            this.drawTexturedModalRect(
+                    this.guiLeft + 15, this.guiTop + 16,
+                    0, 166,
+                    (int)i - 1, 18
+            );
+        }
     }
 }

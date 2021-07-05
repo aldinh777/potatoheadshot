@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class TileEntityEnergyTransfer extends TileEntity implements ITickable, IManaStorage {
+public class TileEntityEnergyTransfer extends TileEntity implements ITickable, IManaMachine {
 
     protected EnergyTransfer.Mode mode = EnergyTransfer.Mode.EXTRACT;
     protected PotatoManaStorage manaStorage = new PotatoManaStorage(8000);
@@ -135,7 +135,7 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
                     }
                 }
 
-                if (tile instanceof IManaStorage) {
+                if (tile instanceof IManaMachine) {
                     storages.add(tile);
                     break;
                 }
@@ -158,8 +158,8 @@ public class TileEntityEnergyTransfer extends TileEntity implements ITickable, I
                 }
             }
 
-            if (tileEntity instanceof IManaStorage) {
-                IManaStorage storage = (IManaStorage) tileEntity;
+            if (tileEntity instanceof IManaMachine) {
+                IManaMachine storage = (IManaMachine) tileEntity;
                 PotatoManaStorage targetStorage = storage.getManaStorage();
                 if (storage instanceof TileEntityManaCauldron) {
                     if (this.mode == EnergyTransfer.Mode.EXTRACT) {

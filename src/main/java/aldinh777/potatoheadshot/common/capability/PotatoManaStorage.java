@@ -42,4 +42,9 @@ public class PotatoManaStorage implements IManaStorage {
             this.mana -= mana;
         }
     }
+
+    @Override
+    public void setMana(int mana) {
+        this.mana = mana < 0 ? 0 : Math.min(mana, getMaxManaStored());
+    }
 }

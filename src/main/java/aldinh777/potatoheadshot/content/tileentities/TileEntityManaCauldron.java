@@ -26,7 +26,7 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class TileEntityManaCauldron extends TileEntity implements ITickable, IManaStorage {
+public class TileEntityManaCauldron extends TileEntity implements ITickable, IManaMachine {
 
     protected PotatoManaStorage storage;
     protected Element element = Element.MANA;

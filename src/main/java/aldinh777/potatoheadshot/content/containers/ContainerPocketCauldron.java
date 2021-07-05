@@ -1,5 +1,8 @@
 package aldinh777.potatoheadshot.content.containers;
 
+import aldinh777.potatoheadshot.common.capability.CapabilityMana;
+import aldinh777.potatoheadshot.common.capability.IManaStorage;
+import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import aldinh777.potatoheadshot.content.items.PocketCauldron;
 import net.minecraft.entity.player.EntityPlayer;
@@ -82,7 +85,10 @@ public class ContainerPocketCauldron extends Container {
     @Override
     public void updateProgressBar(int id, int data) {
         if (id == 0) {
-            PocketCauldron.setManaSize(stack, data);
+            IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+            if (manaStorage instanceof PotatoManaStorage) {
+                manaStorage.setMana(data);
+            }
         }
     }
 
@@ -90,12 +96,14 @@ public class ContainerPocketCauldron extends Container {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (IContainerListener listener : this.listeners) {
-            int manaSize = PocketCauldron.getManaSize(stack);
-            listener.sendWindowProperty(this, 0, manaSize);
+        IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+        if (manaStorage instanceof PotatoManaStorage) {
+            for (IContainerListener listener : listeners) {
+                int manaSize = manaStorage.getManaStored();
+                listener.sendWindowProperty(this, 0, manaSize);
+            }
+            manaSize = manaStorage.getManaStored();
         }
-
-        this.manaSize = PocketCauldron.getManaSize(stack);
     }
 
     @Nonnull
