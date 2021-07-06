@@ -1,8 +1,8 @@
 package aldinh777.potatoheadshot.content.containers;
 
-import aldinh777.potatoheadshot.common.capability.CapabilityMana;
-import aldinh777.potatoheadshot.common.capability.IManaStorage;
-import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.CapabilityMana;
+import aldinh777.potatoheadshot.content.capability.IManaStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import aldinh777.potatoheadshot.content.items.PocketCauldron;
 import net.minecraft.entity.player.EntityPlayer;

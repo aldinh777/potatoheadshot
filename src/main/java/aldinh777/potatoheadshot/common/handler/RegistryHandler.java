@@ -2,7 +2,7 @@ package aldinh777.potatoheadshot.common.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
-import aldinh777.potatoheadshot.common.capability.CapabilityMana;
+import aldinh777.potatoheadshot.content.capability.CapabilityMana;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.common.compat.OreDictionaryCompat;

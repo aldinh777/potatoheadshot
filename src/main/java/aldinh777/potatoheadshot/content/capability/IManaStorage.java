@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.common.capability;
+package aldinh777.potatoheadshot.content.capability;
 
 public interface IManaStorage {
     void collectMana(int mana);

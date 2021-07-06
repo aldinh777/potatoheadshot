@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.content.items;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.common.capability.CapabilityMana;
-import aldinh777.potatoheadshot.common.capability.IManaStorage;
-import aldinh777.potatoheadshot.common.capability.PocketCapability;
-import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.CapabilityMana;
+import aldinh777.potatoheadshot.content.capability.IManaStorage;
+import aldinh777.potatoheadshot.content.capability.PocketCapability;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.common.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;

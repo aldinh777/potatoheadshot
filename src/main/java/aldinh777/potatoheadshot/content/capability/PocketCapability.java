@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.common.capability;
+package aldinh777.potatoheadshot.content.capability;
 
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;

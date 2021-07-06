@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.common.capability;
+package aldinh777.potatoheadshot.content.capability;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;

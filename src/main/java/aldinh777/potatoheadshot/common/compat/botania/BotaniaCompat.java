@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.common.compat.botania;
 
-import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.util.EnergyUtil;
 import net.minecraft.tileentity.TileEntity;

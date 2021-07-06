@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.content.tileentities;
 
 import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
-import aldinh777.potatoheadshot.common.capability.DrierWaterCapability;
+import aldinh777.potatoheadshot.content.capability.DrierWaterCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrier;
 import aldinh777.potatoheadshot.content.inventory.InventoryDrierUpgrade;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;

@@ -1,7 +1,6 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.content.capability.SwapArmorCapability;
-import net.minecraft.client.util.ITooltipFlag;
+import aldinh777.potatoheadshot.content.capability.SwapInventoryCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -18,28 +17,11 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
-public class ArmorSwap extends PotatoItem {
+public class InventorySwap extends PotatoItem {
 
-    public ArmorSwap(String name) {
+    public InventorySwap(String name) {
         super(name);
-        setMaxStackSize(1);
-    }
-
-    @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-
-        IItemHandler itemHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-        if (itemHandler instanceof ItemStackHandler) {
-            tooltip.add("");
-            for (int i = 3; i >= 0; i--) {
-                ItemStack itemStack = itemHandler.getStackInSlot(i);
-                String display = itemStack.isEmpty() ? "EMPTY" : itemStack.getDisplayName();
-                tooltip.add("- " + display);
-            }
-        }
     }
 
     @Nonnull
@@ -50,21 +32,21 @@ public class ArmorSwap extends PotatoItem {
             IItemHandler itemHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
             if (itemHandler instanceof ItemStackHandler) {
                 ItemStackHandler stackHandler = (ItemStackHandler) itemHandler;
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 27; i++) {
                     ItemStack temp = stackHandler.getStackInSlot(i);
-                    stackHandler.setStackInSlot(i, playerIn.inventory.armorInventory.get(i));
-                    playerIn.inventory.armorInventory.set(i, temp);
+                    stackHandler.setStackInSlot(i, playerIn.inventory.mainInventory.get(i + 9));
+                    playerIn.inventory.mainInventory.set(i + 9, temp);
                 }
                 return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
             }
         }
-        playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0f, 1.0f);
+        playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 1.0f, 1.0f);
         return ActionResult.newResult(EnumActionResult.PASS, stack);
     }
 
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new SwapArmorCapability(stack);
+        return new SwapInventoryCapability(stack);
     }
 }

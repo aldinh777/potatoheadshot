@@ -55,6 +55,7 @@ public class PotatoItems {
     public static Item POTATO_MANA_KNIFE;
     public static Item LAVA_HOE;
     public static Item ARMOR_SWAP;
+    public static Item INVENTORY_SWAP;
     public static Item SWEET_POTATO_BUCKET;
     public static Item SWEET_EMPTY_BUCKET;
     public static Item SWEET_LAVA_BUCKET;
@@ -135,6 +136,7 @@ public class PotatoItems {
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
         LAVA_HOE = new LavaHoe("lava_hoe");
         ARMOR_SWAP = new ArmorSwap("armor_swap");
+        INVENTORY_SWAP = new InventorySwap("inventory_swap");
         CARBONATED_COAL = new PotatoItem("carbonated_coal", 102400);
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 819200) {
             @Override

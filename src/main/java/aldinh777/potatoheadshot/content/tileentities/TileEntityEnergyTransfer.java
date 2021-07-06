@@ -2,8 +2,8 @@ package aldinh777.potatoheadshot.content.tileentities;
 
 import aldinh777.potatoheadshot.content.blocks.machines.EnergyTransfer;
 import aldinh777.potatoheadshot.common.compat.botania.BotaniaCompat;
-import aldinh777.potatoheadshot.common.capability.PotatoEnergyStorage;
-import aldinh777.potatoheadshot.common.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoEnergyStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.util.EnergyUtil;
 import com.google.common.collect.Lists;

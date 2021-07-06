@@ -51,6 +51,7 @@ item.potato_knife.name=Potato Knife
 item.potato_mana_knife.name=Magical Knife
 item.lava_hoe.name=Lava Hoe
 item.armor_swap.name=Armor Swap
+item.inventory_swap.name=Inventory Swap
 
 # Splash Mana
 item.splash_mana_fire.name=Splash Potion of Fire Magic
