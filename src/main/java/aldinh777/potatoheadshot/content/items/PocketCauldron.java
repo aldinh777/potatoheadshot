@@ -1,22 +1,20 @@
 package aldinh777.potatoheadshot.content.items;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.content.capability.CapabilityMana;
-import aldinh777.potatoheadshot.content.capability.IManaStorage;
-import aldinh777.potatoheadshot.content.capability.PocketCapability;
-import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.common.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
-import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import aldinh777.potatoheadshot.common.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.common.util.Constants;
+import aldinh777.potatoheadshot.content.capability.CapabilityMana;
+import aldinh777.potatoheadshot.content.capability.IManaStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.item.PocketCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -38,22 +36,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PocketCauldron extends Item {
+public class PocketCauldron extends PotatoItem {
 
     public static final int maxManaSize = ConfigHandler.POCKET_CAULDRON_CAPACITY;
 
     public PocketCauldron(String name) {
-        this.setUnlocalizedName(name);
-        this.setRegistryName(name);
+        super(name);
         this.setMaxStackSize(1);
-        this.setCreativeTab(PotatoTab.POTATO_TAB);
-        PotatoItems.LISTS.add(this);
     }
 
     @Override
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-
         IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
         if (manaStorage instanceof PotatoManaStorage) {
             int mana = manaStorage.getManaStored();
@@ -61,6 +54,7 @@ public class PocketCauldron extends Item {
 
             tooltip.add("Mana : " + mana + "/" + maxMana);
         }
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override

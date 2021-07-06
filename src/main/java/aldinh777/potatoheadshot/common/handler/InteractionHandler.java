@@ -1,15 +1,22 @@
 package aldinh777.potatoheadshot.common.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.content.blocks.MagicBlock;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.content.blocks.MagicBlock;
+import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
+import aldinh777.potatoheadshot.content.capability.IBloodStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoBloodStorage;
+import aldinh777.potatoheadshot.content.items.HeartContainer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -50,6 +57,34 @@ public class InteractionHandler {
                         world.removeEntity(target);
                         if (!player.capabilities.isCreativeMode) {
                             currentItem.damageItem(1, player);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEntityHurt(LivingHurtEvent event) {
+        EntityLivingBase entityIn = event.getEntityLiving();
+        if (entityIn instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entityIn;
+            if (!event.getSource().damageType.equals("heart_extraction")) {
+                ItemStack heartContainer = HeartContainer.findHeartContainer(player);
+                if (heartContainer.hasCapability(CapabilityBlood.BLOOD, EnumFacing.UP)) {
+                    IBloodStorage bloodStorage = heartContainer.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
+                    if (bloodStorage instanceof PotatoBloodStorage) {
+                        float reducedDamage = Math.max(event.getAmount() - bloodStorage.getBloodQuantity(), 0);
+                        bloodStorage.useBlood(event.getAmount());
+                        if (reducedDamage > 0) {
+                            heartContainer.shrink(1);
+                            event.setAmount(reducedDamage);
+                            onEntityHurt(event);
+                        } else {
+                            if (bloodStorage.getBloodQuantity() <= 0) {
+                                heartContainer.shrink(1);
+                            }
+                            event.setCanceled(true);
                         }
                     }
                 }

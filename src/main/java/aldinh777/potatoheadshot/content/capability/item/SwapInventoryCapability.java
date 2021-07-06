@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.content.capability;
+package aldinh777.potatoheadshot.content.capability.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -13,12 +13,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class SwapArmorCapability implements ICapabilitySerializable<NBTBase> {
+public class SwapInventoryCapability implements ICapabilitySerializable<NBTBase> {
 
     public final ItemStack stack;
-    public ItemStackHandler stackHandler = new ItemStackHandler(4);
+    public ItemStackHandler stackHandler = new ItemStackHandler(27);
 
-    public SwapArmorCapability(ItemStack stack) {
+    public SwapInventoryCapability(ItemStack stack) {
         this.stack = stack;
     }
 

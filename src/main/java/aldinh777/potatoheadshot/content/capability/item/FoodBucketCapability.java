@@ -1,4 +1,4 @@
-package aldinh777.potatoheadshot.content.capability;
+package aldinh777.potatoheadshot.content.capability.item;
 
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import net.minecraft.item.Item;

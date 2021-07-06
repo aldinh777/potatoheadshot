@@ -1,6 +1,8 @@
-package aldinh777.potatoheadshot.content.capability;
+package aldinh777.potatoheadshot.content.capability.item;
 
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.content.capability.CapabilityMana;
+import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;

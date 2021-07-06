@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.common.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
+import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.content.capability.CapabilityMana;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
@@ -36,6 +37,7 @@ public class RegistryHandler {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(PotatoHeadshot.INSTANCE, new GuiHandler());
         CapabilityMana.register();
+        CapabilityBlood.register();
     }
 
     public static void init() {
