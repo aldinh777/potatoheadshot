@@ -26,6 +26,6 @@ public class LifeCauldronRecipeCategory extends AbstractCauldronRecipeCategory<L
 	@Nonnull
 	@Override
 	public String getTitle() {
-		return "Mana Life Cauldron";
+		return "Life Essence";
 	}
 }

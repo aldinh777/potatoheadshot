@@ -26,6 +26,6 @@ public class FireCauldronRecipeCategory extends AbstractCauldronRecipeCategory<F
 	@Nonnull
 	@Override
 	public String getTitle() {
-		return "Mana Fire Cauldron";
+		return "Fire Essence";
 	}
 }
