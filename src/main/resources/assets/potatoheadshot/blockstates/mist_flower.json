@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=lower": { "model": "potatoheadshot:mist_flower_bottom" },
+    "half=upper": { "model": "potatoheadshot:mist_flower_top" }
+  }
+}

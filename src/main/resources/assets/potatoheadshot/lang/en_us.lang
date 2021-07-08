@@ -82,5 +82,10 @@ tile.magic_sapling.name=Magic Sapling
 tile.potato_drier.name=Potato Drier
 tile.energy_transfer.name=Energy Transfer
 
+# Flower
+tile.flaming_flower.name=Flaming Flower
+tile.mist_flower.name=Mist Flower
+
 # Death Messages
-death.attack.potato_explosion=%1$s Died by potato explosion
+death.attack.potato_explosion=%1$s exploded by potato
+death.attack.heart_extraction=%1$s extract too much of his life

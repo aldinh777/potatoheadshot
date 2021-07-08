@@ -2,6 +2,8 @@ package aldinh777.potatoheadshot.common.lists;
 
 import aldinh777.potatoheadshot.content.blocks.*;
 import aldinh777.potatoheadshot.content.blocks.crops.*;
+import aldinh777.potatoheadshot.content.blocks.flower.FlamingFlower;
+import aldinh777.potatoheadshot.content.blocks.flower.MistFlower;
 import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
 import aldinh777.potatoheadshot.content.blocks.machines.EnergyTransfer;
 import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
@@ -35,6 +37,9 @@ public class PotatoBlocks {
     public static Block POTATO_DRIER;
     public static Block MANA_CAULDRON;
 
+    public static Block FLAMING_FLOWER;
+    public static Block MIST_FLOWER;
+
     public static void init() {
 
         // Normal Block
@@ -48,5 +53,9 @@ public class PotatoBlocks {
         POTATO_DRIER = new BlockDrier("potato_drier", BlockType.STONE);
         ENERGY_TRANSFER = new EnergyTransfer("energy_transfer", BlockType.GLASS);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron");
+
+        // Flower
+        FLAMING_FLOWER = new FlamingFlower("flaming_flower");
+        MIST_FLOWER = new MistFlower("mist_flower");
     }
 }
