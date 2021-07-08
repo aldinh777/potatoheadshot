@@ -27,7 +27,7 @@ public class HeartContainer extends PotatoItem {
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         IBloodStorage bloodStorage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
         if (bloodStorage instanceof PotatoBloodStorage) {
-            tooltip.add("Heart : " + bloodStorage.getBloodQuantity() + "/" + bloodStorage.getMaxQuantity());
+            tooltip.add("Heart : " + (int)bloodStorage.getBloodQuantity() + "/" + bloodStorage.getMaxQuantity());
         }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
