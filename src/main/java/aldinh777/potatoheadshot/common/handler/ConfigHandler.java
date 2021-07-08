@@ -10,8 +10,6 @@ public class ConfigHandler {
     public static Configuration config;
 
     // Potatoes
-    public static boolean RED_POTATO;
-    public static boolean STICKY_POTATO;
     public static boolean LAVA_POTATO;
     public static boolean WATER_POTATO;
     public static boolean ICE_POTATO;
@@ -52,8 +50,6 @@ public class ConfigHandler {
 
         category = "Potatoes";
         config.addCustomCategoryComment(category, "Should these potatoes be registered?");
-        RED_POTATO = config.getBoolean("RED_POTATO", category, true, "");
-        STICKY_POTATO = config.getBoolean("STICKY_POTATO", category, true, "");
         LAVA_POTATO = config.getBoolean("LAVA_POTATO", category, true, "");
         WATER_POTATO = config.getBoolean("WATER_POTATO", category, true, "");
         ICE_POTATO = config.getBoolean("ICE_POTATO", category, true, "");

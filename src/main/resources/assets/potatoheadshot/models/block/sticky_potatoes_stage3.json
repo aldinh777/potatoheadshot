@@ -1,6 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures": {
-        "crop": "potatoheadshot:blocks/sticky_potatoes_stage_3"
-    }
-}

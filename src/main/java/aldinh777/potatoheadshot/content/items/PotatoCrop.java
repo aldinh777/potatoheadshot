@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import net.minecraft.block.Block;
@@ -15,20 +14,6 @@ public class PotatoCrop extends ItemSeedFood {
         this.setRegistryName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        switch (name) {
-            case "red_potato":
-                if (ConfigHandler.RED_POTATO) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "sticky_potato":
-                if (ConfigHandler.STICKY_POTATO) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            default:
-                PotatoItems.LISTS.add(this);
-                break;
-        }
+        PotatoItems.LISTS.add(this);
     }
 }

@@ -1,6 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures": {
-        "crop": "potatoheadshot:blocks/red_potatoes_stage_2"
-    }
-}

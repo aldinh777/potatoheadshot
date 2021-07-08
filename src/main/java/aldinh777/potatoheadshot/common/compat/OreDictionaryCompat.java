@@ -18,7 +18,6 @@ public class OreDictionaryCompat {
 
             OreDictionary.registerOre("cropSweetpotato", PotatoItems.SWEET_POTATO);
             OreDictionary.registerOre("cropGlowingpotato", PotatoItems.GLOWING_POTATO);
-            OreDictionary.registerOre("slimeball", PotatoItems.STICKY_POTATO);
 
             OreDictionary.registerOre("dustPotato", PotatoItems.POTATO_STARCH);
             OreDictionary.registerOre("salt", PotatoItems.RAW_SALT);

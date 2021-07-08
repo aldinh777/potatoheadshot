@@ -14,8 +14,6 @@ item.salt_potato.name=Salt Potato
 item.sweet_potato.name=Sweet Potato
 item.baked_sweet_potato.name=Baked Sweet Potato
 item.glowing_potato.name=Glowing Potato
-item.sticky_potato.name=Sticky Potato
-item.red_potato.name=Red Potato
 
 # Seeds
 item.lava_potato_seed.name=Lava Potato Seed

@@ -29,16 +29,6 @@ public abstract class PotatoCrops extends BlockCrops {
         this.setUnlocalizedName(name);
 
         switch (name) {
-            case "red_potatoes":
-                if (ConfigHandler.RED_POTATO) {
-                    PotatoBlocks.LISTS.add(this);
-                }
-                break;
-            case "sticky_potatoes":
-                if (ConfigHandler.STICKY_POTATO) {
-                    PotatoBlocks.LISTS.add(this);
-                }
-                break;
             case "lava_potatoes":
                 if (ConfigHandler.LAVA_POTATO) {
                     PotatoBlocks.LISTS.add(this);
