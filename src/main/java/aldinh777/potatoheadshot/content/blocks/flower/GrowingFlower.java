@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class GrowingFlower extends DoubleFlower {
+public class GrowingFlower extends SingleFlower {
 
     public GrowingFlower(String name) {
         super(name);

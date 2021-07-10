@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "potatoheadshot:blocks/flaming_flower_top"
-    }
-}

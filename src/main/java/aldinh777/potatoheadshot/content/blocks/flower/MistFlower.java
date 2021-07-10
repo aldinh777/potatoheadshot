@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class MistFlower extends DoubleFlower {
+public class MistFlower extends SingleFlower {
 
     public MistFlower(String name) {
         super(name);

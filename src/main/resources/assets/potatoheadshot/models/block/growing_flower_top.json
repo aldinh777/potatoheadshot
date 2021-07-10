@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "potatoheadshot:blocks/growing_flower_top"
-    }
-}

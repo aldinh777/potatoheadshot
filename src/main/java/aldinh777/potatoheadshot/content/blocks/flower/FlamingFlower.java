@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class FlamingFlower extends DoubleFlower {
+public class FlamingFlower extends SingleFlower {
 
     public FlamingFlower(String name) {
         super(name);
