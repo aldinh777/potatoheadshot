@@ -80,9 +80,17 @@ tile.magic_sapling.name=Magic Sapling
 tile.potato_drier.name=Potato Drier
 tile.energy_transfer.name=Energy Transfer
 
-# Flower
+# Flower Seed
+item.flaming_flower.name=Flaming Flower Seed
+item.mist_flower.name=Mist Flower Seed
+item.growing_flower.name=Growing Flower Seed
+item.regen_flower.name=Regen Flower Seed
+
+# Flower Block
 tile.flaming_flower.name=Flaming Flower
 tile.mist_flower.name=Mist Flower
+tile.growing_flower.name=Growing Flower
+tile.regen_flower.name=Regen Flower
 
 # Death Messages
 death.attack.potato_explosion=%1$s exploded by potato

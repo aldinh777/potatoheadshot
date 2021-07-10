@@ -3,7 +3,9 @@ package aldinh777.potatoheadshot.common.lists;
 import aldinh777.potatoheadshot.content.blocks.*;
 import aldinh777.potatoheadshot.content.blocks.crops.*;
 import aldinh777.potatoheadshot.content.blocks.flower.FlamingFlower;
+import aldinh777.potatoheadshot.content.blocks.flower.GrowingFlower;
 import aldinh777.potatoheadshot.content.blocks.flower.MistFlower;
+import aldinh777.potatoheadshot.content.blocks.flower.RegenFlower;
 import aldinh777.potatoheadshot.content.blocks.machines.BlockDrier;
 import aldinh777.potatoheadshot.content.blocks.machines.EnergyTransfer;
 import aldinh777.potatoheadshot.content.blocks.machines.ManaCauldron;
@@ -37,6 +39,8 @@ public class PotatoBlocks {
 
     public static Block FLAMING_FLOWER;
     public static Block MIST_FLOWER;
+    public static Block GROWING_FLOWER;
+    public static Block REGEN_FLOWER;
 
     public static void init() {
 
@@ -55,5 +59,7 @@ public class PotatoBlocks {
         // Flower
         FLAMING_FLOWER = new FlamingFlower("flaming_flower");
         MIST_FLOWER = new MistFlower("mist_flower");
+        GROWING_FLOWER = new GrowingFlower("growing_flower");
+        REGEN_FLOWER = new RegenFlower("regen_flower");
     }
 }

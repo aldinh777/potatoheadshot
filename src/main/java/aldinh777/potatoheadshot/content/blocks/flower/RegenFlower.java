@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.content.blocks.flower;
 
-import aldinh777.potatoheadshot.common.util.BlockHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,12 +13,12 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
-public class FlamingFlower extends DoubleFlower {
+public class RegenFlower extends DoubleFlower {
 
-    public FlamingFlower(String name) {
+    public RegenFlower(String name) {
         super(name);
         setTickRandomly(true);
-        setLightLevel(1.0f);
+        setLightLevel(0.5f);
     }
 
     @Override
@@ -32,22 +32,24 @@ public class FlamingFlower extends DoubleFlower {
 
         if (!list.isEmpty()) {
             for (EntityLivingBase entitylivingbase : list) {
-                entitylivingbase.setFire(8);
+                entitylivingbase.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 600));
             }
         }
-
-        BlockHelper.getPosByRange(pos, 2, (targetPos) -> {
-            IBlockState targetState = worldIn.getBlockState(targetPos);
-            IBlockState targetUnder = worldIn.getBlockState(targetPos.down());
-
-            if (targetState.getBlock() == Blocks.AIR) {
-                Block blockUnder = targetUnder.getBlock();
-                if (blockUnder != Blocks.AIR) {
-                    worldIn.setBlockState(targetPos, Blocks.FIRE.getDefaultState());
-                }
-            }
-        });
-
         super.updateTick(worldIn, pos, state, rand);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos) {
+        IBlockState state = worldIn.getBlockState(pos.down());
+        return super.canPlaceBlockAt(worldIn, pos) && this.canSustainBush(state);
+    }
+
+    @Override
+    protected boolean canSustainBush(@Nonnull IBlockState state) {
+        return state.getBlock() == Blocks.GRASS
+                || state.getBlock() == Blocks.DIRT
+                || state.getBlock() == Blocks.SAND
+                || state.getBlock() == Blocks.LOG
+                || state.getBlock() == Blocks.LOG2;
     }
 }

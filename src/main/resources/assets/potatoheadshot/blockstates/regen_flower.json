@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=lower": { "model": "potatoheadshot:regen_flower_bottom" },
+    "half=upper": { "model": "potatoheadshot:regen_flower_top" }
+  }
+}
