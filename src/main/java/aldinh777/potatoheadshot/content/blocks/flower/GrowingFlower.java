@@ -21,16 +21,16 @@ public class GrowingFlower extends SingleFlower {
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         AreaHelper.getStateByRange(worldIn, pos, 5, (targetPos, targetState) -> {
-            if (state.getBlock() == Blocks.DIRT) {
-                IBlockState upBlock = worldIn.getBlockState(pos.up());
+            if (targetState.getBlock() == Blocks.DIRT) {
+                IBlockState upBlock = worldIn.getBlockState(targetPos.up());
                 if (upBlock.getBlock() == Blocks.AIR) {
-                    worldIn.setBlockState(pos, Blocks.GRASS.getDefaultState());
+                    worldIn.setBlockState(targetPos, Blocks.GRASS.getDefaultState());
                 }
 
-            } else if (state.getBlock() instanceof IGrowable) {
-                IGrowable plant = (IGrowable) state.getBlock();
-                if (plant.canGrow(worldIn, pos, state, true)) {
-                    plant.grow(worldIn, new Random(), pos, state);
+            } else if (targetState.getBlock() instanceof IGrowable) {
+                IGrowable plant = (IGrowable) targetState.getBlock();
+                if (plant.canGrow(worldIn, targetPos, targetState, true)) {
+                    plant.grow(worldIn, new Random(), targetPos, targetState);
                 }
             }
         });

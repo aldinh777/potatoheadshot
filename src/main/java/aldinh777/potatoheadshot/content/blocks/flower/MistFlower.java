@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,10 +22,8 @@ public class MistFlower extends SingleFlower {
 
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
-        AxisAlignedBB axisAlignedBB = getBoundingBox(state, worldIn, pos).grow(2.0D, 2.0D, 2.0d);
-        AreaHelper.getEntitiesByRange(EntityLivingBase.class, worldIn, axisAlignedBB, (entityLivingBase -> {
-            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 150));
-        }));
+        AreaHelper.getEntitiesByRange(EntityLivingBase.class, worldIn, pos, 2, (entityLivingBase ->
+                entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 150))));
 
         AreaHelper.getStateByRange(worldIn, pos, 3, (targetPos, targetState) -> {
             if (targetState.getBlock() == Blocks.WATER) {

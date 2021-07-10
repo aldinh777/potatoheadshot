@@ -13,6 +13,14 @@ import java.util.function.Consumer;
 
 public interface AreaHelper {
 
+    static <T extends Entity> void getEntitiesByRange(Class<T> clazz, World world, BlockPos pos, int range, Consumer<T> entityConsumer) {
+        BlockPos pos1 = pos.add(-range, -range, -range);
+        BlockPos pos2 = pos.add(range, range, range);
+
+        AxisAlignedBB axisAlignedBB = new AxisAlignedBB(pos1, pos2);
+        getEntitiesByRange(clazz, world, axisAlignedBB, entityConsumer);
+    }
+
     static <T extends Entity> void getEntitiesByRange(Class<T> clazz, World world, AxisAlignedBB axisAlignedBB, Consumer<T> entityConsumer) {
         List<T> list = world.getEntitiesWithinAABB(clazz, axisAlignedBB);
 
@@ -24,16 +32,13 @@ public interface AreaHelper {
     }
 
     static void getStateByRange(World world, BlockPos pos, int range, BiConsumer<BlockPos, IBlockState> stateBiConsumer) {
-        getPosByRange(pos, range, (blockPos -> {
-            IBlockState state = world.getBlockState(blockPos);
-            stateBiConsumer.accept(pos, state);
-        }), () -> false);
+        getStateByRange(world, pos, range, stateBiConsumer, () -> false);
     }
 
     static void getStateByRange(World world, BlockPos pos, int range, BiConsumer<BlockPos, IBlockState> stateBiConsumer, BooleanSupplier stopCondition) {
         getPosByRange(pos, range, (blockPos -> {
             IBlockState state = world.getBlockState(blockPos);
-            stateBiConsumer.accept(pos, state);
+            stateBiConsumer.accept(blockPos, state);
         }), stopCondition);
     }
 

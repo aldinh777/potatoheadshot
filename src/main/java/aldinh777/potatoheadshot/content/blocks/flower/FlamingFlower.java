@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -22,10 +21,8 @@ public class FlamingFlower extends SingleFlower {
 
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
-        AxisAlignedBB axisAlignedBB = getBoundingBox(state, worldIn, pos).grow(2.0D, 2.0D, 2.0d);
-        AreaHelper.getEntitiesByRange(EntityLivingBase.class, worldIn, axisAlignedBB, (entityLivingBase -> {
-            entityLivingBase.setFire(8);
-        }));
+        AreaHelper.getEntitiesByRange(EntityLivingBase.class, worldIn, pos, 2, (entityLivingBase ->
+                entityLivingBase.setFire(8)));
 
         AreaHelper.getStateByRange(worldIn, pos, 2, (targetPos, targetState) -> {
             if (targetState.getBlock() == Blocks.AIR) {
