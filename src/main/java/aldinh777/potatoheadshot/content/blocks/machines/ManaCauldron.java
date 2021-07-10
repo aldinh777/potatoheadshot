@@ -47,11 +47,6 @@ public class ManaCauldron extends PotatoBlock {
     }
 
     @Override
-    protected void init(String name) {
-        PotatoBlocks.LISTS.add(this);
-    }
-
-    @Override
     public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }

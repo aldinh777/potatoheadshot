@@ -2,7 +2,7 @@ package aldinh777.potatoheadshot.content.entity;
 
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
-import aldinh777.potatoheadshot.common.util.BlockHelper;
+import aldinh777.potatoheadshot.common.util.AreaHelper;
 import aldinh777.potatoheadshot.common.util.Element;
 import aldinh777.potatoheadshot.content.items.PotatoFoodItemBlock;
 import net.minecraft.block.Block;
@@ -24,7 +24,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Random;
 
 public class EntityManaPotion extends EntityPotion {
@@ -64,11 +63,17 @@ public class EntityManaPotion extends EntityPotion {
         private void applyFireSplash(RayTraceResult result) {
             if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 BlockPos blockPos = result.getBlockPos();
-                BlockHelper.getPosByRange(blockPos, 2, (pos) -> {
-                    IBlockState state = world.getBlockState(pos);
-                    IBlockState upBlock = world.getBlockState(pos.up());
 
-                    if (state.getBlock() == Blocks.GRASS) {
+                AreaHelper.getStateByRange(world, blockPos, 2, (pos, state) -> {
+                    if (state.getBlock() == Blocks.AIR) {
+                        IBlockState targetUnder = world.getBlockState(pos.down());
+                        Block blockUnder = targetUnder.getBlock();
+
+                        if (blockUnder != Blocks.AIR) {
+                            world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+                        }
+
+                    } else if (state.getBlock() == Blocks.GRASS) {
                         if (ConfigHandler.SPLASH_FIRE_COOK_GRASS) {
                             PotatoFoodItemBlock cookedDirt = (PotatoFoodItemBlock) PotatoItems.COOKED_DIRT;
                             world.setBlockState(pos, cookedDirt.getBlock().getDefaultState());
@@ -90,41 +95,33 @@ public class EntityManaPotion extends EntityPotion {
                             world.setBlockState(pos, blockResult.getDefaultState());
                         }
                     }
-
-                    if (upBlock.getBlock() == Blocks.AIR) {
-                        world.setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
-                    }
                 });
             }
 
             AxisAlignedBB axisalignedbb = this.getEntityBoundingBox().grow(4.0D, 2.0D, 4.0D);
-            List<EntityLivingBase> list = this.world.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+            AreaHelper.getEntitiesByRange(EntityLivingBase.class, world, axisalignedbb, (entityLivingBase -> {
+                if (entityLivingBase.canBeHitWithPotion()) {
+                    double distance = this.getDistanceSq(entityLivingBase);
 
-            if (!list.isEmpty()) {
-                for (EntityLivingBase entitylivingbase : list) {
-                    if (entitylivingbase.canBeHitWithPotion()) {
-                        double distance = this.getDistanceSq(entitylivingbase);
-
-                        if (distance < 16.0D) {
-                            entitylivingbase.setFire(8);
-                        }
+                    if (distance < 16.0D) {
+                        entityLivingBase.setFire(8);
                     }
                 }
-            }
+            }));
         }
 
         private void applyLifeSplash(RayTraceResult result) {
             if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 BlockPos blockPos = result.getBlockPos();
-                BlockHelper.getPosByRange(blockPos, 1, (pos) -> {
-                    IBlockState state = world.getBlockState(pos);
-                    IBlockState upBlock = world.getBlockState(pos.up());
 
-                    if (upBlock.getBlock() == Blocks.AIR && state.getBlock() == Blocks.DIRT) {
-                        world.setBlockState(pos, Blocks.GRASS.getDefaultState());
-                    }
+                AreaHelper.getStateByRange(world, blockPos, 1, (pos, state) -> {
+                    if (state.getBlock() == Blocks.DIRT) {
+                        IBlockState upBlock = world.getBlockState(pos.up());
+                        if (upBlock.getBlock() == Blocks.AIR) {
+                            world.setBlockState(pos, Blocks.GRASS.getDefaultState());
+                        }
 
-                    if (state.getBlock() instanceof IGrowable) {
+                    } else if (state.getBlock() instanceof IGrowable) {
                         IGrowable plant = (IGrowable) state.getBlock();
                         if (plant.canGrow(world, pos, state, true)) {
                             plant.grow(world, new Random(), pos, state);
@@ -134,23 +131,19 @@ public class EntityManaPotion extends EntityPotion {
             }
 
             AxisAlignedBB axisalignedbb = this.getEntityBoundingBox().grow(4.0D, 2.0D, 4.0D);
-            List<EntityLivingBase> list = this.world.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+            AreaHelper.getEntitiesByRange(EntityLivingBase.class, world, axisalignedbb, (entityLivingBase) -> {
+                if (entityLivingBase.canBeHitWithPotion()) {
+                    double distance = this.getDistanceSq(entityLivingBase);
 
-            if (!list.isEmpty()) {
-                for (EntityLivingBase entitylivingbase : list) {
-                    if (entitylivingbase.canBeHitWithPotion()) {
-                        double distance = this.getDistanceSq(entitylivingbase);
-
-                        if (distance < 16.0D) {
-                            if (entitylivingbase.isEntityUndead()) {
-                                entitylivingbase.attackEntityFrom(DamageSource.MAGIC,6);
-                            } else {
-                                entitylivingbase.heal(6);
-                            }
+                    if (distance < 16.0D) {
+                        if (entityLivingBase.isEntityUndead()) {
+                            entityLivingBase.attackEntityFrom(DamageSource.MAGIC,6);
+                        } else {
+                            entityLivingBase.heal(6);
                         }
                     }
                 }
-            }
+            });
         }
 
         private static ItemStack createFakePotion(Element element) {

@@ -1,8 +1,12 @@
 package aldinh777.potatoheadshot.content.blocks.flower;
 
-import aldinh777.potatoheadshot.common.util.BlockHelper;
+import aldinh777.potatoheadshot.common.util.AreaHelper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,12 +23,17 @@ public class MistFlower extends DoubleFlower {
 
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
-        BlockHelper.getPosByRange(pos, 3, (targetPos) -> {
-            IBlockState targetBlock = worldIn.getBlockState(targetPos);
-            if (targetBlock.getBlock() == Blocks.WATER) {
+        AxisAlignedBB axisAlignedBB = getBoundingBox(state, worldIn, pos).grow(2.0D, 2.0D, 2.0d);
+        AreaHelper.getEntitiesByRange(EntityLivingBase.class, worldIn, axisAlignedBB, (entityLivingBase -> {
+            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 150));
+        }));
+
+        AreaHelper.getStateByRange(worldIn, pos, 3, (targetPos, targetState) -> {
+            if (targetState.getBlock() == Blocks.WATER) {
                 worldIn.setBlockState(targetPos, Blocks.FROSTED_ICE.getDefaultState());
             }
         });
+
         super.updateTick(worldIn, pos, state, rand);
     }
 

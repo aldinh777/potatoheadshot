@@ -1,6 +1,6 @@
 package aldinh777.potatoheadshot.content.blocks.flower;
 
-import aldinh777.potatoheadshot.common.util.BlockHelper;
+import aldinh777.potatoheadshot.common.util.AreaHelper;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -20,15 +20,21 @@ public class GrowingFlower extends DoubleFlower {
 
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
-        BlockHelper.getPosByRange(pos, 5, (targetPos) -> {
-            IBlockState targetBlock = worldIn.getBlockState(targetPos);
-            if (targetBlock.getBlock() instanceof IGrowable) {
-                IGrowable plant = (IGrowable) targetBlock.getBlock();
-                if (plant.canGrow(worldIn, targetPos, targetBlock, true)) {
-                    plant.grow(worldIn, new Random(), targetPos, targetBlock);
+        AreaHelper.getStateByRange(worldIn, pos, 5, (targetPos, targetState) -> {
+            if (state.getBlock() == Blocks.DIRT) {
+                IBlockState upBlock = worldIn.getBlockState(pos.up());
+                if (upBlock.getBlock() == Blocks.AIR) {
+                    worldIn.setBlockState(pos, Blocks.GRASS.getDefaultState());
+                }
+
+            } else if (state.getBlock() instanceof IGrowable) {
+                IGrowable plant = (IGrowable) state.getBlock();
+                if (plant.canGrow(worldIn, pos, state, true)) {
+                    plant.grow(worldIn, new Random(), pos, state);
                 }
             }
         });
+
         super.updateTick(worldIn, pos, state, rand);
     }
 

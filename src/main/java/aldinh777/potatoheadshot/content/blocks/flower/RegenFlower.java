@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.content.blocks.flower;
 
+import aldinh777.potatoheadshot.common.util.AreaHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -10,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Random;
 
 public class RegenFlower extends DoubleFlower {
@@ -23,18 +23,11 @@ public class RegenFlower extends DoubleFlower {
 
     @Override
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
-        float x = pos.getX();
-        float y = pos.getY();
-        float z = pos.getZ();
+        AxisAlignedBB axisAlignedBB = getBoundingBox(state, worldIn, pos).grow(2.0D, 2.0D, 2.0d);
+        AreaHelper.getEntitiesByRange(EntityLivingBase.class, worldIn, axisAlignedBB, (entityLivingBase -> {
+            entityLivingBase.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 600));
+        }));
 
-        AxisAlignedBB axisalignedbb = new AxisAlignedBB(x-2, y-2, z-2, x+2, y+2, z+2);
-        List<EntityLivingBase> list = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
-
-        if (!list.isEmpty()) {
-            for (EntityLivingBase entitylivingbase : list) {
-                entitylivingbase.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 600));
-            }
-        }
         super.updateTick(worldIn, pos, state, rand);
     }
 

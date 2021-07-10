@@ -60,9 +60,6 @@ item.splash_mana_life.name=Splash Potion of Life Magic
 item.upgrade_booster.name=Upgrade Booster
 item.upgrade_multiplier.name=Upgrade Multiplier
 
-# Placeable Item
-tile.mana_cauldron.name=Magical Cauldron
-
 # Food Blocks
 tile.cooked_dirt.name=Cooked Dirt
 tile.potato_planks.name=Potato Planks
@@ -78,6 +75,7 @@ tile.magic_sapling.name=Magic Sapling
 
 # Machines
 tile.potato_drier.name=Potato Drier
+tile.mana_cauldron.name=Magical Cauldron
 tile.energy_transfer.name=Energy Transfer
 
 # Flower Seed

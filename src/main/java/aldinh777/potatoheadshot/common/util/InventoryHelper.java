@@ -4,14 +4,38 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.function.Consumer;
 
 public interface InventoryHelper {
+
+    static boolean transferItem(TileEntity tileEntity, EnumFacing facing, ItemStack stack) {
+        boolean flag = false;
+        if (tileEntity != null) {
+            if (tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)) {
+                IItemHandler itemHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+                if (itemHandler != null) {
+                    int maxSlot = itemHandler.getSlots();
+                    for (int i = 0; i < maxSlot; i++) {
+                        ItemStack insert = itemHandler.insertItem(i, stack, true);
+                        if (insert.isEmpty()) {
+                            itemHandler.insertItem(i, stack, false);
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return flag;
+    }
 
     static void spawnAllSlotAsEntity(IItemHandler handler, World world, BlockPos pos) {
         for (int i = 0; i < handler.getSlots(); ++i) {
