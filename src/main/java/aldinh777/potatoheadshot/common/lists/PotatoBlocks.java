@@ -27,6 +27,8 @@ public class PotatoBlocks {
     public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
     public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
 
+    public static Block LOKBOMB_PLANT = new Lokbomb("lokbomb_plant");
+
     public static Block POTATO_PLANKS;
     public static Block POTATO_BLOCK;
     public static Block SWEET_POTATO_BLOCK;

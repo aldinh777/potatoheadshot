@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "potatoheadshot:lokbomb_plant_stage0" },
+        "age=1": { "model": "potatoheadshot:lokbomb_plant_stage0" },
+        "age=2": { "model": "potatoheadshot:lokbomb_plant_stage1" },
+        "age=3": { "model": "potatoheadshot:lokbomb_plant_stage1" },
+        "age=4": { "model": "potatoheadshot:lokbomb_plant_stage2" },
+        "age=5": { "model": "potatoheadshot:lokbomb_plant_stage2" },
+        "age=6": { "model": "potatoheadshot:lokbomb_plant_stage2" },
+        "age=7": { "model": "potatoheadshot:lokbomb_plant_stage3" }
+    }
+}

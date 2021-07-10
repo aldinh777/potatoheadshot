@@ -19,6 +19,7 @@ item.glowing_potato.name=Glowing Potato
 item.lava_potato_seed.name=Lava Potato Seed
 item.water_potato_seed.name=Water Potato Seed
 item.ice_potato_seed.name=Ice Potato Seed
+item.lokbomb.name=Lokbomb
 
 # Items
 item.small_potato_planks.name=Small Potato Planks
@@ -77,12 +78,6 @@ tile.magic_sapling.name=Magic Sapling
 tile.potato_drier.name=Potato Drier
 tile.mana_cauldron.name=Magical Cauldron
 tile.energy_transfer.name=Energy Transfer
-
-# Flower Seed
-item.flaming_flower.name=Flaming Flower Seed
-item.mist_flower.name=Mist Flower Seed
-item.growing_flower.name=Growing Flower Seed
-item.regen_flower.name=Regen Flower Seed
 
 # Flower Block
 tile.flaming_flower.name=Flaming Flower

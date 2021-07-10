@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "potatoheadshot:blocks/lokbomb_stage_0"
+    }
+}

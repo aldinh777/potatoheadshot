@@ -29,6 +29,7 @@ public class PotatoItems {
     public static Item SWEET_POTATO;
     public static Item BAKED_SWEET_POTATO;
     public static Item GLOWING_POTATO;
+    public static Item LOKBOMB;
 
     public static Item LAVA_POTATO_SEED;
     public static Item WATER_POTATO_SEED;
@@ -89,6 +90,7 @@ public class PotatoItems {
         // Crop
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
+        LOKBOMB = new LokbombPotatoSeed("lokbomb");
 
         // Seeds
         LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");

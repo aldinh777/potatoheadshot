@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemSeeds;
@@ -58,15 +59,13 @@ public class PotatoSeed extends ItemSeeds {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
-        net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
+        IBlockState state = worldIn.getBlockState(pos);
         if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock() == this.soil && worldIn.isAirBlock(pos.up())) {
             worldIn.setBlockState(pos.up(), this.crops.getDefaultState());
 
             itemstack.shrink(1);
             return EnumActionResult.SUCCESS;
-
-        } else {
-            return EnumActionResult.FAIL;
         }
+        return EnumActionResult.FAIL;
     }
 }
