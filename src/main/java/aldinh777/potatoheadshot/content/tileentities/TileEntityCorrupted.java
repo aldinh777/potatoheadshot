@@ -49,13 +49,7 @@ public class TileEntityCorrupted extends TileEntity implements ITickable {
                         world.playSound(nextPos.getX(), nextPos.getY(), nextPos.getZ(), soundType.getBreakSound(), SoundCategory.BLOCKS, 1.0f, 1.0f, false);
 
                         if (!world.isRemote) {
-                            NonNullList<ItemStack> drops = NonNullList.create();
-                            block.getDrops(drops, world, nextPos, nextState, 0);
-
-                            for (ItemStack drop : drops) {
-                                world.spawnEntity(new EntityItem(world, nextPos.getX(), nextPos.getY(), nextPos.getZ(), drop));
-                            }
-
+                            block.dropBlockAsItem(world, nextPos, nextState, 0);
                             block.breakBlock(world, nextPos, nextState);
                             world.setBlockState(nextPos, state.withProperty(CorruptedBlock.STAGE, stage + 1));
                         }

@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.content.blocks;
 
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.util.BlockType;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityCorrupted;
 import net.minecraft.block.properties.PropertyInteger;
@@ -21,6 +22,11 @@ public class CorruptedBlock extends PotatoBlock {
         setDefaultState(blockState.getBaseState()
                 .withProperty(STAGE, 0)
         );
+    }
+
+    @Override
+    protected void init(String name) {
+        PotatoBlocks.LISTS.add(this);
     }
 
     @Override

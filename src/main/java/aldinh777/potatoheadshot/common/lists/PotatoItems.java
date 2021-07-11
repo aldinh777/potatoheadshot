@@ -34,6 +34,7 @@ public class PotatoItems {
     public static Item LAVA_POTATO_SEED;
     public static Item WATER_POTATO_SEED;
     public static Item ICE_POTATO_SEED;
+    public static Item CORRUPTED_SEED;
 
     public static Item SMALL_POTATO_PLANKS;
     public static Item POTATO_STICK;
@@ -91,11 +92,13 @@ public class PotatoItems {
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
         LOKBOMB = new PotatoCrop("lokbomb", 3, 0.3f, PotatoBlocks.LOKBOMB_PLANT);
+        CORRUPTED_SEED = new CorruptedSeed("corrupted_seed");
 
         // Seeds
         LAVA_POTATO_SEED = new PotatoSeed("lava_potato_seed", PotatoBlocks.LAVA_POTATOES);
         WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
         ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
+
 
         // Potato Food Section
         BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
