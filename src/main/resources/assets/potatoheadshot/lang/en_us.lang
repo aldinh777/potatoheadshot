@@ -73,6 +73,7 @@ tile.sweet_potato_block.name=Sweet Potato Block
 tile.glowing_potato_block.name=Glowing Potato Block
 tile.lava_farmland.name=Lava Farmland
 tile.magic_sapling.name=Magic Sapling
+tile.corrupted_block.name=Corrupted Block
 
 # Machines
 tile.potato_drier.name=Potato Drier

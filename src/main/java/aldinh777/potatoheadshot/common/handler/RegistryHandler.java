@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.common.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
 import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityCorrupted;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
 import aldinh777.potatoheadshot.content.capability.CapabilityMana;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
@@ -79,11 +80,13 @@ public class RegistryHandler {
     public static void registerTileEntity() {
         ResourceLocation potatoDrier = new ResourceLocation("potatoheadshot:potato_drier");
         ResourceLocation manaCauldron = new ResourceLocation("potatoheadshot:mana_cauldron");
-        ResourceLocation energyTransfer = new ResourceLocation("potatoheadshot:energyTransfer");
+        ResourceLocation energyTransfer = new ResourceLocation("potatoheadshot:energy_transfer");
+        ResourceLocation corruptedBlock = new ResourceLocation("potatoheadshot:corrupted_block");
 
         GameRegistry.registerTileEntity(TileEntityDrier.class, potatoDrier);
         GameRegistry.registerTileEntity(TileEntityManaCauldron.class, manaCauldron);
         GameRegistry.registerTileEntity(TileEntityEnergyTransfer.class, energyTransfer);
+        GameRegistry.registerTileEntity(TileEntityCorrupted.class, corruptedBlock);
     }
 
     @SubscribeEvent

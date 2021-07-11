@@ -35,6 +35,7 @@ public class PotatoBlocks {
     public static Block GLOWING_POTATO_BLOCK;
     public static Block MAGIC_SAPLING;
     public static Block ENERGY_TRANSFER;
+    public static Block CORRUPTED_BLOCK;
 
     public static Block POTATO_DRIER;
     public static Block MANA_CAULDRON;
@@ -51,6 +52,7 @@ public class PotatoBlocks {
         POTATO_BLOCK = new PotatoBlock("potato_block", BlockType.POTATO);
         SWEET_POTATO_BLOCK = new PotatoBlock("sweet_potato_block", BlockType.METAL);
         GLOWING_POTATO_BLOCK = new MagicBlock("glowing_potato_block", BlockType.MAGIC);
+        CORRUPTED_BLOCK = new CorruptedBlock("corrupted_block");
 
         // Utility Block
         MAGIC_SAPLING = new MagicSapling("magic_sapling");

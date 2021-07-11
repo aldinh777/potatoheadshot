@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "potatoheadshot:blocks/corrupted_block_stage_0"
+  }
+}
