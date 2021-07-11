@@ -2,6 +2,7 @@ package aldinh777.potatoheadshot.content.blocks.crops;
 
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
@@ -31,22 +32,7 @@ public class LavaPotatoCrops extends GlowingPotatoCrops {
     }
 
     @Override
-    protected boolean canSustainBush(IBlockState state) {
+    public boolean isPlaceable(IBlockState state) {
         return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
-    }
-
-    @Override
-    public boolean canSustainPlant(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
-        return state.getBlock() == PotatoBlocks.LAVA_FARMLAND;
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
-    }
-
-    @Override
-    public boolean canBlockStay(World worldIn, BlockPos pos, @Nonnull IBlockState state) {
-        return worldIn.getBlockState(pos.down()).getBlock() == PotatoBlocks.LAVA_FARMLAND;
     }
 }

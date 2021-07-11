@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.content.blocks;
 
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
-import aldinh777.potatoheadshot.content.items.LavaPotatoSeed;
-import aldinh777.potatoheadshot.content.items.PotatoItemBlock;
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.content.blocks.crops.LavaPotatoCrops;
+import aldinh777.potatoheadshot.content.items.PotatoItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.material.Material;
@@ -63,6 +63,6 @@ public class FarmlandLava extends BlockFarmland {
 
     @Override
     public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable) {
-        return plantable instanceof LavaPotatoSeed;
+        return plantable instanceof LavaPotatoCrops;
     }
 }

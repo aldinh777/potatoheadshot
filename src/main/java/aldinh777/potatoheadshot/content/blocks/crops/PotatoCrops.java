@@ -4,14 +4,16 @@ import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public abstract class PotatoCrops extends BlockCrops {
+public abstract class PotatoCrops extends BlockCrops implements IPlaceablePlant {
 
     private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {
             new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D),
@@ -49,6 +51,22 @@ public abstract class PotatoCrops extends BlockCrops {
         }
     }
 
+    @Override
+    protected boolean canSustainBush(@Nonnull IBlockState state) {
+        return isPlaceable(state);
+    }
+
+    public boolean canBlockStay(World worldIn, BlockPos pos, @Nonnull IBlockState state) {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+        return (worldIn.getLight(pos) >= 8 || worldIn.canSeeSky(pos)) && isPlaceable(soil);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+        return isPlaceable(soil);
+    }
+
     @Nonnull
     @Override
     protected abstract Item getSeed();
@@ -61,5 +79,9 @@ public abstract class PotatoCrops extends BlockCrops {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return CROPS_AABB[state.getValue(this.getAgeProperty())];
+    }
+
+    public boolean isPlaceable(IBlockState state) {
+        return state.getBlock() == Blocks.FARMLAND;
     }
 }

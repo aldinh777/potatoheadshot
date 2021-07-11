@@ -26,11 +26,6 @@ public class Lokbomb extends PotatoCrops {
     }
 
     @Override
-    protected boolean canSustainBush(IBlockState state) {
-        return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS;
-    }
-
-    @Override
     public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (getAge(state) >= getMaxAge()) {
@@ -77,5 +72,10 @@ public class Lokbomb extends PotatoCrops {
     @Override
     protected Item getCrop() {
         return PotatoItems.LOKBOMB;
+    }
+
+    @Override
+    public boolean isPlaceable(IBlockState state) {
+        return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS;
     }
 }

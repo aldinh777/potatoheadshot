@@ -20,11 +20,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class IcePotatoStem extends BlockBush implements IGrowable {
+public class IcePotatoStem extends BlockBush implements IGrowable, IPlaceablePlant {
 
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
     private final Block crop;
@@ -52,9 +53,14 @@ public class IcePotatoStem extends BlockBush implements IGrowable {
         return STEM_AABB[state.getValue(AGE)];
     }
 
-    protected boolean canSustainBush(IBlockState state)
-    {
-        return state.getBlock() == Blocks.FARMLAND;
+    protected boolean canSustainBush(@Nonnull IBlockState state) {
+        return isPlaceable(state);
+    }
+
+    @Override
+    public boolean canBlockStay(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+        return isPlaceable(soil);
     }
 
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
@@ -66,7 +72,7 @@ public class IcePotatoStem extends BlockBush implements IGrowable {
 
         if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
 
-            if(net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+            if(ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
                 int i = state.getValue(AGE);
 
                 if (i < 7) {
@@ -85,7 +91,7 @@ public class IcePotatoStem extends BlockBush implements IGrowable {
                     }
                 }
 
-                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+                ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
             }
         }
     }
@@ -140,5 +146,10 @@ public class IcePotatoStem extends BlockBush implements IGrowable {
     @Nonnull
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, AGE);
+    }
+
+    @Override
+    public boolean isPlaceable(IBlockState state) {
+        return state.getBlock() == Blocks.FARMLAND;
     }
 }

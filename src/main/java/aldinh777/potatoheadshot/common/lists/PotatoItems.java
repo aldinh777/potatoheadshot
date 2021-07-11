@@ -1,10 +1,10 @@
 package aldinh777.potatoheadshot.common.lists;
 
-import aldinh777.potatoheadshot.content.blocks.PotatoFoodBlock;
-import aldinh777.potatoheadshot.content.items.*;
 import aldinh777.potatoheadshot.common.util.BlockType;
 import aldinh777.potatoheadshot.common.util.Element;
 import aldinh777.potatoheadshot.common.util.FoodEffects;
+import aldinh777.potatoheadshot.content.blocks.PotatoFoodBlock;
+import aldinh777.potatoheadshot.content.items.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -90,10 +90,10 @@ public class PotatoItems {
         // Crop
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
-        LOKBOMB = new LokbombPotatoSeed("lokbomb");
+        LOKBOMB = new PotatoCrop("lokbomb", 3, 0.3f, PotatoBlocks.LOKBOMB_PLANT);
 
         // Seeds
-        LAVA_POTATO_SEED = new LavaPotatoSeed("lava_potato_seed");
+        LAVA_POTATO_SEED = new PotatoSeed("lava_potato_seed", PotatoBlocks.LAVA_POTATOES);
         WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
         ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
 
