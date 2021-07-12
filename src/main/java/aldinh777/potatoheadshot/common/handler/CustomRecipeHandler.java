@@ -14,6 +14,7 @@ import org.apache.logging.log4j.util.TriConsumer;
 import java.io.*;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CustomRecipeHandler {
@@ -22,12 +23,23 @@ public class CustomRecipeHandler {
     public static List<PotatoDrierRecipe> WET_RECIPES = Lists.newArrayList();
 
     public static void registerDrier() {
-        File configDirectory = PotatoHeadshot.CONFIG_DIR;
-        File drierDirectory = new File(configDirectory.getPath(), "drier");
-        drierDirectory.mkdirs();
+        if (ConfigHandler.CUSTOM_DRIER_RECIPES) {
+            File configDirectory = PotatoHeadshot.CONFIG_DIR;
+            File drierDirectory = new File(configDirectory.getPath(), "drier");
+            boolean directoryCreated = drierDirectory.mkdirs();
 
-        registerRecipe(drierDirectory, "dry_recipes.json", Drier::readDryRecipes, Drier::writeDryRecipes, PotatoDrierRecipe::getDefaultDryRecipes);
-        registerRecipe(drierDirectory, "wet_recipes.json", Drier::readWetRecipes, Drier::writeWetRecipes, PotatoDrierRecipe::getDefaultWetRecipes);
+            if (directoryCreated) {
+                registerRecipe(drierDirectory, "dry_recipes.json", Drier::readDryRecipesFromFile, Drier::writeDryRecipesToFile, PotatoDrierRecipe::getDefaultDryRecipes);
+                registerRecipe(drierDirectory, "wet_recipes.json", Drier::readWetRecipesFromFile, Drier::writeWetRecipesToFile, PotatoDrierRecipe::getDefaultWetRecipes);
+            } else if (drierDirectory.exists()) {
+                registerRecipe(drierDirectory, "dry_recipes.json", Drier::readDryRecipesFromFile, Drier::writeDryRecipesToFile, PotatoDrierRecipe::getDefaultDryRecipes);
+                registerRecipe(drierDirectory, "wet_recipes.json", Drier::readWetRecipesFromFile, Drier::writeWetRecipesToFile, PotatoDrierRecipe::getDefaultWetRecipes);
+            }
+
+        } else {
+            registerRecipe(Drier::readDefaultDryRecipes, PotatoDrierRecipe::getDefaultDryRecipes);
+            registerRecipe(Drier::readDefaultWetRecipes, PotatoDrierRecipe::getDefaultWetRecipes);
+        }
     }
 
     public static <T> void registerRecipe(File recipeDir, String filename, BiConsumer<Reader, Gson> readFunction, TriConsumer<Writer, Gson, Supplier<T>> writeFunction, Supplier<T> recipes) {
@@ -49,9 +61,29 @@ public class CustomRecipeHandler {
         }
     }
 
+    public static <T> void registerRecipe(Consumer<Supplier<T>> readFunction, Supplier<T> recipes) {
+        readFunction.accept(recipes);
+    }
+
     interface Drier {
 
-        static void readDryRecipes(Reader fileReader, Gson gson) {
+        static void readDefaultDryRecipes(Supplier<List<PotatoDrierRecipe>> recipes) {
+            List<PotatoDrierRecipe> defaultRecipes = recipes.get();
+
+            for (PotatoDrierRecipe recipe : defaultRecipes) {
+                PotatoDrierRecipes.INSTANCE.addDryRecipe(recipe.getInput().getItem(), recipe);
+            }
+        }
+
+        static void readDefaultWetRecipes(Supplier<List<PotatoDrierRecipe>> recipes) {
+            List<PotatoDrierRecipe> defaultRecipes = recipes.get();
+
+            for (PotatoDrierRecipe recipe : defaultRecipes) {
+                PotatoDrierRecipes.INSTANCE.addWetRecipe(recipe.getInput().getItem(), recipe);
+            }
+        }
+
+        static void readDryRecipesFromFile(Reader fileReader, Gson gson) {
             CustomDryRecipe[] recipes = gson.fromJson(fileReader, CustomDryRecipe[].class);
 
             for (CustomDryRecipe recipe : recipes) {
@@ -66,7 +98,7 @@ public class CustomRecipeHandler {
             }
         }
 
-        static void readWetRecipes(Reader fileReader, Gson gson) {
+        static void readWetRecipesFromFile(Reader fileReader, Gson gson) {
             CustomWetRecipe[] recipes = gson.fromJson(fileReader, CustomWetRecipe[].class);
 
             for (CustomWetRecipe recipe : recipes) {
@@ -81,7 +113,7 @@ public class CustomRecipeHandler {
             }
         }
 
-        static void writeDryRecipes(Writer fileWriter, Gson gson, Supplier<List<PotatoDrierRecipe>> recipes) {
+        static void writeDryRecipesToFile(Writer fileWriter, Gson gson, Supplier<List<PotatoDrierRecipe>> recipes) {
             List<PotatoDrierRecipe> defaultRecipes = recipes.get();
             List<CustomDryRecipe> customRecipes = Lists.newArrayList();
 
@@ -94,7 +126,7 @@ public class CustomRecipeHandler {
             gson.toJson(customRecipes.toArray(), CustomDryRecipe[].class, fileWriter);
         }
 
-        static void writeWetRecipes(Writer fileWriter, Gson gson, Supplier<List<PotatoDrierRecipe>> recipes) {
+        static void writeWetRecipesToFile(Writer fileWriter, Gson gson, Supplier<List<PotatoDrierRecipe>> recipes) {
             List<PotatoDrierRecipe> defaultRecipes = recipes.get();
             List<CustomWetRecipe> customRecipes = Lists.newArrayList();
 

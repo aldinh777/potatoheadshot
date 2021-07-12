@@ -9,6 +9,9 @@ public class ConfigHandler {
 
     public static Configuration config;
 
+    // Main
+    public static boolean CUSTOM_DRIER_RECIPES;
+
     // Potatoes
     public static boolean LAVA_POTATO;
     public static boolean WATER_POTATO;
@@ -47,6 +50,10 @@ public class ConfigHandler {
         }
 
         String category;
+
+        category = "General";
+        config.addCustomCategoryComment(category, "General is general");
+        CUSTOM_DRIER_RECIPES = config.getBoolean("CUSTOM_DRIER_RECIPES", category, false, "");
 
         category = "Potatoes";
         config.addCustomCategoryComment(category, "Should these potatoes be registered?");
