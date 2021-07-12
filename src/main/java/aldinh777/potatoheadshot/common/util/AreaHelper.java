@@ -7,9 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
+import java.util.function.*;
 
 public interface AreaHelper {
 
@@ -39,19 +37,27 @@ public interface AreaHelper {
         getPosByRange(pos, range, (blockPos -> {
             IBlockState state = world.getBlockState(blockPos);
             stateBiConsumer.accept(blockPos, state);
-        }), stopCondition);
+        }), stopCondition, (blockPos) -> isInEdge(blockPos.getX(), blockPos.getY(), blockPos.getZ(), range));
     }
 
-    static void getPosByRange(BlockPos pos, int range, Consumer<BlockPos> stateConsumer, BooleanSupplier stopCondition) {
+    static void getSurroundingState(World world, BlockPos pos, BiConsumer<BlockPos, IBlockState> stateBiConsumer) {
+        getPosByRange(pos, 1, (blockPos -> {
+            IBlockState state = world.getBlockState(blockPos);
+            stateBiConsumer.accept(blockPos, state);
+        }), () -> false, (blockPos) -> false);
+    }
+
+    static void getPosByRange(BlockPos pos, int range, Consumer<BlockPos> stateConsumer, BooleanSupplier stopCondition, Function<BlockPos, Boolean> skipCondition) {
         for (int x = -range; x <= range; x++) {
             for (int y = -range; y <= range; y++) {
                 for (int z = -range; z <= range; z++) {
                     if (stopCondition.getAsBoolean()) {
                         return;
                     }
-                    if (!isInEdge(x, y, z, range)) {
-                        stateConsumer.accept(pos.add(x, y, z));
+                    if (skipCondition.apply(pos.add(x, y, z))) {
+                        continue;
                     }
+                    stateConsumer.accept(pos.add(x, y, z));
                 }
             }
         }

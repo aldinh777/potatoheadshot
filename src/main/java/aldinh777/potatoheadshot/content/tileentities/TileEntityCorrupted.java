@@ -1,16 +1,13 @@
 package aldinh777.potatoheadshot.content.tileentities;
 
+import aldinh777.potatoheadshot.common.util.AreaHelper;
 import aldinh777.potatoheadshot.content.blocks.CorruptedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -39,9 +36,7 @@ public class TileEntityCorrupted extends TileEntity implements ITickable {
         IBlockState state = world.getBlockState(pos);
         int stage = state.getValue(CorruptedBlock.STAGE);
         if (stage < 5) {
-            for (EnumFacing facing : EnumFacing.VALUES) {
-                BlockPos nextPos = pos.offset(facing);
-                IBlockState nextState = world.getBlockState(nextPos);
+            AreaHelper.getSurroundingState(world, pos, (nextPos, nextState) -> {
                 if (nextState.getBlock() != Blocks.AIR && !(nextState.getBlock() instanceof CorruptedBlock)) {
                     if (nextState.getBlockHardness(world, nextPos) != -1) {
                         Block block = nextState.getBlock();
@@ -55,10 +50,8 @@ public class TileEntityCorrupted extends TileEntity implements ITickable {
                         }
                     }
                 }
-                world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            }
-        } else {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            });
         }
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
     }
 }
