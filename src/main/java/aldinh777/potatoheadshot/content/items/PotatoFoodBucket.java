@@ -1,7 +1,7 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.content.capability.item.FoodBucketCapability;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.content.capability.item.FoodBucketCapability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,13 +19,11 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 public class PotatoFoodBucket extends PotatoFood {
 
     private final Block containedBlock;
     private SoundEvent soundEvent = SoundEvents.ITEM_BUCKET_EMPTY;
-    private boolean explodeOnPlaced = false;
     private int burnTime = 0;
 
     public PotatoFoodBucket(String name, Block block, int hunger, float saturation) {
@@ -62,12 +60,7 @@ public class PotatoFoodBucket extends PotatoFood {
         if (raytraceresult == null) {
 
             // Food Operation
-            if (playerIn.canEat(false)) {
-                playerIn.setActiveHand(handIn);
-                return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
-            }
-
-            return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+            return super.onItemRightClick(worldIn, playerIn, handIn);
 
         } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
             return new ActionResult<>(EnumActionResult.PASS, itemstack);
@@ -104,22 +97,13 @@ public class PotatoFoodBucket extends PotatoFood {
         return this;
     }
 
-    public void setExplodeOnPlaced() {
-        this.explodeOnPlaced = true;
-    }
-
     public PotatoFoodBucket setBurnTime(int burnTime) {
         this.burnTime = burnTime;
         return this;
     }
 
-    private void explode(World worldIn, EntityPlayer player, BlockPos posIn) {
-        worldIn.createExplosion(player, posIn.getX(), posIn.getY(), posIn.getZ(), 4.0f, true);
-        Objects.requireNonNull(player).attackEntityFrom(new DamageSource("potato_explosion"), 8);
-    }
-
     private boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World worldIn, BlockPos posIn) {
-        if (this.containedBlock == Blocks.AIR && !explodeOnPlaced) {
+        if (this.containedBlock == Blocks.AIR) {
             return false;
         }
 
@@ -147,10 +131,6 @@ public class PotatoFoodBucket extends PotatoFood {
 
                 worldIn.playSound(player, posIn, this.soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 worldIn.setBlockState(posIn, this.containedBlock.getDefaultState(), 11);
-
-                if (!worldIn.isRemote && explodeOnPlaced) {
-                    explode(worldIn, player, posIn);
-                }
             }
 
             return true;

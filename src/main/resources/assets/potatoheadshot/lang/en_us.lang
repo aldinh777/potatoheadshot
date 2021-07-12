@@ -14,12 +14,14 @@ item.salt_potato.name=Salt Potato
 item.sweet_potato.name=Sweet Potato
 item.baked_sweet_potato.name=Baked Sweet Potato
 item.glowing_potato.name=Glowing Potato
+item.lokbomb.name=Lokbomb
 
 # Seeds
 item.lava_potato_seed.name=Lava Potato Seed
 item.water_potato_seed.name=Water Potato Seed
 item.ice_potato_seed.name=Ice Potato Seed
-item.lokbomb.name=Lokbomb
+item.lokbomb_seed.name=Lokbomb Seed
+item.corrupted_seed.name=Corrupted Seed
 
 # Items
 item.small_potato_planks.name=Small Potato Planks

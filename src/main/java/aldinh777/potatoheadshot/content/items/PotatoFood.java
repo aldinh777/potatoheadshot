@@ -85,5 +85,6 @@ public class PotatoFood extends ItemFood {
 
     public void addEffects(FoodEffects... effects) {
         this.effects.addAll(Arrays.asList(effects));
+        setAlwaysEdible();
     }
 }

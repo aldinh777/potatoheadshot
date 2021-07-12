@@ -34,6 +34,7 @@ public class PotatoItems {
     public static Item LAVA_POTATO_SEED;
     public static Item WATER_POTATO_SEED;
     public static Item ICE_POTATO_SEED;
+    public static Item LOKBOMB_SEED;
     public static Item CORRUPTED_SEED;
 
     public static Item SMALL_POTATO_PLANKS;
@@ -91,16 +92,16 @@ public class PotatoItems {
         // Crop
         SWEET_POTATO = new PotatoCrop("sweet_potato", 1, 0.3f, PotatoBlocks.SWEET_POTATOES);
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
-        LOKBOMB = new PotatoCrop("lokbomb", 3, 0.3f, PotatoBlocks.LOKBOMB_PLANT);
-        CORRUPTED_SEED = new CorruptedSeed("corrupted_seed");
 
         // Seeds
         LAVA_POTATO_SEED = new PotatoSeed("lava_potato_seed", PotatoBlocks.LAVA_POTATOES);
         WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
         ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
-
+        LOKBOMB_SEED = new PotatoSeed("lokbomb_seed", PotatoBlocks.LOKBOMB_PLANT);
+        CORRUPTED_SEED = new CorruptedSeed("corrupted_seed");
 
         // Potato Food Section
+        LOKBOMB = new PotatoFood("lokbomb", 3, 0.4f);
         BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
         BAKED_POTATO_CHIP = new PotatoFood("baked_potato_chip", 1, 0.2f);
         FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
@@ -184,6 +185,8 @@ public class PotatoItems {
         FoodEffects waterPotatoEffects = FoodEffects.combine(superWetPotatoEffects,
                 FoodEffects.tirePlayer, FoodEffects.fireResistPlayer);
         FoodEffects glowingPotatoEffects = FoodEffects.visionPlayer;
+        FoodEffects lokbombEffects = FoodEffects.combine(
+                FoodEffects.strengthenPlayer, FoodEffects.burnPlayer, FoodEffects.speedPlayer);
 
         // Configuration
         extraHotPotato.setSoundEvent(SoundEvents.ENTITY_BLAZE_SHOOT).setBurnTime(1600);
@@ -196,6 +199,7 @@ public class PotatoItems {
         addFoodEffects(WET_POTATO, superWetPotatoEffects);
         addFoodEffects(WATER_POTATO, waterPotatoEffects);
         addFoodEffects(GLOWING_POTATO, glowingPotatoEffects);
+        addFoodEffects(LOKBOMB, lokbombEffects);
 
         addFoodEffects(SWEET_LAVA_BUCKET, FoodEffects.burnPlayer);
         addFoodEffects(SWEET_WATER_BUCKET, FoodEffects.unBurnPlayer);
