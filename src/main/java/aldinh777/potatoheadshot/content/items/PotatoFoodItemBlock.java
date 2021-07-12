@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -39,25 +38,7 @@ public class PotatoFoodItemBlock extends ItemFood {
         this.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        switch (block.getUnlocalizedName()) {
-            case "tile.cooked_dirt":
-                if (ConfigHandler.COOKED_DIRT) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "tile.baked_potato_planks":
-                if (ConfigHandler.COOKED_POTATO_VARIANT && ConfigHandler.POTATO_PLANKS) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "tile.baked_potato_block":
-                if (ConfigHandler.COOKED_POTATO_VARIANT) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            default:
-                PotatoItems.LISTS.add(this);
-        }
+        PotatoItems.LISTS.add(this);
         this.block = block;
     }
 

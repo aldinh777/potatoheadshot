@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.common.lists;
 
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.content.blocks.*;
 import aldinh777.potatoheadshot.content.blocks.crops.*;
 import aldinh777.potatoheadshot.content.blocks.flower.FlamingFlower;
@@ -19,13 +20,13 @@ public class PotatoBlocks {
 
     public static List<Block> LISTS = new ArrayList<>();
 
-    public static Block LAVA_FARMLAND = new FarmlandLava("lava_farmland");
+    public static Block LAVA_FARMLAND = ConfigHandler.LAVA_POTATO ? new FarmlandLava("lava_farmland") : null;
 
     public static Block SWEET_POTATOES = new SweetPotatoCrops("sweet_potatoes");
     public static Block GLOWING_POTATOES = new GlowingPotatoCrops("glowing_potatoes");
-    public static Block LAVA_POTATOES = new LavaPotatoCrops("lava_potatoes");
-    public static Block WATER_POTATOES = new WaterPotatoCrops("water_potatoes");
-    public static Block ICE_POTATO_STEM = new IcePotatoStem("ice_potato_stem");
+    public static Block LAVA_POTATOES = ConfigHandler.LAVA_POTATO ? new LavaPotatoCrops("lava_potatoes") : null;
+    public static Block WATER_POTATOES = ConfigHandler.WATER_POTATO ? new WaterPotatoCrops("water_potatoes") : null;
+    public static Block ICE_POTATO_STEM = ConfigHandler.ICE_POTATO ? new IcePotatoStem("ice_potato_stem") : null;
 
     public static Block LOKBOMB_PLANT = new Lokbomb("lokbomb_plant");
 
@@ -48,7 +49,9 @@ public class PotatoBlocks {
     public static void init() {
 
         // Normal Block
-        POTATO_PLANKS = new PotatoBlock("potato_planks", BlockType.WOOD);
+        if (ConfigHandler.POTATO_PLANKS) {
+            POTATO_PLANKS = new PotatoBlock("potato_planks", BlockType.WOOD);
+        }
         POTATO_BLOCK = new PotatoBlock("potato_block", BlockType.POTATO);
         SWEET_POTATO_BLOCK = new PotatoBlock("sweet_potato_block", BlockType.METAL);
         GLOWING_POTATO_BLOCK = new MagicBlock("glowing_potato_block", BlockType.MAGIC);

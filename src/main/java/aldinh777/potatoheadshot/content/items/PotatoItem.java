@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.lists.PotatoTab;
 import net.minecraft.item.Item;
@@ -22,32 +21,7 @@ public class PotatoItem extends Item {
         this.setRegistryName(name);
         this.setCreativeTab(PotatoTab.POTATO_TAB);
 
-        switch (name) {
-            case "sweet_potato_bucket":
-                if (ConfigHandler.SWEET_BUCKET) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "splash_mana_fire":
-            case "splash_mana_life":
-                if (ConfigHandler.SPLASH_MANA) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "potato_chip":
-                if (ConfigHandler.POTATO_CHIP) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "small_potato_planks":
-            case "potato_stick":
-                if (ConfigHandler.POTATO_PLANKS) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            default:
-                PotatoItems.LISTS.add(this);
-        }
+        PotatoItems.LISTS.add(this);
     }
 
     @Override

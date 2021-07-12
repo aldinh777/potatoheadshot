@@ -1,5 +1,6 @@
 package aldinh777.potatoheadshot.common.lists;
 
+import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.util.BlockType;
 import aldinh777.potatoheadshot.common.util.Element;
 import aldinh777.potatoheadshot.common.util.FoodEffects;
@@ -94,28 +95,55 @@ public class PotatoItems {
         GLOWING_POTATO = new PotatoCrop("glowing_potato", 1, 0.3f, PotatoBlocks.GLOWING_POTATOES);
 
         // Seeds
-        LAVA_POTATO_SEED = new PotatoSeed("lava_potato_seed", PotatoBlocks.LAVA_POTATOES);
-        WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
-        ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
+        if (ConfigHandler.LAVA_POTATO) {
+            LAVA_POTATO_SEED = new PotatoSeed("lava_potato_seed", PotatoBlocks.LAVA_POTATOES);
+        }
+        if (ConfigHandler.WATER_POTATO) {
+            WATER_POTATO_SEED = new PotatoSeed("water_potato_seed", PotatoBlocks.WATER_POTATOES);
+        }
+        if (ConfigHandler.ICE_POTATO) {
+            ICE_POTATO_SEED = new PotatoSeed("ice_potato_seed", PotatoBlocks.ICE_POTATO_STEM);
+        }
         LOKBOMB_SEED = new PotatoSeed("lokbomb_seed", PotatoBlocks.LOKBOMB_PLANT);
         CORRUPTED_SEED = new CorruptedSeed("corrupted_seed");
 
         // Potato Food Section
         LOKBOMB = new PotatoFood("lokbomb", 3, 0.4f);
-        BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
-        BAKED_POTATO_CHIP = new PotatoFood("baked_potato_chip", 1, 0.2f);
-        FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
+        if (ConfigHandler.POTATO_PLANKS && ConfigHandler.COOKED_POTATO_VARIANT) {
+            BAKED_SMALL_POTATO_PLANKS = new PotatoFood("baked_small_potato_planks", 3, 0.4f);
+            FRIED_FRIES = new PotatoFood("fried_fries", 2, 0.3f);
+        }
         BAKED_SWEET_POTATO = new PotatoFood("baked_sweet_potato", 5, 0.6f);
-        SALT_POTATO = new PotatoFood("salt_potato", 2, 0.3f);
-        HOT_POTATO = new PotatoFoodBucket("extra_hot_potato", Blocks.FIRE, 2, 0.3f);
-        LAVA_POTATO = new PotatoFoodBucket("lava_potato", Blocks.FLOWING_LAVA, 2, 0.3f);
-        WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
-        WATER_POTATO = new PotatoFoodBucket("water_potato", Blocks.FLOWING_WATER, 2, 0.3f);
+        if (ConfigHandler.POTATO_CHIP) {
+            BAKED_POTATO_CHIP = new PotatoFood("baked_potato_chip", 1, 0.2f);
+        }
+        if (ConfigHandler.SALT_POTATO) {
+            SALT_POTATO = new PotatoFood("salt_potato", 2, 0.3f);
+        }
+        if (ConfigHandler.HOT_POTATO) {
+            HOT_POTATO = new PotatoFoodBucket("extra_hot_potato", Blocks.FIRE, 2, 0.3f)
+                    .setSoundEvent(SoundEvents.ENTITY_BLAZE_SHOOT).setBurnTime(1600);
+        }
+        if (ConfigHandler.LAVA_POTATO) {
+            LAVA_POTATO = new PotatoFoodBucket("lava_potato", Blocks.FLOWING_LAVA, 2, 0.3f)
+                    .setSoundEvent(SoundEvents.ITEM_BUCKET_EMPTY_LAVA).setBurnTime(6400).setMaxStackSize(16);
+        }
+        if (ConfigHandler.WET_POTATO) {
+            WET_POTATO = new PotatoFood("super_wet_potato", 2, 0.3f);
+        }
+        if (ConfigHandler.WATER_POTATO) {
+            WATER_POTATO = new PotatoFoodBucket("water_potato", Blocks.FLOWING_WATER, 2, 0.3f)
+                    .setSoundEvent(SoundEvents.ITEM_BUCKET_EMPTY).setMaxStackSize(16);
+        }
 
         // Potato Items
-        SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");
-        POTATO_CHIP = new PotatoItem("potato_chip");
-        POTATO_STICK = new PotatoItem("potato_stick", 100);
+        if (ConfigHandler.POTATO_PLANKS) {
+            SMALL_POTATO_PLANKS = new PotatoItem("small_potato_planks");
+            POTATO_STICK = new PotatoItem("potato_stick", 100);
+        }
+        if (ConfigHandler.POTATO_CHIP) {
+            POTATO_CHIP = new PotatoItem("potato_chip");
+        }
         POTATO_STARCH = new PotatoItem("potato_starch");
         RAW_SALT = new PotatoItem("raw_salt");
         SWEET_POTATO_DUST = new PotatoItem("sweet_potato_dust");
@@ -128,16 +156,20 @@ public class PotatoItems {
 
         // Bucket
         SWEET_POTATO_INGOT = new PotatoItem("sweet_potato_ingot");
-        SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");
-        SWEET_EMPTY_BUCKET = new SweetFoodBucket("sweet_bucket_empty", 5, 0.3f);
-        SWEET_LAVA_BUCKET = new SweetBucket("sweet_bucket_lava", Blocks.FLOWING_LAVA);
-        SWEET_WATER_BUCKET = new SweetBucket("sweet_bucket_water", Blocks.FLOWING_WATER);
-        SWEET_MILK_BUCKET = new SweetBucket("sweet_bucket_milk");
+        if (ConfigHandler.SWEET_BUCKET) {
+            SWEET_POTATO_BUCKET = new PotatoItem("sweet_potato_bucket");
+            SWEET_EMPTY_BUCKET = new SweetFoodBucket("sweet_bucket_empty", 5, 0.3f);
+            SWEET_LAVA_BUCKET = new SweetBucket("sweet_bucket_lava", Blocks.FLOWING_LAVA);
+            SWEET_WATER_BUCKET = new SweetBucket("sweet_bucket_water", Blocks.FLOWING_WATER);
+            SWEET_MILK_BUCKET = new SweetBucket("sweet_bucket_milk");
+        }
 
         // Potato other thing
         POTATO_KNIFE = new PotatoKnife("potato_knife");
         POTATO_MANA_KNIFE = new PotatoManaKnife("potato_mana_knife");
-        LAVA_HOE = new LavaHoe("lava_hoe");
+        if (ConfigHandler.LAVA_POTATO) {
+            LAVA_HOE = new LavaHoe("lava_hoe");
+        }
         ARMOR_SWAP = new ArmorSwap("armor_swap");
         INVENTORY_SWAP = new InventorySwap("inventory_swap");
         HEART_CONTAINER = new HeartContainer("heart_container");
@@ -150,8 +182,10 @@ public class PotatoItems {
         };
 
         // Potato Potions
-        SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", Element.FIRE);
-        SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", Element.LIFE);
+        if (ConfigHandler.SPLASH_MANA) {
+            SPLASH_MANA_FIRE = new SplashManaPotion("splash_mana_fire", Element.FIRE);
+            SPLASH_MANA_LIFE = new SplashManaPotion("splash_mana_life", Element.LIFE);
+        }
 
         // Upgrades
         UPGRADE_BOOSTER = new PotatoItem("upgrade_booster");
@@ -159,23 +193,23 @@ public class PotatoItems {
 
         // This is kinda complicated, but i have to put the food block here to access the item
         // since they are extend ItemFood not ItemBlock so i can't get like Item#getItemFromBlock
-        PotatoFoodBlock cookedDirt = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND);
-        PotatoFoodBlock bakedPotatoPlanks = new PotatoFoodBlock("baked_potato_planks", BlockType.WOOD);
-        PotatoFoodBlock bakedPotatoBlock = new PotatoFoodBlock("baked_potato_block", BlockType.POTATO);
+        if (ConfigHandler.COOKED_DIRT) {
+            PotatoFoodBlock cookedDirt = new PotatoFoodBlock("cooked_dirt", BlockType.GROUND);
+            COOKED_DIRT = new PotatoFoodItemBlock(cookedDirt, 3, 0.2f);
+            cookedDirt.setDroppedItem(COOKED_DIRT);
+        }
+        if (ConfigHandler.POTATO_PLANKS && ConfigHandler.COOKED_POTATO_VARIANT) {
+            PotatoFoodBlock bakedPotatoPlanks = new PotatoFoodBlock("baked_potato_planks", BlockType.WOOD);
+            BAKED_POTATO_PLANKS = new PotatoFoodItemBlock(bakedPotatoPlanks, 5, 0.5f);
+            bakedPotatoPlanks.setDroppedItem(BAKED_POTATO_PLANKS);
+        }
+        if (ConfigHandler.COOKED_POTATO_VARIANT) {
+            PotatoFoodBlock bakedPotatoBlock = new PotatoFoodBlock("baked_potato_block", BlockType.POTATO);
+            BAKED_POTATO_BLOCK = new PotatoFoodItemBlock(bakedPotatoBlock, 10, 0.8f);
+            bakedPotatoBlock.setDroppedItem(BAKED_POTATO_BLOCK);
+        }
 
-        COOKED_DIRT = new PotatoFoodItemBlock(cookedDirt, 3, 0.2f);
-        BAKED_POTATO_PLANKS = new PotatoFoodItemBlock(bakedPotatoPlanks, 5, 0.5f);
-        BAKED_POTATO_BLOCK = new PotatoFoodItemBlock(bakedPotatoBlock, 10, 0.8f);
-
-        cookedDirt.setDroppedItem(COOKED_DIRT);
-        bakedPotatoPlanks.setDroppedItem(BAKED_POTATO_PLANKS);
-        bakedPotatoBlock.setDroppedItem(BAKED_POTATO_BLOCK);
-
-        // Configuration Definition
-        PotatoFoodBucket extraHotPotato = (PotatoFoodBucket) HOT_POTATO;
-        PotatoFoodBucket lavaPotato = (PotatoFoodBucket) LAVA_POTATO;
-        PotatoFoodBucket waterPotato = (PotatoFoodBucket) WATER_POTATO;
-
+        // Effects Definition
         FoodEffects hotPotatoEffects = FoodEffects.combine(FoodEffects.poisonPlayer, FoodEffects.burnPlayer);
         FoodEffects extraHotPotatoEffects = FoodEffects.combine(hotPotatoEffects, FoodEffects.confusePlayer);
         FoodEffects extremeHotPotatoEffects = FoodEffects.combine(extraHotPotatoEffects, FoodEffects.explodePlayer);
@@ -189,10 +223,6 @@ public class PotatoItems {
                 FoodEffects.strengthenPlayer, FoodEffects.burnPlayer, FoodEffects.speedPlayer);
 
         // Configuration
-        extraHotPotato.setSoundEvent(SoundEvents.ENTITY_BLAZE_SHOOT).setBurnTime(1600);
-        lavaPotato.setSoundEvent(SoundEvents.ITEM_BUCKET_EMPTY_LAVA).setBurnTime(6400).setMaxStackSize(16);
-        waterPotato.setSoundEvent(SoundEvents.ITEM_BUCKET_EMPTY).setMaxStackSize(16);
-
         addFoodEffects(HOT_POTATO, hotPotatoEffects);
         addFoodEffects(HOT_POTATO, extraHotPotatoEffects);
         addFoodEffects(LAVA_POTATO, lavaPotatoEffects);

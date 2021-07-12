@@ -1,6 +1,5 @@
 package aldinh777.potatoheadshot.content.blocks;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.util.BlockType;
 import net.minecraft.block.state.IBlockState;
@@ -22,25 +21,7 @@ public class PotatoFoodBlock extends PotatoBlock {
 
     @Override
     protected void init(String name) {
-        switch (name) {
-            case "cooked_dirt":
-                if (ConfigHandler.COOKED_DIRT) {
-                    PotatoBlocks.LISTS.add(this);
-                }
-                break;
-            case "baked_potato_planks":
-                if (ConfigHandler.POTATO_PLANKS && ConfigHandler.COOKED_POTATO_VARIANT) {
-                    PotatoBlocks.LISTS.add(this);
-                }
-                break;
-            case "baked_potato_block":
-                if (ConfigHandler.COOKED_POTATO_VARIANT) {
-                    PotatoBlocks.LISTS.add(this);
-                }
-                break;
-            default:
-                PotatoBlocks.LISTS.add(this);
-        }
+        PotatoBlocks.LISTS.add(this);
     }
 
     @Nonnull

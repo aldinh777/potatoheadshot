@@ -74,7 +74,7 @@ public class EntityManaPotion extends EntityPotion {
                         }
 
                     } else if (state.getBlock() == Blocks.GRASS) {
-                        if (ConfigHandler.SPLASH_FIRE_COOK_GRASS) {
+                        if (ConfigHandler.SPLASH_FIRE_COOK_GRASS && ConfigHandler.COOKED_DIRT) {
                             PotatoFoodItemBlock cookedDirt = (PotatoFoodItemBlock) PotatoItems.COOKED_DIRT;
                             world.setBlockState(pos, cookedDirt.getBlock().getDefaultState());
                         }

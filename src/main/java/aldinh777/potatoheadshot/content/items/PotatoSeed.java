@@ -23,25 +23,7 @@ public class PotatoSeed extends PotatoItem {
         super(name);
         this.crops = crops;
 
-        switch (name) {
-            case "lava_potato_seed":
-                if (ConfigHandler.LAVA_POTATO) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "water_potato_seed":
-                if (ConfigHandler.WATER_POTATO) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            case "ice_potato_seed":
-                if (ConfigHandler.ICE_POTATO) {
-                    PotatoItems.LISTS.add(this);
-                }
-                break;
-            default:
-                PotatoItems.LISTS.add(this);
-        }
+        PotatoItems.LISTS.add(this);
     }
 
     @Nonnull
