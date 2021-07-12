@@ -54,6 +54,8 @@ item.lava_hoe.name=Lava Hoe
 item.armor_swap.name=Armor Swap
 item.inventory_swap.name=Inventory Swap
 item.heart_container.name=Heart Container
+item.random_placer.name=Random Placer
+item.switching_card.name=Switching Card
 
 # Splash Mana
 item.splash_mana_fire.name=Splash Potion of Fire Magic

@@ -59,6 +59,8 @@ public class PotatoItems {
     public static Item ARMOR_SWAP;
     public static Item INVENTORY_SWAP;
     public static Item HEART_CONTAINER;
+    public static Item RANDOM_PLACER;
+    public static Item SWITCHING_CARD;
     public static Item SWEET_POTATO_BUCKET;
     public static Item SWEET_EMPTY_BUCKET;
     public static Item SWEET_LAVA_BUCKET;
@@ -173,6 +175,8 @@ public class PotatoItems {
         ARMOR_SWAP = new ArmorSwap("armor_swap");
         INVENTORY_SWAP = new InventorySwap("inventory_swap");
         HEART_CONTAINER = new HeartContainer("heart_container");
+        RANDOM_PLACER = new RandomPlacer("random_placer");
+        SWITCHING_CARD = new PotatoItem("switching_card");
         CARBONATED_COAL = new PotatoItem("carbonated_coal", 102400);
         ULTIMATE_BROKEN_FUEL = new PotatoItem("ultimate_broken_fuel", 819200) {
             @Override
