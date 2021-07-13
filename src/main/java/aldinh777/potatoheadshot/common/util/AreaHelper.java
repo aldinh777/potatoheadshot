@@ -6,6 +6,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.vecmath.Vector3d;
 import java.util.List;
 import java.util.function.*;
 
@@ -37,7 +38,7 @@ public interface AreaHelper {
         getPosByRange(pos, range, (blockPos -> {
             IBlockState state = world.getBlockState(blockPos);
             stateBiConsumer.accept(blockPos, state);
-        }), stopCondition, (blockPos) -> isInEdge(blockPos.getX(), blockPos.getY(), blockPos.getZ(), range));
+        }), stopCondition, (blockPos) -> isInEdge((int)blockPos.getX(), (int)blockPos.getY(), (int)blockPos.getZ(), range));
     }
 
     static void getSurroundingState(World world, BlockPos pos, BiConsumer<BlockPos, IBlockState> stateBiConsumer) {
@@ -47,14 +48,14 @@ public interface AreaHelper {
         }), () -> false, (blockPos) -> false);
     }
 
-    static void getPosByRange(BlockPos pos, int range, Consumer<BlockPos> stateConsumer, BooleanSupplier stopCondition, Function<BlockPos, Boolean> skipCondition) {
+    static void getPosByRange(BlockPos pos, int range, Consumer<BlockPos> stateConsumer, BooleanSupplier stopCondition, Function<Vector3d, Boolean> skipCondition) {
         for (int x = -range; x <= range; x++) {
             for (int y = -range; y <= range; y++) {
                 for (int z = -range; z <= range; z++) {
                     if (stopCondition.getAsBoolean()) {
                         return;
                     }
-                    if (skipCondition.apply(pos.add(x, y, z))) {
+                    if (skipCondition.apply(new Vector3d(x, y, z))) {
                         continue;
                     }
                     stateConsumer.accept(pos.add(x, y, z));
