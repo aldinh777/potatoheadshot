@@ -1,15 +1,15 @@
 package aldinh777.potatoheadshot.common.handler;
 
 import aldinh777.potatoheadshot.PotatoHeadshot;
-import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
-import aldinh777.potatoheadshot.content.tileentities.TileEntityCorrupted;
-import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
-import aldinh777.potatoheadshot.content.capability.CapabilityMana;
-import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
-import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import aldinh777.potatoheadshot.common.compat.OreDictionaryCompat;
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
+import aldinh777.potatoheadshot.content.capability.CapabilityMana;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityCorrupted;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityDrier;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityEnergyTransfer;
+import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -37,6 +37,7 @@ public class RegistryHandler {
         PotatoBlocks.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(PotatoHeadshot.INSTANCE, new GuiHandler());
+
         CapabilityMana.register();
         CapabilityBlood.register();
     }

@@ -26,10 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -203,56 +200,6 @@ public class PocketCauldron extends PotatoItem {
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new PocketCapability(stack);
-    }
-
-    @Nullable
-    @Override
-    public NBTTagCompound getNBTShareTag(@Nonnull ItemStack stack) {
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-            IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
-            NBTTagCompound compound = stack.getTagCompound();
-            NBTTagCompound manaCompound = new NBTTagCompound();
-
-            if (compound == null) {
-                compound = new NBTTagCompound();
-            }
-
-            if (inventory instanceof ItemStackHandler) {
-                compound.setTag("Inventory", ((ItemStackHandler) inventory).serializeNBT());
-            }
-
-            if (manaStorage instanceof PotatoManaStorage) {
-                ((PotatoManaStorage) manaStorage).writeToNBT(manaCompound);
-                compound.setTag("Mana", manaCompound);
-            }
-
-            return compound;
-        }
-
-        return stack.getTagCompound();
-    }
-
-    @Override
-    public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound compound) {
-        stack.setTagCompound(compound);
-        if (compound != null) {
-            if (compound.hasKey("Inventory")) {
-                IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-
-                if (inventory instanceof ItemStackHandler) {
-                    ((ItemStackHandler) inventory).deserializeNBT(compound.getCompoundTag("Inventory"));
-                }
-            }
-
-            if (compound.hasKey("Mana")) {
-                IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
-
-                if (manaStorage instanceof PotatoManaStorage) {
-                    ((PotatoManaStorage) manaStorage).readFromNBT(compound.getCompoundTag("Mana"));
-                }
-            }
-        }
     }
 
     public static ItemStack findPocketCauldron(EntityPlayer player) {
