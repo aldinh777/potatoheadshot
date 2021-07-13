@@ -46,7 +46,10 @@ public class Lokbomb extends PotatoCrops {
     public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         super.updateTick(worldIn, pos, state, rand);
         if (getAge(state) >= getMaxAge()) {
-            worldIn.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 8, true);
+            int random10 = (int)(Math.random() * 10);
+            if (random10 == 0) {
+                worldIn.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 8, true);
+            }
         }
     }
 
