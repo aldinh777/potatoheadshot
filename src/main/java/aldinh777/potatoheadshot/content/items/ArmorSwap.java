@@ -3,13 +3,13 @@ package aldinh777.potatoheadshot.content.items;
 import aldinh777.potatoheadshot.content.capability.item.SwapArmorCapability;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -46,20 +46,34 @@ public class ArmorSwap extends PotatoItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote) {
-            IItemHandler itemHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-            if (itemHandler instanceof ItemStackHandler) {
-                ItemStackHandler stackHandler = (ItemStackHandler) itemHandler;
-                for (int i = 0; i < 4; i++) {
-                    ItemStack temp = stackHandler.getStackInSlot(i);
-                    stackHandler.setStackInSlot(i, playerIn.inventory.armorInventory.get(i));
-                    playerIn.inventory.armorInventory.set(i, temp);
-                }
-                return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+
+        IItemHandler itemHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+        if (itemHandler instanceof ItemStackHandler) {
+            ItemStackHandler stackHandler = (ItemStackHandler) itemHandler;
+            for (int i = 0; i < 4; i++) {
+                ItemStack armor = stackHandler.getStackInSlot(i);
+                stackHandler.setStackInSlot(i, playerIn.inventory.armorInventory.get(i));
+                playerIn.inventory.armorInventory.set(i, armor);
+                playEquipSound(playerIn, armor);
             }
         }
-        playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0f, 1.0f);
+
         return ActionResult.newResult(EnumActionResult.PASS, stack);
+    }
+
+    private void playEquipSound(EntityPlayer player, ItemStack stack) {
+        if (!stack.isEmpty()) {
+            SoundEvent soundevent = SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
+            Item item = stack.getItem();
+
+            if (item instanceof ItemArmor) {
+                soundevent = ((ItemArmor)item).getArmorMaterial().getSoundEvent();
+            } else if (item == Items.ELYTRA) {
+                soundevent = SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA;
+            }
+
+            player.playSound(soundevent, 1.0F, 1.0F);
+        }
     }
 
     @Nullable
