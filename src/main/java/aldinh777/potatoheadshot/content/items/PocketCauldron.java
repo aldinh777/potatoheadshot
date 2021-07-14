@@ -6,9 +6,7 @@ import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.recipes.category.IManaRecipes;
 import aldinh777.potatoheadshot.common.util.Constants;
-import aldinh777.potatoheadshot.content.capability.CapabilityMana;
-import aldinh777.potatoheadshot.content.capability.IManaStorage;
-import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
+import aldinh777.potatoheadshot.content.capability.*;
 import aldinh777.potatoheadshot.content.capability.item.PocketCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
 import aldinh777.potatoheadshot.content.tileentities.TileEntityManaCauldron;
@@ -27,6 +25,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -200,6 +199,53 @@ public class PocketCauldron extends PotatoItem {
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new PocketCapability(stack);
+    }
+
+    @Nullable
+    @Override
+    public NBTTagCompound getNBTShareTag(@Nonnull ItemStack stack) {
+        NBTTagCompound compound = stack.getTagCompound();
+
+        if (compound == null) {
+            compound = new NBTTagCompound();
+        }
+
+        if (stack.hasCapability(CapabilityMana.MANA, EnumFacing.UP)) {
+            IManaStorage manaStorage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+            NBTTagCompound manaCompound = new NBTTagCompound();
+
+            if (manaStorage instanceof PotatoManaStorage) {
+                ((PotatoManaStorage) manaStorage).writeToNBT(manaCompound);
+                compound.setTag("Mana", manaCompound);
+            }
+        }
+        if (stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
+            IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+            if (handler instanceof ItemStackHandler) {
+                compound.setTag("Inventory", ((ItemStackHandler) handler).serializeNBT());
+            }
+        }
+
+        return compound;
+    }
+
+    @Override
+    public void readNBTShareTag(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+        super.readNBTShareTag(stack, nbt);
+        if (nbt != null) {
+            if (stack.hasCapability(CapabilityMana.MANA, EnumFacing.UP)) {
+                IManaStorage storage = stack.getCapability(CapabilityMana.MANA, EnumFacing.UP);
+                if (storage instanceof PotatoManaStorage) {
+                    ((PotatoManaStorage) storage).readFromNBT(nbt.getCompoundTag("Mana"));
+                }
+            }
+            if (stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
+                IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+                if (handler instanceof ItemStackHandler) {
+                    ((ItemStackHandler) handler).deserializeNBT(nbt.getCompoundTag("Inventory"));
+                }
+            }
+        }
     }
 
     public static ItemStack findPocketCauldron(EntityPlayer player) {

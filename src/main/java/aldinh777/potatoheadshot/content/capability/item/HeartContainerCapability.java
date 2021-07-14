@@ -35,18 +35,13 @@ public class HeartContainerCapability implements ICapabilitySerializable<NBTBase
 
     @Override
     public NBTBase serializeNBT() {
-        NBTTagCompound stackNBT = this.stack.getTagCompound();
-        if (stackNBT == null) {
-            stackNBT = new NBTTagCompound();
-        }
-        stack.setTagCompound(stackNBT);
+        NBTTagCompound compound = new NBTTagCompound();
 
-        NBTTagCompound nbt = new NBTTagCompound();
         NBTBase heartValue = CapabilityBlood.BLOOD.writeNBT(heartContainer, EnumFacing.UP);
 
-        nbt.setTag("Heart", Objects.requireNonNull(heartValue));
+        compound.setTag("Heart", Objects.requireNonNull(heartValue));
 
-        return nbt;
+        return compound;
     }
 
     @Override

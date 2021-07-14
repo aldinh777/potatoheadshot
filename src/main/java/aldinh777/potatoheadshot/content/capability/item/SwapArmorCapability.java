@@ -11,7 +11,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 public class SwapArmorCapability implements ICapabilitySerializable<NBTBase> {
 
@@ -35,20 +34,15 @@ public class SwapArmorCapability implements ICapabilitySerializable<NBTBase> {
 
     @Override
     public NBTBase serializeNBT() {
-        NBTTagCompound stackNBT = this.stack.getTagCompound();
-        if (stackNBT == null) {
-            stackNBT = new NBTTagCompound();
+        NBTTagCompound compound = new NBTTagCompound();
+
+        NBTBase nbt = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(stackHandler, EnumFacing.UP);
+
+        if (nbt != null) {
+            compound.setTag("Inventory", nbt);
         }
 
-        stackNBT.setTag("Inventory", stackHandler.serializeNBT());
-        stack.setTagCompound(stackNBT);
-
-        NBTTagCompound nbt = new NBTTagCompound();
-        NBTBase inventoryValue = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(stackHandler, EnumFacing.UP);
-
-        nbt.setTag("Inventory", Objects.requireNonNull(inventoryValue));
-
-        return nbt;
+        return compound;
     }
 
     @Override

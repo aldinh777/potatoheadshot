@@ -45,21 +45,15 @@ public class PocketCapability implements ICapabilitySerializable<NBTBase> {
 
         @Override
         public NBTBase serializeNBT() {
-            NBTTagCompound stackNBT = this.stack.getTagCompound();
-            if (stackNBT == null) {
-                stackNBT = new NBTTagCompound();
-            }
-            stackNBT.setTag("Inventory", inventory.serializeNBT());
-            stack.setTagCompound(stackNBT);
+            NBTTagCompound compound = new NBTTagCompound();
 
-            NBTTagCompound nbt = new NBTTagCompound();
             NBTBase inventoryValue = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(inventory, EnumFacing.UP);
             NBTBase manaValue = CapabilityMana.MANA.writeNBT(storage, EnumFacing.UP);
 
-            nbt.setTag("Inventory", Objects.requireNonNull(inventoryValue));
-            nbt.setTag("Mana", Objects.requireNonNull(manaValue));
+            compound.setTag("Inventory", Objects.requireNonNull(inventoryValue));
+            compound.setTag("Mana", Objects.requireNonNull(manaValue));
 
-            return nbt;
+            return compound;
         }
 
         @Override

@@ -1,6 +1,8 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.content.capability.*;
+import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
+import aldinh777.potatoheadshot.content.capability.IBloodStorage;
+import aldinh777.potatoheadshot.content.capability.PotatoBloodStorage;
 import aldinh777.potatoheadshot.content.capability.item.HeartContainerCapability;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,8 +11,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -74,34 +74,31 @@ public class HeartContainer extends PotatoItem {
     @Nullable
     @Override
     public NBTTagCompound getNBTShareTag(@Nonnull ItemStack stack) {
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            IBloodStorage bloodStorage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
-            NBTTagCompound compound = stack.getTagCompound();
-            NBTTagCompound bloodCompound = new NBTTagCompound();
+        NBTTagCompound compound = stack.getTagCompound();
 
-            if (compound == null) {
-                compound = new NBTTagCompound();
-            }
-
-            if (bloodStorage instanceof PotatoBloodStorage) {
-                ((PotatoBloodStorage) bloodStorage).writeToNBT(bloodCompound);
-                compound.setTag("Heart", bloodCompound);
-            }
-
-            return compound;
+        if (compound == null) {
+            compound = new NBTTagCompound();
         }
 
-        return stack.getTagCompound();
+        IBloodStorage bloodStorage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
+        NBTTagCompound bloodCompound = new NBTTagCompound();
+
+        if (bloodStorage instanceof PotatoBloodStorage) {
+            ((PotatoBloodStorage) bloodStorage).writeToNBT(bloodCompound);
+            compound.setTag("Heart", bloodCompound);
+        }
+
+        return compound;
     }
 
     @Override
-    public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound compound) {
-        stack.setTagCompound(compound);
-        if (compound != null) {
-            if (compound.hasKey("Heart")) {
-                IBloodStorage bloodStorage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
-                if (bloodStorage instanceof PotatoBloodStorage) {
-                    ((PotatoBloodStorage) bloodStorage).readFromNBT(compound);
+    public void readNBTShareTag(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+        super.readNBTShareTag(stack, nbt);
+        if (nbt != null) {
+            if (stack.hasCapability(CapabilityBlood.BLOOD, EnumFacing.UP)) {
+                IBloodStorage storage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
+                if (storage instanceof PotatoBloodStorage) {
+                    ((PotatoBloodStorage) storage).readFromNBT(nbt.getCompoundTag("Heart"));
                 }
             }
         }

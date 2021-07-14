@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -87,5 +88,37 @@ public class RandomPlacer extends PotatoItem {
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new RandomPlacerCapability(stack);
+    }
+
+    @Nullable
+    @Override
+    public NBTTagCompound getNBTShareTag(@Nonnull ItemStack stack) {
+        NBTTagCompound compound = stack.getTagCompound();
+
+        if (compound == null) {
+            compound = new NBTTagCompound();
+        }
+
+        if (stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
+            IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+            if (handler instanceof ItemStackHandler) {
+                compound.setTag("Inventory", ((ItemStackHandler) handler).serializeNBT());
+            }
+        }
+
+        return compound;
+    }
+
+    @Override
+    public void readNBTShareTag(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
+        super.readNBTShareTag(stack, nbt);
+        if (nbt != null) {
+            if (stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP)) {
+                IItemHandler handler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+                if (handler instanceof ItemStackHandler) {
+                    ((ItemStackHandler) handler).deserializeNBT(nbt.getCompoundTag("Inventory"));
+                }
+            }
+        }
     }
 }
