@@ -50,18 +50,20 @@ public class HeartContainer extends PotatoItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote) {
-            IBloodStorage bloodStorage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
-            if (bloodStorage instanceof PotatoBloodStorage) {
-                if (playerIn.getHealth() > 1 && bloodStorage.getBloodQuantity() < bloodStorage.getMaxQuantity()) {
-                    float totalHeart = playerIn.getHealth() - 1;
-                    float extractedHeart = Math.min(totalHeart, bloodStorage.getMaxQuantity() - bloodStorage.getBloodQuantity());
-                    playerIn.attackEntityFrom(new DamageSource("heart_extraction"), extractedHeart);
-                    bloodStorage.increaseBlood(extractedHeart);
-                    return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-                }
+
+        IBloodStorage bloodStorage = stack.getCapability(CapabilityBlood.BLOOD, EnumFacing.UP);
+
+        if (bloodStorage instanceof PotatoBloodStorage) {
+            if (playerIn.getHealth() > 1 && bloodStorage.getBloodQuantity() < bloodStorage.getMaxQuantity()) {
+                float totalHeart = playerIn.getHealth() - 1;
+                float extractedHeart = Math.min(totalHeart, bloodStorage.getMaxQuantity() - bloodStorage.getBloodQuantity());
+                playerIn.attackEntityFrom(new DamageSource("heart_extraction"), extractedHeart);
+                bloodStorage.increaseBlood(extractedHeart);
+                playerIn.getCooldownTracker().setCooldown(this, 10);
+                return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
             }
         }
+
         return ActionResult.newResult(EnumActionResult.PASS, stack);
     }
 
