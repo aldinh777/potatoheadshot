@@ -58,10 +58,10 @@ public class PotatoBlocks {
         CORRUPTED_BLOCK = new CorruptedBlock("corrupted_block");
 
         // Utility Block
-        MAGIC_SAPLING = new MagicSapling("magic_sapling");
         POTATO_DRIER = new BlockDrier("potato_drier", BlockType.STONE);
         ENERGY_TRANSFER = new EnergyTransfer("energy_transfer", BlockType.GLASS);
         MANA_CAULDRON = new ManaCauldron("mana_cauldron");
+        MAGIC_SAPLING = new MagicSapling("magic_sapling");
 
         // Flower
         FLAMING_FLOWER = new FlamingFlower("flaming_flower");

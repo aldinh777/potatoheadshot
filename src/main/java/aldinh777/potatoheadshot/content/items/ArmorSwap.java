@@ -33,7 +33,6 @@ public class ArmorSwap extends PotatoItem {
 
         IItemHandler itemHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
         if (itemHandler instanceof ItemStackHandler) {
-            tooltip.add("");
             for (int i = 3; i >= 0; i--) {
                 ItemStack itemStack = itemHandler.getStackInSlot(i);
                 String display = itemStack.isEmpty() ? "EMPTY" : itemStack.getDisplayName();
