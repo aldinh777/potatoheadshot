@@ -8,10 +8,12 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SwitchingCard extends PotatoItem {
 
-    public EntityThrowableCard card;
+    public static Map<ItemStack, EntityThrowableCard> cards = new HashMap<>();
 
     public SwitchingCard(String name) {
         super(name);
@@ -22,15 +24,18 @@ public class SwitchingCard extends PotatoItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
+        EntityThrowableCard card = cards.get(itemstack);
 
         if (playerIn.isSneaking()) {
-            card = null;
-        } else {
-            worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_ENDERPEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            if (card != null && !card.isDead) {
+                card.setDead();
+            }
 
-            EntityThrowableCard throwableCard = new EntityThrowableCard(worldIn, playerIn);
+        } else {
+            EntityThrowableCard throwableCard;
 
             if (card != null && !card.isDead) {
+                throwableCard = new EntityThrowableCard(worldIn, playerIn, itemstack, true);
                 throwableCard.setVelocity(0, 0, 0);
                 throwableCard.setNoGravity(true);
 
@@ -41,15 +46,17 @@ public class SwitchingCard extends PotatoItem {
                     card.setDead();
                 }
 
-                playerIn.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
+                worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
             } else {
-                throwableCard.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+                throwableCard = new EntityThrowableCard(worldIn, playerIn, itemstack);
+                throwableCard.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 3.0F, 1.0F);
+                worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_ENDERPEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
             }
 
             if (!worldIn.isRemote) {
                 worldIn.spawnEntity(throwableCard);
-                card = throwableCard;
+                cards.put(itemstack, throwableCard);
             }
         }
 
