@@ -6,7 +6,9 @@ import aldinh777.potatoheadshot.content.blocks.MagicBlock;
 import aldinh777.potatoheadshot.content.capability.CapabilityBlood;
 import aldinh777.potatoheadshot.content.capability.IBloodStorage;
 import aldinh777.potatoheadshot.content.capability.PotatoBloodStorage;
+import aldinh777.potatoheadshot.content.entity.EntityFloatingItem;
 import aldinh777.potatoheadshot.content.items.HeartContainer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -14,8 +16,10 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,7 +55,7 @@ public class InteractionHandler {
                     float z = target.getPosition().getZ() + 0.5f;
                     if (!world.isRemote) {
                         ItemStack lifeStack = new ItemStack(PotatoItems.ESSENCE_LIFE);
-                        EntityItem lifeEssence = new EntityItem(world, x, y, z, lifeStack);
+                        EntityItem lifeEssence = new EntityFloatingItem(world, x, y, z, lifeStack);
                         MagicBlock.floatEntity(lifeEssence, 4_000);
                         world.spawnEntity(lifeEssence);
                         world.removeEntity(target);
@@ -87,6 +91,26 @@ public class InteractionHandler {
                             event.setCanceled(true);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEntityUpdate(EntityEvent event) {
+        Entity entity = event.getEntity();
+        if (entity != null) {
+            NBTTagCompound compound = entity.getEntityData();
+            if (compound.hasKey("GravityTick")) {
+                int gravityTick = compound.getInteger("GravityTick");
+                if (gravityTick > 0) {
+                    if (!entity.hasNoGravity()) {
+                        entity.setNoGravity(true);
+                    }
+                    compound.setInteger("GravityTick", --gravityTick);
+                } else {
+                    entity.setNoGravity(false);
+                    compound.removeTag("GravityTick");
                 }
             }
         }

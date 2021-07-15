@@ -3,6 +3,8 @@ package aldinh777.potatoheadshot.content.items;
 import aldinh777.potatoheadshot.content.blocks.MagicBlock;
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.content.entity.EntityFloatingItem;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -57,7 +59,7 @@ public class PotatoManaKnife extends PotatoKnife {
                     float y = blockpos.getY() + 0.5f;
                     float z = blockpos.getZ() + 0.5f;
 
-                    if (iblockstate.getBlock() == Blocks.GRASS) {
+                    if (iblockstate.getBlock() instanceof BlockLeaves) {
                         if (!playerIn.capabilities.isCreativeMode) {
                             itemstack.damageItem(1, playerIn);
                         }
@@ -65,7 +67,7 @@ public class PotatoManaKnife extends PotatoKnife {
                         if (!worldIn.isRemote) {
                             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                             ItemStack natureStack = new ItemStack(PotatoItems.ESSENCE_NATURE);
-                            EntityItem natureEssence = new EntityItem(worldIn, x, y, z, natureStack);
+                            EntityItem natureEssence = new EntityFloatingItem(worldIn, x, y, z, natureStack);
                             MagicBlock.floatEntity(natureEssence, 4_000);
                             worldIn.spawnEntity(natureEssence);
                             itemstack.damageItem(1, playerIn);
@@ -81,7 +83,7 @@ public class PotatoManaKnife extends PotatoKnife {
                         if (!worldIn.isRemote) {
                             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                             ItemStack manaStack = new ItemStack(PotatoItems.ESSENCE_MANA);
-                            EntityItem pureEssence = new EntityItem(worldIn, x, y, z, manaStack);
+                            EntityItem pureEssence = new EntityFloatingItem(worldIn, x, y, z, manaStack);
                             MagicBlock.floatEntity(pureEssence, 4_000);
                             worldIn.spawnEntity(pureEssence);
                             itemstack.damageItem(1, playerIn);
@@ -97,7 +99,7 @@ public class PotatoManaKnife extends PotatoKnife {
                         if (!worldIn.isRemote) {
                             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
                             ItemStack fireStack = new ItemStack(PotatoItems.ESSENCE_FIRE);
-                            EntityItem fireEssence = new EntityItem(worldIn, x, y, z, fireStack);
+                            EntityItem fireEssence = new EntityFloatingItem(worldIn, x, y, z, fireStack);
                             MagicBlock.floatEntity(fireEssence, 4_000);
                             worldIn.spawnEntity(fireEssence);
                         }

@@ -1,11 +1,12 @@
 package aldinh777.potatoheadshot.content.blocks;
 
 import aldinh777.potatoheadshot.common.util.BlockType;
+import aldinh777.potatoheadshot.content.entity.EntityFloatingItem;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -17,7 +18,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.*;
 import java.util.List;
 
 public class MagicBlock extends PotatoBlock {
@@ -30,13 +30,8 @@ public class MagicBlock extends PotatoBlock {
     @Override
     public void onEntityCollidedWithBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Entity entityIn) {
         if (!worldIn.isRemote) {
-            if (entityIn.hasNoGravity()) {
-                if (entityIn instanceof EntityLivingBase) {
-                    floatEntity(entityIn, 4_000);
-                }
-            } else {
-                floatEntity(entityIn, 4_000);
-            }
+            floatEntity(entityIn, 4_000);
+            entityIn.fallDistance = 0.0F;
         }
     }
 
@@ -82,10 +77,8 @@ public class MagicBlock extends PotatoBlock {
             List<ItemStack> drops = getDrops(worldIn, pos, state, fortune);
             chance = net.minecraftforge.event.ForgeEventFactory.fireBlockHarvesting(drops, worldIn, pos, state, fortune, chance, false, harvesters.get());
 
-            for (ItemStack drop : drops)
-            {
-                if (worldIn.rand.nextFloat() <= chance)
-                {
+            for (ItemStack drop : drops) {
+                if (worldIn.rand.nextFloat() <= chance) {
                     spawnAsEntity(worldIn, pos, drop);
                 }
             }
@@ -101,22 +94,17 @@ public class MagicBlock extends PotatoBlock {
             double d0 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
             double d1 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
             double d2 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-            EntityItem entityitem = new EntityItem(worldIn, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, stack);
-            entityitem.setDefaultPickupDelay();
+            EntityItem entityitem = new EntityFloatingItem(worldIn, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, stack);
             floatEntity(entityitem, 8_000);
             worldIn.spawnEntity(entityitem);
         }
     }
 
     public static void floatEntity(Entity entityIn, int milliseconds) {
-        entityIn.setNoGravity(true);
-        Timer timer = new Timer(0, (e -> {
-            if (entityIn.hasNoGravity()) {
-                entityIn.setNoGravity(false);
-            }
-        }));
-        timer.setInitialDelay(milliseconds);
-        timer.setRepeats(false);
-        timer.restart();
+        NBTTagCompound compound = entityIn.getEntityData();
+        int gravityTick = compound.getInteger("GravityTick");
+        if (gravityTick <= 0) {
+            compound.setInteger("GravityTick", milliseconds / 50);
+        }
     }
 }
