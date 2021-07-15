@@ -6,14 +6,12 @@ This mod adds more functionality to vanilla minecraft potato
 
 #### Crops
 
-- Very Sweet Potato
+- Sweet Potato
 - Glowing Potato
-- Void Potato
-- Sticky Potato
-- Red Potato
 - Lava Potato
 - Water Potato
 - Ice Potato
+- Lokbomb
 
 #### Foods
 
@@ -24,10 +22,7 @@ This mod adds more functionality to vanilla minecraft potato
 - Frozen Potato
 - Fried Fries
 - Hot Potato
-- Extra Hot Potato
-- Extreme Hot Potato
 - Wet Potato
-- Super Wet Potato
 
 #### Food Blocks
 
@@ -44,21 +39,6 @@ Blocks that you can eat
 #### Potato Drier
 Machine to dry or wet the potato
 
-#### Sweet Potato Generator
-Generate RF by Cooking "Potato" or "Very Sweet Potato"
-
-#### Sweet Freezer
-Freeze water with "Raw Salt" to make ice
-
-#### Sweet Infuser
-Infuse any item with other materials to get another items
-
-#### Sweet Crystal Maker
-Create "Crystal Shard" using "Ice" and "Raw Salt"
-
-#### Sweet Crystal Charger
-Charge crystal with power to create "Ultimate Charged Crystal"
-
 
 
 ## Utility
@@ -67,24 +47,28 @@ Charge crystal with power to create "Ultimate Charged Crystal"
 Bucket that you can eat or drink any liquid inside (even lava)
 
 #### Potato Knife
-Destroy Potato Farm to get Potato Leaves and craft 3 of it for a string
+Cheap version of wooden sword
+
+#### Heart Container
+Store your heart inside, damage taken is redirected into it
+
+#### Switching Card
+Timed teleport like ender pearl, but can be cancelled many times
+
+#### Armor Swap
+Swap armor with just one click
+
+#### Inventory Swap
+Swap entire inventory excluding hotbar
 
 
 
 ## Magical Utility
 
-#### Mana Collector
-Collect Mana around your world.
-
-#### Mana Extractor
-Extract Mana from some item.<br>
-This Machine won't collect mana unless there is a "Mana Flower" on top of it
-
-#### Mana Cauldron
+#### Magical Cauldron
 Storage for the mana
 
-Put it behind "Mana Extractor" to pull mana from the extractor <br>
-Put it behind "Mana Collector" to push mana to the collector
+Drop Glowing Potato Dust to increase mana. Or plant some Glowing Potato near it
 
 Drop item to the cauldron, and it will consume some mana to transform the item dropped
 based on the elements in the cauldron
@@ -94,9 +78,6 @@ Can Transfer Mana and RF wirelessly with range of 8 block
 
 Sneak Right Click to switch mode between extract mana or absorb mana
 
-#### Magical Drier
-Simply Potato Drier but uses mana instead coal
-
 #### Pocket Cauldron
 A portable version of Mana Cauldron
 
@@ -105,12 +86,10 @@ Right click on Mana Cauldron to transfer the mana into Pocket Cauldron
 #### Mana Knife
 Right click on something to transform it into essence
 
-- Grass Block => Nature Essence
-- Any Entity => Life Essence
+- Glowing Potato Block => Pure Essence
+- Leaves Block => Nature Essence
+- Any Animal => Life Essence
 - Lava => Fire Essence
-- Bedrock => Void Essence (Bedrock won't removed)
-
-Consume the knife itself
 
 #### Splash Potion of Mana Fire
 Transform Splash Awkward Potion with Mana Fire
@@ -124,49 +103,47 @@ When thrown, heal entity in its area, also grow any plants around it
 
 
 
-## Magic Rods
-Throw this rod to the Mana Cauldron or use it in Pocket Cauldron to change the element in the cauldron
+## Magic Flower
+Flower that give some effect to it surrounding, random time
 
-#### Mana Rod
+#### Flaming Flower
+Burning anything
+
+#### Mist Flower
+Freeze water, and give slow effect
+
+#### Growing Flower
+Grow things around it
+
+#### Regen Flower
+Give regen to anything near it
+
+
+
+## Magic Essence
+Throw this item to the Mana Cauldron or use it in Pocket Cauldron to change the element in the cauldron
+
+#### Mana Essence
 This will change the element to pure mana
 
-#### Life Rod
-This will change the element to fire mana
+#### Life Essence
+This will change the element to life mana
 
 Cauldron with life mana will transform any item dropped into seed or sapling
 
+Sample :
 - Lava Potato => Lava Potato Seed
 - Water Potato => Water Potato Seed
-- Ice Potato => Ice Potato Seed
 
-#### Nature Rod
+#### Nature Essence
 This will change the element to nature mana
 
 Cauldron with nature mana will transform any plant dropped into it next variant
 
-#### Fire Rod
-This will change the element to nature mana
+#### Fire Essence
+This will change the element to fire mana
 
 Cauldron with fire mana will cook any item dropped into it <br>
 Drop iron hoe to mana fire, and to transform it into "Lava Hoe" which works like a normal hoe but give "Lava Farmland" instead
 
 Lava farmland needs lava instead of water
-
-
-
-## Ultimate Utility
-
-#### Ultimate Broken Fuel
-Works like a coal, but won't consume after use
-
-Note : Not compatible with "Petrified Fuel Generator" in "Industrial Foregoing", 
-more likely there will be many more incompatibility with other mods as well
-
-#### Ultimate Flower
-Better and faster version of "Mana Flower"
-
-#### Ultimate Crystal Charger
-Better version of Sweet Crystal Charger. Won't explode when charging Ultimate Crystal.
-
-#### Ultimate Cauldron
-Better version of Mana Cauldron. Won't make explosion when trowing Ultimate Crystal.
