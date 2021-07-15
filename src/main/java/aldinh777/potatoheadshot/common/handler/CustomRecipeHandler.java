@@ -72,6 +72,7 @@ public class CustomRecipeHandler {
 
             for (PotatoDrierRecipe recipe : defaultRecipes) {
                 PotatoDrierRecipes.INSTANCE.addDryRecipe(recipe.getInput().getItem(), recipe);
+                DRY_RECIPES.add(recipe);
             }
         }
 
@@ -80,6 +81,7 @@ public class CustomRecipeHandler {
 
             for (PotatoDrierRecipe recipe : defaultRecipes) {
                 PotatoDrierRecipes.INSTANCE.addWetRecipe(recipe.getInput().getItem(), recipe);
+                WET_RECIPES.add(recipe);
             }
         }
 

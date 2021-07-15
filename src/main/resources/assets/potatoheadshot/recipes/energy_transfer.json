@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#G#",
+    "G*G",
+    "#G#"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:sweet_potato_ingot"
+    },
+    "*": {
+      "item": "potatoheadshot:glowing_potato_block"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:energy_transfer"
+  }
+}

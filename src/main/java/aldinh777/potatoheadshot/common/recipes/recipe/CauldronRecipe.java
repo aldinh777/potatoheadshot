@@ -1,6 +1,7 @@
 package aldinh777.potatoheadshot.common.recipes.recipe;
 
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
+import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Blocks;
@@ -37,7 +38,17 @@ public class CauldronRecipe {
     public static List<CauldronRecipe> getManaRecipes() {
         List<CauldronRecipe> recipes = Lists.newArrayList();
 
+        Item redFlower = Item.getItemFromBlock(Blocks.RED_FLOWER);
+
         addRecipe(recipes, new ItemStack(PotatoItems.POTATO_KNIFE), new ItemStack(PotatoItems.POTATO_MANA_KNIFE), 200);
+        addRecipe(recipes, createStack(redFlower, 0), new ItemStack(PotatoBlocks.FLAMING_FLOWER), 200);
+        addRecipe(recipes, createStack(redFlower, 1), new ItemStack(PotatoBlocks.MIST_FLOWER), 200);
+        addRecipe(recipes, createStack(redFlower, 2), new ItemStack(PotatoBlocks.REGEN_FLOWER), 200);
+        addRecipe(recipes, createStack(redFlower, 8), new ItemStack(PotatoBlocks.GROWING_FLOWER), 200);
+        if (ConfigHandler.ICE_POTATO) {
+            addRecipe(recipes, new ItemStack(Items.WHEAT_SEEDS), new ItemStack(PotatoItems.ICE_POTATO_SEED), 200);
+        }
+
         return recipes;
     }
 
@@ -54,6 +65,9 @@ public class CauldronRecipe {
         Item endStone = Item.getItemFromBlock(Blocks.END_STONE);
         Item ice = Item.getItemFromBlock(Blocks.ICE);
 
+        if (ConfigHandler.HOT_POTATO) {
+            addRecipe(recipes, new ItemStack(PotatoItems.HOT_POTATO), new ItemStack(PotatoItems.LOKBOMB), 800);
+        }
         if (ConfigHandler.LAVA_POTATO) {
             addRecipe(recipes, new ItemStack(PotatoItems.LAVA_POTATO), new ItemStack(PotatoItems.LAVA_POTATO_SEED), 800);
         }
@@ -75,6 +89,7 @@ public class CauldronRecipe {
         addRecipe(recipes, new ItemStack(mycelium), new ItemStack(Blocks.BROWN_MUSHROOM), 20);
         addRecipe(recipes, new ItemStack(endStone), new ItemStack(Blocks.CHORUS_FLOWER), 20);
         addRecipe(recipes, new ItemStack(ice), new ItemStack(Blocks.SNOW), 20);
+        addRecipe(recipes, new ItemStack(Items.SKULL, 1, 1), new ItemStack(PotatoItems.CORRUPTED_SEED, 64), 20 * 64);
         if (ConfigHandler.SPLASH_MANA) {
             addRecipe(recipes, new ItemStack(Items.GLASS_BOTTLE), new ItemStack(PotatoItems.SPLASH_MANA_LIFE), 800);
         }
@@ -119,8 +134,8 @@ public class CauldronRecipe {
         addRecipe(recipes, new ItemStack(cactus), new ItemStack(Items.REEDS), 5);
         addRecipe(recipes, new ItemStack(Items.REEDS), new ItemStack(cactus), 5);
 
-        addRecipe(recipes, createStack(redFlower, 0), createStack(yellowFlower), 5);
-        addRecipe(recipes, createStack(yellowFlower), createStack(redFlower, 1), 5);
+        addRecipe(recipes, createStack(redFlower, 0), createStack(yellowFlower, 0), 5);
+        addRecipe(recipes, createStack(yellowFlower, 0), createStack(redFlower, 1), 5);
         addRecipe(recipes, createStack(redFlower, 1), createStack(redFlower, 2), 5);
         addRecipe(recipes, createStack(redFlower, 2), createStack(redFlower, 3), 5);
         addRecipe(recipes, createStack(redFlower, 3), createStack(redFlower, 4), 5);
@@ -145,10 +160,6 @@ public class CauldronRecipe {
         addRecipe(recipes, createStack(doublePlant, 5), createStack(doublePlant, 0), 5);
 
         return recipes;
-    }
-
-    private static ItemStack createStack(Item item) {
-        return createStack(item, 0);
     }
 
     private static ItemStack createStack(Item item, int meta) {

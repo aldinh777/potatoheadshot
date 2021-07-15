@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:carbonated_coal"
+    },
+    "*": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:ultimate_broken_fuel"
+  }
+}

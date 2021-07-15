@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#*#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:sweet_potato_dust"
+    },
+    "*": {
+      "item": "potatoheadshot:essence_life"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:heart_container"
+  }
+}

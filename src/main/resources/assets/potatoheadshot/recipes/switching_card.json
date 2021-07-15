@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#*#",
+    "#@#",
+    "#*#"
+  ],
+  "key": {
+    "#": {
+      "item": "potatoheadshot:sweet_potato_ingot"
+    },
+    "*": {
+      "item": "potatoheadshot:glowing_potato_dust"
+    },
+    "@": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "potatoheadshot:switching_card"
+  }
+}
