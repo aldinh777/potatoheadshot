@@ -50,6 +50,14 @@ public class EntityThrowableCard extends EntityEnderPearl {
                 double throwerY = entitylivingbase.posY;
                 double throwerZ = entitylivingbase.posZ;
 
+                if (thrower.isRiding()) {
+                    thrower.dismountRidingEntity();
+                }
+
+                if (result.entityHit.isRiding()) {
+                    result.entityHit.dismountRidingEntity();
+                }
+
                 thrower.setPositionAndUpdate(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ);
                 thrower.fallDistance = 0.0F;
                 world.playSound(null, thrower.posX, thrower.posY, thrower.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));

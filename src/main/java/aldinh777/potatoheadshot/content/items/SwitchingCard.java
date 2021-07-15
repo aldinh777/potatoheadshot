@@ -40,6 +40,9 @@ public class SwitchingCard extends PotatoItem {
                 throwableCard.setNoGravity(true);
 
                 if (!worldIn.isRemote) {
+                    if (playerIn.isRiding()) {
+                        playerIn.dismountRidingEntity();
+                    }
                     playerIn.setPositionAndUpdate(card.posX, card.posY, card.posZ);
                     playerIn.fallDistance = 0.0F;
                     playerIn.attackEntityFrom(DamageSource.FALL, 0);
