@@ -1,23 +1,23 @@
 package aldinh777.potatoheadshot.common.recipes.category;
 
+import aldinh777.potatoheadshot.common.recipes.recipe.CauldronRecipe;
+import aldinh777.potatoheadshot.common.util.Element;
 import net.minecraft.item.ItemStack;
 
 public interface IManaRecipes {
 
-    ItemStack getResult(ItemStack input);
+    CauldronRecipe getResult(ItemStack input);
 
-    int getCost(ItemStack input);
-
-    static IManaRecipes getRecipeById(int id) {
-        switch (id) {
-            case 1:
-                return ManaLifeCauldronRecipes.INSTANCE;
-            case 2:
-                return ManaNatureCauldronRecipes.INSTANCE;
-            case 3:
-                return ManaFireCauldronRecipes.INSTANCE;
+    static IManaRecipes getRecipeByElement(Element element) {
+        switch (element) {
+            case LIFE:
+                return ManaCauldronRecipes.LIFE_RECIPES;
+            case NATURE:
+                return ManaCauldronRecipes.NATURE_RECIPES;
+            case FIRE:
+                return ManaCauldronRecipes.FIRE_RECIPES;
             default:
-                return ManaCauldronRecipes.INSTANCE;
+                return ManaCauldronRecipes.PURE_RECIPES;
         }
     }
 }

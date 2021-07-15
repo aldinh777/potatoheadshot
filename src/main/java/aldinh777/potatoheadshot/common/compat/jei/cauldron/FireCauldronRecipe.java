@@ -1,12 +1,13 @@
 package aldinh777.potatoheadshot.common.compat.jei.cauldron;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
+import aldinh777.potatoheadshot.common.recipes.recipe.CauldronRecipe;
 import com.google.common.collect.Lists;
-import java.util.List;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+
+import java.util.List;
+import java.util.Map;
 
 public class FireCauldronRecipe extends AbstractCauldronRecipe {
 	
@@ -17,17 +18,21 @@ public class FireCauldronRecipe extends AbstractCauldronRecipe {
 	public static List<FireCauldronRecipe> getRecipes() {
 		List<FireCauldronRecipe> jeiRecipes = Lists.newArrayList();
 
-		if (ConfigHandler.LAVA_POTATO) {
-			addRecipe(jeiRecipes, Items.IRON_HOE, new ItemStack(PotatoItems.LAVA_HOE));
+		for (CauldronRecipe recipe : CauldronRecipe.getFireRecipes()) {
+			addRecipe(jeiRecipes, recipe.getInput(), recipe.getOutput());
 		}
-		if (ConfigHandler.SPLASH_MANA) {
-			addRecipe(jeiRecipes, Items.GLASS_BOTTLE, new ItemStack(PotatoItems.SPLASH_MANA_FIRE));
+
+		Map<ItemStack, ItemStack> furnaceRecipes = FurnaceRecipes.instance().getSmeltingList();
+
+		for (ItemStack input : furnaceRecipes.keySet()) {
+			ItemStack output = furnaceRecipes.get(input);
+			addRecipe(jeiRecipes, input, output);
 		}
 
 		return jeiRecipes;
 	}
 	
-	public static void addRecipe(List<FireCauldronRecipe> list, Item input, ItemStack output) {
-		list.add(new FireCauldronRecipe(new ItemStack(input), output));
+	public static void addRecipe(List<FireCauldronRecipe> list, ItemStack input, ItemStack output) {
+		list.add(new FireCauldronRecipe(input, output));
 	}
 }

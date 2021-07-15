@@ -5,7 +5,9 @@ import aldinh777.potatoheadshot.common.compat.botania.BotaniaCompat;
 import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.recipes.category.IManaRecipes;
+import aldinh777.potatoheadshot.common.recipes.recipe.CauldronRecipe;
 import aldinh777.potatoheadshot.common.util.Constants;
+import aldinh777.potatoheadshot.common.util.Element;
 import aldinh777.potatoheadshot.content.capability.*;
 import aldinh777.potatoheadshot.content.capability.item.PocketCapability;
 import aldinh777.potatoheadshot.content.inventory.InventoryPocketCauldron;
@@ -158,20 +160,21 @@ public class PocketCauldron extends PotatoItem {
                     return;
                 }
 
-                IManaRecipes recipes = IManaRecipes.getRecipeById(0);
+                IManaRecipes recipes = IManaRecipes.getRecipeByElement(Element.MANA);
 
                 if (rodSlot.getItem().equals(PotatoItems.ESSENCE_MANA)) {
-                    recipes = IManaRecipes.getRecipeById(0);
+                    recipes = IManaRecipes.getRecipeByElement(Element.MANA);
                 } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
-                    recipes = IManaRecipes.getRecipeById(1);
+                    recipes = IManaRecipes.getRecipeByElement(Element.LIFE);
                 } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
-                    recipes = IManaRecipes.getRecipeById(2);
+                    recipes = IManaRecipes.getRecipeByElement(Element.NATURE);
                 } else if (rodSlot.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
-                    recipes = IManaRecipes.getRecipeById(3);
+                    recipes = IManaRecipes.getRecipeByElement(Element.FIRE);
                 }
 
-                ItemStack result = recipes.getResult(inputSlot);
-                int cost = recipes.getCost(inputSlot);
+                CauldronRecipe recipe = recipes.getResult(stack);
+                ItemStack result = recipe.getOutput().copy();
+                int cost = recipe.getCost();
 
                 if (result.isEmpty() || cost > manaSize) {
                     return;

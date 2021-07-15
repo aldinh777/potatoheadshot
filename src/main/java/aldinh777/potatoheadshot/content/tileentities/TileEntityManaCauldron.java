@@ -4,6 +4,7 @@ import aldinh777.potatoheadshot.common.handler.ConfigHandler;
 import aldinh777.potatoheadshot.common.lists.PotatoBlocks;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.recipes.category.IManaRecipes;
+import aldinh777.potatoheadshot.common.recipes.recipe.CauldronRecipe;
 import aldinh777.potatoheadshot.common.util.AreaHelper;
 import aldinh777.potatoheadshot.common.util.Element;
 import aldinh777.potatoheadshot.common.util.InventoryHelper;
@@ -13,6 +14,7 @@ import aldinh777.potatoheadshot.content.capability.PotatoManaStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -30,7 +32,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
 
     protected PotatoManaStorage storage;
     protected Element element = Element.MANA;
-    protected IManaRecipes recipes = IManaRecipes.getRecipeById(0);
+    protected IManaRecipes recipes = IManaRecipes.getRecipeByElement(Element.MANA);
     protected int level = 0;
     protected int checkMana = 0;
 
@@ -74,7 +76,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
     public void readFromNBT(@Nonnull NBTTagCompound compound) {
         super.readFromNBT(compound);
         element = Element.withValue(compound.getInteger("Element"));
-        recipes = IManaRecipes.getRecipeById(element.getValue());
+        recipes = IManaRecipes.getRecipeByElement(element);
         storage.readFromNBT(compound);
     }
 
@@ -118,36 +120,44 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
         AreaHelper.getEntitiesByRange(EntityItem.class, world, bb, (entityItem) -> {
             ItemStack stack = entityItem.getItem();
 
-            if (stack.getItem().equals(PotatoItems.ESSENCE_MANA)) {
+            if (stack.getItem() == PotatoItems.ESSENCE_MANA) {
                 setElement(Element.MANA);
                 stack.shrink(1);
                 flag.set(true);
 
-            } else if (stack.getItem().equals(PotatoItems.ESSENCE_LIFE)) {
+            } else if (stack.getItem() == PotatoItems.ESSENCE_LIFE) {
                 setElement(Element.LIFE);
                 stack.shrink(1);
                 flag.set(true);
 
-            } else if (stack.getItem().equals(PotatoItems.ESSENCE_NATURE)) {
+            } else if (stack.getItem() == PotatoItems.ESSENCE_NATURE) {
                 setElement(Element.NATURE);
                 stack.shrink(1);
                 flag.set(true);
 
-            } else if (stack.getItem().equals(PotatoItems.ESSENCE_FIRE)) {
+            } else if (stack.getItem() == PotatoItems.ESSENCE_FIRE) {
                 setElement(Element.FIRE);
                 stack.shrink(1);
                 flag.set(true);
 
-            } else if (stack.getItem().equals(PotatoItems.GLOWING_POTATO_DUST)) {
+            } else if (stack.getItem() == PotatoItems.GLOWING_POTATO_DUST) {
                 if (storage.getManaStored() < storage.getMaxManaStored()) {
                     storage.collectMana(MANA_COLLECT_DEFAULT);
                     stack.shrink(1);
                 }
                 flag.set(true);
 
+            } else if (stack.getItem() == Item.getItemFromBlock(PotatoBlocks.GLOWING_POTATO_BLOCK)) {
+                if (storage.getManaStored() < storage.getMaxManaStored()) {
+                    storage.collectMana(MANA_COLLECT_DEFAULT * 4);
+                    stack.shrink(1);
+                }
+                flag.set(true);
+
             } else {
-                ItemStack result = recipes.getResult(stack).copy();
-                int cost = recipes.getCost(stack);
+                CauldronRecipe recipe = recipes.getResult(stack);
+                ItemStack result = recipe.getOutput().copy();
+                int cost = recipe.getCost();
 
                 if (!result.isEmpty() && storage.getManaStored() >= cost) {
                     float posX = pos.getX() + 0.5f;
@@ -223,7 +233,7 @@ public class TileEntityManaCauldron extends TileEntity implements ITickable, IMa
 
     public void setElement(Element element) {
         this.element = element;
-        recipes = IManaRecipes.getRecipeById(element.getValue());
+        recipes = IManaRecipes.getRecipeByElement(element);
 
         world.setBlockState(pos, world.getBlockState(pos)
                 .withProperty(ManaCauldron.ELEMENT, element));

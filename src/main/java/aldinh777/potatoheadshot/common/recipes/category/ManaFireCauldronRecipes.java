@@ -1,37 +1,48 @@
 package aldinh777.potatoheadshot.common.recipes.category;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
-import aldinh777.potatoheadshot.common.lists.PotatoItems;
-import net.minecraft.init.Items;
+import aldinh777.potatoheadshot.common.recipes.recipe.CauldronRecipe;
+import com.google.common.collect.Lists;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ManaFireCauldronRecipes implements IManaRecipes {
 
-    public static IManaRecipes INSTANCE = new ManaFireCauldronRecipes();
+    private final Map<Item, List<CauldronRecipe>> recipes = new HashMap<>();
 
-    @Override
-    public ItemStack getResult(ItemStack input) {
-        if (ConfigHandler.LAVA_POTATO && input.getItem() == Items.IRON_HOE) {
-            return new ItemStack(PotatoItems.LAVA_HOE);
+    ManaFireCauldronRecipes() {
+        for (CauldronRecipe recipe : CauldronRecipe.getFireRecipes()) {
+            addRecipe(recipe.getInput().getItem(), recipe);
         }
+    }
 
-        if (ConfigHandler.SPLASH_MANA && input.getItem() == Items.GLASS_BOTTLE) {
-            return new ItemStack(PotatoItems.SPLASH_MANA_FIRE);
+    public void addRecipe(Item input, CauldronRecipe result) {
+        List<CauldronRecipe> results = recipes.get(input);
+        if (results == null) {
+            results = Lists.newArrayList(result);
+            recipes.put(input, results);
+        } else {
+            results.add(result);
         }
-
-        return FurnaceRecipes.instance().getSmeltingResult(input);
     }
 
     @Override
-    public int getCost(ItemStack input) {
-        if (ConfigHandler.LAVA_POTATO) {
-            if (input.getItem() == Items.IRON_HOE) return 800;
+    public CauldronRecipe getResult(ItemStack input) {
+        CauldronRecipe result = ManaCauldronRecipes.getRecipeFromMap(input, recipes);
+
+        if (!result.getOutput().isEmpty()) {
+            return result;
         }
-        if (ConfigHandler.SPLASH_MANA) {
-            if (input.getItem() == Items.GLASS_BOTTLE) return 200;
+
+        ItemStack furnaceResult = FurnaceRecipes.instance().getSmeltingResult(input);
+        if (furnaceResult.isEmpty()) {
+            return new CauldronRecipe(input, ItemStack.EMPTY, 0);
         }
-        if (!FurnaceRecipes.instance().getSmeltingResult(input).isEmpty()) return 25;
-        return 0;
+
+        return new CauldronRecipe(input, furnaceResult, 200);
     }
 }

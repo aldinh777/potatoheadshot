@@ -3,7 +3,6 @@ package aldinh777.potatoheadshot.common.compat.jei.cauldron;
 import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.common.recipes.recipe.CauldronRecipe;
 import com.google.common.collect.Lists;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class ManaCauldronRecipe extends AbstractCauldronRecipe {
 		return jeiRecipes;
 	}
 
-	public static void addRecipe(List<ManaCauldronRecipe> list, Item input, ItemStack output) {
-		list.add(new ManaCauldronRecipe(new ItemStack(input), output));
+	public static void addRecipe(List<ManaCauldronRecipe> list, ItemStack input, ItemStack output) {
+		list.add(new ManaCauldronRecipe(input, output));
 	}
 }
