@@ -58,7 +58,13 @@ public class PocketCapability implements ICapabilitySerializable<NBTBase> {
 
         @Override
         public void deserializeNBT(NBTBase nbt) {
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(inventory, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("Inventory"));
-            CapabilityMana.MANA.readNBT(storage, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("Mana"));
+            NBTBase inventoryTag = ((NBTTagCompound) nbt).getTag("Inventory");
+            NBTBase manaTag = ((NBTTagCompound) nbt).getTag("Mana");
+            if (inventoryTag != null) {
+                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(inventory, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("Inventory"));
+            }
+            if (manaTag != null) {
+                CapabilityMana.MANA.readNBT(storage, EnumFacing.UP, ((NBTTagCompound) nbt).getTag("Mana"));
+            }
         }
     }

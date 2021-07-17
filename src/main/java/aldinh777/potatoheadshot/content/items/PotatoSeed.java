@@ -1,7 +1,5 @@
 package aldinh777.potatoheadshot.content.items;
 
-import aldinh777.potatoheadshot.common.handler.ConfigHandler;
-import aldinh777.potatoheadshot.common.lists.PotatoItems;
 import aldinh777.potatoheadshot.content.blocks.crops.IPlaceablePlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,8 +20,6 @@ public class PotatoSeed extends PotatoItem {
     public PotatoSeed(String name, Block crops) {
         super(name);
         this.crops = crops;
-
-        PotatoItems.LISTS.add(this);
     }
 
     @Nonnull
